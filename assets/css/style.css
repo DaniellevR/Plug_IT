@@ -206,7 +206,7 @@ input, select {
     margin: 10px;
 }
 
-.categories, .products, .orders, .users {
+/*.categories, .products, .orders, .users {
     display: block;
     vertical-align:top;
     background-color: whitesmoke;
@@ -222,7 +222,7 @@ input, select {
 .categories *, .products *, .orders *, .users * {
     float: left;
     width: 30%;
-}
+}*/
 
 .currencyinput {
     border: 1px inset #ccc;
@@ -230,6 +230,12 @@ input, select {
 .currencyinput input {
     border: 0;
 }
+
+/*.adminpanel {
+    margin: auto;
+    text-align: center;
+    display: inline-block;
+}*/
 
 .adminpanel ul {
     display: inline;

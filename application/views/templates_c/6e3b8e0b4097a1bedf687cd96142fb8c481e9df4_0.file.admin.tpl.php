@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-03-19 18:20:06
+/* Smarty version 3.1.29, created on 2016-03-19 22:42:25
   from "C:\wamp\www\Plug_IT\Application\views\templates\admin.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56ed8a46f01a98_50358429',
+  'unifunc' => 'content_56edc7c1099c91_57415029',
   'file_dependency' => 
   array (
     '6e3b8e0b4097a1bedf687cd96142fb8c481e9df4' => 
     array (
       0 => 'C:\\wamp\\www\\Plug_IT\\Application\\views\\templates\\admin.tpl',
-      1 => 1458408001,
+      1 => 1458409763,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_56ed8a46f01a98_50358429 ($_smarty_tpl) {
+function content_56edc7c1099c91_57415029 ($_smarty_tpl) {
 $_smarty_tpl->smarty->ext->_subtemplate->render($_smarty_tpl, "file:header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -75,11 +75,11 @@ $_smarty_tpl->smarty->ext->_subtemplate->render($_smarty_tpl, "file:header.tpl",
 
     <div class="categories fullarticle" id="article1">      
         <form action="" method="POST" enctype="multipart/form-data">
-            Categorienaam:<br/>
+            Categorienaam:
             <input type="text" name="categoryname" required="true"><br/>
-            Omschrijving:<br/>
+            Omschrijving:
             <input type="text" name="category_description" required="true"><br/>
-            Ouder categorie:<br/>
+            Ouder categorie:
             <select name="formParentCategories">
                 <option value="">-</option>
                 <?php
@@ -156,8 +156,6 @@ if ($__foreach_parent_1_saved_item) {
 $_smarty_tpl->tpl_vars['parent'] = $__foreach_parent_1_saved_item;
 }
 ?>
-
-
                 <option value="M">Male</option>
                 <option value="F">Female</option>
             </select><br/>

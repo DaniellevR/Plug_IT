@@ -39,14 +39,15 @@
             <li class="menu_item" id="item4">Orders</li>
         </ul>
     </div>
-
+{*</div>
+<div class="content">*}
     <div class="categories fullarticle" id="article1">      
         <form action="" method="POST" enctype="multipart/form-data">
-            Categorienaam:<br/>
+            Categorienaam:
             <input type="text" name="categoryname" required="true"><br/>
-            Omschrijving:<br/>
+            Omschrijving:
             <input type="text" name="category_description" required="true"><br/>
-            Ouder categorie:<br/>
+            Ouder categorie:
             <select name="formParentCategories">
                 <option value="">-</option>
                 {foreach from=$categories[0] item=parent }
@@ -68,8 +69,6 @@
                         {/if}
                     {/foreach}
                 {/foreach}
-
-
                 <option value="M">Male</option>
                 <option value="F">Female</option>
             </select><br/>
