@@ -145,6 +145,7 @@ div.sitecontainer {
     border: 1px solid black;
     height: auto;
     margin: 10px;
+    width: 100%;
 }
 
 /* ==========================================================================
@@ -184,13 +185,31 @@ div.sitecontainer {
     CSS admin.php
    ========================================================================== */
 
+.adminpanel ul {
+    display: inline;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.adminpanel ul li {
+    background-color: lightblue;
+    width: 20%;
+    text-align: center;
+    margin-right: 10px;
+    padding: 20px;
+    border: 1px solid black;
+    display: block;
+    float: left;
+}
+
 .admin_list {
     background-color: lightblue;
     border: 1px solid black;
     padding: 10px;
 }
 
-.categories form, .products form, .users form {
+.admin form {
     border: 1px solid black;
     margin: 10px 0;
     padding: 10px;
@@ -200,50 +219,11 @@ input, select {
     margin: 10px;
 }
 
-/*.categories, .products, .orders, .users {
-    display: block;
-    vertical-align:top;
-    background-color: whitesmoke;
-    padding: 20px;
-    border: 1px solid black;
-}
-
-.categories form, .products form, .orders form, .users form {
-    margin: 20px;
-    display: inline-block;
-}
-
-.categories *, .products *, .orders *, .users * {
-    float: left;
-    width: 30%;
-}*/
-
 .currencyinput {
     border: 1px inset #ccc;
 }
 .currencyinput input {
     border: 0;
-}
-
-/*.adminpanel {
-    margin: auto;
-    text-align: center;
-    display: inline-block;
-}*/
-
-.adminpanel ul {
-    display: inline;
-}
-
-.adminpanel ul li {
-    background-color: lightblue;
-    width: 200px;
-    text-align: center;
-    margin: 10px;
-    padding: 20px;
-    border: 1px solid black;
-    display: block;
-    float: left;
 }
 
 .fullarticle {

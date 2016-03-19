@@ -28,7 +28,7 @@
     });
 </script>
 
-<div class="content">
+<div class="content admin">
     <h1>Admin</h1>
 
     <div class="adminpanel">
@@ -39,8 +39,7 @@
             <li class="menu_item" id="item4">Orders</li>
         </ul>
     </div>
-{*</div>
-<div class="content">*}
+    
     <div class="categories fullarticle" id="article1">      
         <form action="" method="POST" enctype="multipart/form-data">
             Categorienaam:
@@ -134,7 +133,6 @@
             <input type="submit" value="Toevoegen">
         </form>
     </div>
-
 </div>
 
 {include file="footer.tpl"}
