@@ -1,8 +1,40 @@
-{include file="header.tpl"}
-{include file="navigation.tpl"}
+<?php
+/* Smarty version 3.1.29, created on 2016-03-19 18:20:06
+  from "C:\wamp\www\Plug_IT\Application\views\templates\admin.tpl" */
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-<script language="javascript">
+if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
+  'has_nocache_code' => false,
+  'version' => '3.1.29',
+  'unifunc' => 'content_56ed8a46f01a98_50358429',
+  'file_dependency' => 
+  array (
+    '6e3b8e0b4097a1bedf687cd96142fb8c481e9df4' => 
+    array (
+      0 => 'C:\\wamp\\www\\Plug_IT\\Application\\views\\templates\\admin.tpl',
+      1 => 1458408001,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+    'file:header.tpl' => 1,
+    'file:navigation.tpl' => 1,
+    'file:footer.tpl' => 1,
+  ),
+),false)) {
+function content_56ed8a46f01a98_50358429 ($_smarty_tpl) {
+$_smarty_tpl->smarty->ext->_subtemplate->render($_smarty_tpl, "file:header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
+
+<?php $_smarty_tpl->smarty->ext->_subtemplate->render($_smarty_tpl, "file:navigation.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
+
+
+<?php echo '<script'; ?>
+ type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ language="javascript">
     var id = -1;
 
     $(document).on("hover", ".adminpanel ul li", function() {
@@ -26,7 +58,8 @@
             $('#article' + (i + 1)).show();
         });
     });
-</script>
+<?php echo '</script'; ?>
+>
 
 <div class="content">
     <h1>Admin</h1>
@@ -49,9 +82,27 @@
             Ouder categorie:<br/>
             <select name="formParentCategories">
                 <option value="">-</option>
-                {foreach from=$categories[0] item=parent }
-                    <option>{$parent->name}</option>
-                {/foreach}
+                <?php
+$_from = $_smarty_tpl->tpl_vars['categories']->value[0];
+if (!is_array($_from) && !is_object($_from)) {
+settype($_from, 'array');
+}
+$__foreach_parent_0_saved_item = isset($_smarty_tpl->tpl_vars['parent']) ? $_smarty_tpl->tpl_vars['parent'] : false;
+$_smarty_tpl->tpl_vars['parent'] = new Smarty_Variable();
+$_smarty_tpl->tpl_vars['parent']->_loop = false;
+foreach ($_from as $_smarty_tpl->tpl_vars['parent']->value) {
+$_smarty_tpl->tpl_vars['parent']->_loop = true;
+$__foreach_parent_0_saved_local_item = $_smarty_tpl->tpl_vars['parent'];
+?>
+                    <option><?php echo $_smarty_tpl->tpl_vars['parent']->value->name;?>
+</option>
+                <?php
+$_smarty_tpl->tpl_vars['parent'] = $__foreach_parent_0_saved_local_item;
+}
+if ($__foreach_parent_0_saved_item) {
+$_smarty_tpl->tpl_vars['parent'] = $__foreach_parent_0_saved_item;
+}
+?>
             </select><br/>
             <input type="file" accept="image/*" name="image" id="image" class="input_text" required="true"/><br/>
             <input type="submit" value="Toevoegen">
@@ -59,15 +110,52 @@
         <form>
             Categorie:<br/>
             <select name="Categories">
-                {foreach from=$categories[0] item=parent }
-                    <option>'{$parent->name}'</option>
+                <?php
+$_from = $_smarty_tpl->tpl_vars['categories']->value[0];
+if (!is_array($_from) && !is_object($_from)) {
+settype($_from, 'array');
+}
+$__foreach_parent_1_saved_item = isset($_smarty_tpl->tpl_vars['parent']) ? $_smarty_tpl->tpl_vars['parent'] : false;
+$_smarty_tpl->tpl_vars['parent'] = new Smarty_Variable();
+$_smarty_tpl->tpl_vars['parent']->_loop = false;
+foreach ($_from as $_smarty_tpl->tpl_vars['parent']->value) {
+$_smarty_tpl->tpl_vars['parent']->_loop = true;
+$__foreach_parent_1_saved_local_item = $_smarty_tpl->tpl_vars['parent'];
+?>
+                    <option>'<?php echo $_smarty_tpl->tpl_vars['parent']->value->name;?>
+'</option>
 
-                    {foreach from=$categories[1] item=child }
-                        {if $child->parent == $parent->id}
-                            <option>'{$child->name}' uit categorie '{$parent->name}'</option>
-                        {/if}
-                    {/foreach}
-                {/foreach}
+                    <?php
+$_from = $_smarty_tpl->tpl_vars['categories']->value[1];
+if (!is_array($_from) && !is_object($_from)) {
+settype($_from, 'array');
+}
+$__foreach_child_2_saved_item = isset($_smarty_tpl->tpl_vars['child']) ? $_smarty_tpl->tpl_vars['child'] : false;
+$_smarty_tpl->tpl_vars['child'] = new Smarty_Variable();
+$_smarty_tpl->tpl_vars['child']->_loop = false;
+foreach ($_from as $_smarty_tpl->tpl_vars['child']->value) {
+$_smarty_tpl->tpl_vars['child']->_loop = true;
+$__foreach_child_2_saved_local_item = $_smarty_tpl->tpl_vars['child'];
+?>
+                        <?php if ($_smarty_tpl->tpl_vars['child']->value->parent == $_smarty_tpl->tpl_vars['parent']->value->id) {?>
+                            <option>'<?php echo $_smarty_tpl->tpl_vars['child']->value->name;?>
+' uit categorie '<?php echo $_smarty_tpl->tpl_vars['parent']->value->name;?>
+'</option>
+                        <?php }?>
+                    <?php
+$_smarty_tpl->tpl_vars['child'] = $__foreach_child_2_saved_local_item;
+}
+if ($__foreach_child_2_saved_item) {
+$_smarty_tpl->tpl_vars['child'] = $__foreach_child_2_saved_item;
+}
+?>
+                <?php
+$_smarty_tpl->tpl_vars['parent'] = $__foreach_parent_1_saved_local_item;
+}
+if ($__foreach_parent_1_saved_item) {
+$_smarty_tpl->tpl_vars['parent'] = $__foreach_parent_1_saved_item;
+}
+?>
 
 
                 <option value="M">Male</option>
@@ -138,4 +226,6 @@
 
 </div>
 
-{include file="footer.tpl"}
+<?php $_smarty_tpl->smarty->ext->_subtemplate->render($_smarty_tpl, "file:footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+}
+}
