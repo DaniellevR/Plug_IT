@@ -34,7 +34,7 @@ div.sitecontainer {
 }
 
 .header {
-    //border-bottom: 1px solid #40b648;
+    /* border-bottom: 1px solid #40b648; */
     width: 100%;
     height:130px;
 }
@@ -203,8 +203,8 @@ div.sitecontainer {
     border: 1px solid black;
     margin: 10px 0;
     padding: 10px;
-/*    width: 40%;
-    display: inline-block;*/
+    /*    width: 40%;
+        display: inline-block;*/
 }
 
 /*input, select, span {
@@ -231,4 +231,34 @@ input, select {
 }
 .currencyinput input {
     border: 0;
+}
+
+/* ==========================================================================
+    CSS header.php
+   ========================================================================== */
+
+.categoryThumbnail
+{
+    width: 10em;
+    height: 10em;
+    /*border: 1px black solid;*/
+    float: left;
+    margin-left: 1em;
+    margin-bottom: 1em;
+    background-color: #eeeeee;
+
+    text-decoration: none;
+    color: black;
+    text-align: center;
+}
+
+.categoryThumbnail:hover
+{
+    -webkit-filter: brightness(1.03);
+}
+
+.categoryThumbnail .categoryImage
+{
+    height: 80%;
+    width: 100%;
 }

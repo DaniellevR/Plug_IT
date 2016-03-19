@@ -17,7 +17,22 @@ and open the template in the editor.
             ?>
 
             <div class="content">
-                
+                <?php
+                include "database.php";
+
+                $db = new Database;
+                $categories = $db->getCategories();
+
+                $category_list = array();
+
+                foreach ($categories as $cat) {
+                    if ($cat->parent === null) {
+                        echo "<a href='catalogue.php'><div class='categoryThumbnail'>"
+                        . "<img class='categoryImage' src='pix/category" . $cat->id . ".jpg' alt='TODO' />"
+                        . $cat->name . "</div></a>";
+                    }
+                }
+                ?>
             </div>
 
             <?php

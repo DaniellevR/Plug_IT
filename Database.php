@@ -44,9 +44,9 @@ class Database {
             $id = $row["id"];
             $name = $row["name"];
             $description = $row["description"];
-            $parent = $row["parent"];
+            $parent = $row["category_id"];
             require_once 'Category.inc.php';
-            $category = new Category($id, $name, $description, $parent);//, $image);
+            $category = new Category($id, $name, $description, $parent); //, $image);
             $categories[] = $category;
         }
 
