@@ -34,7 +34,7 @@ div.sitecontainer {
 }
 
 .header {
-    //border-bottom: 1px solid #40b648;
+    /*border-bottom: 1px solid #40b648;*/
     width: 100%;
     height:130px;
 }
@@ -255,7 +255,7 @@ input, select {
 }
 
 .adminpanel ul li {
-    background-color: lightblue;//#98dbcc;
+    background-color: lightblue;/*#98dbcc;*/
     width: 200px;
     text-align: center;
     margin: 10px;
