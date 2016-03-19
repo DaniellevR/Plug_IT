@@ -80,7 +80,7 @@ class Welcome extends CI_Controller {
 
         // Sort
         foreach ($categories as $cat) {
-            if ($cat->parent === '0') {
+            if (is_null($cat->parent)) {
                 $catalogue_catagories[] = $cat;
             } else {
                 $children[] = $cat;

@@ -22,7 +22,7 @@ Class Category extends CI_Model {
             $category->parent = $row->category_id;
             $categories[] = $category;
         }
-
+        
         return $categories;
     }
 
@@ -30,7 +30,7 @@ Class Category extends CI_Model {
         $this->db->set('id', 0);
         $this->db->set('name', $name);
         $this->db->set('description', $description);
-        $this->db->set('parent', $parent);
+        $this->db->set('category_id', $parent);
         $this->db->insert('category');
         $insert_id = $this->db->insert_id();
 
