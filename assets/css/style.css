@@ -14,7 +14,6 @@ body {
 
 div.sitecontainer {
     position: relative;
-    /*width:1450px;*/
     margin: auto;
     background-color: #ffffff;
     border: 1px solid black;
@@ -35,6 +34,8 @@ div.sitecontainer {
 .header {
     width: 100%;
     height:130px;
+    background-color: whitesmoke;
+    border-bottom: 1px solid black;
 }
 
 /* Breadcrumbs */
@@ -104,20 +105,25 @@ div.sitecontainer {
 }
 
 /* ==========================================================================
-    CSS Side navigation
+    CSS Content and side navigation
    ========================================================================== */
 
-.nav {
-    display: block;
-    border: 1px solid black;
-    list-style-type: none;
-    background-color: #77A5FC;
+.content_container {
+    background-color: white;
+    display: flex;
+}
+
+.navigation {
+    background-color: #5CA0FF;
+    width: 300px;
     float: left;
-    padding: 10px;
-    width: 200px;
-    position: absolute;
-    left: 20px;
-    top: 100px;
+    border: 1px solid black;
+    margin: 10px;
+    margin-right: 0;
+}
+
+.nav {
+    padding: 20px;
 }
 
 .nav ul {
@@ -133,41 +139,30 @@ div.sitecontainer {
     text-decoration: underline;
 }
 
-
-/* ==========================================================================
-    CSS Content
-   ========================================================================== */
-
 .content {
-    overflow: auto;
-    border: 1px solid black;
+    overflow: hidden;
     padding: 10px;
-    position: relative;
-    margin-left: 250px;
-    margin-right: 20px;
-    margin-top: -12px;
-    margin-bottom: 115px;
+    border: 1px solid black;
+    height: auto;
+    margin: 10px;
 }
 
 /* ==========================================================================
     CSS footer.php
    ========================================================================== */
 
-.footer_nav {
-    background-color: #86ADAD;
+.footer {
+    width: 100%;
+    padding: 10px 0;
+    background-color: whitesmoke;
     border-top: 1px solid black;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: 0;
-    list-style-type: none;
-    padding: 10px;
+    vertical-align: middle;
+    height: 120px;
 }
 
 .footer_nav ul {
     float: left;
-    margin-left: 150px;
+    width: 20%;
 }
 
 .footer_nav ul a {
@@ -176,7 +171,6 @@ div.sitecontainer {
 }
 
 .footer_nav ul a:hover {
-    color: white;
     text-decoration: underline;
 }
 

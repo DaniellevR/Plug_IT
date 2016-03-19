@@ -1,7 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"> 
-
-    <head> 
+<head> 
         <title>Plug IT</title> 
         <meta charset="UTF-8" />
         <link rel="stylesheet" type="text/css" href="{$style}" />
@@ -19,13 +18,7 @@
                 </div>
 
                 <div class="path">
-                    {*                    <table cellpadding="2" border="1">
-                    <tr><th>ISBN</th><th>TITEL</th></tr>
-                    {foreach from=$books item=book}
-                    <tr><td>{$book.isbn}</td>
-                    <td>{$book.title}</td></tr>
-                    {/foreach}
-                    </table>*}
+                    <a>Path</a>
                 </div>
 
                 <a href="{$home}"> <img src="{$logo}" alt="Plug IT.nl" /></a>

@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-03-18 23:59:36
+/* Smarty version 3.1.29, created on 2016-03-19 22:53:14
   from "C:\wamp\www\Plug_IT\Application\views\templates\navigation.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56ec885895d763_41316696',
+  'unifunc' => 'content_56edca4a54eec8_23935414',
   'file_dependency' => 
   array (
     '97c86001a38a463e7db3e9f293fb2c2e793b7c8b' => 
     array (
       0 => 'C:\\wamp\\www\\Plug_IT\\Application\\views\\templates\\navigation.tpl',
-      1 => 1458341746,
+      1 => 1458424392,
       2 => 'file',
     ),
   ),
@@ -19,12 +19,13 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_56ec885895d763_41316696 ($_smarty_tpl) {
+function content_56edca4a54eec8_23935414 ($_smarty_tpl) {
 ?>
-<div class="side_content">
-    <ul class="nav">
-        <li><a href='catalogue.php'>Catalogus</a></li>       
-            <?php
+<div class="content_container">
+    <div class="navigation">
+        <ul class="nav">
+            <li><a href='catalogue.php'>Catalogus</a></li>       
+                <?php
 $_from = $_smarty_tpl->tpl_vars['categories']->value[0];
 if (!is_array($_from) && !is_object($_from)) {
 settype($_from, 'array');
@@ -36,11 +37,11 @@ foreach ($_from as $_smarty_tpl->tpl_vars['parent']->value) {
 $_smarty_tpl->tpl_vars['parent']->_loop = true;
 $__foreach_parent_0_saved_local_item = $_smarty_tpl->tpl_vars['parent'];
 ?>
-                
-            <li><?php echo $_smarty_tpl->tpl_vars['parent']->value->name;?>
+                    
+                <li><?php echo $_smarty_tpl->tpl_vars['parent']->value->name;?>
 </li>
-            <ul>
-                <?php
+                <ul>
+                    <?php
 $_from = $_smarty_tpl->tpl_vars['categories']->value[1];
 if (!is_array($_from) && !is_object($_from)) {
 settype($_from, 'array');
@@ -52,25 +53,25 @@ foreach ($_from as $_smarty_tpl->tpl_vars['child']->value) {
 $_smarty_tpl->tpl_vars['child']->_loop = true;
 $__foreach_child_1_saved_local_item = $_smarty_tpl->tpl_vars['child'];
 ?>
-                    <?php if ($_smarty_tpl->tpl_vars['child']->value->parent == $_smarty_tpl->tpl_vars['parent']->value->id) {?>
-                        <li><?php echo $_smarty_tpl->tpl_vars['child']->value->name;?>
+                        <?php if ($_smarty_tpl->tpl_vars['child']->value->parent == $_smarty_tpl->tpl_vars['parent']->value->id) {?>
+                            <li><?php echo $_smarty_tpl->tpl_vars['child']->value->name;?>
 </li>
-                        <?php }?>
-                    <?php
+                            <?php }?>
+                        <?php
 $_smarty_tpl->tpl_vars['child'] = $__foreach_child_1_saved_local_item;
 }
 if ($__foreach_child_1_saved_item) {
 $_smarty_tpl->tpl_vars['child'] = $__foreach_child_1_saved_item;
 }
 ?>
-            </ul>
-        <?php
+                </ul>
+            <?php
 $_smarty_tpl->tpl_vars['parent'] = $__foreach_parent_0_saved_local_item;
 }
 if ($__foreach_parent_0_saved_item) {
 $_smarty_tpl->tpl_vars['parent'] = $__foreach_parent_0_saved_item;
 }
 ?>
-    </ul>
-</div><?php }
+        </ul>
+    </div><?php }
 }
