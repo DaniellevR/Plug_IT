@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-03-20 02:03:32
+/* Smarty version 3.1.29, created on 2016-03-20 18:01:14
   from "C:\wamp\www\Plug_IT\Application\views\templates\admin.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56edf6e4528534_02474509',
+  'unifunc' => 'content_56eed75adc9766_74427668',
   'file_dependency' => 
   array (
     '6e3b8e0b4097a1bedf687cd96142fb8c481e9df4' => 
     array (
       0 => 'C:\\wamp\\www\\Plug_IT\\Application\\views\\templates\\admin.tpl',
-      1 => 1458435807,
+      1 => 1458493269,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_56edf6e4528534_02474509 ($_smarty_tpl) {
+function content_56eed75adc9766_74427668 ($_smarty_tpl) {
 $_smarty_tpl->smarty->ext->_subtemplate->render($_smarty_tpl, "file:header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -74,18 +74,26 @@ $_smarty_tpl->smarty->ext->_subtemplate->render($_smarty_tpl, "file:header.tpl",
     </div>
 
     <div class="categories fullarticle" id="article1">
-
-        
         <form action="<?php echo base_url('index.php/AdminController/addCategory');?>
 " method="POST" enctype="multipart/form-data">
-            Categorienaam:
-            <input type="text" name="categoryname" required="true"><br/>
-            Omschrijving:
-            <input type="text" name="category_description" required="true"><br/>
-            Ouder categorie:
-            <select name="formParentCategories">
-                <option value="">-</option>
-                <?php
+            <div class="line">
+                <label>Categorienaam:</label>
+                <div class="input">
+                    <input type="text" name="categoryname" required="true">
+                </div>
+            </div>
+            <div class="line">
+                <label>Omschrijving:</label>
+                <div class="input">
+                    <input type="text" name="category_description" required="true">
+                </div>
+            </div>
+            <div class="line">
+                <label>Ouder categorie:</label>
+                <div class="input">
+                    <select name="formParentCategories">
+                        <option value="">-</option>
+                        <?php
 $_from = $_smarty_tpl->tpl_vars['categories']->value[0];
 if (!is_array($_from) && !is_object($_from)) {
 settype($_from, 'array');
@@ -97,33 +105,33 @@ foreach ($_from as $_smarty_tpl->tpl_vars['parent']->value) {
 $_smarty_tpl->tpl_vars['parent']->_loop = true;
 $__foreach_parent_0_saved_local_item = $_smarty_tpl->tpl_vars['parent'];
 ?>
-                    <option><?php echo $_smarty_tpl->tpl_vars['parent']->value->name;?>
+                            <option><?php echo $_smarty_tpl->tpl_vars['parent']->value->name;?>
 </option>
-                <?php
+                        <?php
 $_smarty_tpl->tpl_vars['parent'] = $__foreach_parent_0_saved_local_item;
 }
 if ($__foreach_parent_0_saved_item) {
 $_smarty_tpl->tpl_vars['parent'] = $__foreach_parent_0_saved_item;
 }
 ?>
-            </select><br/>
-            <input type="file" accept="image/*" name="image" id="image" class="input_text" required="true"/><br/>
-            <input type="submit" value="Toevoegen">
+                    </select>
+                </div>
+            </div>
+            <div class="line">
+                <label>Foto categorie:</label>
+                <div class="input">
+                    <input type="file" accept="image/*" name="image" id="image" required="true"/>
+                </div>
+            </div>
+            <button type="submit" value="Submit" class="form_button">Toevoegen</button>
         </form>
 
-
-
-        
-
-
-        
-
-
-        
         <form>
-            Categorie:<br/>
-            <select name="Categories">
-                <?php
+            <div class="line">
+                <label>Categorie:</label>
+                <div class="input">
+                    <select name="Categories">
+                        <?php
 $_from = $_smarty_tpl->tpl_vars['categories']->value[0];
 if (!is_array($_from) && !is_object($_from)) {
 settype($_from, 'array');
@@ -135,10 +143,10 @@ foreach ($_from as $_smarty_tpl->tpl_vars['parent']->value) {
 $_smarty_tpl->tpl_vars['parent']->_loop = true;
 $__foreach_parent_1_saved_local_item = $_smarty_tpl->tpl_vars['parent'];
 ?>
-                    <option>'<?php echo $_smarty_tpl->tpl_vars['parent']->value->name;?>
+                            <option>'<?php echo $_smarty_tpl->tpl_vars['parent']->value->name;?>
 '</option>
 
-                    <?php
+                            <?php
 $_from = $_smarty_tpl->tpl_vars['categories']->value[1];
 if (!is_array($_from) && !is_object($_from)) {
 settype($_from, 'array');
@@ -150,29 +158,31 @@ foreach ($_from as $_smarty_tpl->tpl_vars['child']->value) {
 $_smarty_tpl->tpl_vars['child']->_loop = true;
 $__foreach_child_2_saved_local_item = $_smarty_tpl->tpl_vars['child'];
 ?>
-                        <?php if ($_smarty_tpl->tpl_vars['child']->value->parent == $_smarty_tpl->tpl_vars['parent']->value->id) {?>
-                            <option>'<?php echo $_smarty_tpl->tpl_vars['child']->value->name;?>
+                                <?php if ($_smarty_tpl->tpl_vars['child']->value->parent == $_smarty_tpl->tpl_vars['parent']->value->id) {?>
+                                    <option>'<?php echo $_smarty_tpl->tpl_vars['child']->value->name;?>
 ' uit categorie '<?php echo $_smarty_tpl->tpl_vars['parent']->value->name;?>
 '</option>
-                        <?php }?>
-                    <?php
+                                <?php }?>
+                            <?php
 $_smarty_tpl->tpl_vars['child'] = $__foreach_child_2_saved_local_item;
 }
 if ($__foreach_child_2_saved_item) {
 $_smarty_tpl->tpl_vars['child'] = $__foreach_child_2_saved_item;
 }
 ?>
-                <?php
+                        <?php
 $_smarty_tpl->tpl_vars['parent'] = $__foreach_parent_1_saved_local_item;
 }
 if ($__foreach_parent_1_saved_item) {
 $_smarty_tpl->tpl_vars['parent'] = $__foreach_parent_1_saved_item;
 }
 ?>
-                <option value="M">Male</option>
-                <option value="F">Female</option>
-            </select><br/>
-            <input type="submit" value="Verwijderen">
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" value="Submit" class="form_button">Verwijderen</button>
         </form>
     </div>
 
@@ -181,57 +191,111 @@ $_smarty_tpl->tpl_vars['parent'] = $__foreach_parent_1_saved_item;
         </ul>
 
         <form>
-            Productnaam:<br/>
-            <input type="text" name="productnaam" required="true"><br/>
-            Omschrijving:<br/>
-            <input type="text" name="product_omschrijving" required="true"><br/>
-            Prijs:<br/>
-            <input type="number" min="0.01" step="0.01" value="0.01" /><br/>
+            <div class="line">
+                <label>Productnaam:</label>
+                <div class="input">
+                    <input type="text" name="productnaam" required="true">
+                </div>
+            </div>
+            <div class="line">
+                <label>Omschrijving:</label>
+                <div class="input">
+                    <input type="text" name="product_omschrijving" required="true">
+                </div>
+            </div>
+            <div class="line">
+                <label>Prijs:</label>
+                <div class="input">
+                    <input type="number" min="0.01" step="0.01" value="0.01" />
+                </div>
+            </div>
             <!--<span class="currencyinput">€<input type="number" min="0.01" step="0.01" value="0.01" name="price"></span><br/>-->
-            <input type="file" accept="image/*" name="image" id="image" class="input_text" required="true"/><br/>
-            <input type="submit" value="Toevoegen">
+            <div class="line">
+                <label>Foto product:</label>
+                <div class="input">
+                    <input type="file" accept="image/*" name="image" id="image" class="input_text" required="true"/>
+                </div>
+            </div>
+            <button type="submit" value="Submit" class="form_button">Toevoegen</button>
         </form>
+
         <form>
-            Categorienaam:<br/>
-            <select name="Categories">
-                <option value="M">Male</option>
-                <option value="F">Female</option>
-            </select><br/>
-            <input type="submit" value="Verwijderen">
+            <div class="line">
+                <label>Categorienaam:</label>
+                <div class="input">
+                    <select name="Categories">
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" value="Submit" class="form_button">Verwijderen</button>
         </form>
     </div>
 
     <div class="users fullarticle" id="article3">
         <form>
-            Gebruikersnaam:<br/>
-            <input type="text" name="username" required="true"><br/>
-            Type:<br/>
-            <select name="types">
-                <option value="User">Gebruiker</option>
-                <option value="Admin">Admin</option>
-            </select><br/>
-            Wachtwoord:<br/>
-            <input type="password" name="password" required="true"><br/>
-            Herhaal wachtwoord:<br/>
-            <input type="password" name="repeat_password" required="true"><br/>
-            <input type="submit" value="Toevoegen">
+            <div class="line">
+                <label>Gebruikersnaam:</label>
+                <div class="input">
+                    <input type="text" name="username" required="true">
+                </div>
+            </div>
+            <div class="line">
+                <label>Type:</label>
+                <div class="input">
+                    <select name="types">
+                        <option value="User">Gebruiker</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                </div>
+            </div>
+            <div class="line">
+                <label>Wachtwoord:</label>
+                <div class="input">
+                    <input type="password" name="password" required="true">
+                </div>
+            </div>
+            <div class="line">
+                <label>Herhaal wachtwoord:</label>
+                <div class="input">
+                    <input type="password" name="repeat_password" required="true"><br/>
+                </div>
+            </div>
+            <button type="submit" value="Submit" class="form_button">Toevoegen</button>
         </form>
     </div>
 
     <div class="orders fullarticle" id="article4">
         <form>
-            Gebruikersnaam:<br/>
-            <input type="text" name="username" required="true"><br/>
-            Type:<br/>
-            <select name="types">
-                <option value="User">Gebruiker</option>
-                <option value="Admin">Admin</option>
-            </select><br/>
-            Wachtwoord:<br/>
-            <input type="password" name="password" required="true"><br/>
-            Herhaal wachtwoord:<br/>
-            <input type="password" name="repeat_password" required="true"><br/>
-            <input type="submit" value="Toevoegen">
+            <div class="line">
+                <label>Ordernaam:</label>
+                <div class="input">
+                    <input type="text" name="username" required="true">
+                </div>
+            </div>
+            <div class="line">
+                <label>Type:</label>
+                <div class="input">
+                    <select name="types">
+                        <option value="User">Gebruiker</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                </div>
+            </div>
+            <div class="line">
+                <label>Wachtwoord:</label>
+                <div class="input">
+                    <input type="password" name="password" required="true">
+                </div>
+            </div>
+            <div class="line">
+                <label>Herhaal wachtwoord:</label>
+                <div class="input">
+                    <input type="password" name="repeat_password" required="true">
+                </div>
+            </div>
+                <button type="submit" value="Submit" class="form_button">Toevoegen</button>
         </form>
     </div>
 </div>

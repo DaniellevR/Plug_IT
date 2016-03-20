@@ -42,119 +42,58 @@
 
     <div class="categories fullarticle" id="article1">
         <form action="{base_url('index.php/AdminController/addCategory')}" method="POST" enctype="multipart/form-data">
-            Categorienaam:
-            <input type="text" name="categoryname" required="true"><br/>
-            Omschrijving:
-            <input type="text" name="category_description" required="true"><br/>
-            Ouder categorie:
-            <select name="formParentCategories">
-                <option value="">-</option>
-                {foreach from=$categories[0] item=parent }
-                    <option>{$parent->name}</option>
-                {/foreach}
-            </select><br/>
-            <input type="file" accept="image/*" name="image" id="image" class="input_text" required="true"/><br/>
-            <input type="submit" value="Toevoegen">
+            <div class="line">
+                <label>Categorienaam:</label>
+                <div class="input">
+                    <input type="text" name="categoryname" required="true">
+                </div>
+            </div>
+            <div class="line">
+                <label>Omschrijving:</label>
+                <div class="input">
+                    <input type="text" name="category_description" required="true">
+                </div>
+            </div>
+            <div class="line">
+                <label>Ouder categorie:</label>
+                <div class="input">
+                    <select name="formParentCategories">
+                        <option value="">-</option>
+                        {foreach from=$categories[0] item=parent }
+                            <option>{$parent->name}</option>
+                        {/foreach}
+                    </select>
+                </div>
+            </div>
+            <div class="line">
+                <label>Foto categorie:</label>
+                <div class="input">
+                    <input type="file" accept="image/*" name="image" id="image" required="true"/>
+                </div>
+            </div>
+            <button type="submit" value="Submit" class="form_button">Toevoegen</button>
         </form>
 
-
-
-        {*        {$autoload['helper'] = array('url', 'form')}
-        {form_open('Welcome/form_open')}
-        <p>
-        <label for="username">User Name:</label>
-        <input type="text" id="username" name="user_name" />
-        </p>
-        <p>
-        <label for="email_address">Your Email:</label>
-        <input type="text" id="email" name="email_address" />
-        </p>
-        <p>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" />
-        </p>
-        <p>
-        <label for="con_password">Confirm Password:</label>
-        <input type="password" id="con_password" name="con_password" />
-        </p>
-        <p>
-        <input type="submit" value="Submit" />
-        </p>
-        {form}*}
-
-
-        {*<form action="{$base}AdminController/save_userinput" method="POST" enctype="multipart/form-data">
-        Categorienaam:
-        <input type="text" name="categoryname" required="true"><br/>
-        Omschrijving:
-        <input type="text" name="category_description" required="true"><br/>
-        Ouder categorie:
-        <select name="formParentCategories">
-        <option value="">-</option>
-        {foreach from=$categories[0] item=parent }
-        <option>{$parent->name}</option>
-        {/foreach}
-        </select><br/>
-        <input type="file" accept="image/*" name="image" id="image" class="input_text" required="true"/><br/>
-        <input type="submit" value="Toevoegen">
-        {form_close()}
-
-        {*        {$this->load->helper('form')}
-        {$autoload['helper'] = array('url', 'form')}
-        {form_open('../AdminController/addCategory')}
-        <p>
-        <label for="username">User Name:</label>
-        <input type="text" id="username" name="user_name" />
-        </p>
-        <p>
-        <label for="email_address">Your Email:</label>
-        <input type="text" id="email" name="email_address" />
-        </p>
-        <p>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" />
-        </p>
-        <p>
-        <label for="con_password">Confirm Password:</label>
-        <input type="password" id="con_password" name="con_password" />
-        </p>
-        <p>
-        <input type="submit" value="Submit" />
-        </p>
-        {form}*}
-
-
-        {*<form action="{$base}AdminController/save_userinput" method="POST" enctype="multipart/form-data">
-        Categorienaam:
-        <input type="text" name="categoryname" required="true"><br/>
-        Omschrijving:
-        <input type="text" name="category_description" required="true"><br/>
-        Ouder categorie:
-        <select name="formParentCategories">
-        <option value="">-</option>
-        {foreach from=$categories[0] item=parent }
-        <option>{$parent->name}</option>
-        {/foreach}
-        </select><br/>
-        <input type="file" accept="image/*" name="image" id="image" class="input_text" required="true"/><br/>
-        <input type="submit" value="Toevoegen">
-        </form>*}
         <form>
-            Categorie:<br/>
-            <select name="Categories">
-                {foreach from=$categories[0] item=parent }
-                    <option>'{$parent->name}'</option>
+            <div class="line">
+                <label>Categorie:</label>
+                <div class="input">
+                    <select name="Categories">
+                        {foreach from=$categories[0] item=parent }
+                            <option>'{$parent->name}'</option>
 
-                    {foreach from=$categories[1] item=child }
-                        {if $child->parent == $parent->id}
-                            <option>'{$child->name}' uit categorie '{$parent->name}'</option>
-                        {/if}
-                    {/foreach}
-                {/foreach}
-                <option value="M">Male</option>
-                <option value="F">Female</option>
-            </select><br/>
-            <input type="submit" value="Verwijderen">
+                            {foreach from=$categories[1] item=child }
+                                {if $child->parent == $parent->id}
+                                    <option>'{$child->name}' uit categorie '{$parent->name}'</option>
+                                {/if}
+                            {/foreach}
+                        {/foreach}
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" value="Submit" class="form_button">Verwijderen</button>
         </form>
     </div>
 
@@ -163,57 +102,111 @@
         </ul>
 
         <form>
-            Productnaam:<br/>
-            <input type="text" name="productnaam" required="true"><br/>
-            Omschrijving:<br/>
-            <input type="text" name="product_omschrijving" required="true"><br/>
-            Prijs:<br/>
-            <input type="number" min="0.01" step="0.01" value="0.01" /><br/>
+            <div class="line">
+                <label>Productnaam:</label>
+                <div class="input">
+                    <input type="text" name="productnaam" required="true">
+                </div>
+            </div>
+            <div class="line">
+                <label>Omschrijving:</label>
+                <div class="input">
+                    <input type="text" name="product_omschrijving" required="true">
+                </div>
+            </div>
+            <div class="line">
+                <label>Prijs:</label>
+                <div class="input">
+                    <input type="number" min="0.01" step="0.01" value="0.01" />
+                </div>
+            </div>
             <!--<span class="currencyinput">€<input type="number" min="0.01" step="0.01" value="0.01" name="price"></span><br/>-->
-            <input type="file" accept="image/*" name="image" id="image" class="input_text" required="true"/><br/>
-            <input type="submit" value="Toevoegen">
+            <div class="line">
+                <label>Foto product:</label>
+                <div class="input">
+                    <input type="file" accept="image/*" name="image" id="image" class="input_text" required="true"/>
+                </div>
+            </div>
+            <button type="submit" value="Submit" class="form_button">Toevoegen</button>
         </form>
+
         <form>
-            Categorienaam:<br/>
-            <select name="Categories">
-                <option value="M">Male</option>
-                <option value="F">Female</option>
-            </select><br/>
-            <input type="submit" value="Verwijderen">
+            <div class="line">
+                <label>Categorienaam:</label>
+                <div class="input">
+                    <select name="Categories">
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" value="Submit" class="form_button">Verwijderen</button>
         </form>
     </div>
 
     <div class="users fullarticle" id="article3">
         <form>
-            Gebruikersnaam:<br/>
-            <input type="text" name="username" required="true"><br/>
-            Type:<br/>
-            <select name="types">
-                <option value="User">Gebruiker</option>
-                <option value="Admin">Admin</option>
-            </select><br/>
-            Wachtwoord:<br/>
-            <input type="password" name="password" required="true"><br/>
-            Herhaal wachtwoord:<br/>
-            <input type="password" name="repeat_password" required="true"><br/>
-            <input type="submit" value="Toevoegen">
+            <div class="line">
+                <label>Gebruikersnaam:</label>
+                <div class="input">
+                    <input type="text" name="username" required="true">
+                </div>
+            </div>
+            <div class="line">
+                <label>Type:</label>
+                <div class="input">
+                    <select name="types">
+                        <option value="User">Gebruiker</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                </div>
+            </div>
+            <div class="line">
+                <label>Wachtwoord:</label>
+                <div class="input">
+                    <input type="password" name="password" required="true">
+                </div>
+            </div>
+            <div class="line">
+                <label>Herhaal wachtwoord:</label>
+                <div class="input">
+                    <input type="password" name="repeat_password" required="true"><br/>
+                </div>
+            </div>
+            <button type="submit" value="Submit" class="form_button">Toevoegen</button>
         </form>
     </div>
 
     <div class="orders fullarticle" id="article4">
         <form>
-            Gebruikersnaam:<br/>
-            <input type="text" name="username" required="true"><br/>
-            Type:<br/>
-            <select name="types">
-                <option value="User">Gebruiker</option>
-                <option value="Admin">Admin</option>
-            </select><br/>
-            Wachtwoord:<br/>
-            <input type="password" name="password" required="true"><br/>
-            Herhaal wachtwoord:<br/>
-            <input type="password" name="repeat_password" required="true"><br/>
-            <input type="submit" value="Toevoegen">
+            <div class="line">
+                <label>Ordernaam:</label>
+                <div class="input">
+                    <input type="text" name="username" required="true">
+                </div>
+            </div>
+            <div class="line">
+                <label>Type:</label>
+                <div class="input">
+                    <select name="types">
+                        <option value="User">Gebruiker</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                </div>
+            </div>
+            <div class="line">
+                <label>Wachtwoord:</label>
+                <div class="input">
+                    <input type="password" name="password" required="true">
+                </div>
+            </div>
+            <div class="line">
+                <label>Herhaal wachtwoord:</label>
+                <div class="input">
+                    <input type="password" name="repeat_password" required="true">
+                </div>
+            </div>
+                <button type="submit" value="Submit" class="form_button">Toevoegen</button>
         </form>
     </div>
 </div>

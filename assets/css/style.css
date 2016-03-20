@@ -209,12 +209,6 @@ div.sitecontainer {
     padding: 10px;
 }
 
-.admin form {
-    border: 1px solid black;
-    margin: 10px 0;
-    padding: 10px;
-}
-
 input, select {
     margin: 10px;
 }
@@ -230,4 +224,29 @@ input, select {
     width: auto;
     float: left;
     display: none;
+}
+
+.admin form {
+    border: 1px solid black;
+    padding: 10px;
+    position: relative;
+    margin: 10px 10px 10px 0;
+    overflow:hidden;
+}
+
+.admin label {
+    color: #404040;
+    float: left;
+    text-align: right;
+}
+
+.admin input, textarea, select {
+    border: 1px solid #CCCCCC;
+    color: #808080;
+    display: inline-block;
+    width: 90%;
+}
+
+.form_button {
+    float: right;   
 }
