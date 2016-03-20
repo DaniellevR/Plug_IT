@@ -4,6 +4,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 <script language="javascript">
     var id = -1;
+    var index = 0;
 
     $(document).on("hover", ".adminpanel ul li", function() {
         var i = $(this).index();
@@ -24,6 +25,15 @@
             $('#item' + (i + 1)).css("background-color", "#e6f2ff");
             $('.fullarticle').hide();
             $('#article' + (i + 1)).show();
+        });
+
+        $(function() {
+            $("#categories").change(function(e) {
+{*                $("#subcategories").empty();*}
+                index = $("#categories option:selected").index();
+{*                $("#subcategories").hide();*}
+                $("#subcategories").show();
+            });
         });
     });
 </script>
@@ -78,18 +88,17 @@
             <div class="line">
                 <label>Categorie:</label>
                 <div class="input">
-                    <select name="Categories">
+                    <select id="categories" name="Categories">
                         {foreach from=$categories[0] item=parent }
-                            <option>'{$parent->name}'</option>
-
-                            {foreach from=$categories[1] item=child }
-                                {if $child->parent == $parent->id}
-                                    <option>'{$child->name}' uit categorie '{$parent->name}'</option>
-                                {/if}
-                            {/foreach}
+                            <option>{$parent->name}</option>
                         {/foreach}
-                        <option value="M">Male</option>
-                        <option value="F">Female</option>
+                    </select>
+                </div>
+            </div>
+            <div class="line">
+                <label>Subcategorie:</label>
+                <div class="input">
+                    <select id="subcategories" name="subcategories">
                     </select>
                 </div>
             </div>
@@ -206,7 +215,7 @@
                     <input type="password" name="repeat_password" required="true">
                 </div>
             </div>
-                <button type="submit" value="Submit" class="form_button">Toevoegen</button>
+            <button type="submit" value="Submit" class="form_button">Toevoegen</button>
         </form>
     </div>
 </div>
