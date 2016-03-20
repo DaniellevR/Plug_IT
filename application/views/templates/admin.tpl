@@ -39,9 +39,9 @@
             <li class="menu_item" id="item4">Orders</li>
         </ul>
     </div>
-    
-    <div class="categories fullarticle" id="article1">      
-        <form action="" method="POST" enctype="multipart/form-data">
+
+    <div class="categories fullarticle" id="article1">
+        <form action="{base_url('index.php/AdminController/addCategory')}" method="POST" enctype="multipart/form-data">
             Categorienaam:
             <input type="text" name="categoryname" required="true"><br/>
             Omschrijving:
@@ -56,6 +56,89 @@
             <input type="file" accept="image/*" name="image" id="image" class="input_text" required="true"/><br/>
             <input type="submit" value="Toevoegen">
         </form>
+
+
+
+        {*        {$autoload['helper'] = array('url', 'form')}
+        {form_open('Welcome/form_open')}
+        <p>
+        <label for="username">User Name:</label>
+        <input type="text" id="username" name="user_name" />
+        </p>
+        <p>
+        <label for="email_address">Your Email:</label>
+        <input type="text" id="email" name="email_address" />
+        </p>
+        <p>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" />
+        </p>
+        <p>
+        <label for="con_password">Confirm Password:</label>
+        <input type="password" id="con_password" name="con_password" />
+        </p>
+        <p>
+        <input type="submit" value="Submit" />
+        </p>
+        {form}*}
+
+
+        {*<form action="{$base}AdminController/save_userinput" method="POST" enctype="multipart/form-data">
+        Categorienaam:
+        <input type="text" name="categoryname" required="true"><br/>
+        Omschrijving:
+        <input type="text" name="category_description" required="true"><br/>
+        Ouder categorie:
+        <select name="formParentCategories">
+        <option value="">-</option>
+        {foreach from=$categories[0] item=parent }
+        <option>{$parent->name}</option>
+        {/foreach}
+        </select><br/>
+        <input type="file" accept="image/*" name="image" id="image" class="input_text" required="true"/><br/>
+        <input type="submit" value="Toevoegen">
+        {form_close()}
+
+        {*        {$this->load->helper('form')}
+        {$autoload['helper'] = array('url', 'form')}
+        {form_open('../AdminController/addCategory')}
+        <p>
+        <label for="username">User Name:</label>
+        <input type="text" id="username" name="user_name" />
+        </p>
+        <p>
+        <label for="email_address">Your Email:</label>
+        <input type="text" id="email" name="email_address" />
+        </p>
+        <p>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" />
+        </p>
+        <p>
+        <label for="con_password">Confirm Password:</label>
+        <input type="password" id="con_password" name="con_password" />
+        </p>
+        <p>
+        <input type="submit" value="Submit" />
+        </p>
+        {form}*}
+
+
+        {*<form action="{$base}AdminController/save_userinput" method="POST" enctype="multipart/form-data">
+        Categorienaam:
+        <input type="text" name="categoryname" required="true"><br/>
+        Omschrijving:
+        <input type="text" name="category_description" required="true"><br/>
+        Ouder categorie:
+        <select name="formParentCategories">
+        <option value="">-</option>
+        {foreach from=$categories[0] item=parent }
+        <option>{$parent->name}</option>
+        {/foreach}
+        </select><br/>
+        <input type="file" accept="image/*" name="image" id="image" class="input_text" required="true"/><br/>
+        <input type="submit" value="Toevoegen">
+        </form>*}
         <form>
             Categorie:<br/>
             <select name="Categories">

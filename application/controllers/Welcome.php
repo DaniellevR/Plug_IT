@@ -33,6 +33,7 @@ class Welcome extends CI_Controller {
         $smarty->assign('cart', $cart);
 
         // Pages
+//        $smarty->assign('add_C', base_url() . "index.php/Welcome/AdminController/addCategory");
         $smarty->assign('home', base_url() . 'index.php/Welcome/render_page/index');
         $smarty->assign('information', base_url() . 'index.php/Welcome/render_page/information');
         $smarty->assign('orderAndDeliviry', base_url() . 'index.php/Welcome/render_page/orderAndDeliviry');
@@ -42,31 +43,19 @@ class Welcome extends CI_Controller {
         $smarty->assign('contact', base_url() . 'index.php/Welcome/render_page/contact');
         $smarty->assign('about', base_url() . 'index.php/Welcome/render_page/about');
         $smarty->assign('admin', base_url() . 'index.php/Welcome/render_page/admin');
-        
+
         $smarty->assign('catalogue', base_url() . 'index.php/Welcome/render_page/catalogue');
         $smarty->assign('categorypage', base_url() . 'index.php/Welcome/render_page/category');
         $smarty->assign('productpage', base_url() . 'index.php/Welcome/render_page/productpage');
-        
+
         // Data
 //        $smarty->registerPlugin("function", "render", "render_page");
-        
+
         $smarty->assign('categories', $this->getParentAndChildCategories());
-        
+
         // Display
         $smarty->display($view . '.tpl');
     }
-    
-//    function redirectNavigation($view, $param) {
-//        
-//    }
-
-//    function getCategories() {
-//        $this->load->model('Category');
-//        $categoryModel = new Category();
-//        $categories = $categoryModel->getCategories();
-//        return $categories;
-////        echo sizeof($categories);
-//    }
 
     function getParentAndChildCategories() {
         $this->load->model('Category');
@@ -75,7 +64,7 @@ class Welcome extends CI_Controller {
 
         $catalogue_catagories = array();
         $children = array();
-        
+
         $navigation = array();
 
         // Sort
@@ -86,46 +75,10 @@ class Welcome extends CI_Controller {
                 $children[] = $cat;
             }
         }
-        
+
         $navigation[] = $catalogue_catagories;
         $navigation[] = $children;
-        
+
         return $navigation;
     }
-    
-    
-//    function getParentAndChildCategories() {
-//        $this->load->model('Category');
-//        $categoryModel = new Category();
-//        $categories = $categoryModel->getCategories();
-//
-//        $catalogue_catagories = array();
-//        $children = array();
-//
-//        // Sort
-//        foreach ($categories as $cat) {
-//            if ($cat->parent === '0') {
-//                $catalogue_catagories[] = $cat;
-//            } else {
-//                $children[] = $cat;
-//            }
-//        }
-//
-//        $navigation = array();
-//        // Create list
-//        foreach ($catalogue_catagories as $cat) {
-//            $navigation[] = "<li><a href='category.php?cat=$cat->name'>$cat->name</a></li>";
-//
-//            $navigation[] = "<ul>";
-//            // Children
-//            foreach ($children as $child) {
-//                if ($child->parent === $cat->name) {
-//                    $navigation[] = "<li><a href='category.php?cat=$child->name'>$child->name</a></li>";
-//                }
-//            }
-//            $navigation[] = "</ul>";
-//        }
-//        
-//        return $navigation;
-//    }
 }

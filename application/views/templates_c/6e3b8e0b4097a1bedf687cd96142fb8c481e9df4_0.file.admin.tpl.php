@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-03-19 23:23:57
+/* Smarty version 3.1.29, created on 2016-03-20 02:03:32
   from "C:\wamp\www\Plug_IT\Application\views\templates\admin.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56edd17d0de997_76371329',
+  'unifunc' => 'content_56edf6e4528534_02474509',
   'file_dependency' => 
   array (
     '6e3b8e0b4097a1bedf687cd96142fb8c481e9df4' => 
     array (
       0 => 'C:\\wamp\\www\\Plug_IT\\Application\\views\\templates\\admin.tpl',
-      1 => 1458426230,
+      1 => 1458435807,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_56edd17d0de997_76371329 ($_smarty_tpl) {
+function content_56edf6e4528534_02474509 ($_smarty_tpl) {
 $_smarty_tpl->smarty->ext->_subtemplate->render($_smarty_tpl, "file:header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -72,9 +72,12 @@ $_smarty_tpl->smarty->ext->_subtemplate->render($_smarty_tpl, "file:header.tpl",
             <li class="menu_item" id="item4">Orders</li>
         </ul>
     </div>
-    
-    <div class="categories fullarticle" id="article1">      
-        <form action="" method="POST" enctype="multipart/form-data">
+
+    <div class="categories fullarticle" id="article1">
+
+        
+        <form action="<?php echo base_url('index.php/AdminController/addCategory');?>
+" method="POST" enctype="multipart/form-data">
             Categorienaam:
             <input type="text" name="categoryname" required="true"><br/>
             Omschrijving:
@@ -107,6 +110,16 @@ $_smarty_tpl->tpl_vars['parent'] = $__foreach_parent_0_saved_item;
             <input type="file" accept="image/*" name="image" id="image" class="input_text" required="true"/><br/>
             <input type="submit" value="Toevoegen">
         </form>
+
+
+
+        
+
+
+        
+
+
+        
         <form>
             Categorie:<br/>
             <select name="Categories">
