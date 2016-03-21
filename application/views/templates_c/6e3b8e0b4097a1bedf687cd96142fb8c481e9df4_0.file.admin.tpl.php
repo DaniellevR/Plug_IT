@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-03-21 14:47:11
+/* Smarty version 3.1.29, created on 2016-03-21 16:55:17
   from "C:\wamp\www\Plug_IT\Application\views\templates\admin.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56effb5f953eb5_20235892',
+  'unifunc' => 'content_56f019656327f2_73222781',
   'file_dependency' => 
   array (
     '6e3b8e0b4097a1bedf687cd96142fb8c481e9df4' => 
     array (
       0 => 'C:\\wamp\\www\\Plug_IT\\Application\\views\\templates\\admin.tpl',
-      1 => 1458501291,
+      1 => 1458575708,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_56effb5f953eb5_20235892 ($_smarty_tpl) {
+function content_56f019656327f2_73222781 ($_smarty_tpl) {
 $_smarty_tpl->smarty->ext->_subtemplate->render($_smarty_tpl, "file:header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -61,9 +61,11 @@ $_smarty_tpl->smarty->ext->_subtemplate->render($_smarty_tpl, "file:header.tpl",
 
         $(function() {
             $("#categories").change(function(e) {
-
+    
                 index = $("#categories option:selected").index();
-
+    
+    
+    
                 $("#subcategories").show();
             });
         });
@@ -153,8 +155,31 @@ foreach ($_from as $_smarty_tpl->tpl_vars['parent']->value) {
 $_smarty_tpl->tpl_vars['parent']->_loop = true;
 $__foreach_parent_1_saved_local_item = $_smarty_tpl->tpl_vars['parent'];
 ?>
-                            <option><?php echo $_smarty_tpl->tpl_vars['parent']->value->name;?>
+                            <option class="category"><?php echo $_smarty_tpl->tpl_vars['parent']->value->name;?>
 </option>
+                            <?php
+$_from = $_smarty_tpl->tpl_vars['categories']->value[1];
+if (!is_array($_from) && !is_object($_from)) {
+settype($_from, 'array');
+}
+$__foreach_child_2_saved_item = isset($_smarty_tpl->tpl_vars['child']) ? $_smarty_tpl->tpl_vars['child'] : false;
+$_smarty_tpl->tpl_vars['child'] = new Smarty_Variable();
+$_smarty_tpl->tpl_vars['child']->_loop = false;
+foreach ($_from as $_smarty_tpl->tpl_vars['child']->value) {
+$_smarty_tpl->tpl_vars['child']->_loop = true;
+$__foreach_child_2_saved_local_item = $_smarty_tpl->tpl_vars['child'];
+?>
+                                <?php if ($_smarty_tpl->tpl_vars['child']->value->parent === $_smarty_tpl->tpl_vars['parent']->value->id) {?>
+                                    <option class="subcategory"><?php echo $_smarty_tpl->tpl_vars['child']->value->name;?>
+</option>
+                                <?php }?>
+                            <?php
+$_smarty_tpl->tpl_vars['child'] = $__foreach_child_2_saved_local_item;
+}
+if ($__foreach_child_2_saved_item) {
+$_smarty_tpl->tpl_vars['child'] = $__foreach_child_2_saved_item;
+}
+?>
                         <?php
 $_smarty_tpl->tpl_vars['parent'] = $__foreach_parent_1_saved_local_item;
 }
@@ -162,13 +187,6 @@ if ($__foreach_parent_1_saved_item) {
 $_smarty_tpl->tpl_vars['parent'] = $__foreach_parent_1_saved_item;
 }
 ?>
-                    </select>
-                </div>
-            </div>
-            <div class="line">
-                <label>Subcategorie:</label>
-                <div class="input">
-                    <select id="subcategories" name="subcategories">
                     </select>
                 </div>
             </div>

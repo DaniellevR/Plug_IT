@@ -250,3 +250,11 @@ input, select {
 .form_button {
     float: right;   
 }
+
+.category {
+    font-weight: bold;
+}
+
+.subcategory {
+    padding-left: 25px;
+}

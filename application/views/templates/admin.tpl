@@ -29,9 +29,11 @@
 
         $(function() {
             $("#categories").change(function(e) {
-{*                $("#subcategories").empty();*}
+    {*                $("#subcategories").empty();*}
                 index = $("#categories option:selected").index();
-{*                $("#subcategories").hide();*}
+    {*                {ldelim}var cat = $categories[0][index];{rdelim};*}
+    {*                    $("#item1").text(catname);*}
+    {*                $("#subcategories").hide();*}
                 $("#subcategories").show();
             });
         });
@@ -90,15 +92,13 @@
                 <div class="input">
                     <select id="categories" name="Categories">
                         {foreach from=$categories[0] item=parent }
-                            <option>{$parent->name}</option>
+                            <option class="category">{$parent->name}</option>
+                            {foreach from=$categories[1] item=child }
+                                {if $child->parent === $parent->id}
+                                    <option class="subcategory">{$child->name}</option>
+                                {/if}
+                            {/foreach}
                         {/foreach}
-                    </select>
-                </div>
-            </div>
-            <div class="line">
-                <label>Subcategorie:</label>
-                <div class="input">
-                    <select id="subcategories" name="subcategories">
                     </select>
                 </div>
             </div>
