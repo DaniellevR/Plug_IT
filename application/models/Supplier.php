@@ -1,55 +1,35 @@
 <?php
 
-Class Category extends CI_Model {
-
-    public $id;
+Class Supplier extends CI_Model {
     public $name;
-    public $description;
-    public $parent;
+    public $address_id;
+    public $email;
+    public $telephonenumber;
 
-    function getCategories() {
+    function getSuppliers() {
         $this->db->select('*')
-                ->from('category');
+                ->from('supplier');
 
         $result = $this->db->get();
 
-        $categories = array();
+        $suppliers = array();
 
         foreach ($result->result() as $row) {
-            $category = new Category();
-            $category->id = $row->id;
-            $category->name = $row->name;
-            $category->description = $row->description;
-            $category->parent = $row->category_id;
-            $categories[] = $category;
+            $supplier = new Supplier();
+            $supplier->name = $row->name;
+            $supplier->address_id = $row->adddress_id;
+            $supplier->email = $row->email;
+            $supplier->telephonenumber = $row->telephonenumber;
+            $suppliers[] = $supplier;
         }
 
-        return $categories;
+        return $suppliers;
     }
 
-    function addCategory($name, $description, $parent) {
-        $this->db->set('id', 0);
+    function addSupplier($name, $address_id, $email, $telephonenumber) {
         $this->db->set('name', $name);
-        $this->db->set('description', $description);
-        $this->db->set('category_id', $parent);
-        $this->db->insert('category');
-        $insert_id = $this->db->insert_id();
-
-        return $insert_id;
-    }
-
-    function removeCategory($id) {
-        $this->db->where('id', $id);
-        $this->db->delete('category');
-    }
-
-    function removeSubcategories($parent_id) {
-        $this->db->where('category_id', $parent_id);
-        $this->db->delete('category');
-    }
-
-    function editCategory($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('category', $data);
+        $this->db->set('address_address_id', $address_id);
+        $this->db->set('email', $email);
+        $this->db->insert('telephonenumber', $telephonenumber);
     }
 }

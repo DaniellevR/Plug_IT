@@ -15,7 +15,7 @@ Class Order extends CI_Model {
         $this->db->set('user_username', $username);
         $this->db->set('order_state_state', $order_state);
         $this->db->set('price', $price);
-        $this->db->insert('order');
+        $this->db->insert('_order');
         $insert_id = $this->db->insert_id();
 
         return $insert_id;
@@ -23,6 +23,6 @@ Class Order extends CI_Model {
     
     function editOrder($id, $data) {
         $this->db->where('id', $id);
-        $this->db->update('order', $data);
+        $this->db->update('_order', $data);
     }
 }

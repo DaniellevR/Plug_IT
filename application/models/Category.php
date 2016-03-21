@@ -1,35 +1,55 @@
 <?php
 
-Class Supplier extends CI_Model {
-    public $name;
-    public $address_id;
-    public $email;
-    public $telephonenumber;
+Class Category extends CI_Model {
 
-    function getSuppliers() {
+    public $id;
+    public $name;
+    public $description;
+    public $parent;
+
+    function getCategories() {
         $this->db->select('*')
-                ->from('supplier');
+                ->from('category');
 
         $result = $this->db->get();
 
-        $suppliers = array();
+        $categories = array();
 
         foreach ($result->result() as $row) {
-            $supplier = new Supplier();
-            $supplier->name = $row->name;
-            $supplier->address_id = $row->adddress_id;
-            $supplier->email = $row->email;
-            $supplier->telephonenumber = $row->telephonenumber;
-            $suppliers[] = $supplier;
+            $category = new Category();
+            $category->id = $row->id;
+            $category->name = $row->name;
+            $category->description = $row->description;
+            $category->parent = $row->category_id;
+            $categories[] = $category;
         }
 
-        return $suppliers;
+        return $categories;
     }
 
-    function addSupplier($name, $address_id, $email, $telephonenumber) {
+    function addCategory($name, $description, $parent) {
+        $this->db->set('id', 0);
         $this->db->set('name', $name);
-        $this->db->set('address_address_id', $address_id);
-        $this->db->set('email', $email);
-        $this->db->insert('telephonenumber', $telephonenumber);
+        $this->db->set('description', $description);
+        $this->db->set('category_id', $parent);
+        $this->db->insert('category');
+        $insert_id = $this->db->insert_id();
+
+        return $insert_id;
+    }
+
+    function removeCategory($id) {
+        $this->db->where('id', $id);
+        $this->db->delete('category');
+    }
+
+    function removeSubcategories($parent_id) {
+        $this->db->where('category_id', $parent_id);
+        $this->db->delete('category');
+    }
+
+    function editCategory($id, $data) {
+        $this->db->where('id', $id);
+        $this->db->update('category', $data);
     }
 }
