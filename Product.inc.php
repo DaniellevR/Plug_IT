@@ -12,11 +12,14 @@
  * @author Daniëlle
  */
 class Product {
-    
-    function __construct($name, $description, $parent, $image) {
+
+    function __construct($id, $name, $description, $price, $brand, $amount) {
+        $this->id = $id;
         $this->name = $name;
         $this->description = $description;
-        $this->parent = $parent;
-        $this->image = $image;
+        $this->price = $price;
+        $this->brand = $brand;
+        $this->amount = $amount;
     }
+
 }
