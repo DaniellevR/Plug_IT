@@ -2,7 +2,6 @@
 {include file="navigation.tpl"}
 
 <div class="content">
-    {*    <?php echo "Product : " . htmlspecialchars($_GET["product"]) . '!';?>*}
     <div class="pictures"></div>
     <div class=""></div>
 </div>

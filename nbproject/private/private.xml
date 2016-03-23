@@ -6,11 +6,11 @@
             <file>file:/C:/wamp/www/Plug_IT/application/models/Address.php</file>
             <file>file:/C:/wamp/www/Plug_IT/application/models/Category.php</file>
             <file>file:/C:/wamp/www/Plug_IT/application/views/templates/admin.tpl</file>
-            <file>file:/C:/wamp/www/Plug_IT/application/models/User.php</file>
-            <file>file:/C:/wamp/www/Plug_IT/application/models/Product.php</file>
-            <file>file:/C:/wamp/www/Plug_IT/application/models/NavigationItem.php</file>
+            <file>file:/C:/wamp/www/Plug_IT/assets/css/style.css</file>
+            <file>file:/C:/wamp/www/Plug_IT/application/controllers/Welcome.php</file>
+            <file>file:/C:/wamp/www/Plug_IT/application/views/templates/navigation.tpl</file>
             <file>file:/C:/wamp/www/Plug_IT/application/controllers/AdminController.php</file>
-            <file>file:/C:/wamp/www/Plug_IT/application/models/Order.php</file>
+            <file>file:/C:/wamp/www/Plug_IT/application/views/templates/header.tpl</file>
         </group>
     </open-files>
 </project-private>

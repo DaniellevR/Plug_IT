@@ -27,17 +27,20 @@
             $('#article' + (i + 1)).show();
         });
 
-        $(function() {
-            $("#categories").change(function(e) {
-    {*                $("#subcategories").empty();*}
-                index = $("#categories option:selected").index();
-    {*                {ldelim}var cat = $categories[0][index];{rdelim};*}
-    {*                    $("#item1").text(catname);*}
-    {*                $("#subcategories").hide();*}
-                $("#subcategories").show();
+    {literal}$(function() {
+                $("#categories_edit").change(function(e) {
+                    var index = $("#categories_edit option:selected").index();
+                    $("#item1").text(index);                   
+                    
+                    var id = $(this).children(":selected").attr("id");
+                    $("#item1").text(id);
+                    
+                    var description = "{/literal}{$categories[0][0]->description}{literal}";
+                    $("#desc").val(description);
+                });
             });
+    {/literal}
         });
-    });
 </script>
 
 <div class="content admin">
@@ -86,11 +89,56 @@
             <button type="submit" value="Submit" class="form_button">Toevoegen</button>
         </form>
 
+        <form action="{base_url('index.php/AdminController/editCategory')}" method="POST" enctype="multipart/form-data">
+            <div class="line">
+                <label>Categorienaam:</label>
+                <div class="input">
+                    <select id="categories_edit" name="Categories">
+                        {$i = 0}
+                        {foreach from=$categories[0] item=parent }
+                            <option class="category" id="opt{$i}">{$parent->name}</option>
+                            {$j = 0}
+                            {foreach from=$categories[1] item=child }
+                                {if $child->parent === $parent->id}
+                                    <option class="subcategory" id="opt{$i};{$j++}">{$child->name}</option>
+                                {/if}
+                            {/foreach}
+                            {$i++}
+                        {/foreach}
+                    </select>
+                </div>
+            </div>
+            <div class="line">
+                <label>Omschrijving:</label>
+                <div class="input">
+                    <input id="desc" type="text" name="category_description" required="true">
+                </div>
+            </div>
+            <div class="line">
+                <label>Ouder categorie:</label>
+                <div class="input">
+                    <select name="formParentCategories">
+                        <option value="">-</option>
+                        {foreach from=$categories[0] item=parent }
+                            <option>{$parent->name}</option>
+                        {/foreach}
+                    </select>
+                </div>
+            </div>
+            <div class="line">
+                <label>Foto categorie:</label>
+                <div class="input">
+                    <input type="file" accept="image/*" name="image" id="image" required="true"/>
+                </div>
+            </div>
+            <button type="submit" value="Submit" class="form_button">Toevoegen</button>
+        </form>
+
         <form>
             <div class="line">
                 <label>Categorie:</label>
                 <div class="input">
-                    <select id="categories" name="Categories">
+                    <select id="categories_remove" name="Categories">
                         {foreach from=$categories[0] item=parent }
                             <option class="category">{$parent->name}</option>
                             {foreach from=$categories[1] item=child }

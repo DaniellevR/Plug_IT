@@ -44,6 +44,7 @@ div.sitecontainer {
     top: 60px;
     left: 280px;
     font-size:14px;
+    width: auto;
 }
 
 .path a {
