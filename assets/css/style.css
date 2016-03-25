@@ -1,0 +1,261 @@
+/* ==========================================================================
+    Body
+   ========================================================================== */
+
+li {
+    list-style-type: none;
+}
+
+body {
+    font-family:Arial, Helvetica, sans-serif;
+    background-color:#5CA0FF;
+    height: auto;
+}
+
+div.sitecontainer {
+    position: relative;
+    margin: auto;
+    background-color: #ffffff;
+    border: 1px solid black;
+    height: auto;
+}
+
+/* ==========================================================================
+    CSS header.php
+   ========================================================================== */
+
+/* Header */
+.header img {
+    position:absolute;
+    top: 20px;
+    left:20px;
+}
+
+.header {
+    width: 100%;
+    height:130px;
+    background-color: whitesmoke;
+    border-bottom: 1px solid black;
+}
+
+/* Breadcrumbs */
+.path {
+    position: absolute;
+    top: 60px;
+    left: 280px;
+    font-size:14px;
+    width: auto;
+}
+
+.path a {
+    color: black;
+}
+
+.path a:hover {
+    text-decoration:underline;
+}
+
+/* Search top */
+.search {
+    position: absolute;
+    top: 60px;
+    right: 90px;
+    display:inline;
+    float:right;
+}
+
+#searchBar {
+    width: 350px;
+}
+
+/* Cart */
+.cart {
+    position: absolute;
+    display:inline;
+    top: 40px;
+    right: 100px;
+}
+
+/* Top navigation (logintool) */
+.logintool ul {
+    position:absolute;
+    margin: 0;
+    padding:0;
+    top: 20px;
+    right: 20px;
+    list-style-type: none;
+    text-align: center;
+    text-decoration: none;
+    background-color: #77A5FC;
+    display: flex;
+}
+
+.logintool ul li {
+    display: inline;
+    border: 1px solid black;
+}
+
+.logintool ul li:hover {
+    background-color: #B2CAF7;
+}
+
+.logintool ul li a {
+    padding: 15px;
+    color: white;
+    text-decoration: none;
+}
+
+/* ==========================================================================
+    CSS Content and side navigation
+   ========================================================================== */
+
+.content_container {
+    background-color: white;
+    display: flex;
+}
+
+.navigation {
+    background-color: #5CA0FF;
+    width: 300px;
+    float: left;
+    border: 1px solid black;
+    margin: 10px;
+    margin-right: 0;
+}
+
+.nav {
+    padding: 20px;
+}
+
+.nav ul {
+    list-style-type: none;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+}
+
+.nav a:hover {
+    text-decoration: underline;
+}
+
+.content {
+    overflow: hidden;
+    padding: 10px;
+    border: 1px solid black;
+    height: auto;
+    margin: 10px;
+    width: 100%;
+}
+
+/* ==========================================================================
+    CSS footer.php
+   ========================================================================== */
+
+.footer {
+    width: 100%;
+    padding: 10px 0;
+    background-color: whitesmoke;
+    border-top: 1px solid black;
+    vertical-align: middle;
+    height: 120px;
+}
+
+.footer_nav ul {
+    float: left;
+    width: 20%;
+}
+
+.footer_nav ul a {
+    color: black;
+    text-decoration: none;
+}
+
+.footer_nav ul a:hover {
+    text-decoration: underline;
+}
+
+.admin_link {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+/* ==========================================================================
+    CSS admin.php
+   ========================================================================== */
+
+.adminpanel ul {
+    display: inline;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.adminpanel ul li {
+    background-color: lightblue;
+    width: 20%;
+    text-align: center;
+    margin-right: 10px;
+    padding: 20px;
+    border: 1px solid black;
+    display: block;
+    float: left;
+}
+
+.admin_list {
+    background-color: lightblue;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+input, select {
+    margin: 10px;
+}
+
+.currencyinput {
+    border: 1px inset #ccc;
+}
+.currencyinput input {
+    border: 0;
+}
+
+/*.fullarticle {
+    width: auto;
+    float: left;
+    display: none;
+}*/
+
+.admin form {
+    border: 1px solid black;
+    padding: 10px;
+    position: relative;
+    margin: 10px 0px 10px 0;
+    overflow:hidden;
+}
+
+.admin label {
+    color: #404040;
+    float: left;
+    text-align: right;
+}
+
+.admin input, textarea, select {
+    border: 1px solid #CCCCCC;
+    color: #808080;
+    display: inline-block;
+    width: 90%;
+}
+
+.form_button {
+    float: right;   
+}
+
+.category {
+    font-weight: bold;
+}
+
+.subcategory {
+    padding-left: 25px;
+}

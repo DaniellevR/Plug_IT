@@ -1,6 +1,6 @@
 <?php
 
-include('controller/Controller.php');
+include('controllers/Controller.php');
 include('lib/smarty/libs/Smarty.class.php');
 
 $smarty = new Smarty;
@@ -11,10 +11,10 @@ $smarty->setConfigDir('smarty/configs');
 
 $controller = new Controller();
 
-if(isset($_GET['method']))
+if(isset($_GET['page']))
 {
-    $method = $_GET['method'];
-    $controller->{$method}();
+    $page = $_GET['page'];
+    $controller->{$page}();
 } else {
     $controller->Home();
 }
