@@ -106,4 +106,27 @@ class Category extends Database {
         }
     }
 
+    public function getChildCategoriesFromId($catId) {
+        $this->db->select('*')->from('product')->where('category', $catId);
+        $result = $this->db->get();
+        if ($result == null) {
+            return;
+        }
+        $categories = array();
+        foreach ($result->result() as $row) {
+            $category = new Category();
+            $category->id = $row->id;
+            $category->name = $row->name;
+            $category->description = $row->description;
+            $category->price = $row->price;
+            $category->brand = $row->brand;
+            $category->supplier = $row->supplier;
+            $category->amount = $row->amount;
+            $category->category_id = $row->category_id;
+            $categories[] = $category;
+        }
+
+        return $categories;
+    }
+
 }
