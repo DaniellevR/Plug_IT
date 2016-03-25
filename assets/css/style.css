@@ -186,22 +186,23 @@ div.sitecontainer {
     CSS admin.php
    ========================================================================== */
 
-.adminpanel ul {
-    display: inline;
+.adminpnl {
     width: 100%;
-    margin: 0;
     padding: 0;
+    background-color: red;
+    margin: 10px 0 10px 0;
+    text-align: center;
+    display:table;
 }
 
-.adminpanel ul li {
+.adminpnl li {
     background-color: lightblue;
-    width: 20%;
-    text-align: center;
-    margin-right: 10px;
-    padding: 20px;
+    padding: 10px;
     border: 1px solid black;
-    display: block;
-    float: left;
+    display: inline-block;
+    width: 25%;
+    text-align: center;
+    display:table-cell;
 }
 
 .admin_list {

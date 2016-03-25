@@ -4,14 +4,12 @@
     <div class="content admin">
         <h1>Admin</h1>
 
-        <div class="adminpanel">
-            <ul>
-                <li class="menu_item" id="item1">Categorieën</li>
-                <li class="menu_item" id="item2">Producten</li>
-                <li class="menu_item" id="item3">Gebruikers</li>
-                <li class="menu_item" id="item4">Orders</li>
-            </ul>
-        </div>
+        <ul class="adminpnl">
+            <li class="menu_item" id="item1">Categorieën</li>
+            <li class="menu_item" id="item2">Producten</li>
+            <li class="menu_item" id="item3">Gebruikers</li>
+            <li class="menu_item" id="item4">Orders</li>
+        </ul>
 
         <div class="categories fullarticle" id="article1">
             <form action="#" method="POST" enctype="multipart/form-data">
