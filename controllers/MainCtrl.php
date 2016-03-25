@@ -17,47 +17,47 @@ class MainCtrl {
     public function Contact() {
         $this->View('contact', 'Call me maybe?');
     }
-    
+
     public function Admin() {
         $this->View('admin', '');
     }
-    
+
     public function Catalogue() {
         $this->View('catalogue', '');
     }
-    
+
     public function Category() {
         $this->View('category', '');
     }
-    
+
     public function Conditions() {
         $this->View('conditions', '');
     }
-    
+
     public function Information() {
         $this->View('information', '');
     }
-    
+
     public function OrderAndDeliviry() {
         $this->View('orderAndDeliviry', '');
     }
-    
+
     public function PaymentInfo() {
         $this->View('paymentInfo', '');
     }
-    
+
     public function Product() {
         $this->View('product', '');
     }
-    
+
     public function RetourInfo() {
         $this->View('retourInfo', '');
     }
-    
+
     public function Cart() {
         $this->View('cart', '');
     }
-    
+
     public function Wishlist() {
         $this->View('wishlist', '');
     }
@@ -65,9 +65,13 @@ class MainCtrl {
     public function MyAccount() {
         $this->View('myAccount', '');
     }
-    
+
     public function CustomerService() {
         $this->View('customerService', '');
+    }
+
+    public function Login() {
+        $this->View('login', '');
     }
 
     public function getNavigationItems() {
@@ -116,6 +120,24 @@ class MainCtrl {
 
         return $sideNavigation;
     }
+
+    public function loginUser() {
+        if (isset($_POST["username"]) && isset($_POST["password"])) {
+            session_start();
+            echo "/Plug_IT/index.php?page=Home";
+
+            $_SESSION["usertype"] = "Admin";
+//            $_SESSION["usertype"] = "Gebruiker";
+        }
+    }
+
+    public function logoutUser() {
+        if (isset($_SESSION['user'])) {
+            session_destroy();
+        }
+        echo "/Plug_IT/index.php?page=Home";
+    }
+
 }
 
 ?>

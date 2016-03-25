@@ -3,6 +3,7 @@
 include('controllers/MainCtrl.php');
 
 class Controller extends MainCtrl {
+
     function View($name, $model) {
         global $smarty;
 
@@ -10,11 +11,13 @@ class Controller extends MainCtrl {
         $navi = $this->getNavigationItems();
         $sideNavigation = $this->getCategories();
 
-        $smarty->assign('header', ['Inloggen', 'Verlanglijstje', 'Klantenservice']);
+//        $smarty->assign('header', ['Inloggen', 'Verlanglijstje', 'Klantenservice']);
         $smarty->assign('navigation', $navi);
         $smarty->assign('categories', $sideNavigation);
         $smarty->assign('model', $model);
+        $smarty->assign("controller", $this);
         $smarty->assign('footer', ['Informatie', 'Bestelling & levering', 'Betalen', 'Retourneren', 'Voorwaarden', 'Over', 'Contact']);
         $smarty->display($name . '.tpl');
     }
+
 }

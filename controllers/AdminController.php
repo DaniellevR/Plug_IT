@@ -14,7 +14,7 @@ class AdminController extends MainCtrl {
         $navi = $this->getNavigationItems();
         $sideNavigation = $this->getCategories();
 
-        $smarty->assign('header', ['Inloggen', 'Verlanglijstje', 'Klantenservice']);
+//        $smarty->assign('header', ['Inloggen', 'Verlanglijstje', 'Klantenservice']);
         $smarty->assign('navigation', $navi);
         $smarty->assign('categories', $sideNavigation);
         $smarty->assign('model', $model);

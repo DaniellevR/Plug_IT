@@ -13,7 +13,21 @@
             <div class="logintool">
                 <ul>
                     {foreach from=$navigation[0] item=nav }
-                        <li><a href="/Plug_IT/index.php?page={$nav->page}">{$nav->name}</a></li>
+                        {if $nav->name === "Inloggen"}
+                            {if !isset($smarty.cookies.PHPSESSID)}
+                                <li><a href="/Plug_IT/index.php?page={$nav->page}">{$nav->name}</a></li>
+                            {/if}
+                        {elseif $nav->name === "Mijn account"}
+                            {if isset($smarty.cookies.PHPSESSID)}
+                                <li><a href="/Plug_IT/index.php?page={$nav->page}">{$nav->name}</a></li>
+                            {/if}
+                        {elseif $nav->name === "Uitloggen"}
+                            {if isset($smarty.cookies.PHPSESSID)}
+                                <li><a href="/Plug_IT/index.php?page={$nav->page}">{$nav->name}</a></li>
+                            {/if}
+                        {else}
+                        <li><a onclick='{$controller->logoutUser()}' href="/Plug_IT/index.php?page={$nav->page}">{$nav->name}</a></li>
+                        {/if}
                     {/foreach}
                 </ul>
             </div>
