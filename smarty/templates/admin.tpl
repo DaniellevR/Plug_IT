@@ -1,18 +1,18 @@
 {extends file='layout.tpl'}
 {block name=body}
-
+<script type="text/javascript" src="/Plug_IT/assets/js/adminPanelNavigation.js"></script>
     <div class="content admin">
-        <h1>Admin</h1>
+        <h1 class="test">Admin</h1>
 
-        <ul class="adminpnl">
-            <li class="menu_item" id="item1">Categorieën</li>
-            <li class="menu_item" id="item2">Producten</li>
-            <li class="menu_item" id="item3">Gebruikers</li>
-            <li class="menu_item" id="item4">Orders</li>
+        <ul class="adminpnl" id="parts">
+            <li><a href="#part1">Categorieën</a></li>
+            <li><a href="#part2">Producten</a></li>
+            <li><a href="#part3">Gebruikers</a></li>
+            <li><a href="#part4">Orders</a></li>
         </ul>
 
-        <div class="categories fullarticle" id="article1">
-            <form action="#" method="POST" enctype="multipart/form-data">
+        <div class="categories adminpart" id="part1">
+            <form action="{$controller->addCategory()}" method="POST" enctype="multipart/form-data">
                 <div class="line">
                     <label>Categorienaam:</label>
                     <div class="input">
@@ -110,7 +110,7 @@
             </form>
         </div>
 
-        <div class="products fullarticle" id="article2">
+        <div class="products adminpart" id="part2">
             <ul class="admin_list">
             </ul>
 
@@ -157,7 +157,7 @@
             </form>
         </div>
 
-        <div class="users fullarticle" id="article3">
+        <div class="users adminpart" id="part3">
             <form>
                 <div class="line">
                     <label>Gebruikersnaam:</label>
@@ -190,7 +190,7 @@
             </form>
         </div>
 
-        <div class="orders fullarticle" id="article4">
+        <div class="orders adminpart" id="part4">
             <form>
                 <div class="line">
                     <label>Ordernaam:</label>

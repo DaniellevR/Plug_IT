@@ -222,11 +222,9 @@ input, select {
     border: 0;
 }
 
-/*.fullarticle {
-    width: auto;
-    float: left;
+.adminpart {
     display: none;
-}*/
+}
 
 .admin form {
     border: 1px solid black;

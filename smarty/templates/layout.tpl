@@ -4,6 +4,7 @@
         <title>{block name=title}Plug IT{/block}</title>
         <meta charset="UTF-8" />
         <link rel="stylesheet" type="text/css" href="/Plug_IT/assets/css/style.css" />
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     {block name=head}{/block}
 </head>
 <body>
