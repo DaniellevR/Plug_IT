@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-03-26 00:41:20
+/* Smarty version 3.1.29, created on 2016-03-26 19:44:44
   from "C:\wamp\www\Plug_IT\smarty\templates\layout.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56f5cca0d7f126_73213708',
+  'unifunc' => 'content_56f6d89c8c9396_26203644',
   'file_dependency' => 
   array (
     'bb0308ddaa30b162f7ec483cf35c26cc0e7708d3' => 
     array (
       0 => 'C:\\wamp\\www\\Plug_IT\\smarty\\templates\\layout.tpl',
-      1 => 1458949276,
+      1 => 1459017878,
       2 => 'file',
     ),
   ),
@@ -19,7 +19,7 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_56f5cca0d7f126_73213708 ($_smarty_tpl) {
+function content_56f6d89c8c9396_26203644 ($_smarty_tpl) {
 $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, false);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
@@ -27,7 +27,7 @@ $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, false);
     <head> 
         <title><?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'title', array (
-  0 => 'block_10556f5cca0ca1990_96828552',
+  0 => 'block_1669956f6d89c68f797_40570053',
   1 => false,
   3 => 0,
   2 => 0,
@@ -39,9 +39,18 @@ $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'title', array (
         <?php echo '<script'; ?>
  type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"><?php echo '</script'; ?>
 >
+        <?php echo '<script'; ?>
+ type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"><?php echo '</script'; ?>
+>
+        <?php echo '<script'; ?>
+ type="text/javascript" src="/Plug_IT/assets/js/functionCalls.js"><?php echo '</script'; ?>
+>
+        <?php echo '<script'; ?>
+ src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"><?php echo '</script'; ?>
+>
     <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'head', array (
-  0 => 'block_2327856f5cca0caa7f0_84956551',
+  0 => 'block_2876056f6d89c6a7c50_69974122',
   1 => false,
   3 => 0,
   2 => 0,
@@ -51,6 +60,7 @@ $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'head', array (
 </head>
 <body>
     <div class="sitecontainer">
+        <h1 class="testje"></h1>
         <div class="header">
             <div class="logintool">
                 <ul>
@@ -80,13 +90,11 @@ $__foreach_nav_0_saved_local_item = $_smarty_tpl->tpl_vars['nav'];
                             <?php }?>
                         <?php } elseif ($_smarty_tpl->tpl_vars['nav']->value->name === "Uitloggen") {?>
                             <?php if (isset($_COOKIE['PHPSESSID'])) {?>
-                                <li><a href="/Plug_IT/index.php?page=<?php echo $_smarty_tpl->tpl_vars['nav']->value->page;?>
-"><?php echo $_smarty_tpl->tpl_vars['nav']->value->name;?>
+                            <li><a onclick="logout(this, event)" href=""><?php echo $_smarty_tpl->tpl_vars['nav']->value->name;?>
 </a></li>
                             <?php }?>
                         <?php } else { ?>
-                        <li><a onclick='<?php echo $_smarty_tpl->tpl_vars['controller']->value->logoutUser();?>
-' href="/Plug_IT/index.php?page=<?php echo $_smarty_tpl->tpl_vars['nav']->value->page;?>
+                        <li><a href="/Plug_IT/index.php?page=<?php echo $_smarty_tpl->tpl_vars['nav']->value->page;?>
 "><?php echo $_smarty_tpl->tpl_vars['nav']->value->name;?>
 </a></li>
                         <?php }?>
@@ -104,7 +112,7 @@ $_smarty_tpl->tpl_vars['nav'] = $__foreach_nav_0_saved_item;
                 <a>Path</a>
             </div>
 
-            <a href="/Plug_IT/index.php?page=Home"> <img src="/Plug_IT/assets/pix/logo.png" alt="Plug IT.nl" /></a>
+
 
             <div class="search">
                 <form action="#" method="post">
@@ -173,7 +181,7 @@ $_smarty_tpl->tpl_vars['parent'] = $__foreach_parent_1_saved_item;
             </div>
         <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'body', array (
-  0 => 'block_2753556f5cca0d612a9_54126498',
+  0 => 'block_2193756f6d89c8783a6_70844627',
   1 => false,
   3 => 0,
   2 => 0,
@@ -212,17 +220,17 @@ $_smarty_tpl->tpl_vars['nav'] = $__foreach_nav_3_saved_item;
 </html>
 <?php }
 /* {block 'title'}  file:layout.tpl */
-function block_10556f5cca0ca1990_96828552($_smarty_tpl, $_blockParentStack) {
+function block_1669956f6d89c68f797_40570053($_smarty_tpl, $_blockParentStack) {
 ?>
 Plug IT<?php
 }
 /* {/block 'title'} */
 /* {block 'head'}  file:layout.tpl */
-function block_2327856f5cca0caa7f0_84956551($_smarty_tpl, $_blockParentStack) {
+function block_2876056f6d89c6a7c50_69974122($_smarty_tpl, $_blockParentStack) {
 }
 /* {/block 'head'} */
 /* {block 'body'}  file:layout.tpl */
-function block_2753556f5cca0d612a9_54126498($_smarty_tpl, $_blockParentStack) {
+function block_2193756f6d89c8783a6_70844627($_smarty_tpl, $_blockParentStack) {
 }
 /* {/block 'body'} */
 }

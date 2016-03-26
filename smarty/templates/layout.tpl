@@ -5,10 +5,14 @@
         <meta charset="UTF-8" />
         <link rel="stylesheet" type="text/css" href="/Plug_IT/assets/css/style.css" />
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <script type="text/javascript" src="/Plug_IT/assets/js/functionCalls.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     {block name=head}{/block}
 </head>
 <body>
     <div class="sitecontainer">
+        <h1 class="testje"></h1>
         <div class="header">
             <div class="logintool">
                 <ul>
@@ -23,10 +27,10 @@
                             {/if}
                         {elseif $nav->name === "Uitloggen"}
                             {if isset($smarty.cookies.PHPSESSID)}
-                                <li><a href="/Plug_IT/index.php?page={$nav->page}">{$nav->name}</a></li>
+                            <li><a onclick="logout(this, event)" href="">{$nav->name}</a></li>
                             {/if}
                         {else}
-                        <li><a onclick='{$controller->logoutUser()}' href="/Plug_IT/index.php?page={$nav->page}">{$nav->name}</a></li>
+                        <li><a href="/Plug_IT/index.php?page={$nav->page}">{$nav->name}</a></li>
                         {/if}
                     {/foreach}
                 </ul>
@@ -36,7 +40,7 @@
                 <a>Path</a>
             </div>
 
-            <a href="/Plug_IT/index.php?page=Home"> <img src="/Plug_IT/assets/pix/logo.png" alt="Plug IT.nl" /></a>
+{*            <a href="/Plug_IT/index.php?page=Home"> <img src="/Plug_IT/assets/pix/logo.png" alt="Plug IT.nl" /></a>*}
 
             <div class="search">
                 <form action="#" method="post">

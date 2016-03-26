@@ -12,7 +12,7 @@ $smarty->setCompileDir('smarty/templates_c');
 $smarty->setCacheDir('smarty/cache');
 $smarty->setConfigDir('smarty/configs');
 
-//$controller = new Controller();
+$controller = new Controller();
 
 if(isset($_GET['page']))
 {

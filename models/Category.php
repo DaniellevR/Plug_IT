@@ -49,11 +49,8 @@ class Category extends Database {
 
     public function addCategory($name, $description, $parent) {
         if ($this->establishConnection()) {
-            $stmt = $dbh->prepare("INSERT INTO category (id, name, description, category_id) VALUES (?, ?, ?, ?, ?)");
-            $stmt->bindParam(1, 0);
-            $stmt->bindParam(2, $name);
-            $stmt->bindParam(3, $description);
-            $stmt->bindParam(4, $parent);
+            $stmt = $this->conn->prepare("INSERT INTO category (id, name, description, category_id) VALUES (0, ?, ?, ?)");
+            $stmt->bind_param('ssi', $name, $description, $parent);
 
             $stmt->execute();
             $generated_id = $stmt->insert_id;
@@ -68,8 +65,8 @@ class Category extends Database {
 
     public function removeCategory($id) {
         if ($this->establishConnection()) {
-            $stmt = $dbh->prepare("DELETE FROM category WHERE id = ?");
-            $stmt->bindParam(1, $id);
+            $stmt = $this->conn->prepare("DELETE FROM category WHERE id = ?");
+            $stmt->bind_param('i', $id);
 
             $this->closeConnection();
 
@@ -81,8 +78,8 @@ class Category extends Database {
 
     public function removeSubcategories($parent_id) {
         if ($this->establishConnection()) {
-            $stmt = $dbh->prepare("DELETE FROM category WHERE category_id = ?");
-            $stmt->bindParam(1, $parent_id);
+            $stmt = $this->conn->prepare("DELETE FROM category WHERE category_id = ?");
+            $stmt->bind_param('i', $parent_id);
 
             $this->closeConnection();
 
@@ -94,11 +91,8 @@ class Category extends Database {
 
     public function editCategory($id, $name, $description, $parent) {
         if ($this->establishConnection()) {
-            $stmt = $dbh->prepare("UPDATE category SET name = ?, description = ?, category_id = ? WHERE id = ?");
-            $stmt->bindParam(1, $name);
-            $stmt->bindParam(2, $description);
-            $stmt->bindParam(3, $parent);
-            $stmt->bindParam(4, $id);
+            $stmt = $this->conn->prepare("UPDATE category SET name = ?, description = ?, category_id = ? WHERE id = ?");
+            $stmt->bind_param('ssii', $name, $description, $parent, $id);
 
             $this->closeConnection();
 

@@ -1,6 +1,7 @@
 <?php
 
-include('controllers/MainCtrl.php');
+$root = realpath($_SERVER["DOCUMENT_ROOT"]);
+require_once($root . "/Plug_IT/controllers/MainCtrl.php");
 
 class Controller extends MainCtrl {
 
@@ -15,8 +16,8 @@ class Controller extends MainCtrl {
         $smarty->assign('navigation', $navi);
         $smarty->assign('categories', $sideNavigation);
         $smarty->assign('model', $model);
-        $smarty->assign("controller", $this);
         $smarty->assign('footer', ['Informatie', 'Bestelling & levering', 'Betalen', 'Retourneren', 'Voorwaarden', 'Over', 'Contact']);
+        
         $smarty->display($name . '.tpl');
     }
 

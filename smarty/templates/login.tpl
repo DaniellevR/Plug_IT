@@ -2,7 +2,7 @@
 {block name=body}
     <div class="content">
         <h1>Inloggen</h1>
-        <form action="{$controller->loginUser()}" method="POST" enctype="multipart/form-data">
+        <form action="" onsubmit="return login(this, event, 'Home')" method="POST" enctype="multipart/form-data">
             <div class="line">
                 <label>Gebruikersnaam:</label>
                 <div class="input">
@@ -13,7 +13,7 @@
                 <label>Wachtwoord:</label>
                 <div class="input">
                     <div class="input">
-                        <input type="text" name="password" required="true">
+                        <input type="password" name="password" required="true">
                     </div>
                 </div>
             </div>

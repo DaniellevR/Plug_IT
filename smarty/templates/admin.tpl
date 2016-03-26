@@ -4,7 +4,8 @@
     <div class="content admin">
         <h1 class="test">Admin</h1>
 
-        {if isset($smarty.cookies.PHPSESSID) && $smarty.session.usertype === "Admin"}
+        {if isset($smarty.cookies.PHPSESSID)}
+            {*            { && $smarty.session.usertype === "Admin"}*}
             <ul class="adminpnl" id="parts">
                 <li><a href="#part1">Categorieën</a></li>
                 <li><a href="#part2">Producten</a></li>
@@ -13,26 +14,27 @@
             </ul>
 
             <div class="categories adminpart" id="part1">
-                <form action="{$controller->addCategory()}" method="POST" enctype="multipart/form-data">
+                {*                <form action="" onsubmit="addCategory(this, event)" method="POST" enctype="multipart/form-data">*}
+                <form action="#" id="addCategoryForm">
                     <div class="line">
                         <label>Categorienaam:</label>
                         <div class="input">
-                            <input type="text" name="categoryname" required="true">
+                            <input id="categorynameAdd" type="text" name="categorynameAdd" required="true">
                         </div>
                     </div>
                     <div class="line">
                         <label>Omschrijving:</label>
                         <div class="input">
-                            <input type="text" name="category_description" required="true">
+                            <input id="categoryDescriptionAdd" type="text" name="category_descriptionAdd" required="true">
                         </div>
                     </div>
                     <div class="line">
                         <label>Ouder categorie:</label>
                         <div class="input">
-                            <select name="formParentCategories">
+                            <select id="categoriesAdd" name="formParentCategoriesAdd">
                                 <option value="">-</option>
                                 {foreach from=$categories[0] item=parent }
-                                    <option>{$parent->name}</option>
+                                    <option value="{$parent->id}">{$parent->name}</option>
                                 {/foreach}
                             </select>
                         </div>
@@ -40,17 +42,18 @@
                     <div class="line">
                         <label>Foto categorie:</label>
                         <div class="input">
-                            <input type="file" accept="image/*" name="image" id="image" required="true"/>
+                            {*                            <input id="photoCat" type="file" accept="image/*" name="imageAddCategory" id="image" required="true"/>*}
+                            <input type="file" name="image" required="true" >
                         </div>
                     </div>
                     <button type="submit" value="Submit" class="form_button">Toevoegen</button>
                 </form>
 
-                <form action="#" method="POST" enctype="multipart/form-data">
+                <form action="" onsubmit="editCategory(this, event)" method="POST" enctype="multipart/form-data">
                     <div class="line">
                         <label>Categorienaam:</label>
                         <div class="input">
-                            <select id="categories_edit" name="Categories">
+                            <select id="categories_edit" name="categoriesEdit">
                                 {$i = 0}
                                 {foreach from=$categories[0] item=parent }
                                     <option class="category" id="opt{$i}">{$parent->name}</option>
@@ -91,11 +94,11 @@
                     <button type="submit" value="Submit" class="form_button">Toevoegen</button>
                 </form>
 
-                <form>
+                <form action="" onsubmit="removeCategory(this, event)" method="POST" enctype="multipart/form-data">
                     <div class="line">
                         <label>Categorie:</label>
                         <div class="input">
-                            <select id="categories_remove" name="Categories">
+                            <select id="categories_remove" name="categoriesRemove">
                                 {foreach from=$categories[0] item=parent }
                                     <option class="category">{$parent->name}</option>
                                     {foreach from=$categories[1] item=child }
@@ -223,6 +226,24 @@
                     <button type="submit" value="Submit" class="form_button">Toevoegen</button>
                 </form>
             </div>
+        {else}
+            <form action="" onsubmit="return login(this, event, 'Admin')" method="POST" enctype="multipart/form-data">
+                <div class="line">
+                    <label>Gebruikersnaam:</label>
+                    <div class="input">
+                        <div class="input">
+                            <input type="text" name="username" required="true">
+                        </div>
+                    </div>
+                    <label>Wachtwoord:</label>
+                    <div class="input">
+                        <div class="input">
+                            <input type="password" name="password" required="true">
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" value="Submit" class="form_button">Inloggen</button>
+            </form>
         {/if}
     </div>
 {/block}

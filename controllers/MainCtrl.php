@@ -124,20 +124,17 @@ class MainCtrl {
     public function loginUser() {
         if (isset($_POST["username"]) && isset($_POST["password"])) {
             session_start();
-            echo "/Plug_IT/index.php?page=Home";
-
             $_SESSION["usertype"] = "Admin";
 //            $_SESSION["usertype"] = "Gebruiker";
+        } else {
+            echo "Gebruikersnaam en/of wachtwoord is onjuist.";
         }
     }
 
     public function logoutUser() {
-        if (isset($_SESSION['user'])) {
-            session_destroy();
-        }
-        echo "/Plug_IT/index.php?page=Home";
+        session_start();
+        session_destroy();
     }
-
 }
 
 ?>
