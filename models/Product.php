@@ -1,6 +1,6 @@
 <?php
 
-Class Product extends CI_Model {
+Class Product extends Database {
 
     public $id;
     public $name;
@@ -19,17 +19,19 @@ Class Product extends CI_Model {
 
         $products = array();
 
-        foreach ($result->result() as $row) {
-            $product = new Product();
-            $product->id = $row->id;
-            $product->name = $row->name;
-            $product->description = $row->description;
-            $product->price = $row->price;
-            $product->brand = $row->brand;
-            $product->supplier = $row->supplier;
-            $product->amount = $row->amount;
-            $product->category_id = $row->category_id;
-            $products[] = $product;
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $product = new Product();
+                $product->id = $row['id'];
+                $product->name = $row['name'];
+                $product->description = $row['description'];
+                $product->price = $row['price'];
+                $product->brand = $row['brand'];
+                $product->supplier = $row['supplier'];
+                $product->amount = $row['amount'];
+                $product->category_id = $row['category_id'];
+                $products[] = $product;
+            }
         }
 
         return $products;
@@ -61,46 +63,66 @@ Class Product extends CI_Model {
     }
 
     public function getProductFromId($id) {
-        $this->db->select('*')->from('product')->where('id', $id);
-        $result = $this->db->get();
-        if ($result == null) {
-            return;
+        if ($this->establishConnection()) {
+            $sql = "SELECT * FROM product WHERE id = " . $id;
+            $result = $this->conn->query($sql);
+            if ($result == null) {
+                return;
+            }
+
+            $product;
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $product = new Product();
+                    $product->id = $row['id'];
+                    $product->name = $row['name'];
+                    $product->description = $row['description'];
+                    $product->price = $row['price'];
+                    $product->brand = $row['brand'];
+                    $product->supplier = $row['supplier_name'];
+                    $product->amount = $row['amount'];
+                    $product->category_id = $row['category_id'];
+                }
+            }
+
+            $this->closeConnection();
+
+            return $product;
         }
-        foreach ($result->result() as $row) {
-            $product = new Product();
-            $product->id = $row->id;
-            $product->name = $row->name;
-            $product->description = $row->description;
-            $product->price = $row->price;
-            $product->brand = $row->brand;
-            $product->supplier = $row->supplier;
-            $product->amount = $row->amount;
-            $product->category_id = $row->category_id;
-        }
-        return $product;
     }
 
     public function getProductsFromCategoryId($catId) {
-        $this->db->select('*')->from('product')->where('category', $catId);
-        $result = $this->db->get();
-        if ($result == null) {
-            return;
-        }
-        $products = array();
-        foreach ($result->result() as $row) {
-            $product = new Product();
-            $product->id = $row->id;
-            $product->name = $row->name;
-            $product->description = $row->description;
-            $product->price = $row->price;
-            $product->brand = $row->brand;
-            $product->supplier = $row->supplier;
-            $product->amount = $row->amount;
-            $product->category_id = $row->category_id;
-            $products[] = $product;
-        }
+        if ($this->establishConnection()) {
+            $sql = "SELECT * FROM product WHERE category_id = " . $catId;
 
-        return $products;
+            $result = $this->conn->query($sql);
+
+            if ($result == null) {
+                return;
+            }
+
+            $products = array();
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $product = new Product();
+                    $product->id = $row['id'];
+                    $product->name = $row['name'];
+                    $product->description = $row['description'];
+                    $product->price = $row['price'];
+                    $product->brand = $row['brand'];
+                    $product->supplier = $row['supplier_name'];
+                    $product->amount = $row['amount'];
+                    $product->category_id = $row['category_id'];
+                    $products[] = $product;
+                }
+            }
+
+            $this->closeConnection();
+
+            return $products;
+        }
     }
 
 }

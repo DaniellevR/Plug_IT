@@ -1,6 +1,8 @@
 <?php
 
-require_once('models/database.php');
+$root = realpath($_SERVER["DOCUMENT_ROOT"]);
+require_once($root . "/Plug_IT/models/Database.php");
+//require_once('models/database.php');
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -107,26 +109,32 @@ class Category extends Database {
     }
 
     public function getChildCategoriesFromId($catId) {
-        $this->db->select('*')->from('product')->where('category', $catId);
-        $result = $this->db->get();
-        if ($result == null) {
-            return;
-        }
-        $categories = array();
-        foreach ($result->result() as $row) {
-            $category = new Category();
-            $category->id = $row->id;
-            $category->name = $row->name;
-            $category->description = $row->description;
-            $category->price = $row->price;
-            $category->brand = $row->brand;
-            $category->supplier = $row->supplier;
-            $category->amount = $row->amount;
-            $category->category_id = $row->category_id;
-            $categories[] = $category;
-        }
+        if ($this->establishConnection()) {
+            $sql = "SELECT * FROM category WHERE category_id = " . $catId;
 
-        return $categories;
+            $result = $this->conn->query($sql);
+
+            if ($result == null) {
+                return;
+            }
+
+            $categories = array();
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $category = new Category();
+                    $category->id = $row['id'];
+                    $category->name = $row['name'];
+                    $category->description = $row['description'];
+                    $category->parent = $row['category_id'];
+                    $categories[] = $category;
+                }
+            }
+
+            $this->closeConnection();
+
+            return $categories;
+        }
     }
 
 }
