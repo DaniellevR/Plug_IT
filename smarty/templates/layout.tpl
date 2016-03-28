@@ -13,7 +13,7 @@
                 <ul>
                     {foreach from=$navigation[0] item=nav }
                         <li><a href="/Plug_IT/index.php?page={$nav->page}">{$nav->name}</a></li>
-                    {/foreach}
+                        {/foreach}
                 </ul>
             </div>
 
@@ -24,9 +24,10 @@
             <a href="/Plug_IT/index.php?page=Home"> <img src="/Plug_IT/assets/pix/logo.png" alt="Plug IT.nl" /></a>
 
             <div class="search">
-                <form action="#" method="post">
-                    <input id="searchBar" type="text" placeholder="Zoeken..." required/>
-                    <input id="searchBarButton" type="button" value="Zoeken">
+                <form action="/Plug_IT/index.php?page=Catalogue" method="get">
+                    <input id="searchBar" type="text" name="searchKeywords" placeholder="Zoeken..." required/>
+                    <input name="page" value="Catalogue" hidden/>
+                    <input id="searchBarButton" type="submit" value="Zoeken"/>
                 </form>
             </div>
 

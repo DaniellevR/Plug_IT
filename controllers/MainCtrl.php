@@ -3,6 +3,7 @@
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once($root . "/Plug_IT/models/NavigationItem.php");
 require_once($root . "/Plug_IT/models/Category.php");
+require_once($root . "/Plug_IT/models/Product.php");
 
 class MainCtrl {
 
@@ -119,6 +120,24 @@ class MainCtrl {
         $sideNavigation[] = $children;
 
         return $sideNavigation;
+    }
+
+    public function getProductsByKeywords($keywords) {
+        $product = new Product();
+        $products = $product->getAllProducts();
+
+        $outputProducts = array();
+
+        foreach ($products as $prod) {
+            foreach ($prod as $text) {
+                if (isset($text)) {
+                    if (strpos(strtoupper($keywords), strtoupper($text)) !== false) {
+                        $outputProducts[] = $prod;
+                    }
+                }
+            }
+        }
+        return $outputProducts;
     }
 
     public function loginUser() {

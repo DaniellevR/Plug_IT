@@ -16,7 +16,10 @@ class CatalogueController extends MainCtrl {
             $childCategories = $this->getChildCategoriesFromId($_GET['id']);
             $products = $this->getProductsFromCategoryId($_GET['id']);
         }
-
+        if (isset($_GET['searchKeywords'])) {
+            $productsFound = $this->getProductsByKeywords($_GET['searchKeywords']);
+            $smarty->assign('productsFound', $productsFound);
+        }
 //        $smarty->assign('header', ['Inloggen', 'Verlanglijstje', 'Klantenservice']);
         $smarty->assign('navigation', $navi);
         $smarty->assign('categories', $sideNavigation);
