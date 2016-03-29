@@ -5,6 +5,7 @@ require_once($root . "/Plug_IT/models/NavigationItem.php");
 require_once($root . "/Plug_IT/controllers/Controller.php");
 require_once($root . "/Plug_IT/controllers/CatalogueController.php");
 require_once($root . "/Plug_IT/controllers/ProductController.php");
+require_once($root . "/Plug_IT/controllers/ShoppingcartController.php");
 include('lib/smarty/libs/Smarty.class.php');
 
 $smarty = new Smarty;
@@ -21,6 +22,8 @@ if (isset($_GET['page'])) {
         $controller = new CatalogueController();
     } else if ($page == 'Product') {
         $controller = new ProductController();
+    } else if ($page == 'Cart') {
+        $controller = new ShoppingcartController();
     } else {
         $controller = new Controller();
     }

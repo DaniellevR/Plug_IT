@@ -159,4 +159,8 @@ class MainCtrl {
 
 }
 
+session_start();
+session_cache_expire(1800);
+$testArray = array(1, 2, 3);
+$_SESSION['cartList'] = $testArray;
 ?>

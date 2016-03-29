@@ -2,6 +2,29 @@
 {block name=body}
     <div class="content">
         <h1>Winkelwagen</h1>
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, mperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui.</p>
+        {if isset($cartList)}
+            {$total = 0}
+            {foreach from=$cartList item=product}
+                <a href='/Plug_IT/index.php?page=Product&id={$product->id}'>
+                    <div class='productThumbnail'>
+                        <img class='productImage' src='assets/pix/product/{$product->id}.jpg' alt='NO IMAGE' />
+                        <div class='productName'>
+                            <h4>{$product->name}</h4>
+                        </div>
+                        <div class='shortDescription'>
+                            <p>{$product->description}</p></div>
+                        <div id='productBuy'><p>€{$product->price}</p>
+                        </div>
+                        <div class="input">
+                            <input type="number" min="1" step="1" value="1" />
+                        </div>
+                    </div>
+                </a>
+                {$total = $total + $product->price}
+            {/foreach}
+            <h3>Totaalprijs: €{$total}</h3>
+        {else}
+            <h3>U heeft nog geen producten in uw winkelwagentje.</h3>
+        {/if}
     </div>
 {/block}
