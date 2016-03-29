@@ -205,13 +205,13 @@ div.sitecontainer {
     display:table-cell;
 }
 
-.admin_list {
+/*.admin_list {
     background-color: lightblue;
     border: 1px solid black;
     padding: 10px;
-}
+}*/
 
-input, select {
+/*input, select {
     margin: 10px;
 }
 
@@ -220,7 +220,7 @@ input, select {
 }
 .currencyinput input {
     border: 0;
-}
+}*/
 
 .adminpart {
     display: none;
@@ -234,21 +234,59 @@ input, select {
     overflow:hidden;
 }
 
-.admin label {
+/*.admin label {
     color: #404040;
     float: left;
     text-align: right;
-}
+}*/
 
-.admin input, textarea, select {
+/*.admin input, textarea, select {
     border: 1px solid #CCCCCC;
     color: #808080;
     display: inline-block;
-    width: 90%;
-}
+    width: 99%;
+}*/
 
 .form_button {
-    float: right;   
+    float: right;
+    -moz-box-shadow: 0px 1px 0px 0px #f0f7fa;
+    -webkit-box-shadow: 0px 1px 0px 0px #f0f7fa;
+    box-shadow: 0px 1px 0px 0px #f0f7fa;
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #33bdef), color-stop(1, #019ad2));
+    background:-moz-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+    background:-webkit-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+    background:-o-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+    background:-ms-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+    background:linear-gradient(to bottom, #33bdef 5%, #019ad2 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#33bdef', endColorstr='#019ad2',GradientType=0);
+    background-color:#33bdef;
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    border-radius:6px;
+    border:1px solid #057fd0;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:15px;
+    font-weight:bold;
+    padding:6px 24px;
+    text-decoration:none;
+    text-shadow:0px -1px 0px #5b6178;
+}
+.form_button:hover {
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #019ad2), color-stop(1, #33bdef));
+    background:-moz-linear-gradient(top, #019ad2 5%, #33bdef 100%);
+    background:-webkit-linear-gradient(top, #019ad2 5%, #33bdef 100%);
+    background:-o-linear-gradient(top, #019ad2 5%, #33bdef 100%);
+    background:-ms-linear-gradient(top, #019ad2 5%, #33bdef 100%);
+    background:linear-gradient(to bottom, #019ad2 5%, #33bdef 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#019ad2', endColorstr='#33bdef',GradientType=0);
+    background-color:#019ad2;
+}
+.form_button:active {
+    position:relative;
+    top:1px;
 }
 
 .category {
@@ -257,4 +295,35 @@ input, select {
 
 .subcategory {
     padding-left: 25px;
+}
+
+.longdescription {
+    height: 100px;
+}
+
+.image {
+    height: 100px;
+    margin: 10px;
+}
+
+label {
+    display:block;
+    margin: 10px;
+}
+
+/*input, select, textarea {
+    width: 500px;
+    margin-left: 10px;
+}*/
+
+.categories input, .categories select, .categories textarea,
+.products input, .products select, .products textarea,
+.users input, .users select, .users textarea,
+.orders input, .orders select, .orders textarea {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.small_field {
+    width: 50px;
 }

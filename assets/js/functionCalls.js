@@ -21,7 +21,6 @@ function login(sender, e, page) {
         }
     });
 }
-;
 
 function logout(sender, e) {
     e.preventDefault();
@@ -34,72 +33,103 @@ function logout(sender, e) {
         }
     });
 }
-;
 
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-$(document).on('submit', 'form', function(e) {
+function removeCategory(sender, e) {
     e.preventDefault();
-//    $form = $(this);
-//    uploadImage($form);
-
-    var formId = $(this).attr("id");
-
-    if (formId === "addCategoryForm") {
-        var select = document.getElementById("categoriesAdd");
-        var categoryname = document.getElementById('categorynameAdd').value;
-        var description = document.getElementById('categoryDescriptionAdd').value;
-        var parentId = select.options[select.selectedIndex].value;
-
-        $form = $(this);
-        uploadImage($form);
-
-        jQuery.ajax({
-            type: "POST",
-            url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
-            data: {action: "addCategory", category: categoryname, description: description, parent: parentId},
-            success: function() {
-                location.reload();
-            }
-        });
-    }
-
-
-
-
-});
-
-function uploadImage($form) {
-    var formdata = new FormData($form[0]); //formelement
-    var request = new XMLHttpRequest();
-    request.open('post', 'handlers/upload.php');
-    request.send(formdata);
-}
-
-function handleForm(data) {
-//    $('.testje').text("1");
-//    var d = JSON.stringify(data);
-    $('.testje').text("2");
-
     jQuery.ajax({
         type: "POST",
         url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
-        data: data,
-//        contentType: "application/json; charset=utf-8",
-//        dataType: "json",
+        data: {action: 'removeCategory', categoryId: document.getElementsByName('categoriesRemove')[0].value},
         success: function() {
-            location.reload();
-            $('.testje').text("3");
-//            window.location = "/Plug_IT/index.php?page=Admin#part1";
-        },
-        error: function() {
-            $('.testje').text("4");
+            window.location = "/Plug_IT/index.php?page=Admin";
         }
     });
 }
-;
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function removeProduct(sender, e) {
+    e.preventDefault();
+    jQuery.ajax({
+        type: "POST",
+        url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
+        data: {action: 'removeProduct', productId: document.getElementsByName('productToRemove')[0].value},
+        success: function() {
+            window.location = "/Plug_IT/index.php?page=Admin";
+        }
+    });
+}
+
+function addUser(sender, e) {
+//    firstname, prefix, lastname, email, telephonenumber, streetname, housenumber, housenumberSuffix, postalCode, city, username, roles, password, repeat_password
+    e.preventDefault();
+    jQuery.ajax({
+        type: "POST",
+        url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
+        data: {action: 'addUser', firstname: document.getElementsByName('firstname')[0].value, prefix: document.getElementsByName('prefix')[0].value,
+            lastname: document.getElementsByName('lastname')[0].value, email: document.getElementsByName('email')[0].value,
+            telephonenumber: document.getElementsByName('telephonenumber')[0].value, streetname: document.getElementsByName('streetnameAddUser')[0].value,
+            housenumber: document.getElementsByName('housenumberAddUser')[0].value, housenumberSuffix: document.getElementsByName('housenumberSuffixAddUser')[0].value,
+            postalCode: document.getElementsByName('postalCodeAddUser')[0].value, city: document.getElementsByName('cityAddUser')[0].value,
+            username: document.getElementsByName('username')[0].value, role: document.getElementsByName('roles')[0].value,
+            password: document.getElementsByName('password')[0].value, reapeatPassword: document.getElementsByName('repeat_password')[0].value},
+        success: function() {
+//            window.location = "/Plug_IT/index.php?page=Admin";
+        }
+    });
+}
+
+function grabInfo(select, action, contentDiv)
+{
+    var id = select[select.selectedIndex].id;
+
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+        {
+//            $('.test').text(xmlhttp.responseText);
+            document.getElementById(contentDiv).innerHTML = xmlhttp.responseText;
+        }
+    }
+
+//    if (action === 'getProductInfo') {
+//
+//    } else {
+//        xmlhttp.open("GET", "handlers/getinfo.php?action=" + action + "&categoryid=" + id, true);
+//    }
+    xmlhttp.open("GET", "handlers/getinfo.php?action=" + action + "&id=" + id, true);
+    xmlhttp.send();
+}
+
+//function grabInfo(select)
+//{
+//    var categoryId = select[select.selectedIndex].id;
+//
+//    if (window.XMLHttpRequest)
+//    {// code for IE7+, Firefox, Chrome, Opera, Safari
+//        xmlhttp = new XMLHttpRequest();
+//    }
+//    else
+//    {// code for IE6, IE5
+//        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+//    }
+//
+//    xmlhttp.onreadystatechange = function()
+//    {
+//        if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+//        {
+////            $('.test').text(xmlhttp.responseText);
+//            document.getElementById("contentDiv").innerHTML = xmlhttp.responseText;
+//        }
+//    }
+//
+//    xmlhttp.open("GET", "handlers/getinfo.php?categoryid=" + categoryId, true);
+//    xmlhttp.send();
+//}

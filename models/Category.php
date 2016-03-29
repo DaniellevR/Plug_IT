@@ -47,6 +47,34 @@ class Category extends Database {
         }
     }
 
+//    public function getCategory($id) {
+//        if ($this->establishConnection()) {
+////            $stmt = $this->conn->prepare("SELECT * FROM category WHERE id = ?");
+////            $stmt->bind_param('i', $id);
+////            $stmt->execute();
+////            
+//            $sql = "SELECT * FROM category WHERE id = " + $id;
+//            $result = $this->conn->query($sql);
+//
+//            $category = new Category();
+//
+//            if ($result->num_rows > 0) {
+//                while ($row = $result->fetch_assoc()) {
+//                    $category->id = $row['id'];
+//                    $category->name = $row['name'];
+//                    $category->description = $row['description'];
+//                    $category->parent = $row['category_id'];
+//                }
+//            }
+//
+//            $this->closeConnection();
+//
+//            return $category;
+//        } else {
+//            return false;
+//        }
+//    }
+
     public function addCategory($name, $description, $parent) {
         if ($this->establishConnection()) {
             $stmt = $this->conn->prepare("INSERT INTO category (id, name, description, category_id) VALUES (0, ?, ?, ?)");
@@ -59,30 +87,30 @@ class Category extends Database {
 
             return $generated_id;
         } else {
-            return false;
+            return -1;
         }
     }
 
     public function removeCategory($id) {
-        if ($this->establishConnection()) {
-            $stmt = $this->conn->prepare("DELETE FROM category WHERE id = ?");
-            $stmt->bind_param('i', $id);
-
-            $this->closeConnection();
-
-            return true;
-        } else {
-            return false;
+        if ($this->removeSubcategories($id) == 1) {
+            if ($this->establishConnection()) {
+                $stmt = $this->conn->prepare("DELETE FROM category WHERE id = ?");
+                $stmt->bind_param('i', $id);
+                $stmt->execute();
+                $this->closeConnection();
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
-    public function removeSubcategories($parent_id) {
+    private function removeSubcategories($parent_id) {
         if ($this->establishConnection()) {
             $stmt = $this->conn->prepare("DELETE FROM category WHERE category_id = ?");
             $stmt->bind_param('i', $parent_id);
-
+            $stmt->execute();
             $this->closeConnection();
-
             return true;
         } else {
             return false;
@@ -93,9 +121,8 @@ class Category extends Database {
         if ($this->establishConnection()) {
             $stmt = $this->conn->prepare("UPDATE category SET name = ?, description = ?, category_id = ? WHERE id = ?");
             $stmt->bind_param('ssii', $name, $description, $parent, $id);
-
+            $stmt->execute();
             $this->closeConnection();
-
             return true;
         } else {
             return false;

@@ -1,0 +1,57 @@
+<?php
+
+$root = realpath($_SERVER["DOCUMENT_ROOT"]);
+require_once($root . "/Plug_IT/controllers/AdminController.php");
+require_once($root . "/Plug_IT/models/Category.php");
+
+if (isset($_POST['categoriesEdit']) && isset($_POST['newname']) && isset($_POST['category_description']) && isset($_POST['parent'])) {
+    $id = $_POST['categoriesEdit'];
+    $name = $_POST['newname'];
+    $description = $_POST['category_description'];
+    $parent = $_POST['parent'];
+
+    // db
+    $categoryModel = new Category();
+    $res = $categoryModel->editCategory($id, $name, $description, $parent);
+
+    if ($res == 1) {
+        if (isset($_FILES['image'])) {
+            $errors = array();
+            $file_name = $_FILES['image']['name'];
+            $file_size = $_FILES['image']['size'];
+            $file_tmp = $_FILES['image']['tmp_name'];
+            $file_type = $_FILES['image']['type'];
+
+            $file_ext = explode(".", $file_name);
+            $file_ext = end($file_ext);
+
+            $expensions = array("jpeg", "jpg", "png");
+
+            if (in_array($file_ext, $expensions) === false) {
+                $errors[] = "extension not allowed, please choose a JPEG or PNG file.";
+            }
+
+            if ($file_size > 2097152) {
+                $errors[] = 'File size must be excately 2 MB';
+            }
+
+            if (empty($errors) == true) {
+                if (!is_dir("../categories/")) {
+                    mkdir("../categories/");
+                }
+
+                $path = "../categories/";
+                foreach (glob($path . $id . '*') as $filename) {
+                    unlink(realpath($filename));
+                }
+
+                move_uploaded_file($file_tmp, "../categories/" . $id . "." . $file_ext);
+            } else {
+                print_r($errors);
+            }
+        }
+    }
+}
+
+header("Location: /Plug_IT/index.php?page=Admin");
+?>

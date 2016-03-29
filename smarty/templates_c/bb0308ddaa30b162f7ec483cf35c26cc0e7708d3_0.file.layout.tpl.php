@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-03-26 19:44:44
+/* Smarty version 3.1.29, created on 2016-03-27 01:41:02
   from "C:\wamp\www\Plug_IT\smarty\templates\layout.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56f6d89c8c9396_26203644',
+  'unifunc' => 'content_56f72c1e9476b6_09020868',
   'file_dependency' => 
   array (
     'bb0308ddaa30b162f7ec483cf35c26cc0e7708d3' => 
     array (
       0 => 'C:\\wamp\\www\\Plug_IT\\smarty\\templates\\layout.tpl',
-      1 => 1459017878,
+      1 => 1459039237,
       2 => 'file',
     ),
   ),
@@ -19,7 +19,7 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_56f6d89c8c9396_26203644 ($_smarty_tpl) {
+function content_56f72c1e9476b6_09020868 ($_smarty_tpl) {
 $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, false);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
@@ -27,7 +27,7 @@ $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, false);
     <head> 
         <title><?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'title', array (
-  0 => 'block_1669956f6d89c68f797_40570053',
+  0 => 'block_468756f72c1e8610f9_07027412',
   1 => false,
   3 => 0,
   2 => 0,
@@ -50,7 +50,7 @@ $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'title', array (
 >
     <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'head', array (
-  0 => 'block_2876056f6d89c6a7c50_69974122',
+  0 => 'block_354856f72c1e86af64_34059350',
   1 => false,
   3 => 0,
   2 => 0,
@@ -60,7 +60,7 @@ $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'head', array (
 </head>
 <body>
     <div class="sitecontainer">
-        <h1 class="testje"></h1>
+
         <div class="header">
             <div class="logintool">
                 <ul>
@@ -90,7 +90,7 @@ $__foreach_nav_0_saved_local_item = $_smarty_tpl->tpl_vars['nav'];
                             <?php }?>
                         <?php } elseif ($_smarty_tpl->tpl_vars['nav']->value->name === "Uitloggen") {?>
                             <?php if (isset($_COOKIE['PHPSESSID'])) {?>
-                            <li><a onclick="logout(this, event)" href=""><?php echo $_smarty_tpl->tpl_vars['nav']->value->name;?>
+                            <li><a onclick="" href=""><?php echo $_smarty_tpl->tpl_vars['nav']->value->name;?>
 </a></li>
                             <?php }?>
                         <?php } else { ?>
@@ -112,7 +112,7 @@ $_smarty_tpl->tpl_vars['nav'] = $__foreach_nav_0_saved_item;
                 <a>Path</a>
             </div>
 
-
+            <a href="/Plug_IT/index.php?page=Home"> <img src="/Plug_IT/assets/pix/logo.png" alt="Plug IT.nl" /></a>
 
             <div class="search">
                 <form action="#" method="post">
@@ -181,7 +181,7 @@ $_smarty_tpl->tpl_vars['parent'] = $__foreach_parent_1_saved_item;
             </div>
         <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'body', array (
-  0 => 'block_2193756f6d89c8783a6_70844627',
+  0 => 'block_790956f72c1e926ce9_63576554',
   1 => false,
   3 => 0,
   2 => 0,
@@ -220,17 +220,17 @@ $_smarty_tpl->tpl_vars['nav'] = $__foreach_nav_3_saved_item;
 </html>
 <?php }
 /* {block 'title'}  file:layout.tpl */
-function block_1669956f6d89c68f797_40570053($_smarty_tpl, $_blockParentStack) {
+function block_468756f72c1e8610f9_07027412($_smarty_tpl, $_blockParentStack) {
 ?>
 Plug IT<?php
 }
 /* {/block 'title'} */
 /* {block 'head'}  file:layout.tpl */
-function block_2876056f6d89c6a7c50_69974122($_smarty_tpl, $_blockParentStack) {
+function block_354856f72c1e86af64_34059350($_smarty_tpl, $_blockParentStack) {
 }
 /* {/block 'head'} */
 /* {block 'body'}  file:layout.tpl */
-function block_2193756f6d89c8783a6_70844627($_smarty_tpl, $_blockParentStack) {
+function block_790956f72c1e926ce9_63576554($_smarty_tpl, $_blockParentStack) {
 }
 /* {/block 'body'} */
 }

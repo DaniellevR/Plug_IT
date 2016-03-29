@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="sitecontainer">
-        <h1 class="testje"></h1>
+{*        <h1 class="testje"></h1>*}
         <div class="header">
             <div class="logintool">
                 <ul>
@@ -27,7 +27,7 @@
                             {/if}
                         {elseif $nav->name === "Uitloggen"}
                             {if isset($smarty.cookies.PHPSESSID)}
-                            <li><a onclick="logout(this, event)" href="">{$nav->name}</a></li>
+                            <li><a onclick="" href="">{$nav->name}</a></li>
                             {/if}
                         {else}
                         <li><a href="/Plug_IT/index.php?page={$nav->page}">{$nav->name}</a></li>
@@ -40,7 +40,7 @@
                 <a>Path</a>
             </div>
 
-{*            <a href="/Plug_IT/index.php?page=Home"> <img src="/Plug_IT/assets/pix/logo.png" alt="Plug IT.nl" /></a>*}
+            <a href="/Plug_IT/index.php?page=Home"> <img src="/Plug_IT/assets/pix/logo.png" alt="Plug IT.nl" /></a>
 
             <div class="search">
                 <form action="#" method="post">

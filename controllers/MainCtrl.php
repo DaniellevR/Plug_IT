@@ -3,6 +3,7 @@
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once($root . "/Plug_IT/models/NavigationItem.php");
 require_once($root . "/Plug_IT/models/Category.php");
+require_once($root . "/Plug_IT/models/Supplier.php");
 
 class MainCtrl {
 
@@ -119,6 +120,12 @@ class MainCtrl {
         $sideNavigation[] = $children;
 
         return $sideNavigation;
+    }
+    
+    public function getSuppliers() {
+        $supplierModel = new Supplier();
+        $suppliers = $supplierModel->getSuppliers();
+        return $suppliers;
     }
 
     public function loginUser() {
