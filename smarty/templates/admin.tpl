@@ -3,6 +3,12 @@
     <div class="content admin">
         <h1 class="test">Admin</h1>
 
+        {if $errors !== ""}
+            <div class="error">
+                {$errors}
+            </div>
+        {/if}
+
         {if isset($smarty.cookies.PHPSESSID)}
             {*            { && $smarty.session.usertype === "Admin"}*}
             <ul class="adminpnl">
@@ -30,15 +36,15 @@
 
         {block name=categoriesforms}{/block}
 
-        {block name=productsforms}{/block}
+    {block name=productsforms}{/block}
 
-        {block name=usersforms}{/block}
+{block name=usersforms}{/block}
 
-        {block name=ordersforms}{/block}
+{block name=ordersforms}{/block}
 
-        {else}
-            {block name="parent_block"}{include file="loginform.tpl"}{/block}
-            
-        {/if}
-    </div>
+{else}
+{block name="parent_block"}{include file="loginform.tpl"}{/block}
+
+{/if}
+</div>
 {/block}

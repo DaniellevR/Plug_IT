@@ -18,7 +18,13 @@ class AdminController extends MainCtrl {
         $navi = $this->getNavigationItems();
         $sideNavigation = $this->getCategories();
 
-//        $smarty->assign('header', ['Inloggen', 'Verlanglijstje', 'Klantenservice']);
+        $errors = "";
+        if (isset($_SESSION["errors"])) {
+            $errors = $_SESSION["errors"];
+            unset($_SESSION["errors"]);
+        }
+        $smarty->assign('errors', $errors);
+        
         $smarty->assign('navigation', $navi);
         $smarty->assign('categories', $sideNavigation);
         $smarty->assign('suppliers', $this->getSuppliers());
@@ -29,38 +35,22 @@ class AdminController extends MainCtrl {
         $smarty->display($name . '.tpl');
     }
 
-//    public function addCategory() {
-//        
-//    }
-//
-//    public function editCategory() {
-//        if (isset($_POST["categoriesEdit"]) && isset($_POST["categoryDescriptionEdit"])) {
-//            formParentCategories
-//        }
-//    }
-
     public function removeCategory() {
         if (isset($_POST["categoryId"])) {
             $categoryModel = new Category();
             $res = $categoryModel->removeCategory($_POST['categoryId']);
 
             if ($res == 1) {
-                $path = "../categories/";
+                $path = "../assets/pix/categories/";
                 foreach (glob($path . $_POST['categoryId'] . '*') as $filename) {
                     unlink(realpath($filename));
                 }
+            } else {
+                $_SESSION["errors"] = "Kon de categorie niet verwijderen.";
             }
+        } else {
+            $_SESSION["errors"] = "Kon de categorie niet verwijderen.";
         }
-
-//        $this->Admin();
-    }
-
-    public function addProduct() {
-        
-    }
-
-    public function editProduct() {
-        
     }
 
     public function removeProduct() {
@@ -69,11 +59,15 @@ class AdminController extends MainCtrl {
             $res = $productModel->removeProduct($_POST['productId']);
 
             if ($res == 1) {
-                $path = "../products/";
+                $path = "../assets/pix/products/";
                 foreach (glob($path . $_POST['productId'] . '*') as $filename) {
                     unlink(realpath($filename));
                 }
+            } else {
+                $_SESSION["errors"] = "Kon het product niet verwijderen.";
             }
+        } else {
+            $_SESSION["errors"] = "Kon het product niet verwijderen.";
         }
     }
 

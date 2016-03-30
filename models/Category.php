@@ -47,36 +47,38 @@ class Category extends Database {
         }
     }
 
-//    public function getCategory($id) {
-//        if ($this->establishConnection()) {
-////            $stmt = $this->conn->prepare("SELECT * FROM category WHERE id = ?");
-////            $stmt->bind_param('i', $id);
-////            $stmt->execute();
-////            
-//            $sql = "SELECT * FROM category WHERE id = " + $id;
-//            $result = $this->conn->query($sql);
-//
-//            $category = new Category();
-//
-//            if ($result->num_rows > 0) {
-//                while ($row = $result->fetch_assoc()) {
-//                    $category->id = $row['id'];
-//                    $category->name = $row['name'];
-//                    $category->description = $row['description'];
-//                    $category->parent = $row['category_id'];
-//                }
-//            }
-//
-//            $this->closeConnection();
-//
-//            return $category;
-//        } else {
-//            return false;
-//        }
-//    }
+    public function checkIfCategoryIsUnique($name, $parent) {
+        if ($this->establishConnection()) {
+            if ($parent === "") {
+                $sql = "SELECT COUNT(*) as cnt FROM category WHERE name = '" . $this->conn->real_escape_string($name) . "' AND category_id IS NULL";
+            } else {
+                $sql = "SELECT COUNT(*) as cnt FROM category WHERE name = '" . $this->conn->real_escape_string($name) . "' AND category_id = " . $this->conn->real_escape_string($parent);
+            }
+
+            $result = $this->conn->query($sql);
+
+            $count = -1;
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $count = $row['cnt'];
+                }
+            }
+
+            $this->closeConnection();
+
+            return $count;
+        } else {
+            return -1;
+        }
+    }
 
     public function addCategory($name, $description, $parent) {
         if ($this->establishConnection()) {
+            if ($parent === "") {
+                $parent = NULL;
+            }
+
             $stmt = $this->conn->prepare("INSERT INTO category (id, name, description, category_id) VALUES (0, ?, ?, ?)");
             $stmt->bind_param('ssi', $name, $description, $parent);
 

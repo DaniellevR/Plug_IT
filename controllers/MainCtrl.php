@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once($root . "/Plug_IT/models/NavigationItem.php");
 require_once($root . "/Plug_IT/models/Category.php");

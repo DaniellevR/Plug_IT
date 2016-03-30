@@ -319,3 +319,10 @@ label {
 /*.adminpnl .selected a {
     color: black;
 }*/
+
+.error {
+    background-color: #ffadad;
+    border: 2px solid red;
+    padding: 10px;
+    text-align: center;
+}

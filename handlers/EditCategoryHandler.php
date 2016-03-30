@@ -4,6 +4,8 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once($root . "/Plug_IT/controllers/AdminController.php");
 require_once($root . "/Plug_IT/models/Category.php");
 
+$errors = "";
+
 if (isset($_POST['categoriesEdit']) && isset($_POST['newname']) && isset($_POST['category_description']) && isset($_POST['parent'])) {
     $id = $_POST['categoriesEdit'];
     $name = $_POST['newname'];
@@ -12,9 +14,9 @@ if (isset($_POST['categoriesEdit']) && isset($_POST['newname']) && isset($_POST[
 
     // db
     $categoryModel = new Category();
-    $res = $categoryModel->editCategory($id, $name, $description, $parent);
+    $count = $categoryModel->checkIfCategoryIsUnique($_POST['categoryname'], $_POST['parent']);
 
-    if ($res == 1) {
+    if ($count == 0) {
         if (isset($_FILES['image'])) {
             $errors = array();
             $file_name = $_FILES['image']['name'];
@@ -28,30 +30,40 @@ if (isset($_POST['categoriesEdit']) && isset($_POST['newname']) && isset($_POST[
             $expensions = array("jpeg", "jpg", "png");
 
             if (in_array($file_ext, $expensions) === false) {
-                $errors[] = "extension not allowed, please choose a JPEG or PNG file.";
+                $errors = "Extensie niet toegestaan. Kies een jpeg, jpg of png afbeelding.\r\n";
             }
 
             if ($file_size > 2097152) {
-                $errors[] = 'File size must be excately 2 MB';
+                $errors = $errors . 'Afbeelding mag niet groter zijn dan 2MB.\r\n';
             }
 
-            if (empty($errors) == true) {
-                if (!is_dir("../assets/pix/categories/")) {
-                    mkdir("../assets/pix/categories/");
-                }
+            if ($errors === "") {
+                $res = $categoryModel->editCategory($id, $name, $description, $parent);
 
-                $path = "../assets/pix/categories/";
-                foreach (glob($path . $id . '*') as $filename) {
-                    unlink(realpath($filename));
-                }
+                if ($res == 1) {
+                    if (!is_dir("../assets/pix/categories/")) {
+                        mkdir("../assets/pix/categories/");
+                    }
 
-                move_uploaded_file($file_tmp, "../assets/pix/categories/" . $id . "." . $file_ext);
-            } else {
-                print_r($errors);
+                    $path = "../assets/pix/categories/";
+                    foreach (glob($path . $id . '*') as $filename) {
+                        unlink(realpath($filename));
+                    }
+
+                    move_uploaded_file($file_tmp, "../assets/pix/categories/" . $id . "." . $file_ext);
+                } else {
+                    $errors = $errors . "Er is een fout opgetreden bij het opslaan. Probeer het opnieuw.";
+                }
             }
         }
+    } else {
+        $errors = $errors . "Ingevoerde gegevens bestaan al.";
     }
+} else {
+    $errors = $errors . "Kon de categorie niet wijzigen.";
 }
+
+$_SESSION["errors"] = $errors;
 
 header("Location: /Plug_IT/index.php?page=Admin");
 ?>
