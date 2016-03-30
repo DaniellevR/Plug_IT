@@ -37,23 +37,8 @@
         {block name=ordersforms}{/block}
 
         {else}
-        <form action="" onsubmit="return login(this, event, 'Admin')" method="POST" enctype="multipart/form-data">
-        <div class="line">
-            <label>Gebruikersnaam:</label>
-            <div class="input">
-                <div class="input">
-                    <input type="text" name="username" required="true">
-                </div>
-            </div>
-            <label>Wachtwoord:</label>
-            <div class="input">
-                <div class="input">
-                    <input type="password" name="password" required="true">
-                </div>
-            </div>
-        </div>
-        <button type="submit" value="Submit" class="form_button">Inloggen</button>
-    </form>
-{/if}
-</div>
+            {block name="parent_block"}{include file="loginform.tpl"}{/block}
+            
+        {/if}
+    </div>
 {/block}

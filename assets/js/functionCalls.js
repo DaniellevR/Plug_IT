@@ -4,20 +4,33 @@
  * and open the template in the editor.
  */
 
-function login(sender, e, page) {
-    e.preventDefault();
+//function login(sender, e, page) {
+//    e.preventDefault();
+//
+//    jQuery.ajax({
+//        type: "POST",
+//        url: 'http://localhost/Plug_IT/handlers/SessionHandler.php',
+//        data: {action: 'login', username: document.getElementsByName('username')[0].value, password: document.getElementsByName('password')[0].value},
+//        success: function() {
+//            window.location = "/Plug_IT/index.php?page=" + page;
+//            return true;
+//        },
+//        error: function(response) {
+//            alert("e : " + JSON.stringify(response));
+//            return false;
+//        }
+//    });
+//}
 
+function login(sender, e) {
+    e.preventDefault();
+    
     jQuery.ajax({
         type: "POST",
         url: 'http://localhost/Plug_IT/handlers/SessionHandler.php',
         data: {action: 'login', username: document.getElementsByName('username')[0].value, password: document.getElementsByName('password')[0].value},
         success: function() {
-            window.location = "/Plug_IT/index.php?page=" + page;
-            return true;
-        },
-        error: function(response) {
-            alert("e : " + JSON.stringify(response));
-            return false;
+            window.location = "/Plug_IT/index.php?page=Home";
         }
     });
 }

@@ -33,15 +33,15 @@ class MainCtrl {
     public function AdminProducts() {
         $this->View('productsforms', '');
     }
-    
+
     public function AdminUsers() {
         $this->View('usersforms', '');
     }
-    
+
     public function AdminOrders() {
         $this->View('ordersforms', '');
     }
-    
+
     public function Catalogue() {
         $this->View('catalogue', '');
     }
@@ -165,12 +165,17 @@ class MainCtrl {
 
     public function loginUser() {
         if (isset($_POST["username"]) && isset($_POST["password"])) {
+            $username = $_POST["username"];
+            
             session_start();
+            $_SESSION["username"] = $username;
             $_SESSION["usertype"] = "Admin";
 //            $_SESSION["usertype"] = "Gebruiker";
         } else {
             echo "Gebruikersnaam en/of wachtwoord is onjuist.";
         }
+
+//        header("Location: /Plug_IT/index.php?page=Home");
     }
 
     public function logoutUser() {
