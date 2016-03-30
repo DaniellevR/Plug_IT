@@ -17,6 +17,10 @@ $smarty->setConfigDir('smarty/configs');
 if (isset($_GET['page'])) {
     $page = $_GET['page'];
 
+    if ($page === 'Admin') {
+        $page = 'AdminCategories';
+    }
+    
     if ($page === 'AdminCategories' || $page === 'AdminProducts' || $page === 'AdminUsers' || $page === 'AdminOrders') {
         $controller = new AdminController();
     } else {

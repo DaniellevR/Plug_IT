@@ -95,7 +95,7 @@ class MainCtrl {
     }
 
     public function Register() {
-        $this->View('registerform', '');
+        $this->View('register', '');
     }
 
     public function getNavigationItems() {

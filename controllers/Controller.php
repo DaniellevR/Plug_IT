@@ -15,9 +15,14 @@ class Controller extends MainCtrl {
 //        $smarty->assign('header', ['Inloggen', 'Verlanglijstje', 'Klantenservice']);
         $smarty->assign('navigation', $navi);
         $smarty->assign('categories', $sideNavigation);
+        
+        $smarty->assign('suppliers', $this->getSuppliers());
+        $smarty->assign('users', $this->getUsers());
+        $smarty->assign('roles', $this->getRoles());
+        
         $smarty->assign('model', $model);
         $smarty->assign('footer', ['Informatie', 'Bestelling & levering', 'Betalen', 'Retourneren', 'Voorwaarden', 'Over', 'Contact']);
-        
+
         $smarty->display($name . '.tpl');
     }
 
