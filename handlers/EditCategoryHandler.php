@@ -14,47 +14,50 @@ if (isset($_POST['categoriesEdit']) && isset($_POST['newname']) && isset($_POST[
 
     // db
     $categoryModel = new Category();
-    $count = $categoryModel->checkIfCategoryIsUnique($_POST['categoryname'], $_POST['parent']);
+    $count = $categoryModel->checkIfCategoryIsUnique($name, $parent);
 
     if ($count == 0) {
-        if (isset($_FILES['image'])) {
-            $errors = array();
-            $file_name = $_FILES['image']['name'];
-            $file_size = $_FILES['image']['size'];
-            $file_tmp = $_FILES['image']['tmp_name'];
-            $file_type = $_FILES['image']['type'];
+        $res = $categoryModel->editCategory($id, $name, $description, $parent);
 
-            $file_ext = explode(".", $file_name);
-            $file_ext = end($file_ext);
+        if ($res == 1) {
+            if (isset($_FILES['image'])) {
+                $file_name = $_FILES['image']['name'];
+                $file_size = $_FILES['image']['size'];
+                $file_tmp = $_FILES['image']['tmp_name'];
+                $file_type = $_FILES['image']['type'];
 
-            $expensions = array("jpeg", "jpg", "png");
+                if ($file_name != "" && $file_size != "" && $file_tmp != "" && $file_type != "") {
 
-            if (in_array($file_ext, $expensions) === false) {
-                $errors = "Extensie niet toegestaan. Kies een jpeg, jpg of png afbeelding.\r\n";
-            }
+                    $file_ext = explode(".", $file_name);
+                    $file_ext = end($file_ext);
 
-            if ($file_size > 2097152) {
-                $errors = $errors . 'Afbeelding mag niet groter zijn dan 2MB.\r\n';
-            }
+                    $expensions = array("jpeg", "jpg", "png");
 
-            if ($errors === "") {
-                $res = $categoryModel->editCategory($id, $name, $description, $parent);
-
-                if ($res == 1) {
-                    if (!is_dir("../assets/pix/categories/")) {
-                        mkdir("../assets/pix/categories/");
+                    if (in_array($file_ext, $expensions) === false) {
+                        $errors = "Extensie niet toegestaan. Kies een jpeg, jpg of png afbeelding.\r\n";
                     }
 
-                    $path = "../assets/pix/categories/";
-                    foreach (glob($path . $id . '*') as $filename) {
-                        unlink(realpath($filename));
+                    if ($file_size > 2097152) {
+                        $errors = $errors . 'Afbeelding mag niet groter zijn dan 2MB.\r\n';
                     }
 
-                    move_uploaded_file($file_tmp, "../assets/pix/categories/" . $id . "." . $file_ext);
-                } else {
-                    $errors = $errors . "Er is een fout opgetreden bij het opslaan. Probeer het opnieuw.";
+                    if ($errors === "") {
+
+                        if (!is_dir("../assets/pix/categories/")) {
+                            mkdir("../assets/pix/categories/");
+                        }
+
+                        $path = "../assets/pix/categories/";
+                        foreach (glob($path . $id . '*') as $filename) {
+                            unlink(realpath($filename));
+                        }
+
+                        move_uploaded_file($file_tmp, "../assets/pix/categories/" . $id . ".png");
+                    }
                 }
             }
+        } else {
+            $errors = $errors . "Er is een fout opgetreden bij het opslaan. Probeer het opnieuw.";
         }
     } else {
         $errors = $errors . "Ingevoerde gegevens bestaan al.";

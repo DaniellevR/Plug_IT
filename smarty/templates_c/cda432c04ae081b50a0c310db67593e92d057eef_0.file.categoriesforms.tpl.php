@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-03-30 19:26:12
+/* Smarty version 3.1.29, created on 2016-03-30 23:33:22
   from "C:\wamp\www\Plug_IT\smarty\templates\categoriesforms.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56fc0c34866d45_74007971',
+  'unifunc' => 'content_56fc4622838ef5_29937149',
   'file_dependency' => 
   array (
     'cda432c04ae081b50a0c310db67593e92d057eef' => 
     array (
       0 => 'C:\\wamp\\www\\Plug_IT\\smarty\\templates\\categoriesforms.tpl',
-      1 => 1459358669,
+      1 => 1459373499,
       2 => 'file',
     ),
   ),
@@ -20,13 +20,13 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
     'file:admin.tpl' => 1,
   ),
 ),false)) {
-function content_56fc0c34866d45_74007971 ($_smarty_tpl) {
+function content_56fc4622838ef5_29937149 ($_smarty_tpl) {
 $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'categoriesforms', array (
-  0 => 'block_3026656fc0c3474be32_53407237',
+  0 => 'block_119656fc4622713782_25171440',
   1 => false,
   3 => 0,
   2 => 0,
@@ -35,7 +35,7 @@ $_smarty_tpl->ext->_inheritance->endChild($_smarty_tpl);
 $_smarty_tpl->smarty->ext->_subtemplate->render($_smarty_tpl, "file:admin.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'categoriesforms'}  file:categoriesforms.tpl */
-function block_3026656fc0c3474be32_53407237($_smarty_tpl, $_blockParentStack) {
+function block_119656fc4622713782_25171440($_smarty_tpl, $_blockParentStack) {
 ?>
 
     <div class="adminpart">
@@ -220,7 +220,7 @@ $_smarty_tpl->tpl_vars['parent'] = $__foreach_parent_4_saved_item;
 
 
                     </select></div></div>
-            <div class="line"><label>Foto categorie:</label><div class="input"><input type="file" accept="image/*" name="image" id="image" required="true"/></div></div>
+            <div class="line"><label>Foto categorie:</label><div class="input"><input type="file" accept="image/*" name="image" id="image"/></div></div>
 
             <img src="/Plug_IT/assets/pix/categories/<?php echo $_smarty_tpl->tpl_vars['cat']->value->id;?>
 .png" class="image" />

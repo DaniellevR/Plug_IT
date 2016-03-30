@@ -60,7 +60,7 @@
 
 
                     </select></div></div>
-            <div class="line"><label>Foto categorie:</label><div class="input"><input type="file" accept="image/*" name="image" id="image" required="true"/></div></div>
+            <div class="line"><label>Foto categorie:</label><div class="input"><input type="file" accept="image/*" name="image" id="image"/></div></div>
 
             <img src="/Plug_IT/assets/pix/categories/{$cat->id}.png" class="image" />
         </div>
