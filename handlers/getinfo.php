@@ -54,7 +54,7 @@ if ($action === 'editCategory') {
     echo '</select></div></div>';
     echo '<div class="line"><label>Foto categorie:</label><div class="input"><input type="file" accept="image/*" name="image" id="image" required="true"/></div></div>';
 
-    $path = "../categories/";
+    $path = "../assets/pix/categories/";
     foreach (glob($path . $categoryId . '*') as $filename) {
         echo '<img src="' . substr($filename, 3) . '" class="image" />';
     }

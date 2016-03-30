@@ -22,9 +22,20 @@
 //    });
 //}
 
+$()
+
+//$('#categoriesEdit').load(function() {
+//    grabInfo(this, 'editCategory', 'contentDivEditCategory');
+//});
+
+//window.onload = function() {
+//    var select = document.getElementsByName('categoriesEdit');
+//    grabInfo(select, 'editCategory', 'contentDivEditCategory');
+//};
+
 function login(sender, e) {
     e.preventDefault();
-    
+
     jQuery.ajax({
         type: "POST",
         url: 'http://localhost/Plug_IT/handlers/SessionHandler.php',

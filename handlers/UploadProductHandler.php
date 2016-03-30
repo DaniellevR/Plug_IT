@@ -29,11 +29,11 @@ if (isset($_FILES['image'])) {
         $productModel = new Product();
         $generated_id = $productModel->addProduct($_POST['categoryname'], $_POST['category_description'], $_POST['parent']);
 
-        if (!is_dir("../products/")) {
-            mkdir("../products/");
+        if (!is_dir("../assets/pix/products/")) {
+            mkdir("../assets/pix/products/");
         }
 
-        move_uploaded_file($file_tmp, "../products/" . $generated_id . "." . $file_ext);
+        move_uploaded_file($file_tmp, "../assets/pix/products/" . $generated_id . "." . $file_ext);
     } else {
         print_r($errors);
     }

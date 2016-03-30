@@ -1,6 +1,5 @@
 {extends file='admin.tpl'}
 {block name=categoriesforms}
-    {*<div class="categories adminpart" id="part1">*}
     <div class="adminpart">
         <form action="handlers/UploadCategoryHandler.php" method="POST" enctype="multipart/form-data">
             <h3>Categorie toevoegen</h3>
@@ -25,43 +24,67 @@
             <div class="line">
                 <label>Categorienaam:</label>
                 <div class="input">
-                    <select id="categories_edit" name="categoriesEdit" onchange="grabInfo(this, 'editCategory', 'contentDivEditCategory')">
-                        {$i = 0}
+                    <select id="categories_edit" id="categoriesEdit" name="categoriesEdit" onchange="grabInfo(this, 'editCategory', 'contentDivEditCategory')">
                         {foreach from=$categories[0] item=parent }
                             <option class="category" value="{$parent->id}" id="{$parent->id}">{$parent->name}</option>
-                            {$j = 0}
                             {foreach from=$categories[1] item=child }
                                 {if $child->parent === $parent->id}
                                     <option class="subcategory" value="{$child->id}" id="{$child->id}">{$child->name}</option>
                                 {/if}
                             {/foreach}
-                            {$i++}
                         {/foreach}
                     </select>
                 </div>
             </div>
-            <div id="contentDivEditCategory"></div>
-            <button type="submit" value="Submit" class="form_button">Wijzigen</button>
-        </form>
+            <div id="contentDivEditCategory">
 
-        <form method="POST" enctype="multipart/form-data" onsubmit="removeCategory(this, event)">
-            <h3>Categorie verwijderen</h3>
-            <div class="line">
-                <label>Categorienaam:</label>
-                <div class="input">
-                    <select id="categories_remove" name="categoriesRemove">
+                {$cat = ""}
+                {foreach from=$categories[0] item=parent }
+                {if $cat === ""}{$cat = $parent}{/if}
+            {/foreach}
+
+            <div class="line"><label>Nieuwe naam:</label><div class="input"><input id="newname" type="text" name="newname" value="{$cat->name}" required="true"></div></div>
+            <div class="line"><label>Omschrijving:</label><div class="input"><input id="desc" type="text" name="category_description" value="{$cat->description}" required="true"></div></div>
+            <div class="line"><label>Ouder categorie:</label><div class="input"><select name="parent">
+
+
+                        <option value="">-</option>
                         {foreach from=$categories[0] item=parent }
-                            <option class="category" value="{$parent->id}">{$parent->name}</option>
+                            <option class="category" value="{$parent->id}" id="{$parent->id}" {if $cat->parent === $parent->id}selected{/if}>{$parent->name}</option>
                             {foreach from=$categories[1] item=child }
                                 {if $child->parent === $parent->id}
-                                    <option class="subcategory" value="{$child->id}">{$child->name}</option>
+                                    <option class="subcategory" value="{$child->id}" id="{$child->id}" {if $cat->parent === $child->id}selected{/if}>{$child->name}</option>
                                 {/if}
                             {/foreach}
                         {/foreach}
-                    </select>
-                </div>
+
+
+                    </select></div></div>
+            <div class="line"><label>Foto categorie:</label><div class="input"><input type="file" accept="image/*" name="image" id="image" required="true"/></div></div>
+
+            <img src="/Plug_IT/assets/pix/categories/{$cat->id}.png" class="image" />
+        </div>
+        <button type="submit" value="Submit" class="form_button">Wijzigen</button>
+    </form>
+
+    <form method="POST" enctype="multipart/form-data" onsubmit="removeCategory(this, event)">
+        <h3>Categorie verwijderen</h3>
+        <div class="line">
+            <label>Categorienaam:</label>
+            <div class="input">
+                <select id="categories_remove" name="categoriesRemove">
+                    {foreach from=$categories[0] item=parent }
+                        <option class="category" value="{$parent->id}">{$parent->name}</option>
+                        {foreach from=$categories[1] item=child }
+                            {if $child->parent === $parent->id}
+                                <option class="subcategory" value="{$child->id}">{$child->name}</option>
+                            {/if}
+                        {/foreach}
+                    {/foreach}
+                </select>
             </div>
-            <button type="submit" value="Submit" class="form_button">Verwijderen</button>
-        </form>
-    </div>
+        </div>
+        <button type="submit" value="Submit" class="form_button">Verwijderen</button>
+    </form>
+</div>
 {/block}

@@ -36,16 +36,16 @@ if (isset($_POST['categoriesEdit']) && isset($_POST['newname']) && isset($_POST[
             }
 
             if (empty($errors) == true) {
-                if (!is_dir("../categories/")) {
-                    mkdir("../categories/");
+                if (!is_dir("../assets/pix/categories/")) {
+                    mkdir("../assets/pix/categories/");
                 }
 
-                $path = "../categories/";
+                $path = "../assets/pix/categories/";
                 foreach (glob($path . $id . '*') as $filename) {
                     unlink(realpath($filename));
                 }
 
-                move_uploaded_file($file_tmp, "../categories/" . $id . "." . $file_ext);
+                move_uploaded_file($file_tmp, "../assets/pix/categories/" . $id . "." . $file_ext);
             } else {
                 print_r($errors);
             }

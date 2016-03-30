@@ -29,11 +29,11 @@ if (isset($_FILES['image'])) {
         $categoryModel = new Category();
         $generated_id = $categoryModel->addCategory($_POST['categoryname'], $_POST['category_description'], $_POST['parent']);
 
-        if (!is_dir("../categories/")) {
-            mkdir("../categories/");
+        if (!is_dir("../assets/pix/categories/")) {
+            mkdir("../assets/pix/categories/");
         }
 
-        move_uploaded_file($file_tmp, "../categories/" . $generated_id . "." . $file_ext);
+        move_uploaded_file($file_tmp, "../assets/pix/categories/" . $generated_id . ".png");
     } else {
         print_r($errors);
     }
