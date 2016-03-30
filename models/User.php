@@ -19,22 +19,33 @@ class User extends Database {
     public $telephonenumber;
     public $rolename;
 
-    public function checkIfUsernameExists($username) {
+    public function getUsers() {
         if ($this->establishConnection()) {
-            $stmt = $this->conn->prepare("SELECT username FROM user WHERE username = ?");
-            $stmt->bind_param('s', $username);
-            $stmt->execute();
+            $sql = "SELECT * FROM user";
+            $result = $this->conn->query($sql);
 
-            $name = "";
-            
-            $stmt->bind_result($name);
-            $stmt->fetch();
+            $users = array();
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $user = new User();
+                    $user->username = $row['username'];
+                    $user->password = $row['password'];
+                    $user->firstname = $row['firstname'];
+                    $user->prefix = $row['prefix'];
+                    $user->lastname = $row['lastname'];
+                    $user->email = $row['email'];
+                    $user->telephonenumber = $row['telephonenumber'];
+                    $user->rolename = $row['role_name'];
+                    $users[] = $user;
+                }
+            }
 
             $this->closeConnection();
-            
-            return $name;
+
+            return $users;
         } else {
-            return -1;
+            return false;
         }
     }
 
@@ -44,13 +55,50 @@ class User extends Database {
             $stmt->bind_param('ssssssss', $username, $password, $firstname, $prefix, $lastname, $email, $telephonenumber, $rolename);
 
             $stmt->execute();
-            $generated_id = $stmt->insert_id;
 
             $this->closeConnection();
 
-            return $generated_id;
+            return $username;
         } else {
             return -1;
+        }
+    }
+
+    public function connectUserWithAddress($username, $addressId) {
+        if ($this->establishConnection()) {
+            $stmt = $this->conn->prepare("INSERT INTO user_has_address (user_username, address_address_id) VALUES (?, ?)");
+            $stmt->bind_param('si', $username, $addressId);
+
+            $stmt->execute();
+
+            $this->closeConnection();
+
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
+    public function getIdsAddresses($username) {
+        if ($this->establishConnection()) {
+            $stmt = $this->conn->prepare("SELECT address_address_id FROM user_has_address WHERE user_username = ?");
+            $stmt->bind_param('s', $username);
+            $stmt->execute();
+
+            $ids = array();
+            $id = -1;
+
+            $stmt->bind_result($id);
+
+            while ($stmt->fetch()) { // For each row
+                $ids[] = $id;
+            }
+
+            $this->closeConnection();
+
+            return $ids;
+        } else {
+            return false;
         }
     }
 

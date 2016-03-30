@@ -3,6 +3,9 @@
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once($root . "/Plug_IT/models/Category.php");
 require_once($root . "/Plug_IT/models/Product.php");
+require_once($root . "/Plug_IT/models/User.php");
+require_once($root . "/Plug_IT/models/Role.php");
+require_once($root . "/Plug_IT/models/Address.php");
 
 $action = $_GET['action'];
 //echo "ACTION : " . $action;
@@ -86,6 +89,57 @@ if ($action === 'editCategory') {
     $productId = $_GET["id"];
     $productModel = new Product();
     $product = $productModel->getProduct($productId);
-    echo "TEST";
+} else if ($action === 'editUser') {
+    $username = $_GET["id"];
+    $userModel = new User();
+    $users = $userModel->getUsers();
+    $adresModel = new Address();
+    $addresses = $adresModel->getAddresses();
+
+    // Find the user
+    $foundUser = NULL;
+    foreach ($users as $user) {
+        if ($user->username === $username) {
+            $foundUser = $user;
+        }
+    }
+
+    // Get the connected addresses
+    $idsAddresses = $userModel->getIdsAddresses($username);
+
+    echo '<h5>Persoonsgegevens</h5><label>Naam:</label><input type="text" name="firstnameEditUser" required="true" placeholder="Voornaam" value="' . $foundUser->firstname . '">';
+    echo '<input type="text" name="prefixEditUser" required="true" placeholder="tv" value="' . $foundUser->prefix . '">';
+    echo '<input type="text" name="lastnameEditUser" required="true" placeholder="Achternaam" value="' . $foundUser->lastname . '">';
+    echo '<label>Email:</label><input type="text" name="emailEditUser" required="true" value="' . $foundUser->email . '">';
+    echo '<label>Telefoonnummer:</label><input type="text" name="telephonenumberEditUser" required="true" value="' . $foundUser->telephonenumber . '">';
+
+    // Find the addresses
+    foreach ($addresses as $address) {
+        if (in_array($address->id, $idsAddresses)) {
+            echo '<h5>Adresgegevens</h5><label>Adres:</label>';
+            echo '<input type="text" name="streetnameEditUser" required="true" placeholder="Straatnaam" value="' . $address->streetname . '">';
+            echo '<input type="text" name="housenumberEditUser" required="true" placeholder="nr" value="' . $address->housenumber . '">';
+            echo '<input type="text" name="housenumberSuffixEditUser" placeholder="tv" value="' . $address->housenumberSuffix . '">';
+            echo '<label>Postcode:</label><input type="text" name="postalCodeEditUser" required="true" value="' . $address->postalCode . '">';
+            echo '<label>Woonplaats:</label><input type="text" name="cityEditUser" required="true" value="' . $address->city . '">';
+        }
+    }
+
+    echo '<h5>Accountgegevens</h5>';
+    echo '<label>Rol:</label>';
+    echo '<select name="rolesEditUser">';
+
+    $roleModel = new Role();
+    $roles = $roleModel->getRoles();
+    foreach ($roles as $role) {
+        if ($role->name === $foundUser->rolename) {
+            echo '<option value="' . $role->name . '" selected>' . $role->name . '</option>';
+        } else {
+            echo '<option value="' . $role->name . '">' . $role->name . '</option>';
+        }
+    }
+    echo '</select><label>Huidige wachtwoord:</label><input type="password" name="current_passwordEditUser">';
+    echo '<label>Nieuwe Wachtwoord:</label><input type="password" name="passwordEditUser">';
+    echo '<label>Herhaal nieuwe wachtwoord:</label><input type="password" name="repeat_passwordEditUser">';
 }
 ?>

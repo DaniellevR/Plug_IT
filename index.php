@@ -12,18 +12,22 @@ $smarty->setCompileDir('smarty/templates_c');
 $smarty->setCacheDir('smarty/cache');
 $smarty->setConfigDir('smarty/configs');
 
-$controller = new Controller();
+//$controller = new Controller();
 
-if(isset($_GET['page']))
-{
+if (isset($_GET['page'])) {
     $page = $_GET['page'];
-    
-    if ($page === 'Admin') {
+
+    if ($page === 'AdminCategories' || $page === 'AdminProducts' || $page === 'AdminUsers' || $page === 'AdminOrders') {
         $controller = new AdminController();
     } else {
         $controller = new Controller();
     }
-    $controller->{$page}();
+    
+    if (method_exists($controller, $page)) {
+        $controller->{$page}();
+    } else {
+        header("Location: /Plug_IT/index.php?page=Home");
+    }
 } else {
     $controller = new Controller();
     $controller->Home();

@@ -9,7 +9,6 @@ require_once($root . "/Plug_IT/models/Database.php");
  * @author Daniëlle
  */
 class Address extends Database {
-
     public $id;
     public $streetname;
     public $housenumber;
@@ -19,53 +18,36 @@ class Address extends Database {
 
     public function getAddresses() {
         if ($this->establishConnection()) {
-            $sql = "SELECT * FROM category";
+            $sql = "SELECT * FROM address";
             $result = $this->conn->query($sql);
 
-            $categories = array();
+            $addresses = array();
 
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    $category = new Category();
-                    $category->id = $row['id'];
-                    $category->name = $row['name'];
-                    $category->description = $row['description'];
-                    $category->parent = $row['category_id'];
-                    $categories[] = $category;
+                    $address = new Address();
+                    $address->id = $row['address_id'];
+                    $address->streetname = $row['streetname'];
+                    $address->housenumber = $row['housenumber'];
+                    $address->city = $row['city'];
+                    $address->housenumberSuffix = $row['housenumber_suffix'];
+                    $address->postalCode = $row['postal_code'];
+                    $addresses[] = $address;
                 }
             }
 
             $this->closeConnection();
 
-            return $categories;
+            return $addresses;
         } else {
             return false;
         }
     }
     
-    public function checkIfAddressExists($streetname, $housenumber, $city, $housenumber_suffix, $postal_code) {
-        if ($this->establishConnection()) {
-            $stmt = $this->conn->prepare("SELECT streetname FROM address WHERE streetname = ?, housenumber = ?, city = ?, housenumber_suffix = ?, postal_code = ?");
-            $stmt->bind_param('sisss', $streetname, $housenumber, $city, $housenumber_suffix, $postal_code);
-            $stmt->execute();
-            
-            $name = "";
-            
-            $stmt->bind_result($name);
-            $stmt->fetch();
-
-            $this->closeConnection();
-            
-            return $name;
-        } else {
-            return -1;
-        }
-    }
-
     public function addAddress($streetname, $housenumber, $city, $housenumberSuffix, $postalCode) {
         if ($this->establishConnection()) {
             $stmt = $this->conn->prepare("INSERT INTO address (address_id, streetname, housenumber, city, housenumber_suffix, postal_code) VALUES (0, ?, ?, ?, ?, ?)");
-            $stmt->bind_param('isisss', $name, $description, $parent);
+            $stmt->bind_param('sisss', $streetname, $housenumber, $city, $housenumberSuffix, $postalCode);
 
             $stmt->execute();
             $generated_id = $stmt->insert_id;

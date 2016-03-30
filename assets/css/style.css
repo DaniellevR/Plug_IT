@@ -196,34 +196,13 @@ div.sitecontainer {
 }
 
 .adminpnl li {
-    background-color: lightblue;
+    background-color: #33bdef;
     padding: 10px;
     border: 1px solid black;
     display: inline-block;
     width: 25%;
     text-align: center;
     display:table-cell;
-}
-
-/*.admin_list {
-    background-color: lightblue;
-    border: 1px solid black;
-    padding: 10px;
-}*/
-
-/*input, select {
-    margin: 10px;
-}
-
-.currencyinput {
-    border: 1px inset #ccc;
-}
-.currencyinput input {
-    border: 0;
-}*/
-
-.adminpart {
-    display: none;
 }
 
 .admin form {
@@ -233,19 +212,6 @@ div.sitecontainer {
     margin: 10px 0px 10px 0;
     overflow:hidden;
 }
-
-/*.admin label {
-    color: #404040;
-    float: left;
-    text-align: right;
-}*/
-
-/*.admin input, textarea, select {
-    border: 1px solid #CCCCCC;
-    color: #808080;
-    display: inline-block;
-    width: 99%;
-}*/
 
 .form_button {
     float: right;
@@ -311,15 +277,7 @@ label {
     margin: 10px;
 }
 
-/*input, select, textarea {
-    width: 500px;
-    margin-left: 10px;
-}*/
-
-.categories input, .categories select, .categories textarea,
-.products input, .products select, .products textarea,
-.users input, .users select, .users textarea,
-.orders input, .orders select, .orders textarea {
+.adminpart input, .adminpart select, .adminpart textarea {
     width: 100%;
     margin-bottom: 10px;
 }
@@ -327,3 +285,37 @@ label {
 .small_field {
     width: 50px;
 }
+
+.loginform {
+    width: 30%;
+    border: 1px solid black;
+    padding: 20px;
+    padding-bottom: 60px;
+}
+
+.loginform input {
+    float: right;
+}
+
+.loginform button {
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.center {
+    margin:0 auto;
+}
+
+.adminpnl .selected {
+    /*background-color: #00ffff;*/
+    background-color: #4fd8f0
+}
+
+.adminpnl a {
+    color: white;
+    text-decoration: none;
+}
+
+/*.adminpnl .selected a {
+    color: black;
+}*/

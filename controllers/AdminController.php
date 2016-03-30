@@ -22,6 +22,8 @@ class AdminController extends MainCtrl {
         $smarty->assign('navigation', $navi);
         $smarty->assign('categories', $sideNavigation);
         $smarty->assign('suppliers', $this->getSuppliers());
+        $smarty->assign('users', $this->getUsers());
+        $smarty->assign('roles', $this->getRoles());
         $smarty->assign('model', $model);
         $smarty->assign('footer', ['Informatie', 'Bestelling & levering', 'Betalen', 'Retourneren', 'Voorwaarden', 'Over', 'Contact']);
         $smarty->display($name . '.tpl');
@@ -76,7 +78,7 @@ class AdminController extends MainCtrl {
     }
 
     public function addUser() {
-        if (isset($_POST["firstname"]) && isset($_POST["prefix"]) && isset($_POST["lastname"]) && isset($_POST["email"]) && isset($_POST["telephonenumber"]) && isset($_POST["streetname"]) && isset($_POST["housenumber"]) && isset($_POST["housenumberSuffix"]) && isset($_POST["postalCode"]) && isset($_POST["city"]) && isset($_POST["username"]) && isset($_POST["role"]) && isset($_POST["password"]) && isset($_POST["reapeatPassword"])) {
+        if (isset($_POST["firstname"]) && isset($_POST["prefix"]) && isset($_POST["lastname"]) && isset($_POST["email"]) && isset($_POST["telephonenumber"]) && isset($_POST["streetname"]) && isset($_POST["housenumber"]) && isset($_POST["housenumberSuffix"]) && isset($_POST["postalCode"]) && isset($_POST["city"]) && isset($_POST["username"]) && isset($_POST["role"]) && isset($_POST["password"]) && isset($_POST["repeatPassword"])) {
             $firstname = $_POST["firstname"];
             $prefix = $_POST["prefix"];
             $lastname = $_POST["lastname"];
@@ -90,43 +92,86 @@ class AdminController extends MainCtrl {
             $username = $_POST["username"];
             $rolename = $_POST["role"];
             $password = $_POST["password"];
-            $repeat_password = $_POST["repeat_password"];
+            $repeatPassword = $_POST["repeatPassword"];
 
             $userModel = new User();
-            $addressModel = new Address();
 
-            if ($userModel->checkIfUsernameExists($username) == "") {
-                $addressSaved = FALSE;
-
-                $ret = $addressModel->checkIfAddressExists($streetname, $housenumber, $city, $housenumberSuffix, $postalCode);
-                $file = fopen("C://test.txt", "w");
-                fwrite($file, "RETURN : " . $ret);
-                fclose($file);
-
-                if ($ret != "") {
-                    $res = $addressModel->addAddress($streetname, $housenumber, $city, $housenumberSuffix, $postalCode);
-                    if ($res != -1) {
-                        $addressSaved = TRUE;
-                    }
-                } else {
-                    $addressSaved = TRUE;
+            // Check existance username
+            $users = $userModel->getUsers();
+            $usernameFound = "FALSE";
+            foreach ($users as $user) {
+                if ($user->username === $username) {
+                    $usernameFound = "TRUE";
+                    break;
                 }
+            }
 
-                $file = fopen("C://test.txt", "w");
-                fwrite($file, $addressSaved);
-                fclose($file);
+            if ($usernameFound === "TRUE") {
+                // Already exists
+            } else {
+                // Check (and add) address
+                $addressId = $this->checkAndAddAddress($streetname, $housenumber, $city, $housenumberSuffix, $postalCode);
 
-                if ($addressSaved === TRUE) {
-                    if ($userModel->addUser($username, $password, $firstname, $prefix, $lastname, $email, $telephonenumber, $rolename) > 0) {
-                        
-                    }
-                }
+                // Add user
+                $user_id = $userModel->addUser($username, $password, $firstname, $prefix, $lastname, $email, $telephonenumber, $rolename);
+
+                // Add user and address connection
+                $userModel->connectUserWithAddress($username, $addressId);
             }
         }
     }
 
+    public function checkAndAddAddress($streetname, $housenumber, $city, $housenumberSuffix, $postalCode) {
+        // Check existance address
+        $addressModel = new Address();
+        $addresses = $addressModel->getAddresses();
+        $addressId = -1;
+        foreach ($addresses as $address) {
+            //&& $address->housenumber == $housenumber && $addres->city == $city && $address->housenumberSuffix == $housenumberSuffix && $address->postalCode == $postalCode) {
+            if ($address->streetname == $streetname && $address->housenumber == $housenumber && $addres->city == $city && $address->housenumberSuffix == $housenumberSuffix && $address->postalCode == $postalCode) {
+                $addressId = $address->id;
+                break;
+            }
+        }
+
+        if ($addressId === -1) {
+            // Add address
+            return $addressModel->addAddress($streetname, $housenumber, $city, $housenumberSuffix, $postalCode);
+        }
+
+        return $addressId;
+    }
+
     public function editUser() {
-        
+        if (isset($_POST["firstname"]) && isset($_POST["prefix"]) && isset($_POST["lastname"]) && isset($_POST["email"]) && isset($_POST["telephonenumber"]) && isset($_POST["streetname"]) && isset($_POST["housenumber"]) && isset($_POST["housenumberSuffix"]) && isset($_POST["postalCode"]) && isset($_POST["city"]) && isset($_POST["username"]) && isset($_POST["role"]) && isset($_POST["currentPassword"]) && isset($_POST["password"]) && isset($_POST["repeatPassword"])) {
+            $firstname = $_POST["firstname"];
+            $prefix = $_POST["prefix"];
+            $lastname = $_POST["lastname"];
+            $email = $_POST["email"];
+            $telephonenumber = $_POST["telephonenumber"];
+            $streetname = $_POST["streetname"];
+            $housenumber = $_POST["housenumber"];
+            $housenumberSuffix = $_POST["housenumberSuffix"];
+            $postalCode = $_POST["postalCode"];
+            $city = $_POST["city"];
+            $username = $_POST["username"];
+            $rolename = $_POST["role"];
+            $currentPassword = $_POST["currentPassword"];
+            $password = $_POST["password"];
+            $repeatPassword = $_POST["repeatPassword"];
+
+            $userModel = new User();
+
+
+            // Check (and add) address
+            $addressId = $this->checkAndAddAddress($streetname, $housenumber, $city, $housenumberSuffix, $postalCode);
+
+            // Edit user
+            $user_id = $userModel->addUser($username, $password, $firstname, $prefix, $lastname, $email, $telephonenumber, $rolename);
+
+            // Add user and address connection
+            $userModel->connectUserWithAddress($username, $addressId);
+        }
     }
 
     public function addOrder() {

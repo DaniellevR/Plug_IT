@@ -12,7 +12,6 @@
 </head>
 <body>
     <div class="sitecontainer">
-{*        <h1 class="testje"></h1>*}
         <div class="header">
             <div class="logintool">
                 <ul>
