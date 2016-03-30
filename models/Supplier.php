@@ -53,23 +53,41 @@ class Supplier extends Database {
         }
     }
 
-    public function addSupplier($name, $email, $telephonenumber, $addressId, $streetname, $housenumber, $housenumber_suffix, $city, $postalCode) {
-        $addressModel = new Address();
-        $addressId = $addressModel->addAddress($streetname, $housenumber, $city, $housenumberSuffix, $postalCode);
-        if ($addressId > 0) {
-            if ($this->establishConnection()) {
-                $stmt = $this->conn->prepare("INSERT INTO supplier (name, address_address_id, email, telephonenumber) VALUES (?, ?, ?, ?)");
-                $stmt->bind_param('siss', $name, $addressId, $email, $telephonenumber);
+    public function checkIfSupplierExists($name) {
+        if ($this->establishConnection()) {
+            $sql = "SELECT COUNT(*) as cnt FROM supplier WHERE name = '" . $this->conn->real_escape_string($name) . "'";
 
-                $stmt->execute();
-                $generated_id = $stmt->insert_id;
+            $result = $this->conn->query($sql);
 
-                $this->closeConnection();
+            $count = -1;
 
-                return $generated_id;
-            } else {
-                return -1;
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $count = $row['cnt'];
+                }
             }
+
+            $this->closeConnection();
+
+            return $count;
+        } else {
+            return -1;
+        }
+    }
+
+    public function addSupplier($name, $addressId, $email, $telephonenumber) {
+        if ($this->establishConnection()) {
+            $stmt = $this->conn->prepare("INSERT INTO supplier (name, address_address_id, email, telephonenumber) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param('siss', $name, $addressId, $email, $telephonenumber);
+
+            $stmt->execute();
+            $generated_id = $stmt->insert_id;
+
+            $this->closeConnection();
+
+            return $generated_id;
+        } else {
+            return -1;
         }
     }
 

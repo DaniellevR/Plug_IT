@@ -87,6 +87,27 @@ class Product extends Database {
         }
     }
 
+    public function checkIfProductIsUnique($name, $supplier) {
+        if ($this->establishConnection()) {
+            $sql = "SELECT COUNT(*) as cnt FROM product WHERE name = '" . $this->conn->real_escape_string($name) . "' AND supplier_name = " . $this->conn->real_escape_string($supplier);
+            $result = $this->conn->query($sql);
+
+            $count = -1;
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $count = $row['cnt'];
+                }
+            }
+
+            $this->closeConnection();
+
+            return $count;
+        } else {
+            return -1;
+        }
+    }
+
     public function getProduct($productId) {
         if ($this->establishConnection()) {
             $stmt = $this->conn->prepare("SELECT * FROM product WHERE id = ?");

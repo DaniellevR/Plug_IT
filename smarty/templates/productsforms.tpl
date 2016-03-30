@@ -1,6 +1,5 @@
 {extends file='admin.tpl'}
 {block name=productsforms}
-    {*    <div class="products adminpart" id="part2">*}
     <div class="adminpart">
         <form>
             <h3>Product toevoegen</h3>
@@ -14,42 +13,50 @@
             <label>Kenmerken:</label>
             <input type="text" name="characteristics" required="true" placeholder="Kenmerk, Kenmerk, Kenmerk">
             <label>Prijs:</label>
-            <input type="number" min="0.01" step="0.01" value="0.01" />
+            <input type="number" name="price" min="0.01" step="0.01" value="0.01" />
             <label>Merk:</label>
             <input type="text" name="brand" required="true">
-            <label>Foto product:</label>
-            <input type="file" accept="image/*" name="image" id="image" class="input_text" required="true"/>
+            <label>Aantal op voorraad:</label>
+            <input type="number" name="amount" required="true">
             <label>Categorienaam:</label>
             <select id="categoriesAddProduct" name="categoriesAddProduct">
                 {foreach from=$categories[0] item=parent }
-                    <option class="category">{$parent->name}</option>
+                    <option class="category" value="{$parent->id}">{$parent->name}</option>
                     {foreach from=$categories[1] item=child }
                         {if $child->parent === $parent->id}
-                            <option class="subcategory">{$child->name}</option>
+                            <option class="subcategory" value="{$child->id}">{$child->name}</option>
                         {/if}
                     {/foreach}
                 {/foreach}
             </select>
+            <label>Foto product:</label>
+            <input type="file" accept="image/*" name="image" id="image" class="input_text" required="true"/>
 
             <h5>Leverancier</h5>
-            <label>Bestaande leverancier:</label>
+            <label>Kies uw leverancier:</label>
             <select name="suppliersAddProduct">
-                <option value="">-</option>
+                <option value="">Nieuwe leverancier</option>
                 {foreach from=$suppliers item=supplier }
                     <option value="{$supplier->name}">{$supplier->name}</option>
                 {/foreach}
             </select>
 
-            <label>Naam:</label>
-            <input type="text" name="suppliername" required="true">
-            <label>Adres:</label>
-            <input type="text" name="streetname" required="true" placeholder="Straatnaam">
-            <input class="small_field" type="text" name="housenumber" required="true" placeholder="nr">
-            <input class="small_field" type="text" name="housenumberSuffix" required="true" placeholder="tv">
-            <label>Postcode:</label>
-            <input type="text" name="postalCode" required="true">
-            <label>Woonplaats:</label>
-            <input type="text" name="city" required="true">
+            <div id="contentDivAddProduct">
+                <label>Naam:</label>
+                <input type="text" name="suppliername" required="true">
+                <label>Email:</label>
+                <input type="email" name="email" required="true">
+                <label>Telefoonnummer:</label>
+                <input type="tel" name="telephonenumber" required="true">
+                <label>Adres:</label>
+                <input type="text" name="streetname" required="true" placeholder="Straatnaam">
+                <input class="small_field" type="text" name="housenumber" required="true" placeholder="nr">
+                <input class="small_field" type="text" name="housenumberSuffix" required="true" placeholder="tv">
+                <label>Postcode:</label>
+                <input type="text" name="postalCode" required="true">
+                <label>Woonplaats:</label>
+                <input type="text" name="city" required="true">
+            </div>
 
             <button type="submit" value="Submit" class="form_button">Toevoegen</button>
         </form>

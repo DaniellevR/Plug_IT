@@ -44,6 +44,31 @@ class Address extends Database {
         }
     }
     
+    public function checkIfAddressExists($streetname, $housenumber, $city, $housenumberSuffix, $postalCode) {
+        if ($this->establishConnection()) {
+            $sql = "SELECT COUNT(*) as cnt FROM address WHERE streetname = '" . $this->conn->real_escape_string($name) . "' AND housenumber = " . 
+                    $this->conn->real_escape_string($housenumber) . " AND city = '" . $this->conn->real_escape_string($city) . 
+                    "' AND housenumber_suffix = '" . $this->conn->real_escape_string($housenumberSuffix) .
+                    "' AND postal_code = '" . $this->conn->real_escape_string($postalCode) . "'";
+
+            $result = $this->conn->query($sql);
+
+            $count = -1;
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $count = $row['cnt'];
+                }
+            }
+
+            $this->closeConnection();
+
+            return $count;
+        } else {
+            return -1;
+        }
+    }
+    
     public function addAddress($streetname, $housenumber, $city, $housenumberSuffix, $postalCode) {
         if ($this->establishConnection()) {
             $stmt = $this->conn->prepare("INSERT INTO address (address_id, streetname, housenumber, city, housenumber_suffix, postal_code) VALUES (0, ?, ?, ?, ?, ?)");
