@@ -47,13 +47,66 @@ class Category extends Database {
         }
     }
 
+    public function checkIfCategoryIsUnique($name, $parent) {
+        if ($this->establishConnection()) {
+            if ($parent === "") {
+                $sql = "SELECT COUNT(*) as cnt FROM category WHERE name = '" . $this->conn->real_escape_string($name) . "' AND category_id IS NULL";
+            } else {
+                $sql = "SELECT COUNT(*) as cnt FROM category WHERE name = '" . $this->conn->real_escape_string($name) . "' AND category_id = " . $this->conn->real_escape_string($parent);
+            }
+
+            $result = $this->conn->query($sql);
+
+            $count = -1;
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $count = $row['cnt'];
+                }
+            }
+
+            $this->closeConnection();
+
+            return $count;
+        } else {
+            return -1;
+        }
+    }
+    
+        public function checkIfCategoryIsUniqueWithId($id, $name, $parent) {
+        if ($this->establishConnection()) {
+            if ($parent === "") {
+                $sql = "SELECT COUNT(*) as cnt FROM category WHERE name = '" . $this->conn->real_escape_string($name) . "' AND category_id IS NULL AND id <> " . $this->conn->real_escape_string($id);
+            } else {
+                $sql = "SELECT COUNT(*) as cnt FROM category WHERE name = '" . $this->conn->real_escape_string($name) . "' AND category_id = " . $this->conn->real_escape_string($parent) . " AND id <> " . $this->conn->real_escape_string($id);
+            }
+
+            $result = $this->conn->query($sql);
+
+            $count = -1;
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $count = $row['cnt'];
+                }
+            }
+
+            $this->closeConnection();
+
+            return $count;
+        } else {
+            return -1;
+        }
+    }
+
     public function addCategory($name, $description, $parent) {
         if ($this->establishConnection()) {
-            $stmt = $dbh->prepare("INSERT INTO category (id, name, description, category_id) VALUES (?, ?, ?, ?, ?)");
-            $stmt->bindParam(1, 0);
-            $stmt->bindParam(2, $name);
-            $stmt->bindParam(3, $description);
-            $stmt->bindParam(4, $parent);
+            if ($parent === "") {
+                $parent = NULL;
+            }
+
+            $stmt = $this->conn->prepare("INSERT INTO category (id, name, description, category_id) VALUES (0, ?, ?, ?)");
+            $stmt->bind_param('ssi', $name, $description, $parent);
 
             $stmt->execute();
             $generated_id = $stmt->insert_id;
@@ -62,30 +115,30 @@ class Category extends Database {
 
             return $generated_id;
         } else {
-            return false;
+            return -1;
         }
     }
 
     public function removeCategory($id) {
-        if ($this->establishConnection()) {
-            $stmt = $dbh->prepare("DELETE FROM category WHERE id = ?");
-            $stmt->bindParam(1, $id);
-
-            $this->closeConnection();
-
-            return true;
-        } else {
-            return false;
+        if ($this->removeSubcategories($id) == 1) {
+            if ($this->establishConnection()) {
+                $stmt = $this->conn->prepare("DELETE FROM category WHERE id = ?");
+                $stmt->bind_param('i', $id);
+                $stmt->execute();
+                $this->closeConnection();
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
-    public function removeSubcategories($parent_id) {
+    private function removeSubcategories($parent_id) {
         if ($this->establishConnection()) {
-            $stmt = $dbh->prepare("DELETE FROM category WHERE category_id = ?");
-            $stmt->bindParam(1, $parent_id);
-
+            $stmt = $this->conn->prepare("DELETE FROM category WHERE category_id = ?");
+            $stmt->bind_param('i', $parent_id);
+            $stmt->execute();
             $this->closeConnection();
-
             return true;
         } else {
             return false;
@@ -94,14 +147,10 @@ class Category extends Database {
 
     public function editCategory($id, $name, $description, $parent) {
         if ($this->establishConnection()) {
-            $stmt = $dbh->prepare("UPDATE category SET name = ?, description = ?, category_id = ? WHERE id = ?");
-            $stmt->bindParam(1, $name);
-            $stmt->bindParam(2, $description);
-            $stmt->bindParam(3, $parent);
-            $stmt->bindParam(4, $id);
-
+            $stmt = $this->conn->prepare("UPDATE category SET name = ?, description = ?, category_id = ? WHERE id = ?");
+            $stmt->bind_param('ssii', $name, $description, $parent, $id);
+            $stmt->execute();
             $this->closeConnection();
-
             return true;
         } else {
             return false;

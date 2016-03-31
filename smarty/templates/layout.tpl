@@ -4,6 +4,10 @@
         <title>{block name=title}Plug IT{/block}</title>
         <meta charset="UTF-8" />
         <link rel="stylesheet" type="text/css" href="/Plug_IT/assets/css/style.css" />
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <script type="text/javascript" src="/Plug_IT/assets/js/functionCalls.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     {block name=head}{/block}
 </head>
 <body>
@@ -12,13 +16,46 @@
             <div class="logintool">
                 <ul>
                     {foreach from=$navigation[0] item=nav }
+<<<<<<< HEAD
                         <li><a href="/Plug_IT/index.php?page={$nav->page}">{$nav->name}</a></li>
+=======
+                        {if $nav->name === "Inloggen"}
+                            {if !isset($smarty.cookies.PHPSESSID)}
+                                <li><a href="/Plug_IT/index.php?page={$nav->page}">{$nav->name}</a></li>
+                                {/if}
+                            {elseif $nav->name === "Mijn account"}
+                                {if isset($smarty.cookies.PHPSESSID)}
+                                <li><a href="/Plug_IT/index.php?page={$nav->page}">{$nav->name}</a></li>
+                                {/if}
+                            {elseif $nav->name === "Uitloggen"}
+                                {if isset($smarty.cookies.PHPSESSID)}
+                                <li><a onclick="" href="">{$nav->name}</a></li>
+                                {/if}
+                            {else}
+                            <li><a href="/Plug_IT/index.php?page={$nav->page}">{$nav->name}</a></li>
+                            {/if}
+>>>>>>> b2aee283981f31721f6ee0dbfd7db3a0df7a4c2d
                         {/foreach}
                 </ul>
             </div>
 
             <div class="path">
-                <a>Path</a>
+                {if isset($smarty.get.page)}
+                    {if $smarty.get.page === "Home"}
+                        <a href='/Plug_IT/index.php?page=Home'>Home</a>
+                    {else}
+                        {foreach from=$navigation[0] item=headeritem }
+                            {if $headeritem->page === $smarty.get.page}
+                                <a href='/Plug_IT/index.php?page=Home'>Home</a> > <a href='/Plug_IT/index.php?page={$smarty.get.page}'>{$headeritem->name}</a>
+                            {/if}
+                        {/foreach}
+                        {foreach from=$navigation[1] item=footeritem }
+                            {if $footeritem->page === $smarty.get.page}
+                                <a href='/Plug_IT/index.php?page=Home'>Home</a> > <a href='/Plug_IT/index.php?page={$smarty.get.page}'>{$footeritem->name}</a>
+                            {/if}
+                        {/foreach}
+                    {/if}
+                {/if}
             </div>
 
             <a href="/Plug_IT/index.php?page=Home"> <img src="/Plug_IT/assets/pix/logo.png" alt="Plug IT.nl" /></a>
@@ -62,6 +99,7 @@
             {foreach from=$navigation[1] item=nav }
                 <li><a href="/Plug_IT/index.php?page={$nav->page}">{$nav->name}</a></li>
                 {/foreach}
+            <li><a href="/Plug_IT/index.php?page=Tasks">Taakverdeling</a></li>
         </ul>
     </div>
 </div>

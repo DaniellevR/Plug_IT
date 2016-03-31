@@ -7,6 +7,7 @@ require_once($root . "/Plug_IT/controllers/CatalogueController.php");
 require_once($root . "/Plug_IT/controllers/ProductController.php");
 require_once($root . "/Plug_IT/controllers/ShoppingcartController.php");
 require_once($root . "/Plug_IT/controllers/OrderAndDeliveryController.php");
+require_once($root . "/Plug_IT/controllers/AdminController.php");
 include('lib/smarty/libs/Smarty.class.php');
 
 $smarty = new Smarty;
@@ -27,10 +28,22 @@ if (isset($_GET['page'])) {
         $controller = new ShoppingcartController();
     } else if ($page == 'OrderAndDelivery') {
         $controller = new OrderAndDeliveryController();
+    }
+    if ($page === 'Admin') {
+        $page = 'AdminCategories';
+    }
+
+    if ($page === 'AdminCategories' || $page === 'AdminProducts' || $page === 'AdminUsers' || $page === 'AdminOrders') {
+        $controller = new AdminController();
     } else {
         $controller = new Controller();
     }
-    $controller->{$page}();
+
+    if (method_exists($controller, $page)) {
+        $controller->{$page}();
+    } else {
+        header("Location: /Plug_IT/index.php?page=Home");
+    }
 } else {
     $controller = new Controller();
     $controller->Home();

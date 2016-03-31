@@ -2,6 +2,10 @@
 
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once($root . "/Plug_IT/controllers/MainCtrl.php");
+require_once($root . "/Plug_IT/models/Category.php");
+require_once($root . "/Plug_IT/models/Product.php");
+require_once($root . "/Plug_IT/models/Address.php");
+require_once($root . "/Plug_IT/models/User.php");
 
 class AdminController extends MainCtrl {
 
@@ -14,54 +18,161 @@ class AdminController extends MainCtrl {
         $navi = $this->getNavigationItems();
         $sideNavigation = $this->getCategories();
 
-//        $smarty->assign('header', ['Inloggen', 'Verlanglijstje', 'Klantenservice']);
+        $errors = "";
+        if (isset($_SESSION["errors"])) {
+            $errors = $_SESSION["errors"];
+            unset($_SESSION["errors"]);
+        }
+        $smarty->assign('errors', $errors);
+
         $smarty->assign('navigation', $navi);
         $smarty->assign('categories', $sideNavigation);
+        $smarty->assign('suppliers', $this->getSuppliers());
+        $smarty->assign('users', $this->getUsers());
+        $smarty->assign('roles', $this->getRoles());
         $smarty->assign('model', $model);
-        $smarty->assign("controller", $this);
-        $smarty->assign('footer', ['Informatie', 'Bestelling & levering', 'Betalen', 'Retourneren', 'Voorwaarden', 'Over', 'Contact']);
         $smarty->display($name . '.tpl');
     }
-    
-    public function test($id) {
-        echo "Dit is de test functie met id : " . $id;
+
+    public function removeCategory() {
+        if (isset($_POST["categoryId"])) {
+            $categoryModel = new Category();
+            $res = $categoryModel->removeCategory($_POST['categoryId']);
+
+            if ($res == 1) {
+                $path = "../assets/pix/categories/";
+                foreach (glob($path . $_POST['categoryId'] . '*') as $filename) {
+                    unlink(realpath($filename));
+                }
+            } else {
+                $_SESSION["errors"] = "Kon de categorie niet verwijderen.";
+            }
+        } else {
+            $_SESSION["errors"] = "Kon de categorie niet verwijderen.";
+        }
     }
 
-    public function addCategory() {
-        if (isset($_FILES['image'])) {
-            $errors = array();
-            $file_name = $_FILES['image']['name'];
-            $file_size = $_FILES['image']['size'];
-            $file_tmp = $_FILES['image']['tmp_name'];
-//            $file_type = $_FILES['image']['type'];
-            $file_ext = explode(".", $file_name);
-            $file_ext = end($file_ext);
-            $expensions = array("jpeg", "jpg", "png");
-            if (in_array($file_ext, $expensions) === false) {
-                $errors[] = "extension not allowed, please choose a JPEG or PNG file.";
-            }
-            if ($file_size > 2097152) {
-                $errors[] = 'File size must be excately 2 MB';
-            }
-            if (empty($errors) == true) {
-                // db
-//        require_once 'Database.php';
-//        $db = new Database();
-//        $generated_id = $db->addCategory($_POST['categoryname'], $_POST['category_description'], $_POST['formParentCategories']);
-                $generated_id = 1;
-                if (!is_dir("/categories/")) {
-                    mkdir("/categories/");
+    public function removeProduct() {
+        if (isset($_POST["productId"])) {
+            $productModel = new Product();
+            $res = $productModel->removeProduct($_POST['productId']);
+
+            if ($res == 1) {
+                $path = "../assets/pix/products/";
+                foreach (glob($path . $_POST['productId'] . '*') as $filename) {
+                    unlink(realpath($filename));
                 }
-                move_uploaded_file($file_tmp, "/categories/" . $generated_id . "." . $file_ext); //$file_name);
             } else {
-                print_r($errors);
+                $_SESSION["errors"] = "Kon het product niet verwijderen.";
+            }
+        } else {
+            $_SESSION["errors"] = "Kon het product niet verwijderen.";
+        }
+    }
+
+    public function addUser() {
+        if (isset($_POST["firstname"]) && isset($_POST["prefix"]) && isset($_POST["lastname"]) && isset($_POST["email"]) && isset($_POST["telephonenumber"]) && isset($_POST["streetname"]) && isset($_POST["housenumber"]) && isset($_POST["housenumberSuffix"]) && isset($_POST["postalCode"]) && isset($_POST["city"]) && isset($_POST["username"]) && isset($_POST["role"]) && isset($_POST["password"]) && isset($_POST["repeatPassword"])) {
+            $firstname = $_POST["firstname"];
+            $prefix = $_POST["prefix"];
+            $lastname = $_POST["lastname"];
+            $email = $_POST["email"];
+            $telephonenumber = $_POST["telephonenumber"];
+            $streetname = $_POST["streetname"];
+            $housenumber = $_POST["housenumber"];
+            $housenumberSuffix = $_POST["housenumberSuffix"];
+            $postalCode = $_POST["postalCode"];
+            $city = $_POST["city"];
+            $username = $_POST["username"];
+            $rolename = $_POST["role"];
+            $password = $_POST["password"];
+            $repeatPassword = $_POST["repeatPassword"];
+
+            $userModel = new User();
+
+            // Check existance username
+            $users = $userModel->getUsers();
+            $usernameFound = "FALSE";
+            foreach ($users as $user) {
+                if ($user->username === $username) {
+                    $usernameFound = "TRUE";
+                    break;
+                }
+            }
+
+            if ($usernameFound === "TRUE") {
+                // Already exists
+            } else {
+                // Check (and add) address
+                $addressId = $this->checkAndAddAddress($streetname, $housenumber, $city, $housenumberSuffix, $postalCode);
+
+                // Add user
+                $user_id = $userModel->addUser($username, $password, $firstname, $prefix, $lastname, $email, $telephonenumber, $rolename);
+
+                // Add user and address connection
+                $userModel->connectUserWithAddress($username, $addressId);
+            }
+        }
+    }
+
+    public function checkAndAddAddress($streetname, $housenumber, $city, $housenumberSuffix, $postalCode) {
+        // Check existance address
+        $addressModel = new Address();
+        $addresses = $addressModel->getAddresses();
+        $addressId = -1;
+        foreach ($addresses as $address) {
+            //&& $address->housenumber == $housenumber && $addres->city == $city && $address->housenumberSuffix == $housenumberSuffix && $address->postalCode == $postalCode) {
+            if ($address->streetname == $streetname && $address->housenumber == $housenumber && $addres->city == $city && $address->housenumberSuffix == $housenumberSuffix && $address->postalCode == $postalCode) {
+                $addressId = $address->id;
+                break;
             }
         }
 
-//        $this->load->helper('url');
-//        redirect(base_url("index.php/Welcome/admin"));
+        if ($addressId === -1) {
+            // Add address
+            return $addressModel->addAddress($streetname, $housenumber, $city, $housenumberSuffix, $postalCode);
+        }
 
-//        $this->About();
+        return $addressId;
+    }
+
+    public function editUser() {
+        if (isset($_POST["firstname"]) && isset($_POST["prefix"]) && isset($_POST["lastname"]) && isset($_POST["email"]) && isset($_POST["telephonenumber"]) && isset($_POST["streetname"]) && isset($_POST["housenumber"]) && isset($_POST["housenumberSuffix"]) && isset($_POST["postalCode"]) && isset($_POST["city"]) && isset($_POST["username"]) && isset($_POST["role"]) && isset($_POST["currentPassword"]) && isset($_POST["password"]) && isset($_POST["repeatPassword"])) {
+            $firstname = $_POST["firstname"];
+            $prefix = $_POST["prefix"];
+            $lastname = $_POST["lastname"];
+            $email = $_POST["email"];
+            $telephonenumber = $_POST["telephonenumber"];
+            $streetname = $_POST["streetname"];
+            $housenumber = $_POST["housenumber"];
+            $housenumberSuffix = $_POST["housenumberSuffix"];
+            $postalCode = $_POST["postalCode"];
+            $city = $_POST["city"];
+            $username = $_POST["username"];
+            $rolename = $_POST["role"];
+            $currentPassword = $_POST["currentPassword"];
+            $password = $_POST["password"];
+            $repeatPassword = $_POST["repeatPassword"];
+
+            $userModel = new User();
+
+
+            // Check (and add) address
+            $addressId = $this->checkAndAddAddress($streetname, $housenumber, $city, $housenumberSuffix, $postalCode);
+
+            // Edit user
+            $user_id = $userModel->addUser($username, $password, $firstname, $prefix, $lastname, $email, $telephonenumber, $rolename);
+
+            // Add user and address connection
+            $userModel->connectUserWithAddress($username, $addressId);
+        }
+    }
+
+    public function addOrder() {
+        
+    }
+
+    public function EditOrder() {
+        
     }
 
 }

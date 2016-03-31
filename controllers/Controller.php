@@ -1,6 +1,7 @@
 <?php
 
-include('controllers/MainCtrl.php');
+$root = realpath($_SERVER["DOCUMENT_ROOT"]);
+require_once($root . "/Plug_IT/controllers/MainCtrl.php");
 
 class Controller extends MainCtrl {
 
@@ -11,12 +12,23 @@ class Controller extends MainCtrl {
         $navi = $this->getNavigationItems();
         $sideNavigation = $this->getCategories();
 
-//        $smarty->assign('header', ['Inloggen', 'Verlanglijstje', 'Klantenservice']);
         $smarty->assign('navigation', $navi);
         $smarty->assign('categories', $sideNavigation);
-        $smarty->assign('model', $model);
+
         $smarty->assign("controller", $this);
-        $smarty->assign('footer', ['Informatie', 'Bestelling & levering', 'Betalen', 'Retourneren', 'Voorwaarden', 'Over', 'Contact']);
+        $errors = "";
+        if (isset($_SESSION["errors"])) {
+            $errors = $_SESSION["errors"];
+            unset($_SESSION["errors"]);
+        }
+        $smarty->assign('errors', $errors);
+
+
+        $smarty->assign('suppliers', $this->getSuppliers());
+        $smarty->assign('users', $this->getUsers());
+        $smarty->assign('roles', $this->getRoles());
+
+        $smarty->assign('model', $model);
         $smarty->display($name . '.tpl');
     }
 
