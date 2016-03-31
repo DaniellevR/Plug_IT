@@ -10,6 +10,7 @@ Class Product extends Database {
     public $supplier;
     public $amount;
     public $category_id;
+    public $amountInCart;
 
     public function getProduct() {
         $this->db->select('*')

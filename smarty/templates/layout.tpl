@@ -46,9 +46,11 @@
                         <ul>
                             {foreach from=$categories[1] item=child }
                                 {if $child->parent == $parent->id}
-                                    <a href="/Plug_IT/index.php?page=Category"><li>{$child->name}</li></a>
-                                        {/if}
-                                    {/foreach}
+                                    <a href="/Plug_IT/index.php?page=Category">
+                                        <li>{$child->name}</li
+                                    </a>
+                                {/if}
+                            {/foreach}
                         </ul>
                     {/foreach}
                 </ul>

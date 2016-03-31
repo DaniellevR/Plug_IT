@@ -376,3 +376,14 @@ input, select {
     width: 20%;
     border: 1px solid blue;
 }
+
+/* ==========================================================================
+    OrderAndDelivery
+   ========================================================================== */
+
+.orderInfo
+{
+    border: black 1px dotted;
+    color: black;
+    text-decoration: none;
+}

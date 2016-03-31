@@ -6,18 +6,28 @@
         {if isset($productsFound)}
             {if $productsFound|@sizeof > 0}
                 {foreach from=$productsFound item=product}
-                    <a href='/Plug_IT/index.php?page=Product&id={$product->id}'>
-                        <div class='productThumbnail'>
-                            <img class='productImage' src='assets/pix/product/{$product->id}.jpg' alt='NO IMAGE' />
-                            <div class='productName'>
-                                <h4>{$product->name}</h4>
-                            </div>
-                            <div class='shortDescription'>
-                                <p>{$product->description}</p></div>
-                            <div id='productBuy'><p>€{$product->price}</p>
-                            </div>
+                    <div class='productThumbnail'>
+                        <a href='/Plug_IT/index.php?page=Product&id={$product->id}'>
+                            Naar productpagina
+                        </a>
+                        <img class='productImage' src='assets/pix/product/{$product->id}.jpg' alt='NO IMAGE' />
+                        <div class='productName'>
+                            <h4>{$product->name}</h4>
                         </div>
-                    </a>
+                        <div class='shortDescription'>
+                            <p>{$product->description}</p></div>
+                        <div id='productBuy'>
+                            <p>€{$product->price}</p>
+                        </div>
+                        <div class="input">
+                            <form action="/Plug_IT/index.php?page=Cart" method="post">
+                                <input name="amount" type="number" min="1" step="1" value="1" />
+                                <input name="page" value="Cart" hidden/>
+                                <input name="id" value="{$product->id}" hidden/>
+                                <input id="addToCartButton" type="submit" value="Toevoegen aan winkelwagentje"/>
+                            </form>
+                        </div>
+                    </div>
                 {/foreach}
             {else}
                 <h4>Geen producten gevonden</h4>
@@ -46,18 +56,27 @@
 
         {if isset($products)}
             {foreach from=$products item=product}
-                <a href='/Plug_IT/index.php?page=Product&id={$product->id}'>
-                    <div class='productThumbnail'>
-                        <img class='productImage' src='assets/pix/product/{$product->id}.jpg' alt='NO IMAGE' />
-                        <div class='productName'>
-                            <h4>{$product->name}</h4>
-                        </div>
-                        <div class='shortDescription'>
-                            <p>{$product->description}</p></div>
-                        <div id='productBuy'><p>€{$product->price}</p>
-                        </div>
+                <div class='productThumbnail'>
+                    <a href='/Plug_IT/index.php?page=Product&id={$product->id}'>
+                        Naar productpagina
+                    </a>
+                    <img class='productImage' src='assets/pix/product/{$product->id}.jpg' alt='NO IMAGE' />
+                    <div class='productName'>
+                        <h4>{$product->name}</h4>
                     </div>
-                </a>
+                    <div class='shortDescription'>
+                        <p>{$product->description}</p></div>
+                    <div id='productBuy'><p>€{$product->price}</p>
+                    </div>
+                    <div class="input">
+                        <form action="/Plug_IT/index.php?page=Cart" method="post">
+                            <input name="amount" type="number" min="1" step="1" value="1" />
+                            <input name="page" value="Cart" hidden/>
+                            <input name="id" value="{$product->id}" hidden/>
+                            <input id="addToCartButton" type="submit" value="Toevoegen aan winkelwagentje"/>
+                        </form>
+                    </div>
+                </div>
             {/foreach}
         {/if}
     </div>

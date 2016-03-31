@@ -11,9 +11,19 @@ class ShoppingcartController extends MainCtrl {
         // Get navigation items
         $navi = $this->getNavigationItems();
         $sideNavigation = $this->getCategories();
-        if (isset($_SESSION['cartList'])) {
-            $cartList = $this->getProductsFromId($_SESSION['cartList']);
+        if (isset($_POST['id']) && isset($_POST['amount'])) {
+            $this->addProductToCart($_POST['id'], $_POST['amount']);
         }
+        if (isset($_POST['removeId'])) {
+            $this->removeFromCart($_POST['removeId']);
+        }
+        if (isset($_SESSION['cartList'])) {
+            $cartList = $_SESSION['cartList'];
+        }
+        if (isset($_POST['id']) && isset($_POST['amount'])) {
+            $this->editAmountInCart($_POST['id'], $_POST['amount']);
+        }
+
 //        $smarty->assign('header', ['Inloggen', 'Verlanglijstje', 'Klantenservice']);
         $smarty->assign('navigation', $navi);
         $smarty->assign('categories', $sideNavigation);
@@ -26,12 +36,45 @@ class ShoppingcartController extends MainCtrl {
         $smarty->display($name . '.tpl');
     }
 
-    public function getProductsFromId($ids) {
-        require_once 'models/Product.php';
-        $product = new Product();
-        $products = $product->getProductsFromId($ids);
+    public function removeFromCart($id) {
+        for ($i = 0; $i < count($_SESSION['cartList']); $i++) {
+            if ($_SESSION['cartList'][$i]->id == $id) {
+                unset($_SESSION['cartList'][$i]);
+                return;
+            }
+        }
+    }
 
-        return $products;
+    public function editAmountInCart($id, $amount) {
+        for ($i = 0; $i < count($_SESSION['cartList']); $i++) {
+            if ($_SESSION['cartList'][$i]->id == $id) {
+                if ($amount < 1) {
+                    unset($_SESSION['cartList'][$i]);
+                    return;
+                } else {
+                    $_SESSION['cartList'][$i]->amountInCart = $amount;
+                }
+            }
+        }
+    }
+
+    public function addProductToCart($id, $amount) {
+        if (!isset($_SESSION['cartList'])) {
+            $_SESSION['cartList'] = array();
+        }
+
+        foreach ($_SESSION['cartList'] as $i) {
+            if ($i->id == $id) {
+                $i->amountInCart = $i->amountInCart + $amount;
+                return;
+            }
+        }
+
+        $product = new Product();
+        $p = $product->getProductFromId($id);
+        $p->amountInCart = $amount;
+        $_SESSION['cartList'][] = $p;
+        return;
     }
 
 }

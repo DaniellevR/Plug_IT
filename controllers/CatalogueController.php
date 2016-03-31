@@ -20,6 +20,7 @@ class CatalogueController extends MainCtrl {
             $productsFound = $this->getProductsByKeywords($_GET['searchKeywords']);
             $smarty->assign('productsFound', $productsFound);
         }
+
 //        $smarty->assign('header', ['Inloggen', 'Verlanglijstje', 'Klantenservice']);
         $smarty->assign('navigation', $navi);
         $smarty->assign('categories', $sideNavigation);

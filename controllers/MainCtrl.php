@@ -39,8 +39,8 @@ class MainCtrl {
         $this->View('information', '');
     }
 
-    public function OrderAndDeliviry() {
-        $this->View('orderAndDeliviry', '');
+    public function OrderAndDelivery() {
+        $this->View('orderAndDelivery', '');
     }
 
     public function PaymentInfo() {
@@ -161,6 +161,4 @@ class MainCtrl {
 
 session_start();
 session_cache_expire(1800);
-$testArray = array(1, 2, 3);
-$_SESSION['cartList'] = $testArray;
 ?>
