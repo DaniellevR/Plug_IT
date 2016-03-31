@@ -6,7 +6,7 @@
             {$total = 0}
             {foreach from=$cartList item=product}
                 <div class='productThumbnail'>
-                    <img class='productImage' src='assets/pix/product/{$product->id}.jpg' alt='NO IMAGE' />
+                    <img class='productImage' src='assets/pix/products/{$product->id}.png' alt='NO IMAGE' />
                     <a href='/Plug_IT/index.php?page=Product&id={$product->id}'>
                         Naar productpagina
                     </a>

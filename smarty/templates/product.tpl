@@ -6,7 +6,7 @@
             <div id='productTitle'>
                 <h2>
                     {$product->name}
-                </h2></div><div class='productImage'><img src='assets/pix/product/{$product->id}.jpg' alt='NO IMAGE' />
+                </h2></div><div class='productImage'><img src='assets/pix/products/{$product->id}.png' alt='NO IMAGE' />
             </div>
             <div id='description'>
                 <p>

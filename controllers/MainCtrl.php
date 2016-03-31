@@ -3,7 +3,9 @@
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once($root . "/Plug_IT/models/NavigationItem.php");
 require_once($root . "/Plug_IT/models/Category.php");
-require_once($root . "/Plug_IT/models/Product.php");
+require_once($root . "/Plug_IT/models/Supplier.php");
+require_once($root . "/Plug_IT/models/User.php");
+require_once($root . "/Plug_IT/models/Role.php");
 
 class MainCtrl {
 
@@ -19,8 +21,20 @@ class MainCtrl {
         $this->View('contact', 'Call me maybe?');
     }
 
-    public function Admin() {
-        $this->View('admin', '');
+    public function AdminCategories() {
+        $this->View('categoriesforms', '');
+    }
+
+    public function AdminProducts() {
+        $this->View('productsforms', '');
+    }
+
+    public function AdminUsers() {
+        $this->View('usersforms', '');
+    }
+
+    public function AdminOrders() {
+        $this->View('ordersforms', '');
     }
 
     public function Catalogue() {
@@ -75,6 +89,14 @@ class MainCtrl {
         $this->View('login', '');
     }
 
+    public function Register() {
+        $this->View('register', '');
+    }
+
+    public function Tasks() {
+        $this->View('tasks', '');
+    }
+
     public function getNavigationItems() {
         $navigationItemModel = new NavigationItem();
         $navigationItems = $navigationItemModel->getNavigationItems();
@@ -120,6 +142,24 @@ class MainCtrl {
         $sideNavigation[] = $children;
 
         return $sideNavigation;
+    }
+    
+    public function getSuppliers() {
+        $supplierModel = new Supplier();
+        $suppliers = $supplierModel->getSuppliers();
+        return $suppliers;
+    }
+
+    public function getRoles() {
+        $roleModel = new Role();
+        $roles = $roleModel->getRoles();
+        return $roles;
+    }
+
+    public function getUsers() {
+        $userModel = new User();
+        $users = $userModel->getUsers();
+        return $users;
     }
 
     public function getProductsByKeywords($keywords) {

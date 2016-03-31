@@ -2,6 +2,8 @@
 
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once($root . "/Plug_IT/controllers/MainCtrl.php");
+require_once($root . "/Plug_IT/models/Category.php");
+require_once($root . "/Plug_IT/models/Product.php");
 
 class CatalogueController extends MainCtrl {
 
@@ -31,12 +33,10 @@ class CatalogueController extends MainCtrl {
         }
         $smarty->assign('model', $model);
         $smarty->assign("controller", $this);
-        $smarty->assign('footer', ['Informatie', 'Bestelling & levering', 'Betalen', 'Retourneren', 'Voorwaarden', 'Over', 'Contact']);
         $smarty->display($name . '.tpl');
     }
 
     public function getAllCategories() {
-        require_once 'models/Category.php';
         $category = new Category();
         $allCategories = $category->getCategories();
 
@@ -44,7 +44,6 @@ class CatalogueController extends MainCtrl {
     }
 
     public function getChildCategoriesFromId($catId) {
-        require_once 'models/Category.php';
         $category = new Category();
         $childCategories = $category->getChildCategoriesFromId($catId);
 
@@ -52,7 +51,6 @@ class CatalogueController extends MainCtrl {
     }
 
     public function getProductFromId($id) {
-        require_once 'models/Product.php';
         $product = new Product();
         $outputProduct = $product->getProductFromId($id);
 
@@ -60,7 +58,6 @@ class CatalogueController extends MainCtrl {
     }
 
     public function getProductsFromCategoryId($catId) {
-        require_once 'models/Product.php';
         $product = new Product();
         $products = $product->getProductsFromCategoryId($catId);
 

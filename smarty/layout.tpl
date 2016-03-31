@@ -4,10 +4,6 @@
         <title>{block name=title}Plug IT{/block}</title>
         <meta charset="UTF-8" />
         <link rel="stylesheet" type="text/css" href="/Plug_IT/assets/css/style.css" />
-        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-        <script type="text/javascript" src="/Plug_IT/assets/js/functionCalls.js"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     {block name=head}{/block}
 </head>
 <body>
@@ -57,9 +53,10 @@
             <a href="/Plug_IT/index.php?page=Home"> <img src="/Plug_IT/assets/pix/logo.png" alt="Plug IT.nl" /></a>
 
             <div class="search">
-                <form action="#" method="post">
-                    <input id="searchBar" type="text" placeholder="Zoeken..." required/>
-                    <input id="searchBarButton" type="button" value="Zoeken">
+                <form action="/Plug_IT/index.php?page=Catalogue" method="get">
+                    <input id="searchBar" type="text" name="searchKeywords" placeholder="Zoeken..." required/>
+                    <input name="page" value="Catalogue" hidden/>
+                    <input id="searchBarButton" type="submit" value="Zoeken"/>
                 </form>
             </div>
 
@@ -78,9 +75,11 @@
                         <ul>
                             {foreach from=$categories[1] item=child }
                                 {if $child->parent == $parent->id}
-                                    <a href="/Plug_IT/index.php?page=Category"><li>{$child->name}</li></a>
-                                        {/if}
-                                    {/foreach}
+                                    <a href="/Plug_IT/index.php?page=Category">
+                                        <li>{$child->name}</li
+                                    </a>
+                                {/if}
+                            {/foreach}
                         </ul>
                     {/foreach}
                 </ul>

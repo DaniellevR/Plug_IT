@@ -10,7 +10,7 @@
                         <a href='/Plug_IT/index.php?page=Product&id={$product->id}'>
                             Naar productpagina
                         </a>
-                        <img class='productImage' src='assets/pix/product/{$product->id}.jpg' alt='NO IMAGE' />
+                        <img class='productImage' src='assets/pix/products/{$product->id}.png' alt='NO IMAGE' />
                         <div class='productName'>
                             <h4>{$product->name}</h4>
                         </div>
@@ -36,7 +36,7 @@
             {foreach from=$childCategories item=cat}
                 <a href="/Plug_IT/index.php?page=Catalogue&cat={$cat->name}&id={$cat->id}">
                     <div class='categoryThumbnail'>
-                        <img class='categoryImage' src='assets/pix/category/{$cat->id}.jpg' alt='NO IMAGE' />
+                        <img class='categoryImage' src='assets/pix/categories/{$cat->id}.png' alt='NO IMAGE' />
                         {$cat->name} 
                     </div>
                 </a>
@@ -46,7 +46,7 @@
                 {if $cat->parent == null}
                     <a href="/Plug_IT/index.php?page=Catalogue&cat={$cat->name}&id={$cat->id}">
                         <div class='categoryThumbnail'>
-                            <img class='categoryImage' src='assets/pix/category/{$cat->id}.jpg' alt='NO IMAGE' />
+                            <img class='categoryImage' src='assets/pix/categories/{$cat->id}.png' alt='NO IMAGE' />
                             {$cat->name} 
                         </div>
                     </a>
@@ -60,7 +60,7 @@
                     <a href='/Plug_IT/index.php?page=Product&id={$product->id}'>
                         Naar productpagina
                     </a>
-                    <img class='productImage' src='assets/pix/product/{$product->id}.jpg' alt='NO IMAGE' />
+                    <img class='productImage' src='assets/pix/products/{$product->id}.png' alt='NO IMAGE' />
                     <div class='productName'>
                         <h4>{$product->name}</h4>
                     </div>

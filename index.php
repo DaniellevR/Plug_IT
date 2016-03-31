@@ -3,6 +3,7 @@
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once($root . "/Plug_IT/models/NavigationItem.php");
 require_once($root . "/Plug_IT/controllers/Controller.php");
+require_once($root . "/Plug_IT/controllers/AdminController.php");
 require_once($root . "/Plug_IT/controllers/CatalogueController.php");
 require_once($root . "/Plug_IT/controllers/ProductController.php");
 require_once($root . "/Plug_IT/controllers/ShoppingcartController.php");
@@ -19,6 +20,10 @@ $smarty->setConfigDir('smarty/configs');
 
 if (isset($_GET['page'])) {
     $page = $_GET['page'];
+    if ($page === 'Admin') {
+        $page = 'AdminCategories';
+    }
+
     if ($page == 'Catalogue') {
         $controller = new CatalogueController();
     } else if ($page == 'Product') {
@@ -27,10 +32,17 @@ if (isset($_GET['page'])) {
         $controller = new ShoppingcartController();
     } else if ($page == 'OrderAndDelivery') {
         $controller = new OrderAndDeliveryController();
+    } else if ($page === 'AdminCategories' || $page === 'AdminProducts' || $page === 'AdminUsers' || $page === 'AdminOrders') {
+        $controller = new AdminController();
     } else {
         $controller = new Controller();
     }
-    $controller->{$page}();
+
+    if (method_exists($controller, $page)) {
+        $controller->{$page}();
+    } else {
+        header("Location: /Plug_IT/index.php?page=Home");
+    }
 } else {
     $controller = new Controller();
     $controller->Home();
