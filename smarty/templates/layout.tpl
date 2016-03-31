@@ -36,7 +36,22 @@
             </div>
 
             <div class="path">
-                <a>Path</a>
+                {if isset($smarty.get.page)}
+                    {if $smarty.get.page === "Home"}
+                        <a href='/Plug_IT/index.php?page=Home'>Home</a>
+                    {else}
+                        {foreach from=$navigation[0] item=headeritem }
+                            {if $headeritem->page === $smarty.get.page}
+                                <a href='/Plug_IT/index.php?page=Home'>Home</a> > <a href='/Plug_IT/index.php?page={$smarty.get.page}'>{$headeritem->name}</a>
+                            {/if}
+                        {/foreach}
+                        {foreach from=$navigation[1] item=footeritem }
+                            {if $footeritem->page === $smarty.get.page}
+                                <a href='/Plug_IT/index.php?page=Home'>Home</a> > <a href='/Plug_IT/index.php?page={$smarty.get.page}'>{$footeritem->name}</a>
+                            {/if}
+                        {/foreach}
+                    {/if}
+                {/if}
             </div>
 
             <a href="/Plug_IT/index.php?page=Home"> <img src="/Plug_IT/assets/pix/logo.png" alt="Plug IT.nl" /></a>

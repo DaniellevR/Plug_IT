@@ -14,6 +14,7 @@
             <li>Cataloguspagina</li>
             <li>Categorieënpagina</li>
             <li>Productpagina met reviews</li>
+            <li>Zoekfunctie</li>
             <li>Bestellingsproces</li>
             <li>Betalingsproces</li>
             <li>Invullen database met data</li>
@@ -40,7 +41,7 @@
                 </ul>
             </li>
             <li>Pagina's voorzien van lorum ipsum</li>
-            <li>Breadcrumbs?</li>
+            <li>Breadcrumbs header en footer</li>
             <li>Registratiepagina</li>
             <li>Profielpagina</li>
         </ul>
