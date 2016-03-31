@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-03-31 01:11:40
+/* Smarty version 3.1.29, created on 2016-03-31 03:01:58
   from "C:\wamp\www\Plug_IT\smarty\templates\productsforms.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56fc5d2cbf8639_87408842',
+  'unifunc' => 'content_56fc77065c1ad1_71289854',
   'file_dependency' => 
   array (
     '650b6fd6280f8f0918554011b0016259c1f932df' => 
     array (
       0 => 'C:\\wamp\\www\\Plug_IT\\smarty\\templates\\productsforms.tpl',
-      1 => 1459377585,
+      1 => 1459386114,
       2 => 'file',
     ),
   ),
@@ -20,13 +20,13 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
     'file:admin.tpl' => 1,
   ),
 ),false)) {
-function content_56fc5d2cbf8639_87408842 ($_smarty_tpl) {
+function content_56fc77065c1ad1_71289854 ($_smarty_tpl) {
 $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'productsforms', array (
-  0 => 'block_1429556fc5d2cb30c13_17586419',
+  0 => 'block_3079256fc77064f6576_69236272',
   1 => false,
   3 => 0,
   2 => 0,
@@ -35,7 +35,7 @@ $_smarty_tpl->ext->_inheritance->endChild($_smarty_tpl);
 $_smarty_tpl->smarty->ext->_subtemplate->render($_smarty_tpl, "file:admin.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'productsforms'}  file:productsforms.tpl */
-function block_1429556fc5d2cb30c13_17586419($_smarty_tpl, $_blockParentStack) {
+function block_3079256fc77064f6576_69236272($_smarty_tpl, $_blockParentStack) {
 ?>
 
     <div class="adminpart">
@@ -110,7 +110,7 @@ $_smarty_tpl->tpl_vars['parent'] = $__foreach_parent_0_saved_item;
 
             <h5>Leverancier</h5>
             <label>Kies uw leverancier:</label>
-            <select name="suppliersAddProduct">
+            <select name="suppliersAddProduct" onchange="grabInfo(this, 'getSupplierInfo', 'contentDivAddProduct')">
                 <option value="">Nieuwe leverancier</option>
                 <?php
 $_from = $_smarty_tpl->tpl_vars['suppliers']->value;
@@ -124,7 +124,8 @@ foreach ($_from as $_smarty_tpl->tpl_vars['supplier']->value) {
 $_smarty_tpl->tpl_vars['supplier']->_loop = true;
 $__foreach_supplier_2_saved_local_item = $_smarty_tpl->tpl_vars['supplier'];
 ?>
-                    <option value="<?php echo $_smarty_tpl->tpl_vars['supplier']->value->name;?>
+                    <option id="<?php echo $_smarty_tpl->tpl_vars['supplier']->value->name;?>
+" value="<?php echo $_smarty_tpl->tpl_vars['supplier']->value->name;?>
 "><?php echo $_smarty_tpl->tpl_vars['supplier']->value->name;?>
 </option>
                 <?php

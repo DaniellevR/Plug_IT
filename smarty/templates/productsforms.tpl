@@ -34,10 +34,10 @@
 
             <h5>Leverancier</h5>
             <label>Kies uw leverancier:</label>
-            <select name="suppliersAddProduct">
+            <select name="suppliersAddProduct" onchange="grabInfo(this, 'getSupplierInfo', 'contentDivAddProduct')">
                 <option value="">Nieuwe leverancier</option>
                 {foreach from=$suppliers item=supplier }
-                    <option value="{$supplier->name}">{$supplier->name}</option>
+                    <option id="{$supplier->name}" value="{$supplier->name}">{$supplier->name}</option>
                 {/foreach}
             </select>
 

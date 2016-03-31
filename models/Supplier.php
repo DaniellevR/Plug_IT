@@ -52,6 +52,37 @@ class Supplier extends Database {
             return false;
         }
     }
+    
+    public function getSupplier($name) {
+        if ($this->establishConnection()) {
+            $sql = "SELECT supplier.name, supplier.email, supplier.telephonenumber, address.address_id, address.streetname, address.housenumber, "
+                    . "address.city, address.housenumber_suffix, address.postal_code FROM supplier INNER JOIN address ON supplier.address_address_id = address.address_id"
+                    . " WHERE supplier.name = '" . $this->conn->real_escape_string($name) . "'";
+            $result = $this->conn->query($sql);
+
+            $supplier = new Supplier();
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $supplier->name = $row['name'];
+                    $supplier->email = $row['email'];
+                    $supplier->telephonenumber = $row['telephonenumber'];
+                    $supplier->addressId = $row['address_id'];
+                    $supplier->streetname = $row['streetname'];
+                    $supplier->housenumber = $row['housenumber'];
+                    $supplier->housenumber_suffix = $row['housenumber_suffix'];
+                    $supplier->city = $row['city'];
+                    $supplier->postalCode = $row['postal_code'];
+                }
+            }
+
+            $this->closeConnection();
+
+            return $supplier;
+        } else {
+            return false;
+        }
+    }
 
     public function checkIfSupplierExists($name) {
         if ($this->establishConnection()) {
