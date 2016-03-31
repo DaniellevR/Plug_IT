@@ -3,16 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp/www/Plug_IT/smarty/templates/admin.tpl</file>
-            <file>file:/C:/wamp/www/Plug_IT/models/Role.php</file>
-            <file>file:/C:/wamp/www/Plug_IT/controllers/MainCtrl.php</file>
+            <file>file:/C:/wamp/www/Plug_IT/smarty/templates/categoriesforms.tpl</file>
             <file>file:/C:/wamp/www/Plug_IT/models/Supplier.php</file>
-            <file>file:/C:/wamp/www/Plug_IT/models/User.php</file>
             <file>file:/C:/wamp/www/Plug_IT/models/Category.php</file>
-            <file>file:/C:/wamp/www/Plug_IT/controllers/AdminController.php</file>
+            <file>file:/C:/wamp/www/Plug_IT/smarty/templates/productsforms.tpl</file>
             <file>file:/C:/wamp/www/Plug_IT/models/Address.php</file>
             <file>file:/C:/wamp/www/Plug_IT/handlers/getinfo.php</file>
+            <file>file:/C:/wamp/www/Plug_IT/handlers/EditCategoryHandler.php</file>
             <file>file:/C:/wamp/www/Plug_IT/models/Product.php</file>
+            <file>file:/C:/wamp/www/Plug_IT/handlers/UploadProductHandler.php</file>
             <file>file:/C:/wamp/www/Plug_IT/assets/js/functionCalls.js</file>
         </group>
     </open-files>

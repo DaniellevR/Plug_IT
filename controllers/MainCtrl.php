@@ -99,6 +99,10 @@ class MainCtrl {
     public function Register() {
         $this->View('register', '');
     }
+    
+    public function Tasks() {
+        $this->View('tasks', '');
+    }
 
     public function getNavigationItems() {
         $navigationItemModel = new NavigationItem();

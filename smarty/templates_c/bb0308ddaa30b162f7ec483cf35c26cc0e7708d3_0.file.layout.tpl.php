@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-03-30 15:43:14
+/* Smarty version 3.1.29, created on 2016-03-31 11:58:29
   from "C:\wamp\www\Plug_IT\smarty\templates\layout.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56fbd7f22cd779_09954731',
+  'unifunc' => 'content_56fcf4c5d577d0_77565848',
   'file_dependency' => 
   array (
     'bb0308ddaa30b162f7ec483cf35c26cc0e7708d3' => 
     array (
       0 => 'C:\\wamp\\www\\Plug_IT\\smarty\\templates\\layout.tpl',
-      1 => 1459344699,
+      1 => 1459417734,
       2 => 'file',
     ),
   ),
@@ -19,7 +19,7 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_56fbd7f22cd779_09954731 ($_smarty_tpl) {
+function content_56fcf4c5d577d0_77565848 ($_smarty_tpl) {
 $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, false);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
@@ -27,7 +27,7 @@ $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, false);
     <head> 
         <title><?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'title', array (
-  0 => 'block_2445556fbd7f2113f58_77298295',
+  0 => 'block_1536656fcf4c5a978a1_62901329',
   1 => false,
   3 => 0,
   2 => 0,
@@ -50,7 +50,7 @@ $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'title', array (
 >
     <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'head', array (
-  0 => 'block_3243656fbd7f211d134_58534765',
+  0 => 'block_480756fcf4c5ab2927_31920625',
   1 => false,
   3 => 0,
   2 => 0,
@@ -80,24 +80,24 @@ $__foreach_nav_0_saved_local_item = $_smarty_tpl->tpl_vars['nav'];
                                 <li><a href="/Plug_IT/index.php?page=<?php echo $_smarty_tpl->tpl_vars['nav']->value->page;?>
 "><?php echo $_smarty_tpl->tpl_vars['nav']->value->name;?>
 </a></li>
-                            <?php }?>
-                        <?php } elseif ($_smarty_tpl->tpl_vars['nav']->value->name === "Mijn account") {?>
-                            <?php if (isset($_COOKIE['PHPSESSID'])) {?>
+                                <?php }?>
+                            <?php } elseif ($_smarty_tpl->tpl_vars['nav']->value->name === "Mijn account") {?>
+                                <?php if (isset($_COOKIE['PHPSESSID'])) {?>
                                 <li><a href="/Plug_IT/index.php?page=<?php echo $_smarty_tpl->tpl_vars['nav']->value->page;?>
 "><?php echo $_smarty_tpl->tpl_vars['nav']->value->name;?>
 </a></li>
-                            <?php }?>
-                        <?php } elseif ($_smarty_tpl->tpl_vars['nav']->value->name === "Uitloggen") {?>
-                            <?php if (isset($_COOKIE['PHPSESSID'])) {?>
-                            <li><a onclick="" href=""><?php echo $_smarty_tpl->tpl_vars['nav']->value->name;?>
+                                <?php }?>
+                            <?php } elseif ($_smarty_tpl->tpl_vars['nav']->value->name === "Uitloggen") {?>
+                                <?php if (isset($_COOKIE['PHPSESSID'])) {?>
+                                <li><a onclick="" href=""><?php echo $_smarty_tpl->tpl_vars['nav']->value->name;?>
 </a></li>
-                            <?php }?>
-                        <?php } else { ?>
-                        <li><a href="/Plug_IT/index.php?page=<?php echo $_smarty_tpl->tpl_vars['nav']->value->page;?>
+                                <?php }?>
+                            <?php } else { ?>
+                            <li><a href="/Plug_IT/index.php?page=<?php echo $_smarty_tpl->tpl_vars['nav']->value->page;?>
 "><?php echo $_smarty_tpl->tpl_vars['nav']->value->name;?>
 </a></li>
-                        <?php }?>
-                    <?php
+                            <?php }?>
+                        <?php
 $_smarty_tpl->tpl_vars['nav'] = $__foreach_nav_0_saved_local_item;
 }
 if ($__foreach_nav_0_saved_item) {
@@ -180,7 +180,7 @@ $_smarty_tpl->tpl_vars['parent'] = $__foreach_parent_1_saved_item;
             </div>
         <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'body', array (
-  0 => 'block_3145356fbd7f22af458_96418732',
+  0 => 'block_2072456fcf4c5cebe13_94800262',
   1 => false,
   3 => 0,
   2 => 0,
@@ -212,6 +212,7 @@ if ($__foreach_nav_3_saved_item) {
 $_smarty_tpl->tpl_vars['nav'] = $__foreach_nav_3_saved_item;
 }
 ?>
+            <li><a href="/Plug_IT/index.php?page=Tasks">Taakverdeling</a></li>
         </ul>
     </div>
 </div>
@@ -219,17 +220,17 @@ $_smarty_tpl->tpl_vars['nav'] = $__foreach_nav_3_saved_item;
 </html>
 <?php }
 /* {block 'title'}  file:layout.tpl */
-function block_2445556fbd7f2113f58_77298295($_smarty_tpl, $_blockParentStack) {
+function block_1536656fcf4c5a978a1_62901329($_smarty_tpl, $_blockParentStack) {
 ?>
 Plug IT<?php
 }
 /* {/block 'title'} */
 /* {block 'head'}  file:layout.tpl */
-function block_3243656fbd7f211d134_58534765($_smarty_tpl, $_blockParentStack) {
+function block_480756fcf4c5ab2927_31920625($_smarty_tpl, $_blockParentStack) {
 }
 /* {/block 'head'} */
 /* {block 'body'}  file:layout.tpl */
-function block_3145356fbd7f22af458_96418732($_smarty_tpl, $_blockParentStack) {
+function block_2072456fcf4c5cebe13_94800262($_smarty_tpl, $_blockParentStack) {
 }
 /* {/block 'body'} */
 }

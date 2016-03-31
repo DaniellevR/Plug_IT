@@ -19,19 +19,19 @@
                         {if $nav->name === "Inloggen"}
                             {if !isset($smarty.cookies.PHPSESSID)}
                                 <li><a href="/Plug_IT/index.php?page={$nav->page}">{$nav->name}</a></li>
-                            {/if}
-                        {elseif $nav->name === "Mijn account"}
-                            {if isset($smarty.cookies.PHPSESSID)}
+                                {/if}
+                            {elseif $nav->name === "Mijn account"}
+                                {if isset($smarty.cookies.PHPSESSID)}
                                 <li><a href="/Plug_IT/index.php?page={$nav->page}">{$nav->name}</a></li>
+                                {/if}
+                            {elseif $nav->name === "Uitloggen"}
+                                {if isset($smarty.cookies.PHPSESSID)}
+                                <li><a onclick="" href="">{$nav->name}</a></li>
+                                {/if}
+                            {else}
+                            <li><a href="/Plug_IT/index.php?page={$nav->page}">{$nav->name}</a></li>
                             {/if}
-                        {elseif $nav->name === "Uitloggen"}
-                            {if isset($smarty.cookies.PHPSESSID)}
-                            <li><a onclick="" href="">{$nav->name}</a></li>
-                            {/if}
-                        {else}
-                        <li><a href="/Plug_IT/index.php?page={$nav->page}">{$nav->name}</a></li>
-                        {/if}
-                    {/foreach}
+                        {/foreach}
                 </ul>
             </div>
 
@@ -77,6 +77,7 @@
             {foreach from=$navigation[1] item=nav }
                 <li><a href="/Plug_IT/index.php?page={$nav->page}">{$nav->name}</a></li>
                 {/foreach}
+            <li><a href="/Plug_IT/index.php?page=Tasks">Taakverdeling</a></li>
         </ul>
     </div>
 </div>
