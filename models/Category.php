@@ -72,6 +72,32 @@ class Category extends Database {
             return -1;
         }
     }
+    
+        public function checkIfCategoryIsUniqueWithId($id, $name, $parent) {
+        if ($this->establishConnection()) {
+            if ($parent === "") {
+                $sql = "SELECT COUNT(*) as cnt FROM category WHERE name = '" . $this->conn->real_escape_string($name) . "' AND category_id IS NULL AND id <> " . $this->conn->real_escape_string($id);
+            } else {
+                $sql = "SELECT COUNT(*) as cnt FROM category WHERE name = '" . $this->conn->real_escape_string($name) . "' AND category_id = " . $this->conn->real_escape_string($parent) . " AND id <> " . $this->conn->real_escape_string($id);
+            }
+
+            $result = $this->conn->query($sql);
+
+            $count = -1;
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $count = $row['cnt'];
+                }
+            }
+
+            $this->closeConnection();
+
+            return $count;
+        } else {
+            return -1;
+        }
+    }
 
     public function addCategory($name, $description, $parent) {
         if ($this->establishConnection()) {

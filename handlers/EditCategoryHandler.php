@@ -14,7 +14,7 @@ if (isset($_POST['categoriesEdit']) && isset($_POST['newname']) && isset($_POST[
 
     // db
     $categoryModel = new Category();
-    $count = $categoryModel->checkIfCategoryIsUnique($name, $parent);
+    $count = $categoryModel->checkIfCategoryIsUniqueWithId($id, $name, $parent);
 
     if ($count == 0) {
         $res = $categoryModel->editCategory($id, $name, $description, $parent);
