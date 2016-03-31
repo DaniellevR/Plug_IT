@@ -48,6 +48,7 @@ function logout(sender, e) {
 
 function removeCategory(sender, e) {
     e.preventDefault();
+    
     jQuery.ajax({
         type: "POST",
         url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',

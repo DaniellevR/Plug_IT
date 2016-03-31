@@ -24,7 +24,7 @@ class AdminController extends MainCtrl {
             unset($_SESSION["errors"]);
         }
         $smarty->assign('errors', $errors);
-        
+
         $smarty->assign('navigation', $navi);
         $smarty->assign('categories', $sideNavigation);
         $smarty->assign('suppliers', $this->getSuppliers());
@@ -42,7 +42,7 @@ class AdminController extends MainCtrl {
 
             if ($res == 1) {
                 $path = "../assets/pix/categories/";
-                foreach (glob($path . $_POST['categoryId'] . '*') as $filename) {
+                foreach (glob($path . $_POST['categoryId'] . '.*') as $filename) {
                     unlink(realpath($filename));
                 }
             } else {
@@ -60,7 +60,7 @@ class AdminController extends MainCtrl {
 
             if ($res == 1) {
                 $path = "../assets/pix/products/";
-                foreach (glob($path . $_POST['productId'] . '*') as $filename) {
+                foreach (glob($path . $_POST['productId'] . '.*') as $filename) {
                     unlink(realpath($filename));
                 }
             } else {

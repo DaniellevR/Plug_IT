@@ -17,15 +17,15 @@
                 <ul>
                     {foreach from=$navigation[0] item=nav }
                         {if $nav->name === "Inloggen"}
-                            {if !isset($smarty.cookies.PHPSESSID)}
+                            {if !isset($smarty.session.usertype)}
                                 <li><a href="/Plug_IT/index.php?page={$nav->page}">{$nav->name}</a></li>
                                 {/if}
                             {elseif $nav->name === "Mijn account"}
-                                {if isset($smarty.cookies.PHPSESSID)}
+                                {if isset($smarty.session.usertype)}
                                 <li><a href="/Plug_IT/index.php?page={$nav->page}">{$nav->name}</a></li>
                                 {/if}
                             {elseif $nav->name === "Uitloggen"}
-                                {if isset($smarty.cookies.PHPSESSID)}
+                                {if isset($smarty.session.usertype)}
                                 <li><a onclick="logout(this, event);" href="">{$nav->name}</a></li>
                                 {/if}
                             {else}

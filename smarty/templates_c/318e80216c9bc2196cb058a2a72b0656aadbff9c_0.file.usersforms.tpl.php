@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-03-31 17:12:08
+/* Smarty version 3.1.29, created on 2016-03-31 22:01:42
   from "C:\wamp\www\Plug_IT\smarty\templates\usersforms.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56fd3e4836c8b0_84830969',
+  'unifunc' => 'content_56fd8226859c28_92020555',
   'file_dependency' => 
   array (
     '318e80216c9bc2196cb058a2a72b0656aadbff9c' => 
     array (
       0 => 'C:\\wamp\\www\\Plug_IT\\smarty\\templates\\usersforms.tpl',
-      1 => 1459433262,
+      1 => 1459453879,
       2 => 'file',
     ),
   ),
@@ -21,13 +21,13 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
     'file:registerform.tpl' => 1,
   ),
 ),false)) {
-function content_56fd3e4836c8b0_84830969 ($_smarty_tpl) {
+function content_56fd8226859c28_92020555 ($_smarty_tpl) {
 $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'usersforms', array (
-  0 => 'block_852756fd3e48338774_84188935',
+  0 => 'block_1359156fd8226826156_51918944',
   1 => false,
   3 => 0,
   2 => 0,
@@ -36,19 +36,19 @@ $_smarty_tpl->ext->_inheritance->endChild($_smarty_tpl);
 $_smarty_tpl->smarty->ext->_subtemplate->render($_smarty_tpl, "file:admin.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'parent_block'}  file:usersforms.tpl */
-function block_2889256fd3e483406a5_52410015($_smarty_tpl, $_blockParentStack) {
+function block_1971656fd822682e4c6_58747712($_smarty_tpl, $_blockParentStack) {
 $_smarty_tpl->smarty->ext->_subtemplate->render($_smarty_tpl, "file:registerform.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 }
 /* {/block 'parent_block'} */
 /* {block 'usersforms'}  file:usersforms.tpl */
-function block_852756fd3e48338774_84188935($_smarty_tpl, $_blockParentStack) {
+function block_1359156fd8226826156_51918944($_smarty_tpl, $_blockParentStack) {
 ?>
 
 
 <div class="adminpart">
     <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, "parent_block", array (
-  0 => 'block_2889256fd3e483406a5_52410015',
+  0 => 'block_1971656fd822682e4c6_58747712',
   1 => false,
   3 => 0,
   2 => 0,

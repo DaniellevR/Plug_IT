@@ -187,5 +187,17 @@ class Product extends Database {
             }
         }
     }
+    
+    public function editProduct($id, $name, $shortDescription, $description, $characteristics, $price, $brand, $supplier, $amount, $categoryId) {
+        if ($this->establishConnection()) {
+            $stmt = $this->conn->prepare("UPDATE product SET name = ?, short_description = ?, description = ?, characteristics = ?, price = ?, brand = ?, supplier_name = ?, amount = ?, category_id = ? WHERE id = ?");
+            $stmt->bind_param('ssssdssiii', $name, $shortDescription, $description, $characteristics, $price, $brand, $supplier, $amount, $categoryId, $id);
+            $stmt->execute();
+            $this->closeConnection();
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }

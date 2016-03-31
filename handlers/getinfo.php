@@ -24,9 +24,10 @@ if ($action === 'editCategory') {
         }
     }
 
-    echo '<div class="line"><label>Nieuwe naam:</label><div class="input"><input id="newname" type="text" name="newname" value="' . $category->name . '" required="true"></div></div>';
-    echo '<div class="line"><label>Omschrijving:</label><div class="input"><input id="desc" type="text" name="category_description" value="' . $category->description . '" required="true"></div></div>';
-    echo '<div class="line"><label>Ouder categorie:</label><div class="input"><select name="parent">';
+    echo '<div><label for="categoryNewName">Categorienaam</label><input type="text" id="categoryNewName" name="newname" required="true" value="' . $category->name . '"/></div>';
+    echo '<div><label for="categoryNewDescription">Omschrijving</label><input type="text" id="categoryNewDescription" name="category_description" required="true" value="' . $category->description . '"/></div>';
+    echo '<div><label for="categoriesParentEdit">Ouder categorie</label>';
+    echo '<select type="text" id="categories_edit" id="categoriesParentEdit" name="parent" onchange="grabInfo(this, "editCategory", "contentDivEditCategory")">';
 
 // Get options parent
     if (is_null($category->parent)) {
@@ -51,40 +52,55 @@ if ($action === 'editCategory') {
         }
     }
 
-    echo '</select></div></div>';
-    echo '<div class="line"><label>Foto categorie:</label><div class="input"><input type="file" accept="image/*" name="image" id="image"/></div></div>';
+    echo '</select></div>';
+    echo '<div><label for="imageEditCategory">Foto categorie</label><input type="file" accept="image/*" name="image" id="imageEditCategory" class="input_text" required="true"/></div>';
 
     $path = "../assets/pix/categories/";
     foreach (glob($path . $categoryId . '.*') as $filename) {
         echo '<img src="' . substr($filename, 3) . '" class="image" />';
     }
-} else if ($action === 'getProductsFromCategoryEditProduct') {
+
+//echo '<div><img type="image" src="/Plug_IT/assets/pix/categories/{$cat->id}.png" class="image" /></div>';
+}
+//else if ($action === 'getProductsFromCategoryEditProduct') {
+//    $categoryId = $_GET["id"];
+//    $productModel = new Product();
+//    $products = $productModel->getProductsInCategory($categoryId);
+//
+//    echo '<label>Productnaam:</label>';
+//    echo '<select id="products_edit" name="categoriesEdit" onchange=\'grabInfo(this, "getProductInfo", "contentDivEditProductPart2")\'>';
+//    foreach ($products as $product) {
+//        echo '<option value="' . $product->id . '">' . $product->name . '</option>';
+//    }
+//    echo '</select>';
+//
+//    // Show first product
+//    if (sizeof($products) > 0) {
+//        $product = $products[0];
+//    }
+//}
+else if ($action === 'getProductsFromCategoryRemoveProduct' || $action === 'getProductsFromCategoryEditProduct') {
     $categoryId = $_GET["id"];
     $productModel = new Product();
     $products = $productModel->getProductsInCategory($categoryId);
 
-    echo '<label>Productnaam:</label>';
-    echo '<select id="products_edit" name="categoriesEdit" onchange=\'grabInfo(this, "getProductInfo", "contentDivEditProductPart2")\'>';
+    if ($action === 'getProductsFromCategoryRemoveProduct') {
+        echo '<div><label for="productToRemove">Productnaam</label>';
+        echo '<select type="text" id="productToRemove" name="productToRemove">';
+    } else {
+        echo '<div><label for="productToEdit">Productnaam</label>';
+        echo '<select type="text" id="productToEdit" name="productToEdit" onchange="grabInfo(this, "getProductsFromCategoryEditProduct", "contentDivEditProduct2");">';
+    }
+
     foreach ($products as $product) {
         echo '<option value="' . $product->id . '">' . $product->name . '</option>';
     }
-    echo '</select>';
 
-    // Show first product
-    if (sizeof($products) > 0) {
-        $product = $products[0];
+    echo '</select></div>';
+    
+    if ($action === 'getProductsFromCategoryEditProduct') {
+        //
     }
-} else if ($action === 'getProductsFromCategoryRemoveProduct') {
-    $categoryId = $_GET["id"];
-    $productModel = new Product();
-    $products = $productModel->getProductsInCategory($categoryId);
-
-    echo '<label>Productnaam:</label>';
-    echo '<select name="productToRemove">';
-    foreach ($products as $product) {
-        echo '<option value="' . $product->id . '">' . $product->name . '</option>';
-    }
-    echo '</select>';
 } else if ($action === 'getProductInfo') {
     $productId = $_GET["id"];
     $productModel = new Product();

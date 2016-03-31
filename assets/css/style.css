@@ -27,48 +27,6 @@ div.sitecontainer {
     text-align: center;
 }
 
-.form_button {
-    float: right;
-    -moz-box-shadow: 0px 1px 0px 0px #f0f7fa;
-    -webkit-box-shadow: 0px 1px 0px 0px #f0f7fa;
-    box-shadow: 0px 1px 0px 0px #f0f7fa;
-    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #33bdef), color-stop(1, #019ad2));
-    background:-moz-linear-gradient(top, #33bdef 5%, #019ad2 100%);
-    background:-webkit-linear-gradient(top, #33bdef 5%, #019ad2 100%);
-    background:-o-linear-gradient(top, #33bdef 5%, #019ad2 100%);
-    background:-ms-linear-gradient(top, #33bdef 5%, #019ad2 100%);
-    background:linear-gradient(to bottom, #33bdef 5%, #019ad2 100%);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#33bdef', endColorstr='#019ad2',GradientType=0);
-    background-color:#33bdef;
-    -moz-border-radius:6px;
-    -webkit-border-radius:6px;
-    border-radius:6px;
-    border:1px solid #057fd0;
-    display:inline-block;
-    cursor:pointer;
-    color:#ffffff;
-    font-family:Arial;
-    font-size:15px;
-    font-weight:bold;
-    padding:6px 24px;
-    text-decoration:none;
-    text-shadow:0px -1px 0px #5b6178;
-}
-.form_button:hover {
-    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #019ad2), color-stop(1, #33bdef));
-    background:-moz-linear-gradient(top, #019ad2 5%, #33bdef 100%);
-    background:-webkit-linear-gradient(top, #019ad2 5%, #33bdef 100%);
-    background:-o-linear-gradient(top, #019ad2 5%, #33bdef 100%);
-    background:-ms-linear-gradient(top, #019ad2 5%, #33bdef 100%);
-    background:linear-gradient(to bottom, #019ad2 5%, #33bdef 100%);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#019ad2', endColorstr='#33bdef',GradientType=0);
-    background-color:#019ad2;
-}
-.form_button:active {
-    position:relative;
-    top:1px;
-}
-
 /* ==========================================================================
     CSS header.php
    ========================================================================== */
@@ -262,15 +220,15 @@ div.sitecontainer {
     overflow:hidden;
 }*/
 
-.admin_list {
+/*.admin_list {
     background-color: lightblue;
     border: 1px solid black;
     padding: 10px;
-}
+}*/
 
-input, select {
+/*input, select {
     margin: 10px;
-}
+}*/
 
 .currencyinput {
     border: 1px inset #ccc;
@@ -285,31 +243,34 @@ input, select {
     display: none;
 }*/
 
-.admin form {
+/*.admin form {
     border: 1px solid black;
     padding: 10px;
     position: relative;
     margin: 10px 0px 10px 0;
     overflow:hidden;
-}
-
-.admin label {
-    color: #404040;
-    float: left;
-    text-align: right;
-}
-
-.admin input, textarea, select {
-    border: 1px solid #CCCCCC;
-    color: #808080;
-    display: inline-block;
-    width: 90%;
-}
-
-/*.form_button {
-    float: right;   
 }*/
 
+/*                                                                      */
+/*.admin form {
+    border: 1px solid black;
+    padding: 10px;
+    position: relative;
+    margin: 10px 0px 10px 0;
+    overflow:hidden;
+    width: 50%;
+}
+
+.admin form input {
+    width: available;
+}
+
+label {
+    float:right;
+    clear:both;
+}*/
+
+/*                                                                      */
 .category {
     font-weight: bold;
 }
@@ -323,14 +284,14 @@ input, select {
 }
 
 .image {
-    height: 100px;
-    margin: 10px;
+    height: 200px;
+    margin: 0 35% 0 35%;
 }
 
-label {
-    /*display:block;*/
+/*label {
+    display:block;
     margin: 10px;
-}/*
+}
 
 .adminpart input, .adminpart select, .adminpart textarea {
     width: 100%;
@@ -495,3 +456,177 @@ label {
     color: black;
     text-decoration: none;
 }
+
+
+
+
+
+
+.admin form {
+    border: 1px solid black;
+}
+
+form {
+    background-color: whitesmoke;
+    margin: 10px 0 0px 0;
+}
+
+form div{
+    margin: 15px;
+    border : none;
+}
+
+label {
+    display: inline-block;
+    width: 25%;
+    text-align: right;
+    margin: 10px;
+    /*vertical-align: middle;*/
+}
+
+input[type=text], input[type=password], input[type=file], input[type=tel], input[type=email], select[type=text], textarea[type=text] {
+    width: 65%; 
+    /*font-family: "Lucida Grande","Lucida Sans Unicode",Tahoma,Sans-Serif;*/
+    padding: 5px;
+    font-size: 0.9em;
+    border-radius: 5px;
+    /*background: rgba(0, 0, 0, 0.07);*/
+}
+
+/*input[type=text]:focus, input[type=password]:focus{
+    background: #FFFFFF;
+}*/
+
+/*.button {
+    font-size: 1em;
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #59B969;
+    box-shadow: 0 1px 0 0 #60BD49 inset;
+}*/
+
+.button {
+    float: right;
+    -moz-box-shadow: 0px 1px 0px 0px #f0f7fa;
+    -webkit-box-shadow: 0px 1px 0px 0px #f0f7fa;
+    box-shadow: 0px 1px 0px 0px #f0f7fa;
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #33bdef), color-stop(1, #019ad2));
+    background:-moz-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+    background:-webkit-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+    background:-o-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+    background:-ms-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+    background:linear-gradient(to bottom, #33bdef 5%, #019ad2 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#33bdef', endColorstr='#019ad2',GradientType=0);
+    background-color:#33bdef;
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    border-radius:6px;
+    border:1px solid #057fd0;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:15px;
+    font-weight:bold;
+    padding:6px 24px;
+    text-decoration:none;
+    text-shadow:0px -1px 0px #5b6178;
+}
+
+.button:hover {
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #019ad2), color-stop(1, #33bdef));
+    background:-moz-linear-gradient(top, #019ad2 5%, #33bdef 100%);
+    background:-webkit-linear-gradient(top, #019ad2 5%, #33bdef 100%);
+    background:-o-linear-gradient(top, #019ad2 5%, #33bdef 100%);
+    background:-ms-linear-gradient(top, #019ad2 5%, #33bdef 100%);
+    background:linear-gradient(to bottom, #019ad2 5%, #33bdef 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#019ad2', endColorstr='#33bdef',GradientType=0);
+    background-color:#019ad2;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*.admin label {
+    color: #404040;
+    float: left;
+    text-align: right;
+}
+
+.admin input, textarea, select {
+    float: right;
+    display: block;
+    border: 1px solid #CCCCCC;
+    color: #808080;
+    display: inline-block;
+    width: 90%;
+}*/
+
+/*.admin form & {
+        float: right;
+        display: block;
+    border: 1px solid #CCCCCC;
+    color: #808080;
+    display: inline-block;
+    width: 90%;
+}*/
+
+/*.form_button {
+    float: right;   
+}*/
+
+
+
+
+
+
+
+/*.form_button {
+    float: right;
+    -moz-box-shadow: 0px 1px 0px 0px #f0f7fa;
+    -webkit-box-shadow: 0px 1px 0px 0px #f0f7fa;
+    box-shadow: 0px 1px 0px 0px #f0f7fa;
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #33bdef), color-stop(1, #019ad2));
+    background:-moz-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+    background:-webkit-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+    background:-o-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+    background:-ms-linear-gradient(top, #33bdef 5%, #019ad2 100%);
+    background:linear-gradient(to bottom, #33bdef 5%, #019ad2 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#33bdef', endColorstr='#019ad2',GradientType=0);
+    background-color:#33bdef;
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    border-radius:6px;
+    border:1px solid #057fd0;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:15px;
+    font-weight:bold;
+    padding:6px 24px;
+    text-decoration:none;
+    text-shadow:0px -1px 0px #5b6178;
+}
+.form_button:hover {
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #019ad2), color-stop(1, #33bdef));
+    background:-moz-linear-gradient(top, #019ad2 5%, #33bdef 100%);
+    background:-webkit-linear-gradient(top, #019ad2 5%, #33bdef 100%);
+    background:-o-linear-gradient(top, #019ad2 5%, #33bdef 100%);
+    background:-ms-linear-gradient(top, #019ad2 5%, #33bdef 100%);
+    background:linear-gradient(to bottom, #019ad2 5%, #33bdef 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#019ad2', endColorstr='#33bdef',GradientType=0);
+    background-color:#019ad2;
+}
+.form_button:active {
+    position:relative;
+    top:1px;
+}*/

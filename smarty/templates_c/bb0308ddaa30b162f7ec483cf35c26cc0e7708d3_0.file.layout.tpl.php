@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-03-31 17:23:41
+/* Smarty version 3.1.29, created on 2016-03-31 22:16:45
   from "C:\wamp\www\Plug_IT\smarty\templates\layout.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56fd40fdb0d7a8_72541406',
+  'unifunc' => 'content_56fd85adb4dba0_76625624',
   'file_dependency' => 
   array (
     'bb0308ddaa30b162f7ec483cf35c26cc0e7708d3' => 
     array (
       0 => 'C:\\wamp\\www\\Plug_IT\\smarty\\templates\\layout.tpl',
-      1 => 1459437791,
+      1 => 1459455398,
       2 => 'file',
     ),
   ),
@@ -19,7 +19,7 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_56fd40fdb0d7a8_72541406 ($_smarty_tpl) {
+function content_56fd85adb4dba0_76625624 ($_smarty_tpl) {
 $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, false);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
@@ -27,7 +27,7 @@ $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, false);
     <head> 
         <title><?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'title', array (
-  0 => 'block_2304956fd40fd9e1060_52421071',
+  0 => 'block_1668056fd85ada23614_91100854',
   1 => false,
   3 => 0,
   2 => 0,
@@ -50,7 +50,7 @@ $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'title', array (
 >
     <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'head', array (
-  0 => 'block_1742256fd40fd9ea3d1_21641369',
+  0 => 'block_774556fd85ada2c8c3_62735357',
   1 => false,
   3 => 0,
   2 => 0,
@@ -76,19 +76,19 @@ $_smarty_tpl->tpl_vars['nav']->_loop = true;
 $__foreach_nav_0_saved_local_item = $_smarty_tpl->tpl_vars['nav'];
 ?>
                         <?php if ($_smarty_tpl->tpl_vars['nav']->value->name === "Inloggen") {?>
-                            <?php if (!isset($_COOKIE['PHPSESSID'])) {?>
+                            <?php if (!isset($_SESSION['usertype'])) {?>
                                 <li><a href="/Plug_IT/index.php?page=<?php echo $_smarty_tpl->tpl_vars['nav']->value->page;?>
 "><?php echo $_smarty_tpl->tpl_vars['nav']->value->name;?>
 </a></li>
                                 <?php }?>
                             <?php } elseif ($_smarty_tpl->tpl_vars['nav']->value->name === "Mijn account") {?>
-                                <?php if (isset($_COOKIE['PHPSESSID'])) {?>
+                                <?php if (isset($_SESSION['usertype'])) {?>
                                 <li><a href="/Plug_IT/index.php?page=<?php echo $_smarty_tpl->tpl_vars['nav']->value->page;?>
 "><?php echo $_smarty_tpl->tpl_vars['nav']->value->name;?>
 </a></li>
                                 <?php }?>
                             <?php } elseif ($_smarty_tpl->tpl_vars['nav']->value->name === "Uitloggen") {?>
-                                <?php if (isset($_COOKIE['PHPSESSID'])) {?>
+                                <?php if (isset($_SESSION['usertype'])) {?>
                                 <li><a onclick="logout(this, event);" href=""><?php echo $_smarty_tpl->tpl_vars['nav']->value->name;?>
 </a></li>
                                 <?php }?>
@@ -233,7 +233,7 @@ $_smarty_tpl->tpl_vars['parent'] = $__foreach_parent_3_saved_item;
             </div>
         <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'body', array (
-  0 => 'block_2820756fd40fdaecf63_65848565',
+  0 => 'block_2455056fd85adb2d096_16573621',
   1 => false,
   3 => 0,
   2 => 0,
@@ -273,17 +273,17 @@ $_smarty_tpl->tpl_vars['nav'] = $__foreach_nav_5_saved_item;
 </html>
 <?php }
 /* {block 'title'}  file:layout.tpl */
-function block_2304956fd40fd9e1060_52421071($_smarty_tpl, $_blockParentStack) {
+function block_1668056fd85ada23614_91100854($_smarty_tpl, $_blockParentStack) {
 ?>
 Plug IT<?php
 }
 /* {/block 'title'} */
 /* {block 'head'}  file:layout.tpl */
-function block_1742256fd40fd9ea3d1_21641369($_smarty_tpl, $_blockParentStack) {
+function block_774556fd85ada2c8c3_62735357($_smarty_tpl, $_blockParentStack) {
 }
 /* {/block 'head'} */
 /* {block 'body'}  file:layout.tpl */
-function block_2820756fd40fdaecf63_65848565($_smarty_tpl, $_blockParentStack) {
+function block_2455056fd85adb2d096_16573621($_smarty_tpl, $_blockParentStack) {
 }
 /* {/block 'body'} */
 }
