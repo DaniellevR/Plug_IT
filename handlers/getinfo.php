@@ -59,26 +59,7 @@ if ($action === 'editCategory') {
     foreach (glob($path . $categoryId . '.*') as $filename) {
         echo '<img src="' . substr($filename, 3) . '" class="image" />';
     }
-
-//echo '<div><img type="image" src="/Plug_IT/assets/pix/categories/{$cat->id}.png" class="image" /></div>';
 }
-//else if ($action === 'getProductsFromCategoryEditProduct') {
-//    $categoryId = $_GET["id"];
-//    $productModel = new Product();
-//    $products = $productModel->getProductsInCategory($categoryId);
-//
-//    echo '<label>Productnaam:</label>';
-//    echo '<select id="products_edit" name="categoriesEdit" onchange=\'grabInfo(this, "getProductInfo", "contentDivEditProductPart2")\'>';
-//    foreach ($products as $product) {
-//        echo '<option value="' . $product->id . '">' . $product->name . '</option>';
-//    }
-//    echo '</select>';
-//
-//    // Show first product
-//    if (sizeof($products) > 0) {
-//        $product = $products[0];
-//    }
-//}
 else if ($action === 'getProductsFromCategoryRemoveProduct' || $action === 'getProductsFromCategoryEditProduct') {
     $categoryId = $_GET["id"];
     $productModel = new Product();
@@ -97,7 +78,7 @@ else if ($action === 'getProductsFromCategoryRemoveProduct' || $action === 'getP
     }
 
     echo '</select></div>';
-    
+
     if ($action === 'getProductsFromCategoryEditProduct') {
         //
     }
@@ -123,40 +104,54 @@ else if ($action === 'getProductsFromCategoryRemoveProduct' || $action === 'getP
     // Get the connected addresses
     $idsAddresses = $userModel->getIdsAddresses($username);
 
-    echo '<h5>Persoonsgegevens</h5><label>Naam:</label><input type="text" name="firstnameEditUser" required="true" placeholder="Voornaam" value="' . $foundUser->firstname . '">';
-    echo '<input type="text" name="prefixEditUser" required="true" placeholder="tv" value="' . $foundUser->prefix . '">';
-    echo '<input type="text" name="lastnameEditUser" required="true" placeholder="Achternaam" value="' . $foundUser->lastname . '">';
-    echo '<label>Email:</label><input type="text" name="emailEditUser" required="true" value="' . $foundUser->email . '">';
-    echo '<label>Telefoonnummer:</label><input type="text" name="telephonenumberEditUser" required="true" value="' . $foundUser->telephonenumber . '">';
+    echo '<div><h5>Persoonsgegevens</h5></div>';
+    echo '<div><label for="firstname">Name</label><input type="text" id="firstname" name="firstname" required="true" placeholder="Voornaam" value="' . $foundUser->firstname . '"></div>';
+    echo '<div><label></label><input type="text" id="prefix" name="prefix" required="true" placeholder="tv" value="' . $foundUser->prefix . '"></div>';
+    echo '<div><label></label><input type="text" id="lastname" name="lastname" required="true" placeholder="Achternaam" value="' . $foundUser->lastname . '"></div>';
+    echo '<div><label for="email">Email</label><input type="email" id="email"  required="true" value="' . $foundUser->email . '"/></div>';
+    echo '<div><label for="telephonenumber">Telefoonnummer</label><input type="text" id="telephonenumber" name="telephonenumber" required="true" value="' . $foundUser->telephonenumber . '"></div>';
 
     // Find the addresses
     foreach ($addresses as $address) {
         if (in_array($address->id, $idsAddresses)) {
-            echo '<h5>Adresgegevens</h5><label>Adres:</label>';
-            echo '<input type="text" name="streetnameEditUser" required="true" placeholder="Straatnaam" value="' . $address->streetname . '">';
-            echo '<input type="text" name="housenumberEditUser" required="true" placeholder="nr" value="' . $address->housenumber . '">';
-            echo '<input type="text" name="housenumberSuffixEditUser" placeholder="tv" value="' . $address->housenumberSuffix . '">';
-            echo '<label>Postcode:</label><input type="text" name="postalCodeEditUser" required="true" value="' . $address->postalCode . '">';
-            echo '<label>Woonplaats:</label><input type="text" name="cityEditUser" required="true" value="' . $address->city . '">';
+            echo '<div><h5>Adresgegevens</h5></div>';
+            echo '<div><label for="streetname">Adres</label><input type="text" id="streetname" name="streetnameAddUser" required="true" placeholder="Straatnaam" value="' . $address->streetname . '"></div>';
+            echo '<div><label></label><input type="text" name="housenumberAddUser" required="true" placeholder="nr" value="' . $address->housenumber . '"></div>';
+            echo '<div><label></label><input type="text" name="housenumberSuffixAddUser" placeholder="tv" value="' . $address->housenumberSuffix . '"></div>';
+            echo '<div><label for="postalCode">Postcode</label><input type="text" name="postalCodeAddUser" required="true" value="' . $address->postalCode . '"></div>';
+            echo '<div><label for="city">Woonplaats</label><input type="text" name="cityAddUser" required="true" value="' . $address->city . '"></div>';
         }
     }
 
-    echo '<h5>Accountgegevens</h5>';
-    echo '<label>Rol:</label>';
-    echo '<select name="rolesEditUser">';
+    echo '<div><h5>Accountgegevens</h5></div>';
+    echo '<div>';
 
     $roleModel = new Role();
     $roles = $roleModel->getRoles();
-    foreach ($roles as $role) {
-        if ($role->name === $foundUser->rolename) {
-            echo '<option value="' . $role->name . '" selected>' . $role->name . '</option>';
+
+    if (isset($_SESSION["usertype"])) {
+        if ($_SESSION["usertype"] === 'Administrator') {
+            echo '<label>Rol</label><select type="text" name="rolesEditUser">';
+            foreach ($roles as $role) {
+                if ($role->name === $foundUser->rolename) {
+                    echo '<option value="' . $role->name . '" selected>' . $role->name . '</option>';
+                } else {
+                    echo '<option value="' . $role->name . '">' . $role->name . '</option>';
+                }
+            }
+            echo '</select></div>';
         } else {
-            echo '<option value="' . $role->name . '">' . $role->name . '</option>';
+            echo '<input type="text" name="roles" value="User" required="true" hidden="true">';
         }
+    } else {
+        echo '<input type="text" name="roles" value="User" required="true" hidden="true">';
     }
-    echo '</select><label>Huidige wachtwoord:</label><input type="password" name="current_passwordEditUser">';
-    echo '<label>Nieuwe Wachtwoord:</label><input type="password" name="passwordEditUser">';
-    echo '<label>Herhaal nieuwe wachtwoord:</label><input type="password" name="repeat_passwordEditUser">';
+
+    echo '<div><label for="usernameEditUser">Gebruikersnaam</label><input type="text" id="usernameEditUser" name="usernameEditUser" readonly value="' . $username . '"></div>';
+    echo '<div><label for="passwordEditUser">Huidige wachtwoord</label><input type="password" id="passwordEditUser" name="passwordEditUser"></div>';
+    echo '<div><label for="newPasswordEditUser">Nieuwe wachtwoord</label><input type="password" id="newPasswordEditUser" name="newPasswordEditUser"></div>';
+    echo '<div><label for="repeat_passwordEditUser">Herhaal wachtwoord</label><input type="password" id="repeat_passwordEditUser" name="repeat_passwordEditUser"></div>';
+
 } else if ($action === 'getSupplierInfo') {
     $suppliername = $_GET["id"];
     $supplierModel = new Supplier();
