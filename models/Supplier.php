@@ -112,7 +112,7 @@ class Supplier extends Database {
             $stmt->bind_param('siss', $name, $addressId, $email, $telephonenumber);
 
             $stmt->execute();
-            $generated_id = $stmt->insert_id;
+            $generated_id = $this->conn->insert_id;
 
             $this->closeConnection();
 

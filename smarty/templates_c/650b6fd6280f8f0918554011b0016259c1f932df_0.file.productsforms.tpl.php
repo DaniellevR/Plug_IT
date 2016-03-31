@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-03-31 03:01:58
+/* Smarty version 3.1.29, created on 2016-03-31 13:36:46
   from "C:\wamp\www\Plug_IT\smarty\templates\productsforms.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56fc77065c1ad1_71289854',
+  'unifunc' => 'content_56fd0bce1f6c76_27199122',
   'file_dependency' => 
   array (
     '650b6fd6280f8f0918554011b0016259c1f932df' => 
     array (
       0 => 'C:\\wamp\\www\\Plug_IT\\smarty\\templates\\productsforms.tpl',
-      1 => 1459386114,
+      1 => 1459424061,
       2 => 'file',
     ),
   ),
@@ -20,13 +20,13 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
     'file:admin.tpl' => 1,
   ),
 ),false)) {
-function content_56fc77065c1ad1_71289854 ($_smarty_tpl) {
+function content_56fd0bce1f6c76_27199122 ($_smarty_tpl) {
 $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'productsforms', array (
-  0 => 'block_3079256fc77064f6576_69236272',
+  0 => 'block_147156fd0bcde95a18_99453701',
   1 => false,
   3 => 0,
   2 => 0,
@@ -35,11 +35,11 @@ $_smarty_tpl->ext->_inheritance->endChild($_smarty_tpl);
 $_smarty_tpl->smarty->ext->_subtemplate->render($_smarty_tpl, "file:admin.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'productsforms'}  file:productsforms.tpl */
-function block_3079256fc77064f6576_69236272($_smarty_tpl, $_blockParentStack) {
+function block_147156fd0bcde95a18_99453701($_smarty_tpl, $_blockParentStack) {
 ?>
 
     <div class="adminpart">
-        <form>
+        <form action="handlers/UploadProductHandler.php" method="POST" enctype="multipart/form-data">
             <h3>Product toevoegen</h3>
             <h5>Productinformatie</h5>
             <label>Productnaam:</label>
@@ -147,7 +147,7 @@ $_smarty_tpl->tpl_vars['supplier'] = $__foreach_supplier_2_saved_item;
                 <label>Adres:</label>
                 <input type="text" name="streetname" required="true" placeholder="Straatnaam">
                 <input class="small_field" type="text" name="housenumber" required="true" placeholder="nr">
-                <input class="small_field" type="text" name="housenumberSuffix" required="true" placeholder="tv">
+                <input class="small_field" type="text" name="housenumberSuffix" placeholder="tv">
                 <label>Postcode:</label>
                 <input type="text" name="postalCode" required="true">
                 <label>Woonplaats:</label>

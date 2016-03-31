@@ -61,12 +61,14 @@ if (isset($_FILES['image'])) {
                 if ($addressModel->checkIfAddressExists($streetname, $housenumber, $city, $housenumberSuffix, $postalCode) == 0) {
                     // Add address
                     $addressId = $addressModel->addAddress($streetname, $housenumber, $city, $housenumberSuffix, $postalCode);
-
+                    
                     if ($addressId > 0) {
                         // Add supplier
-                        if ($supplierModel->addSupplier($suppliername, $addressId, $email, $telephonenumber) <= 0) {
-                            $errors = $errors . "Fout opgetreden bij het opslaan van de leverancier.\r\nHet product kon niet toegevoegd worden.";
-                        }
+                        $supplierModel->addSupplier($suppliername, $addressId, $email, $telephonenumber);
+                        
+//                        if ($ret <= 0) {
+//                            $errors = $errors . "Fout opgetreden bij het opslaan van de leverancier.\r\nHet product kon niet toegevoegd worden.";
+//                        }
                     } else {
                         $errors = $errors . "Fout opgetreden bij het opslaan van de leverancier.\r\nHet product kon niet toegevoegd worden.";
                     }
@@ -76,7 +78,7 @@ if (isset($_FILES['image'])) {
             }
         }
 
-        if ($errors == "") {            
+        if ($errors == "") {
             $count = $productModel->checkIfProductIsUnique($productname, $suppliername);
 
             if ($count == 0) {

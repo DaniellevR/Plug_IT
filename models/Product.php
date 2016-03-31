@@ -89,7 +89,7 @@ class Product extends Database {
 
     public function checkIfProductIsUnique($name, $supplier) {
         if ($this->establishConnection()) {
-            $sql = "SELECT COUNT(*) as cnt FROM product WHERE name = '" . $this->conn->real_escape_string($name) . "' AND supplier_name = " . $this->conn->real_escape_string($supplier);
+            $sql = "SELECT COUNT(*) as cnt FROM product WHERE name = '" . $this->conn->real_escape_string($name) . "' AND supplier_name = '" . $this->conn->real_escape_string($supplier) . "'";
             $result = $this->conn->query($sql);
 
             $count = -1;

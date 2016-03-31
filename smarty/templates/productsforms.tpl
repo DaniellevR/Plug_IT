@@ -1,7 +1,7 @@
 {extends file='admin.tpl'}
 {block name=productsforms}
     <div class="adminpart">
-        <form>
+        <form action="handlers/UploadProductHandler.php" method="POST" enctype="multipart/form-data">
             <h3>Product toevoegen</h3>
             <h5>Productinformatie</h5>
             <label>Productnaam:</label>
@@ -51,7 +51,7 @@
                 <label>Adres:</label>
                 <input type="text" name="streetname" required="true" placeholder="Straatnaam">
                 <input class="small_field" type="text" name="housenumber" required="true" placeholder="nr">
-                <input class="small_field" type="text" name="housenumberSuffix" required="true" placeholder="tv">
+                <input class="small_field" type="text" name="housenumberSuffix" placeholder="tv">
                 <label>Postcode:</label>
                 <input type="text" name="postalCode" required="true">
                 <label>Woonplaats:</label>
