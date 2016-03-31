@@ -1,6 +1,7 @@
 <?php
 
-include('controllers/MainCtrl.php');
+$root = realpath($_SERVER["DOCUMENT_ROOT"]);
+require_once($root . "/Plug_IT/controllers/MainCtrl.php");
 
 class Controller extends MainCtrl {
 

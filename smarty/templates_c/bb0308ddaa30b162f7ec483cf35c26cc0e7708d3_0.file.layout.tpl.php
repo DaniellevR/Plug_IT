@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-03-31 16:36:27
+/* Smarty version 3.1.29, created on 2016-03-31 17:23:41
   from "C:\wamp\www\Plug_IT\smarty\templates\layout.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56fd35ebd5fb70_98541855',
+  'unifunc' => 'content_56fd40fdb0d7a8_72541406',
   'file_dependency' => 
   array (
     'bb0308ddaa30b162f7ec483cf35c26cc0e7708d3' => 
     array (
       0 => 'C:\\wamp\\www\\Plug_IT\\smarty\\templates\\layout.tpl',
-      1 => 1459434978,
+      1 => 1459437791,
       2 => 'file',
     ),
   ),
@@ -19,7 +19,7 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_56fd35ebd5fb70_98541855 ($_smarty_tpl) {
+function content_56fd40fdb0d7a8_72541406 ($_smarty_tpl) {
 $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, false);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
@@ -27,7 +27,7 @@ $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, false);
     <head> 
         <title><?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'title', array (
-  0 => 'block_71556fd35ebc334c7_18369421',
+  0 => 'block_2304956fd40fd9e1060_52421071',
   1 => false,
   3 => 0,
   2 => 0,
@@ -50,7 +50,7 @@ $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'title', array (
 >
     <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'head', array (
-  0 => 'block_1501656fd35ebc3c6f8_05082458',
+  0 => 'block_1742256fd40fd9ea3d1_21641369',
   1 => false,
   3 => 0,
   2 => 0,
@@ -89,7 +89,7 @@ $__foreach_nav_0_saved_local_item = $_smarty_tpl->tpl_vars['nav'];
                                 <?php }?>
                             <?php } elseif ($_smarty_tpl->tpl_vars['nav']->value->name === "Uitloggen") {?>
                                 <?php if (isset($_COOKIE['PHPSESSID'])) {?>
-                                <li><a onclick="" href=""><?php echo $_smarty_tpl->tpl_vars['nav']->value->name;?>
+                                <li><a onclick="logout(this, event);" href=""><?php echo $_smarty_tpl->tpl_vars['nav']->value->name;?>
 </a></li>
                                 <?php }?>
                             <?php } else { ?>
@@ -233,7 +233,7 @@ $_smarty_tpl->tpl_vars['parent'] = $__foreach_parent_3_saved_item;
             </div>
         <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'body', array (
-  0 => 'block_2297756fd35ebd3ec19_09923823',
+  0 => 'block_2820756fd40fdaecf63_65848565',
   1 => false,
   3 => 0,
   2 => 0,
@@ -273,17 +273,17 @@ $_smarty_tpl->tpl_vars['nav'] = $__foreach_nav_5_saved_item;
 </html>
 <?php }
 /* {block 'title'}  file:layout.tpl */
-function block_71556fd35ebc334c7_18369421($_smarty_tpl, $_blockParentStack) {
+function block_2304956fd40fd9e1060_52421071($_smarty_tpl, $_blockParentStack) {
 ?>
 Plug IT<?php
 }
 /* {/block 'title'} */
 /* {block 'head'}  file:layout.tpl */
-function block_1501656fd35ebc3c6f8_05082458($_smarty_tpl, $_blockParentStack) {
+function block_1742256fd40fd9ea3d1_21641369($_smarty_tpl, $_blockParentStack) {
 }
 /* {/block 'head'} */
 /* {block 'body'}  file:layout.tpl */
-function block_2297756fd35ebd3ec19_09923823($_smarty_tpl, $_blockParentStack) {
+function block_2820756fd40fdaecf63_65848565($_smarty_tpl, $_blockParentStack) {
 }
 /* {/block 'body'} */
 }

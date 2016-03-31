@@ -9,7 +9,7 @@
             </div>
         {/if}
 
-        {if isset($smarty.cookies.PHPSESSID)}
+        {if isset($smarty.cookies.PHPSESSID) && isset($smarty.session.usertype)}
             {*            { && $smarty.session.usertype === "Admin"}*}
             <ul class="adminpnl">
                 {if $smarty.get.page === 'AdminCategories'}

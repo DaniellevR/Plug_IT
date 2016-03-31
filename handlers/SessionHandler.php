@@ -9,8 +9,6 @@
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once($root . "/Plug_IT/controllers/Controller.php");
 
-
-
 if (isset($_POST['action']) && !empty($_POST['action'])) {
     $action = $_POST['action'];
     $ctrl = new Controller();

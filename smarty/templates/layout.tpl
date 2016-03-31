@@ -26,7 +26,7 @@
                                 {/if}
                             {elseif $nav->name === "Uitloggen"}
                                 {if isset($smarty.cookies.PHPSESSID)}
-                                <li><a onclick="" href="">{$nav->name}</a></li>
+                                <li><a onclick="logout(this, event);" href="">{$nav->name}</a></li>
                                 {/if}
                             {else}
                             <li><a href="/Plug_IT/index.php?page={$nav->page}">{$nav->name}</a></li>

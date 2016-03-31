@@ -143,7 +143,7 @@ class MainCtrl {
 
         return $sideNavigation;
     }
-    
+
     public function getSuppliers() {
         $supplierModel = new Supplier();
         $suppliers = $supplierModel->getSuppliers();
@@ -185,16 +185,18 @@ class MainCtrl {
             session_start();
             echo "/Plug_IT/index.php?page=Home";
 
+            $_SESSION["username"] = "Plug IT";
             $_SESSION["usertype"] = "Admin";
 //            $_SESSION["usertype"] = "Gebruiker";
         }
     }
 
     public function logoutUser() {
-        if (isset($_SESSION['user'])) {
-            session_destroy();
-        }
-        echo "/Plug_IT/index.php?page=Home";
+        session_start(); //to ensure you are using same session
+        session_destroy(); //destroy the session
+
+//        header("location: /Plug_IT/index.php?page=Home");
+        $this->Home();
     }
 
 }
