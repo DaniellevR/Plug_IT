@@ -22,7 +22,7 @@
                                 {/if}
                             {elseif $nav->name === "Mijn account"}
                                 {if isset($smarty.session.usertype)}
-                                <li><a href="/Plug_IT/index.php?page={$nav->page}">{$nav->name}</a></li>
+                                <li><a href="/Plug_IT/index.php?page={$nav->page}">{$smarty.session.username}</a></li>
                                 {/if}
                             {elseif $nav->name === "Uitloggen"}
                                 {if isset($smarty.session.usertype)}

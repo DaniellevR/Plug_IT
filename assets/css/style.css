@@ -27,6 +27,12 @@ div.sitecontainer {
     text-align: center;
 }
 
+.errortext {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+
 /* ==========================================================================
     CSS header.php
    ========================================================================== */

@@ -2,15 +2,14 @@
 {block name=body}
     <div class="content admin">
         <h1 class="test">Admin</h1>
-
-        {if $errors !== ""}
+        
+        {if $errors !== "" && $errors !== "Gebruikersnaam en/of wachtwoord is onjuist." && $errors !== "Er is iets misgegaan bij het inloggen. Probeer het opnieuw."}
             <div class="error">
                 {$errors}
             </div>
         {/if}
 
-        {if isset($smarty.cookies.PHPSESSID) && isset($smarty.session.usertype)}
-            {*            { && $smarty.session.usertype === "Admin"}*}
+        {if isset($smarty.cookies.PHPSESSID) && isset($smarty.session.usertype) && $smarty.session.usertype === "Administrator"}
             <ul class="adminpnl">
                 {if $smarty.get.page === 'AdminCategories'}
                     <li class="selected"><a href="/Plug_IT/index.php?page=AdminCategories">Categorieën</a></li>

@@ -49,6 +49,28 @@ class User extends Database {
         }
     }
 
+    public function loginCheck($username) {
+        if ($this->establishConnection()) {
+            $sql = "SELECT password, role_name FROM user WHERE username = '" . $this->conn->real_escape_string($username) . "'";
+            $result = $this->conn->query($sql);
+
+            $data = array();
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $data[] = $row['password'];
+                    $data[] = $row['role_name'];
+                }
+            }
+
+            $this->closeConnection();
+
+            return $data;
+        } else {
+            return "";
+        }
+    }
+
     public function addUser($username, $password, $firstname, $prefix, $lastname, $email, $telephonenumber, $rolename) {
         if ($this->establishConnection()) {
             $stmt = $this->conn->prepare("INSERT INTO user (username, password, firstname, prefix, lastname, email, telephonenumber, role_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");

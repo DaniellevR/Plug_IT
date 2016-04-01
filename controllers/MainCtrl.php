@@ -180,23 +180,42 @@ class MainCtrl {
         return $outputProducts;
     }
 
-    public function loginUser() {
+    public function loginUser() {        
         if (isset($_POST["username"]) && isset($_POST["password"])) {
-            session_start();
-            echo "/Plug_IT/index.php?page=Home";
+            $username = $_POST["username"];
+            $password = $_POST["password"];
+            
+            $userModel = new User();
+            $data = $userModel->loginCheck($username);
 
-            $_SESSION["username"] = "Plug IT";
-            $_SESSION["usertype"] = "Admin";
-//            $_SESSION["usertype"] = "Gebruiker";
+            $givenHashedPassword = crypt($password, $data[0]);
+
+            if ($givenHashedPassword === $data[0]) {
+                $_SESSION["username"] = $_POST["username"];
+                $_SESSION["usertype"] = $data[1];
+                echo $data[1];
+            } else {
+                $_SESSION["errors"] = "Gebruikersnaam en/of wachtwoord is onjuist.";
+                echo "error";
+            }
+        } else {
+            $_SESSION["errors"] = "Er is iets misgegaan bij het inloggen. Probeer het opnieuw.";
+            echo "error";
         }
     }
 
     public function logoutUser() {
-        session_start(); //to ensure you are using same session
-        session_destroy(); //destroy the session
+        unset($_SESSION['username']);
+        unset($_SESSION['usertype']);
+        session_write_close();
+    }
 
-//        header("location: /Plug_IT/index.php?page=Home");
-        $this->Home();
+    public function hash($password) {
+        $cost = 10;
+        $salt = strtr(base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM)), '+', '.');
+        $salt = sprintf("$2a$%02d$", $cost) . $salt;
+        $hash = crypt($password, $salt);
+        return $hash;
     }
 
 }
