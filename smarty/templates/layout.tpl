@@ -92,7 +92,6 @@
             {foreach from=$navigation[1] item=nav }
                 <li><a href="/Plug_IT/index.php?page={$nav->page}">{$nav->name}</a></li>
                 {/foreach}
-            <li><a href="/Plug_IT/index.php?page=Tasks">Taakverdeling</a></li>
         </ul>
     </div>
 </div>

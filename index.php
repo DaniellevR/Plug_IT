@@ -1,7 +1,7 @@
 <?php
 
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once($root . "/Plug_IT/models/NavigationItem.php");
+require_once($root . "/Plug_IT/models/NavigationItem.inc.php");
 require_once($root . "/Plug_IT/controllers/Controller.php");
 require_once($root . "/Plug_IT/controllers/AdminController.php");
 require_once($root . "/Plug_IT/controllers/CatalogueController.php");

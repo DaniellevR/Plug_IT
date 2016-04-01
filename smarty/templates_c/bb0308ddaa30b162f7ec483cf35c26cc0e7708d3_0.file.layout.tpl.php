@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-04-01 21:28:59
+/* Smarty version 3.1.29, created on 2016-04-01 22:26:48
   from "C:\wamp\www\Plug_IT\smarty\templates\layout.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56fecbfb234de0_94682303',
+  'unifunc' => 'content_56fed9881ca201_50078746',
   'file_dependency' => 
   array (
     'bb0308ddaa30b162f7ec483cf35c26cc0e7708d3' => 
     array (
       0 => 'C:\\wamp\\www\\Plug_IT\\smarty\\templates\\layout.tpl',
-      1 => 1459538929,
+      1 => 1459542221,
       2 => 'file',
     ),
   ),
@@ -19,7 +19,7 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_56fecbfb234de0_94682303 ($_smarty_tpl) {
+function content_56fed9881ca201_50078746 ($_smarty_tpl) {
 $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, false);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
@@ -27,7 +27,7 @@ $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, false);
     <head> 
         <title><?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'title', array (
-  0 => 'block_269456fecbfb1040a2_22011589',
+  0 => 'block_1921356fed9880a24c6_91907107',
   1 => false,
   3 => 0,
   2 => 0,
@@ -50,7 +50,7 @@ $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'title', array (
 >
     <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'head', array (
-  0 => 'block_3258356fecbfb10d379_08870447',
+  0 => 'block_685056fed9880aa0e3_28770201',
   1 => false,
   3 => 0,
   2 => 0,
@@ -233,7 +233,7 @@ $_smarty_tpl->tpl_vars['parent'] = $__foreach_parent_3_saved_item;
             </div>
         <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'body', array (
-  0 => 'block_88456fecbfb214e90_91494869',
+  0 => 'block_1249956fed9881aa2b4_04327077',
   1 => false,
   3 => 0,
   2 => 0,
@@ -265,7 +265,6 @@ if ($__foreach_nav_5_saved_item) {
 $_smarty_tpl->tpl_vars['nav'] = $__foreach_nav_5_saved_item;
 }
 ?>
-            <li><a href="/Plug_IT/index.php?page=Tasks">Taakverdeling</a></li>
         </ul>
     </div>
 </div>
@@ -273,17 +272,17 @@ $_smarty_tpl->tpl_vars['nav'] = $__foreach_nav_5_saved_item;
 </html>
 <?php }
 /* {block 'title'}  file:layout.tpl */
-function block_269456fecbfb1040a2_22011589($_smarty_tpl, $_blockParentStack) {
+function block_1921356fed9880a24c6_91907107($_smarty_tpl, $_blockParentStack) {
 ?>
 Plug IT<?php
 }
 /* {/block 'title'} */
 /* {block 'head'}  file:layout.tpl */
-function block_3258356fecbfb10d379_08870447($_smarty_tpl, $_blockParentStack) {
+function block_685056fed9880aa0e3_28770201($_smarty_tpl, $_blockParentStack) {
 }
 /* {/block 'head'} */
 /* {block 'body'}  file:layout.tpl */
-function block_88456fecbfb214e90_91494869($_smarty_tpl, $_blockParentStack) {
+function block_1249956fed9881aa2b4_04327077($_smarty_tpl, $_blockParentStack) {
 }
 /* {/block 'body'} */
 }

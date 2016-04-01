@@ -1,12 +1,12 @@
 <?php
 
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once($root . "/Plug_IT/models/Category.php");
-require_once($root . "/Plug_IT/models/Product.php");
-require_once($root . "/Plug_IT/models/User.php");
-require_once($root . "/Plug_IT/models/Role.php");
-require_once($root . "/Plug_IT/models/Address.php");
-require_once($root . "/Plug_IT/models/Supplier.php");
+require_once($root . "/Plug_IT/models/Category.inc.php");
+require_once($root . "/Plug_IT/models/Product.inc.php");
+require_once($root . "/Plug_IT/models/User.inc.php");
+require_once($root . "/Plug_IT/models/Role.inc.php");
+require_once($root . "/Plug_IT/models/Address.inc.php");
+require_once($root . "/Plug_IT/models/Supplier.inc.php");
 
 $action = $_GET['action'];
 

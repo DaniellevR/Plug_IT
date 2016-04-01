@@ -1,11 +1,11 @@
 <?php
 
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once($root . "/Plug_IT/models/NavigationItem.php");
-require_once($root . "/Plug_IT/models/Category.php");
-require_once($root . "/Plug_IT/models/Supplier.php");
-require_once($root . "/Plug_IT/models/User.php");
-require_once($root . "/Plug_IT/models/Role.php");
+require_once($root . "/Plug_IT/models/NavigationItem.inc.php");
+require_once($root . "/Plug_IT/models/Category.inc.php");
+require_once($root . "/Plug_IT/models/Supplier.inc.php");
+require_once($root . "/Plug_IT/models/User.inc.php");
+require_once($root . "/Plug_IT/models/Role.inc.php");
 
 class MainCtrl {
 

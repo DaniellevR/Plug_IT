@@ -2,7 +2,7 @@
 
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once($root . "/Plug_IT/controllers/AdminController.php");
-require_once($root . "/Plug_IT/models/Category.php");
+require_once($root . "/Plug_IT/models/Category.inc.php");
 
 if (isset($_FILES['image'])) {
     $errors = "";
