@@ -2,7 +2,7 @@
 
 //require_once('models/database.php');
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once($root . "/Plug_IT/models/Database.php");
+require_once($root . "/Plug_IT/models/Database.inc.php");
 
 /*
  * To change this license header, choose License Headers in Project Properties.

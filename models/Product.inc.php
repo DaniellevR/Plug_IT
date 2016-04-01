@@ -1,7 +1,7 @@
 <?php
 
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once($root . "/Plug_IT/models/Database.php");
+require_once($root . "/Plug_IT/models/Database.inc.php");
 
 /**
  * Description of Product
