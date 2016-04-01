@@ -18,6 +18,7 @@ class Controller extends MainCtrl {
             unset($_SESSION["errors"]);
         }
         $smarty->assign('errors', $errors);
+        
         $smarty->assign('navigation', $navi);
         $smarty->assign('categories', $sideNavigation);
         $smarty->assign('suppliers', $this->getSuppliers());
