@@ -37,6 +37,11 @@ a:visited {
     color: blue;
 }
 
+.noadditionalDesign {
+    border: none;
+    background-color: transparent;
+}
+
 /* ==========================================================================
     CSS header.php
    ========================================================================== */

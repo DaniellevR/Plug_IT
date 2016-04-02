@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-03-31 16:51:46
+/* Smarty version 3.1.29, created on 2016-04-02 14:26:55
   from "C:\wamp\www\Plug_IT\smarty\templates\catalogue.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56fd39827a4417_11161449',
+  'unifunc' => 'content_56ffba8f6ad911_62533839',
   'file_dependency' => 
   array (
     'f1ba6917c84a89e59396e5b3b24b45fa6552882b' => 
     array (
       0 => 'C:\\wamp\\www\\Plug_IT\\smarty\\templates\\catalogue.tpl',
-      1 => 1459435899,
+      1 => 1459600012,
       2 => 'file',
     ),
   ),
@@ -20,13 +20,13 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
     'file:layout.tpl' => 1,
   ),
 ),false)) {
-function content_56fd39827a4417_11161449 ($_smarty_tpl) {
+function content_56ffba8f6ad911_62533839 ($_smarty_tpl) {
 $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'body', array (
-  0 => 'block_1609156fd39826dc3d3_57172287',
+  0 => 'block_1361756ffba8f5dd2a3_68966743',
   1 => false,
   3 => 0,
   2 => 0,
@@ -37,7 +37,7 @@ $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'body', array (
 $_smarty_tpl->smarty->ext->_subtemplate->render($_smarty_tpl, "file:layout.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'}  file:catalogue.tpl */
-function block_1609156fd39826dc3d3_57172287($_smarty_tpl, $_blockParentStack) {
+function block_1361756ffba8f5dd2a3_68966743($_smarty_tpl, $_blockParentStack) {
 ?>
 
     <div class="content">
@@ -190,7 +190,7 @@ $__foreach_product_3_saved_local_item = $_smarty_tpl->tpl_vars['product'];
 </p>
                     </div>
                     <div class="input">
-                        <form action="/Plug_IT/index.php?page=Cart" method="post">
+                        <form class="noadditionalDesign" action="/Plug_IT/index.php?page=Cart" method="post">
                             <input name="amount" type="number" min="1" step="1" value="1" />
                             <input name="page" value="Cart" hidden/>
                             <input name="id" value="<?php echo $_smarty_tpl->tpl_vars['product']->value->id;?>

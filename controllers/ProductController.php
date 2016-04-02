@@ -2,6 +2,7 @@
 
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once($root . "/Plug_IT/controllers/MainCtrl.php");
+require_once($root . "/Plug_IT/models/Product.inc.php");
 
 class ProductController extends MainCtrl {
 
@@ -24,7 +25,6 @@ class ProductController extends MainCtrl {
     }
 
     public function getProductFromId($id) {
-        require_once 'models/Product.php';
         $product = new Product();
 
         $outputProduct = $product->getProductFromId($id);
@@ -33,7 +33,6 @@ class ProductController extends MainCtrl {
     }
 
     public function getProductFromCategoryId($catId) {
-        require_once 'models/Product.php';
         $product = new Product();
         $products = $product->getProductsFromCategoryId($catId);
 

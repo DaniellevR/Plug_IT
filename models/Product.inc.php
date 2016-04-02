@@ -119,6 +119,36 @@ class Product extends Database {
             return false;
         }
     }
+    
+    public function getProductFromId($id) {
+        if ($this->establishConnection()) {
+            $sql = "SELECT * FROM product WHERE id = " . $id;
+            $result = $this->conn->query($sql);
+            if ($result == null) {
+                return;
+            }
+
+            $product;
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $product = new Product();
+                    $product->id = $row['id'];
+                    $product->name = $row['name'];
+                    $product->description = $row['description'];
+                    $product->price = $row['price'];
+                    $product->brand = $row['brand'];
+                    $product->supplier = $row['supplier_name'];
+                    $product->amount = $row['amount'];
+                    $product->category_id = $row['category_id'];
+                }
+            }
+
+            $this->closeConnection();
+
+            return $product;
+        }
+    }
 
     public function checkIfProductIsUnique($name, $supplier) {
         if ($this->establishConnection()) {
