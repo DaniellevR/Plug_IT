@@ -3,7 +3,7 @@
     <div class="content admin">
         <h1 class="test">Admin</h1>
         
-        {if $errors !== "" && $errors !== "Gebruikersnaam en/of wachtwoord is onjuist." && $errors !== "Er is iets misgegaan bij het inloggen. Probeer het opnieuw."}
+        {if $errors !== "" && $action !== "addUser" && $action !== "login"}
             <div class="error">
                 {$errors}
             </div>

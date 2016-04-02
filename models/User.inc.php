@@ -80,7 +80,7 @@ class User extends Database {
 
             $this->closeConnection();
 
-            return $username;
+            return 1;
         } else {
             return -1;
         }

@@ -4,44 +4,26 @@
  * and open the template in the editor.
  */
 
-//function login(sender, e, page) {
-//    e.preventDefault();
-//
-//    jQuery.ajax({
-//        type: "POST",
-//        url: 'http://localhost/Plug_IT/handlers/SessionHandler.php',
-//        data: {action: 'login', username: document.getElementsByName('username')[0].value, password: document.getElementsByName('password')[0].value},
-//        success: function() {
-//            window.location = "/Plug_IT/index.php?page=" + page;
-//            return true;
-//        },
-//        error: function(response) {
-//            alert("e : " + JSON.stringify(response));
-//            return false;
-//        }
-//    });
-//}
-
-var QueryString = function () {
-  // This function is anonymous, is executed immediately and 
-  // the return value is assigned to QueryString!
-  var query_string = {};
-  var query = window.location.search.substring(1);
-  var vars = query.split("&");
-  for (var i=0;i<vars.length;i++) {
-    var pair = vars[i].split("=");
+var QueryString = function() {
+    // This function is anonymous, is executed immediately and 
+    // the return value is assigned to QueryString!
+    var query_string = {};
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
         // If first entry with this name
-    if (typeof query_string[pair[0]] === "undefined") {
-      query_string[pair[0]] = decodeURIComponent(pair[1]);
-        // If second entry with this name
-    } else if (typeof query_string[pair[0]] === "string") {
-      var arr = [ query_string[pair[0]],decodeURIComponent(pair[1]) ];
-      query_string[pair[0]] = arr;
-        // If third or later entry with this name
-    } else {
-      query_string[pair[0]].push(decodeURIComponent(pair[1]));
+        if (typeof query_string[pair[0]] === "undefined") {
+            query_string[pair[0]] = decodeURIComponent(pair[1]);
+            // If second entry with this name
+        } else if (typeof query_string[pair[0]] === "string") {
+            var arr = [query_string[pair[0]], decodeURIComponent(pair[1])];
+            query_string[pair[0]] = arr;
+            // If third or later entry with this name
+        } else {
+            query_string[pair[0]].push(decodeURIComponent(pair[1]));
+        }
     }
-  } 
     return query_string;
 }();
 
@@ -53,15 +35,26 @@ function login(sender, e) {
         url: 'http://localhost/Plug_IT/handlers/SessionHandler.php',
         data: {action: 'login', username: document.getElementsByName('username')[0].value, password: document.getElementsByName('password')[0].value},
         success: function(response) {
-            if (response === "error") {
-                window.location = "/Plug_IT/index.php?page=Login";
-            } else if (response === "Administrator") {
-                window.location = "/Plug_IT/index.php?page=AdminCategories";
-            } else if (response === "User") {
+            if (response === "User") {
                 window.location = "/Plug_IT/index.php?page=Home";
             } else {
-                window.location = "/Plug_IT/index.php?page=" + QueryString.page;
+                if (QueryString.page === "Admin") {
+                    window.location = "/Plug_IT/index.php?page=AdminCategories";
+                } else {
+                    window.location = "/Plug_IT/index.php?page=" + QueryString.page;
+                }
             }
+
+
+//            if (response === "error") {
+//                window.location = "/Plug_IT/index.php?page=" + QueryString.page;
+//            } else if (response === "Administrator") {
+//                window.location = "/Plug_IT/index.php?page=" + QueryString.page;
+//            } else if (response === "User") {
+//                window.location = "/Plug_IT/index.php?page=Home";
+//            } else {
+//                window.location = "/Plug_IT/index.php?page=" + QueryString.page;
+//            }
         }
     });
 }
@@ -80,7 +73,7 @@ function logout(sender, e) {
 
 function removeCategory(sender, e) {
     e.preventDefault();
-    
+
     jQuery.ajax({
         type: "POST",
         url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
@@ -106,6 +99,7 @@ function removeProduct(sender, e) {
 function addUser(sender, e) {
 //    firstname, prefix, lastname, email, telephonenumber, streetname, housenumber, housenumberSuffix, postalCode, city, username, roles, password, repeat_password
     e.preventDefault();
+
     jQuery.ajax({
         type: "POST",
         url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
@@ -115,9 +109,16 @@ function addUser(sender, e) {
             housenumber: document.getElementsByName('housenumberAddUser')[0].value, housenumberSuffix: document.getElementsByName('housenumberSuffixAddUser')[0].value,
             postalCode: document.getElementsByName('postalCodeAddUser')[0].value, city: document.getElementsByName('cityAddUser')[0].value,
             username: document.getElementsByName('username')[0].value, role: document.getElementsByName('roles')[0].value,
-            password: document.getElementsByName('password')[0].value, repeatPassword: document.getElementsByName('repeat_password')[0].value},
-        success: function() {
-            window.location = "/Plug_IT/index.php?page=Admin";
+            password: document.getElementsByName('password')[0].value, repeatPassword: document.getElementsByName('repeat_password')[0].value,
+            page: document.getElementsByName('page')[0].value},
+        success: function(response) {
+            if (response === "error") {
+                window.location = "/Plug_IT/index.php?page=" + QueryString.page;
+            } else if (QueryString.page === "AdminUsers") {
+                window.location = "/Plug_IT/index.php?page=AdminUsers";
+            } else {
+                window.location = "/Plug_IT/index.php?page=Home";
+            }
         }
     });
 }

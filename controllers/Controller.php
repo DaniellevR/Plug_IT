@@ -12,6 +12,13 @@ class Controller extends MainCtrl {
         $navi = $this->getNavigationItems();
         $sideNavigation = $this->getCategories();
 
+        $action = "";
+        if (isset($_SESSION["action"])) {
+            $action = $_SESSION["action"];
+            unset($_SESSION["action"]);
+        }
+        $smarty->assign('action', $action);
+
         $errors = "";
         if (isset($_SESSION["errors"])) {
             $errors = $_SESSION["errors"];
@@ -19,6 +26,8 @@ class Controller extends MainCtrl {
         }
         $smarty->assign('errors', $errors);
         
+        $smarty->assign('page', $name);
+
         $smarty->assign('navigation', $navi);
         $smarty->assign('categories', $sideNavigation);
         $smarty->assign('suppliers', $this->getSuppliers());

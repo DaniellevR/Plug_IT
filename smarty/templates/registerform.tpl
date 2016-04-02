@@ -1,7 +1,18 @@
 {block name=registerform}
     <form method="POST" enctype="multipart/form-data" onsubmit="addUser(this, event);">
+
+        {if $errors !== ""}
+            <div class="errortext">
+                {$errors}
+            </div>
+        {/if}
+        
+        <input type="hidden" name="page" value="{$page}">
+        
         <div>
-            <h3>Gebruiker toevoegen</h3>
+            {if isset($smarty.get.page) && $smarty.get.page !== "Register"}
+                <h3>Gebruiker toevoegen</h3>
+            {/if}
             <h5>Persoonsgegevens</h5>
         </div>
         <div>
@@ -10,7 +21,7 @@
         </div>
         <div>
             <label></label>
-            <input type="text" id="prefix" name="prefix" required="true" placeholder="tv">
+            <input type="text" id="prefix" name="prefix" required="true" placeholder="Tussenvoegsel">
         </div>
         <div>
             <label></label>
@@ -18,7 +29,7 @@
         </div>
         <div>
             <label for="email">Email</label>
-            <input type="email" id="email"  required="true"/>
+            <input type="email" id="email" name="email"  required="true"/>
         </div>
         <div>
             <label for="telephonenumber">Telefoonnummer</label>
@@ -32,11 +43,11 @@
         </div>
         <div>
             <label></label>
-            <input type="text" name="housenumberAddUser" required="true" placeholder="nr">
+            <input type="text" name="housenumberAddUser" required="true" placeholder="Huisnummer">
         </div>
         <div>
             <label></label>
-            <input type="text" name="housenumberSuffixAddUser" placeholder="tv">
+            <input type="text" name="housenumberSuffixAddUser" placeholder="Huisnummertoevoeging">
         </div>
         <div>
             <label for="postalCode">Postcode</label>
@@ -82,7 +93,7 @@
         </div>
         <div>
             <label></label>
-            <input type="submit" value="Registreren" id="addUser" class="button"/>
+            <button type="submit" value="Registreren" class="button">Registreren</button>
         </div>
     </form>
 {/block}

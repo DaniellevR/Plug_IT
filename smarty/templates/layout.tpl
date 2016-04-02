@@ -52,6 +52,8 @@
                         {/foreach}
                     {/if}
                 {/if}
+                
+                <h1 class="testfunction">Testfunctie</h1>
             </div>
 
             <a href="/Plug_IT/index.php?page=Home"> <img src="/Plug_IT/assets/pix/logo.png" alt="Plug IT.nl" /></a>

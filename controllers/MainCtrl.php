@@ -180,7 +180,9 @@ class MainCtrl {
         return $outputProducts;
     }
 
-    public function loginUser() {        
+    public function loginUser() {
+        $_SESSION["action"] = "login";
+        
         if (isset($_POST["username"]) && isset($_POST["password"])) {
             $username = $_POST["username"];
             $password = $_POST["password"];

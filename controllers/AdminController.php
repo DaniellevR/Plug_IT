@@ -18,12 +18,21 @@ class AdminController extends MainCtrl {
         $navi = $this->getNavigationItems();
         $sideNavigation = $this->getCategories();
 
+        $action = "";
+        if (isset($_SESSION["action"])) {
+            $action = $_SESSION["action"];
+            unset($_SESSION["action"]);
+        }
+        $smarty->assign('action', $action);
+
         $errors = "";
         if (isset($_SESSION["errors"])) {
             $errors = $_SESSION["errors"];
             unset($_SESSION["errors"]);
         }
         $smarty->assign('errors', $errors);
+
+        $smarty->assign('page', $name);
 
         $smarty->assign('navigation', $navi);
         $smarty->assign('categories', $sideNavigation);
@@ -71,7 +80,9 @@ class AdminController extends MainCtrl {
     }
 
     public function addUser() {
-        if (isset($_POST["firstname"]) && isset($_POST["prefix"]) && isset($_POST["lastname"]) && isset($_POST["email"]) && isset($_POST["telephonenumber"]) && isset($_POST["streetname"]) && isset($_POST["housenumber"]) && isset($_POST["housenumberSuffix"]) && isset($_POST["postalCode"]) && isset($_POST["city"]) && isset($_POST["username"]) && isset($_POST["role"]) && isset($_POST["password"]) && isset($_POST["repeatPassword"])) {
+        $_SESSION["action"] = "addUser";
+
+        if (isset($_POST["firstname"]) && isset($_POST["prefix"]) && isset($_POST["lastname"]) && isset($_POST["email"]) && isset($_POST["telephonenumber"]) && isset($_POST["streetname"]) && isset($_POST["housenumber"]) && isset($_POST["housenumberSuffix"]) && isset($_POST["postalCode"]) && isset($_POST["city"]) && isset($_POST["username"]) && isset($_POST["role"]) && isset($_POST["password"]) && isset($_POST["repeatPassword"]) && isset($_POST["page"])) {
             $firstname = $_POST["firstname"];
             $prefix = $_POST["prefix"];
             $lastname = $_POST["lastname"];
@@ -86,31 +97,63 @@ class AdminController extends MainCtrl {
             $rolename = $_POST["role"];
             $password = $_POST["password"];
             $repeatPassword = $_POST["repeatPassword"];
+            $page = $_POST["page"];
 
-            $userModel = new User();
+            if (strcmp($password, $repeatPassword) === 0) {
+                $userModel = new User();
 
-            // Check existance username
-            $users = $userModel->getUsers();
-            $usernameFound = "FALSE";
-            foreach ($users as $user) {
-                if ($user->username === $username) {
-                    $usernameFound = "TRUE";
-                    break;
+                // Check existance username
+                $users = $userModel->getUsers();
+                $usernameFound = "FALSE";
+                foreach ($users as $user) {
+                    if ($user->username === $username) {
+                        $usernameFound = "TRUE";
+                        break;
+                    }
                 }
-            }
 
-            if ($usernameFound === "TRUE") {
-                // Already exists
+                if ($usernameFound === "TRUE") {
+                    // Already exists
+                    $_SESSION["errors"] = "Gebruikersnaam is al in gebruik.";
+                    echo "error";
+                } else {
+                    // Check (and add) address
+                    $addressId = $this->checkAndAddAddress($streetname, $housenumber, $city, $housenumberSuffix, $postalCode);
+
+                    if ($addressId > 0) {
+                        // Add user
+                        $hashedPassword = $this->hash($password);
+                        $user_id = $userModel->addUser($username, $hashedPassword, $firstname, $prefix, $lastname, $email, $telephonenumber, $rolename);
+
+                        if ($user_id === 1) {
+                            // Add user and address connection
+                            $ret = $userModel->connectUserWithAddress($username, $addressId);
+                            if ($ret === 1) {
+                                // Session
+                                if ($page === "register") {
+                                    $_SESSION["username"] = $username;
+                                    $_SESSION["usertype"] = $rolename;
+                                }
+                            } else {
+                                $_SESSION["errors"] = "U bent geregistreerd, maar uw adres kon niet gekoppeld worden aan uw account.";
+                                echo "error";
+                            }
+                        } else {
+                            $_SESSION["errors"] = "Er is een fout opgetreden bij het registreren. Probeer het opnieuw.";
+                            echo "error";
+                        }
+                    } else {
+                        $_SESSION["errors"] = "Kon het adres niet toevoegen in de database.\r\nU bent niet geregistreerd. Probeer het opnieuw.";
+                        echo "error";
+                    }
+                }
             } else {
-                // Check (and add) address
-                $addressId = $this->checkAndAddAddress($streetname, $housenumber, $city, $housenumberSuffix, $postalCode);
-
-                // Add user
-                $user_id = $userModel->addUser($username, $password, $firstname, $prefix, $lastname, $email, $telephonenumber, $rolename);
-
-                // Add user and address connection
-                $userModel->connectUserWithAddress($username, $addressId);
+                $_SESSION["errors"] = "Het herhaalde wachtwoord komt niet overeen.";
+                echo "error";
             }
+        } else {
+            $_SESSION["errors"] = "Er is een fout opgetreden. Probeer het opnieuw.";
+            echo "error";
         }
     }
 

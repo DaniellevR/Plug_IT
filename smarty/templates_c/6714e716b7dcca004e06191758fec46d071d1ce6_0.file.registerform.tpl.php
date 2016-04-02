@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-03-31 22:11:27
+/* Smarty version 3.1.29, created on 2016-04-02 14:10:08
   from "C:\wamp\www\Plug_IT\smarty\templates\registerform.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56fd846fd79744_80229997',
+  'unifunc' => 'content_56ffb6a0e0c579_14477861',
   'file_dependency' => 
   array (
     '6714e716b7dcca004e06191758fec46d071d1ce6' => 
     array (
       0 => 'C:\\wamp\\www\\Plug_IT\\smarty\\templates\\registerform.tpl',
-      1 => 1459455013,
+      1 => 1459598815,
       2 => 'file',
     ),
   ),
@@ -19,22 +19,35 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_56fd846fd79744_80229997 ($_smarty_tpl) {
+function content_56ffb6a0e0c579_14477861 ($_smarty_tpl) {
 $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, false);
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'registerform', array (
-  0 => 'block_605956fd846fd25617_34203747',
+  0 => 'block_447756ffb6a0d9b5b5_65420208',
   1 => false,
   3 => 0,
   2 => 0,
 ));
 }
 /* {block 'registerform'}  file:registerform.tpl */
-function block_605956fd846fd25617_34203747($_smarty_tpl, $_blockParentStack) {
+function block_447756ffb6a0d9b5b5_65420208($_smarty_tpl, $_blockParentStack) {
 ?>
 
     <form method="POST" enctype="multipart/form-data" onsubmit="addUser(this, event);">
+
+        <?php if ($_smarty_tpl->tpl_vars['errors']->value !== '') {?>
+            <div class="errortext">
+                <?php echo $_smarty_tpl->tpl_vars['errors']->value;?>
+
+            </div>
+        <?php }?>
+        
+        <input type="hidden" name="page" value="<?php echo $_smarty_tpl->tpl_vars['page']->value;?>
+">
+        
         <div>
-            <h3>Gebruiker toevoegen</h3>
+            <?php if (isset($_GET['page']) && $_GET['page'] !== "Register") {?>
+                <h3>Gebruiker toevoegen</h3>
+            <?php }?>
             <h5>Persoonsgegevens</h5>
         </div>
         <div>
@@ -43,7 +56,7 @@ function block_605956fd846fd25617_34203747($_smarty_tpl, $_blockParentStack) {
         </div>
         <div>
             <label></label>
-            <input type="text" id="prefix" name="prefix" required="true" placeholder="tv">
+            <input type="text" id="prefix" name="prefix" required="true" placeholder="Tussenvoegsel">
         </div>
         <div>
             <label></label>
@@ -51,7 +64,7 @@ function block_605956fd846fd25617_34203747($_smarty_tpl, $_blockParentStack) {
         </div>
         <div>
             <label for="email">Email</label>
-            <input type="email" id="email"  required="true"/>
+            <input type="email" id="email" name="email"  required="true"/>
         </div>
         <div>
             <label for="telephonenumber">Telefoonnummer</label>
@@ -65,11 +78,11 @@ function block_605956fd846fd25617_34203747($_smarty_tpl, $_blockParentStack) {
         </div>
         <div>
             <label></label>
-            <input type="text" name="housenumberAddUser" required="true" placeholder="nr">
+            <input type="text" name="housenumberAddUser" required="true" placeholder="Huisnummer">
         </div>
         <div>
             <label></label>
-            <input type="text" name="housenumberSuffixAddUser" placeholder="tv">
+            <input type="text" name="housenumberSuffixAddUser" placeholder="Huisnummertoevoeging">
         </div>
         <div>
             <label for="postalCode">Postcode</label>
@@ -134,7 +147,7 @@ $_smarty_tpl->tpl_vars['role'] = $__foreach_role_0_saved_item;
         </div>
         <div>
             <label></label>
-            <input type="submit" value="Registreren" id="addUser" class="button"/>
+            <button type="submit" value="Registreren" class="button">Registreren</button>
         </div>
     </form>
 <?php
