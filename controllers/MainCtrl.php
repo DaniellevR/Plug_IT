@@ -6,6 +6,7 @@ require_once($root . "/Plug_IT/models/Category.inc.php");
 require_once($root . "/Plug_IT/models/Supplier.inc.php");
 require_once($root . "/Plug_IT/models/User.inc.php");
 require_once($root . "/Plug_IT/models/Role.inc.php");
+require_once($root . "/Plug_IT/models/Address.inc.php");
 
 class MainCtrl {
 
@@ -160,6 +161,12 @@ class MainCtrl {
         $userModel = new User();
         $users = $userModel->getUsers();
         return $users;
+    }
+    
+    public function getAddresses() {
+        $addressModel = new Address();
+        $addresses = $addressModel->getAddresses();
+        return $addresses;
     }
 
     public function getProductsByKeywords($keywords) {

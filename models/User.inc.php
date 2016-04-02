@@ -18,10 +18,20 @@ class User extends Database {
     public $email;
     public $telephonenumber;
     public $rolename;
+    
+    public $addressId;
+    public $streetname;
+    public $housenumber;
+    public $housenumber_suffix;
+    public $city;
+    public $postalCode;
 
-    public function getUsers() {
+        public function getUsers() {
         if ($this->establishConnection()) {
-            $sql = "SELECT * FROM user";
+            $sql = "SELECT user.username, user.password, user.firstname, user.prefix, user.lastname, user.email, user.telephonenumber, user.role_name, "
+                    . "address.address_id, address.streetname, address.housenumber, address.city, address.housenumber_suffix, address.postal_code "
+                    . "FROM user INNER JOIN user_has_address ON user.username = user_has_address.user_username "
+                    . "INNER JOIN address ON user_has_address.address_address_id = address.address_id";
             $result = $this->conn->query($sql);
 
             $users = array();
@@ -37,6 +47,14 @@ class User extends Database {
                     $user->email = $row['email'];
                     $user->telephonenumber = $row['telephonenumber'];
                     $user->rolename = $row['role_name'];
+                    
+                    $user->addressId = $row['address_id'];
+                    $user->streetname = $row['streetname'];
+                    $user->housenumber = $row['housenumber'];
+                    $user->housenumber_suffix = $row['housenumber_suffix'];
+                    $user->city = $row['city'];
+                    $user->postalCode = $row['postal_code'];
+                    
                     $users[] = $user;
                 }
             }
@@ -48,6 +66,36 @@ class User extends Database {
             return false;
         }
     }
+    
+//    public function getUsers() {
+//        if ($this->establishConnection()) {
+//            $sql = "SELECT * FROM user";
+//            $result = $this->conn->query($sql);
+//
+//            $users = array();
+//
+//            if ($result->num_rows > 0) {
+//                while ($row = $result->fetch_assoc()) {
+//                    $user = new User();
+//                    $user->username = $row['username'];
+//                    $user->password = $row['password'];
+//                    $user->firstname = $row['firstname'];
+//                    $user->prefix = $row['prefix'];
+//                    $user->lastname = $row['lastname'];
+//                    $user->email = $row['email'];
+//                    $user->telephonenumber = $row['telephonenumber'];
+//                    $user->rolename = $row['role_name'];
+//                    $users[] = $user;
+//                }
+//            }
+//
+//            $this->closeConnection();
+//
+//            return $users;
+//        } else {
+//            return false;
+//        }
+//    }
 
     public function loginCheck($username) {
         if ($this->establishConnection()) {

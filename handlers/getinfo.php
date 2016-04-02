@@ -106,7 +106,7 @@ else if ($action === 'getProductsFromCategoryRemoveProduct' || $action === 'getP
 
     echo '<div><h5>Persoonsgegevens</h5></div>';
     echo '<div><label for="firstname">Name</label><input type="text" id="firstname" name="firstname" required="true" placeholder="Voornaam" value="' . $foundUser->firstname . '"></div>';
-    echo '<div><label></label><input type="text" id="prefix" name="prefix" required="true" placeholder="tv" value="' . $foundUser->prefix . '"></div>';
+    echo '<div><label></label><input type="text" id="prefix" name="prefix" required="true" placeholder="Tussenvoegsel" value="' . $foundUser->prefix . '"></div>';
     echo '<div><label></label><input type="text" id="lastname" name="lastname" required="true" placeholder="Achternaam" value="' . $foundUser->lastname . '"></div>';
     echo '<div><label for="email">Email</label><input type="email" id="email"  required="true" value="' . $foundUser->email . '"/></div>';
     echo '<div><label for="telephonenumber">Telefoonnummer</label><input type="text" id="telephonenumber" name="telephonenumber" required="true" value="' . $foundUser->telephonenumber . '"></div>';
@@ -116,8 +116,8 @@ else if ($action === 'getProductsFromCategoryRemoveProduct' || $action === 'getP
         if (in_array($address->id, $idsAddresses)) {
             echo '<div><h5>Adresgegevens</h5></div>';
             echo '<div><label for="streetname">Adres</label><input type="text" id="streetname" name="streetnameAddUser" required="true" placeholder="Straatnaam" value="' . $address->streetname . '"></div>';
-            echo '<div><label></label><input type="text" name="housenumberAddUser" required="true" placeholder="nr" value="' . $address->housenumber . '"></div>';
-            echo '<div><label></label><input type="text" name="housenumberSuffixAddUser" placeholder="tv" value="' . $address->housenumberSuffix . '"></div>';
+            echo '<div><label></label><input type="text" name="housenumberAddUser" required="true" placeholder="Huisnummer" value="' . $address->housenumber . '"></div>';
+            echo '<div><label></label><input type="text" name="housenumberSuffixAddUser" placeholder="Huisnummertoevoeging" value="' . $address->housenumberSuffix . '"></div>';
             echo '<div><label for="postalCode">Postcode</label><input type="text" name="postalCodeAddUser" required="true" value="' . $address->postalCode . '"></div>';
             echo '<div><label for="city">Woonplaats</label><input type="text" name="cityAddUser" required="true" value="' . $address->city . '"></div>';
         }
@@ -141,10 +141,10 @@ else if ($action === 'getProductsFromCategoryRemoveProduct' || $action === 'getP
             }
             echo '</select></div>';
         } else {
-            echo '<input type="text" name="roles" value="User" required="true" hidden="true">';
+            echo '<input type="text" name="rolesEditUser" value="User" required="true" hidden="true">';
         }
     } else {
-        echo '<input type="text" name="roles" value="User" required="true" hidden="true">';
+        echo '<input type="text" name="rolesEditUser" value="User" required="true" hidden="true">';
     }
 
     echo '<div><label for="usernameEditUser">Gebruikersnaam</label><input type="text" id="usernameEditUser" name="usernameEditUser" readonly value="' . $username . '"></div>';
@@ -162,8 +162,8 @@ else if ($action === 'getProductsFromCategoryRemoveProduct' || $action === 'getP
         echo '<label>Email:</label><input type="email" name="email" required="true" value="' . $supplier->email . '">';
         echo '<label>Telefoonnummer:</label><input type="tel" name="telephonenumber" required="true" value="' . $supplier->telephonenumber . '">';
         echo '<label>Adres:</label><input type="text" name="streetname" required="true" placeholder="Straatnaam" value="' . $supplier->streetname . '">';
-        echo '<input class="small_field" type="text" name="housenumber" required="true" placeholder="nr" value="' . $supplier->housenumber . '">';
-        echo '<input class="small_field" type="text" name="housenumberSuffix" required="true" placeholder="tv" value="' . $supplier->housenumber_suffix . '">';
+        echo '<input class="small_field" type="text" name="housenumber" required="true" placeholder="Huisnummer" value="' . $supplier->housenumber . '">';
+        echo '<input class="small_field" type="text" name="housenumberSuffix" required="true" placeholder="Huisnummertoevoeging" value="' . $supplier->housenumber_suffix . '">';
         echo '<label>Postcode:</label><input type="text" name="postalCode" required="true" value="' . $supplier->postalCode . '">';
         echo '<label>Woonplaats:</label><input type="text" name="city" required="true" value="' . $supplier->city . '">';
     } else {
@@ -171,8 +171,8 @@ else if ($action === 'getProductsFromCategoryRemoveProduct' || $action === 'getP
         echo '<label>Email:</label><input type="email" name="email" required="true" value="' . $supplier->email . '" readonly>';
         echo '<label>Telefoonnummer:</label><input type="tel" name="telephonenumber" required="true" value="' . $supplier->telephonenumber . '" readonly>';
         echo '<label>Adres:</label><input type="text" name="streetname" required="true" placeholder="Straatnaam" value="' . $supplier->streetname . '" readonly>';
-        echo '<input class="small_field" type="text" name="housenumber" required="true" placeholder="nr" value="' . $supplier->housenumber . '" readonly>';
-        echo '<input class="small_field" type="text" name="housenumberSuffix" required="true" placeholder="tv" value="' . $supplier->housenumber_suffix . '" readonly>';
+        echo '<input class="small_field" type="text" name="housenumber" required="true" placeholder="Huisnummer" value="' . $supplier->housenumber . '" readonly>';
+        echo '<input class="small_field" type="text" name="housenumberSuffix" required="true" placeholder="Huisnummertoevoeging" value="' . $supplier->housenumber_suffix . '" readonly>';
         echo '<label>Postcode:</label><input type="text" name="postalCode" required="true" value="' . $supplier->postalCode . '" readonly>';
         echo '<label>Woonplaats:</label><input type="text" name="city" required="true" value="' . $supplier->city . '" readonly>';
     }

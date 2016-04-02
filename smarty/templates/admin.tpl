@@ -11,7 +11,7 @@
 
         {if isset($smarty.cookies.PHPSESSID) && isset($smarty.session.usertype) && $smarty.session.usertype === "Administrator"}
             <ul class="adminpnl">
-                {if $smarty.get.page === 'AdminCategories'}
+                {if $smarty.get.page === 'AdminCategories' || $smarty.get.page === 'Admin'}
                     <li class="selected"><a href="/Plug_IT/index.php?page=AdminCategories">Categorieën</a></li>
                     {else}
                     <li><a href="/Plug_IT/index.php?page=AdminCategories">Categorieën</a></li>
