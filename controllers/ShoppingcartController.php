@@ -2,6 +2,7 @@
 
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once($root . "/Plug_IT/controllers/MainCtrl.php");
+require_once($root . "/Plug_IT/models/Product.inc.php");
 
 class ShoppingcartController extends MainCtrl {
 

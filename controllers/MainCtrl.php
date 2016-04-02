@@ -57,6 +57,10 @@ class MainCtrl {
     public function OrderAndDelivery() {
         $this->View('orderAndDelivery', '');
     }
+    
+    public function OrderAndDeliveryInfo() {
+        $this->View('orderAndDeliveryInfo', '');
+    }
 
     public function PaymentInfo() {
         $this->View('paymentInfo', '');

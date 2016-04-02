@@ -39,6 +39,51 @@
                 {if isset($smarty.get.page)}
                     {if $smarty.get.page === "Home"}
                         <a href='/Plug_IT/index.php?page=Home'>Home</a>
+                    {elseif $smarty.get.page === "Catalogue"}
+                        <a href='/Plug_IT/index.php?page=Home'>Home</a> > <a href='/Plug_IT/index.php?page=Catalogue'>Catalogus</a>
+                        {if isset($smarty.get.id)}
+                            {foreach from=$categories[0] item=parent }
+                                {if $smarty.get.id === $parent->id}
+                                    > <a href='/Plug_IT/index.php?page=Catalogue&cat={$parent->name}&id={$parent->id}'>{$parent->name}</a>
+                                {/if}
+                            {/foreach}
+                            {foreach from=$categories[1] item=child }
+                                {if $smarty.get.id === $child->id}
+
+                                    {foreach from=$categories[0] item=parent }
+                                        {if $parent->id === $child->parent}
+                                            > <a href='/Plug_IT/index.php?page=Catalogue&cat={$parent->name}&id={$parent->id}'>{$parent->name}</a>
+                                        {/if}
+                                    {/foreach}
+                                    > <a href='/Plug_IT/index.php?page=Catalogue&cat={$child->name}&id={$child->id}'>{$child->name}</a>
+                                {/if}
+                            {/foreach}
+                        {/if}
+                    {elseif $smarty.get.page === "Product"}
+                        <a href='/Plug_IT/index.php?page=Home'>Home</a> > <a href='/Plug_IT/index.php?page=Catalogue'>Catalogus</a>
+                        {if isset($smarty.get.id)}
+                            {$isFound = ""}
+                            {foreach from=$categories[0] item=parent }
+                                {if $product->categoryId === $parent->id}
+                                    {$isFound = "yes"}
+                                     > <a href='/Plug_IT/index.php?page=Catalogue&cat={$parent->name}&id={$parent->id}'>{$parent->name}</a>
+                                {/if}
+                            {/foreach}
+                            
+                            {if $isFound === ""}
+                                {foreach from=$categories[1] item=child }
+                                    {if $product->categoryId === $child->id}
+                                         {foreach from=$categories[0] item=parent }
+                                            {if $parent->id === $child->parent}
+                                                 > <a href='/Plug_IT/index.php?page=Catalogue&cat={$parent->name}&id={$parent->id}'>{$parent->name}</a>
+                                            {/if}
+                                        {/foreach}
+                                         > <a href='/Plug_IT/index.php?page=Catalogue&cat={$child->name}&id={$child->id}'>{$child->name}</a>
+                                    {/if}
+                                {/foreach}
+                            {/if}
+                             > <a href='/Plug_IT/index.php?page=Product&id={$product->id}'>{$product->name}</a>
+                        {/if}
                     {else}
                         {foreach from=$navigation[0] item=headeritem }
                             {if $headeritem->page === $smarty.get.page}
@@ -47,7 +92,16 @@
                         {/foreach}
                         {foreach from=$navigation[1] item=footeritem }
                             {if $footeritem->page === $smarty.get.page}
-                                <a href='/Plug_IT/index.php?page=Home'>Home</a> > <a href='/Plug_IT/index.php?page={$smarty.get.page}'>{$footeritem->name}</a>
+                                {if $footeritem->parent !== NULL}
+                                    {foreach from=$navigation[1] item=footeritem2 }
+                                        {if $footeritem->parent === $footeritem2->id}
+                                            <a href='/Plug_IT/index.php?page=Home'>Home</a> > <a href='/Plug_IT/index.php?page={$footeritem2->page}'>{$footeritem2->name}</a> > <a href='/Plug_IT/index.php?page={$smarty.get.page}'>{$footeritem->name}</a>
+                                        {/if}
+                                    {/foreach}
+                                {else}
+                                    <a href='/Plug_IT/index.php?page=Home'>Home</a> > <a href='/Plug_IT/index.php?page={$smarty.get.page}'>{$footeritem->name}</a>
+                                {/if}
+
                             {/if}
                         {/foreach}
                     {/if}
@@ -90,30 +144,30 @@
         {block name=body}{/block}
     </div>
     <div class="footer">
-            {foreach from=$navigation[1] item=footeritem }
-                {$children = ""}
-                {foreach from=$navigation[1] item=footeritem2 }
-                    {if $footeritem2->parent === $footeritem->id}
-                        {$children = "yes"}
-                    {/if}
-                {/foreach}
+        {foreach from=$navigation[1] item=footeritem }
+            {$children = ""}
+            {foreach from=$navigation[1] item=footeritem2 }
+                {if $footeritem2->parent === $footeritem->id}
+                    {$children = "yes"}
+                {/if}
+            {/foreach}
 
-                
-                {if $children !== ""}
-                    <ul><b>{$footeritem->name}</b>
+
+            {if $children !== ""}
+                <ul><b>{$footeritem->name}</b>
                     {foreach from=$navigation[1] item=footeritem2 }
                         {if $footeritem2->parent === $footeritem->id}
                             <li><a href="/Plug_IT/index.php?page={$footeritem2->page}">{$footeritem2->name}</a></li>
+                            {/if}
+                        {/foreach}
+                </ul>
+            {else}
+                {if $footeritem->parent === NULL}
+                    <ul><b><a href="/Plug_IT/index.php?page={$footeritem->page}">{$footeritem->name}</a></b><ul>
                         {/if}
-                    {/foreach}
-                    </ul>
-                {else}
-                    {if $footeritem->parent === NULL}
-                        <ul><b><a href="/Plug_IT/index.php?page={$footeritem->page}">{$footeritem->name}</a></b><ul>
                     {/if}
-                {/if}
-            {/foreach}
-    </div>
-</div>
-</body>
-</html>
+                {/foreach}
+                </div>
+                </div>
+                </body>
+                </html>

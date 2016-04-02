@@ -140,7 +140,7 @@ class Product extends Database {
                     $product->brand = $row['brand'];
                     $product->supplier = $row['supplier_name'];
                     $product->amount = $row['amount'];
-                    $product->category_id = $row['category_id'];
+                    $product->categoryId = $row['category_id'];
                 }
             }
 
