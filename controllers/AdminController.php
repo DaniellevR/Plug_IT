@@ -198,7 +198,6 @@ class AdminController extends MainCtrl {
 
             $userModel = new User();
 
-
             // Check (and add) address
             $addressId = $this->checkAndAddAddress($streetname, $housenumber, $city, $housenumberSuffix, $postalCode);
 

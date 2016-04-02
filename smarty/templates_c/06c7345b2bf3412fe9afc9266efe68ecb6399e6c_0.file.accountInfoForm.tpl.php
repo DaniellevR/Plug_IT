@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-04-02 18:29:40
+/* Smarty version 3.1.29, created on 2016-04-02 19:17:04
   from "C:\wamp\www\Plug_IT\smarty\templates\accountInfoForm.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56fff374464071_62784349',
+  'unifunc' => 'content_56fffe90f19150_53077899',
   'file_dependency' => 
   array (
     '06c7345b2bf3412fe9afc9266efe68ecb6399e6c' => 
     array (
       0 => 'C:\\wamp\\www\\Plug_IT\\smarty\\templates\\accountInfoForm.tpl',
-      1 => 1459614574,
+      1 => 1459617313,
       2 => 'file',
     ),
   ),
@@ -19,10 +19,10 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_56fff374464071_62784349 ($_smarty_tpl) {
+function content_56fffe90f19150_53077899 ($_smarty_tpl) {
 $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, false);
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'accountInfoForm', array (
-  0 => 'block_1799856fff374361ab3_08610578',
+  0 => 'block_3106656fffe90e0be51_70487704',
   1 => false,
   3 => 0,
   2 => 0,
@@ -31,10 +31,10 @@ $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'accountInfoForm'
 
 <?php }
 /* {block 'accountInfoForm'}  file:accountInfoForm.tpl */
-function block_1799856fff374361ab3_08610578($_smarty_tpl, $_blockParentStack) {
+function block_3106656fffe90e0be51_70487704($_smarty_tpl, $_blockParentStack) {
 ?>
 
-    <form method="POST" enctype="multipart/form-data" onsubmit="addUser(this, event)">
+    <form method="POST" enctype="multipart/form-data" onsubmit="editUser(this, event)">
         <?php $_smarty_tpl->tpl_vars['username'] = new Smarty_Variable('', null);
 $_smarty_tpl->ext->_updateScope->updateScope($_smarty_tpl, 'username', 0);?>
         <?php $_smarty_tpl->tpl_vars['user'] = new Smarty_Variable('', null);
@@ -144,18 +144,13 @@ $__foreach_useritem_2_saved_local_item = $_smarty_tpl->tpl_vars['useritem'];
                     <div><label for="city">Woonplaats</label><input type="text" name="cityAddUser" required="true" value="<?php echo $_smarty_tpl->tpl_vars['useritem']->value->city;?>
 "></div>
                     <?php }?>
-                <?php
+            <?php
 $_smarty_tpl->tpl_vars['useritem'] = $__foreach_useritem_2_saved_local_item;
 }
 if ($__foreach_useritem_2_saved_item) {
 $_smarty_tpl->tpl_vars['useritem'] = $__foreach_useritem_2_saved_item;
 }
 ?>
-
-
-            
-
-
 
             <div><h5>Accountgegevens</h5></div>
 

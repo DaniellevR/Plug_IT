@@ -25,12 +25,13 @@ class NavigationItem extends Database {
 
     public function getNavigationItems() {
         if ($this->establishConnection()) {
-            $sql = "SELECT * FROM navigationItem";
+            $sql = "SELECT * FROM navigationitem";
             $result = $this->conn->query($sql);
 
             $navigationItems = array();
 
             if ($result->num_rows > 0) {
+//            if ($result != null) {
                 while ($row = $result->fetch_assoc()) {
                     $navigationItem = new NavigationItem();
                     $navigationItem->id = $row['id'];

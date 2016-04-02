@@ -1,5 +1,5 @@
 {block name=accountInfoForm}
-    <form method="POST" enctype="multipart/form-data" onsubmit="addUser(this, event)">
+    <form method="POST" enctype="multipart/form-data" onsubmit="editUser(this, event)">
         {$username = ""}
         {$user = ""}
 
