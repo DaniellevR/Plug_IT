@@ -52,7 +52,7 @@
                         {/foreach}
                     {/if}
                 {/if}
-                
+
                 <h1 class="testfunction">Testfunctie</h1>
             </div>
 
@@ -90,11 +90,29 @@
         {block name=body}{/block}
     </div>
     <div class="footer">
-        <ul class="footer_nav">
-            {foreach from=$navigation[1] item=nav }
-                <li><a href="/Plug_IT/index.php?page={$nav->page}">{$nav->name}</a></li>
+            {foreach from=$navigation[1] item=footeritem }
+                {$children = ""}
+                {foreach from=$navigation[1] item=footeritem2 }
+                    {if $footeritem2->parent === $footeritem->id}
+                        {$children = "yes"}
+                    {/if}
                 {/foreach}
-        </ul>
+
+                
+                {if $children !== ""}
+                    <ul><b>{$footeritem->name}</b>
+                    {foreach from=$navigation[1] item=footeritem2 }
+                        {if $footeritem2->parent === $footeritem->id}
+                            <li><a href="/Plug_IT/index.php?page={$footeritem2->page}">{$footeritem2->name}</a></li>
+                        {/if}
+                    {/foreach}
+                    </ul>
+                {else}
+                    {if $footeritem->parent === NULL}
+                        <ul><b><a href="/Plug_IT/index.php?page={$footeritem->page}">{$footeritem->name}</a></b><ul>
+                    {/if}
+                {/if}
+            {/foreach}
     </div>
 </div>
 </body>
