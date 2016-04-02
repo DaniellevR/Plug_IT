@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-04-02 19:17:04
+/* Smarty version 3.1.29, created on 2016-04-02 21:26:44
   from "C:\wamp\www\Plug_IT\smarty\templates\accountInfoForm.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56fffe90f19150_53077899',
+  'unifunc' => 'content_57001cf49bd990_14735483',
   'file_dependency' => 
   array (
     '06c7345b2bf3412fe9afc9266efe68ecb6399e6c' => 
     array (
       0 => 'C:\\wamp\\www\\Plug_IT\\smarty\\templates\\accountInfoForm.tpl',
-      1 => 1459617313,
+      1 => 1459625200,
       2 => 'file',
     ),
   ),
@@ -19,10 +19,10 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_56fffe90f19150_53077899 ($_smarty_tpl) {
+function content_57001cf49bd990_14735483 ($_smarty_tpl) {
 $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, false);
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'accountInfoForm', array (
-  0 => 'block_3106656fffe90e0be51_70487704',
+  0 => 'block_10457001cf47e15c6_28985775',
   1 => false,
   3 => 0,
   2 => 0,
@@ -31,10 +31,18 @@ $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'accountInfoForm'
 
 <?php }
 /* {block 'accountInfoForm'}  file:accountInfoForm.tpl */
-function block_3106656fffe90e0be51_70487704($_smarty_tpl, $_blockParentStack) {
+function block_10457001cf47e15c6_28985775($_smarty_tpl, $_blockParentStack) {
 ?>
 
     <form method="POST" enctype="multipart/form-data" onsubmit="editUser(this, event)">
+
+        <?php if ($_smarty_tpl->tpl_vars['errors']->value !== '') {?>
+            <div class="errortext">
+                <?php echo $_smarty_tpl->tpl_vars['errors']->value;?>
+
+            </div>
+        <?php }?>
+
         <?php $_smarty_tpl->tpl_vars['username'] = new Smarty_Variable('', null);
 $_smarty_tpl->ext->_updateScope->updateScope($_smarty_tpl, 'username', 0);?>
         <?php $_smarty_tpl->tpl_vars['user'] = new Smarty_Variable('', null);
@@ -108,15 +116,15 @@ $_smarty_tpl->tpl_vars['useritem'] = $__foreach_useritem_1_saved_item;
 
         <div id="contentDivEditUser">
             <div><h5>Persoonsgegevens</h5></div>
-            <div><label for="firstname">Name</label><input type="text" id="firstname" name="firstname" required="true" placeholder="Voornaam" value="<?php echo $_smarty_tpl->tpl_vars['user']->value->firstname;?>
+            <div><label for="firstname">Name</label><input type="text" id="firstname" name="firstnameEditUser" required="true" placeholder="Voornaam" value="<?php echo $_smarty_tpl->tpl_vars['user']->value->firstname;?>
 "></div>
-            <div><label></label><input type="text" id="prefix" name="prefix" required="true" placeholder="Tussenvoegsel" value="<?php echo $_smarty_tpl->tpl_vars['user']->value->prefix;?>
+            <div><label></label><input type="text" id="prefix" name="prefixEditUser" placeholder="Tussenvoegsel" value="<?php echo $_smarty_tpl->tpl_vars['user']->value->prefix;?>
 "></div>
-            <div><label></label><input type="text" id="lastname" name="lastname" required="true" placeholder="Achternaam" value="<?php echo $_smarty_tpl->tpl_vars['user']->value->lastname;?>
+            <div><label></label><input type="text" id="lastname" name="lastnameEditUser" required="true" placeholder="Achternaam" value="<?php echo $_smarty_tpl->tpl_vars['user']->value->lastname;?>
 "></div>
-            <div><label for="email">Email</label><input type="email" id="email"  required="true" value="<?php echo $_smarty_tpl->tpl_vars['user']->value->email;?>
+            <div><label for="email">Email</label><input type="email" name="emailEditUser" id="email"  required="true" value="<?php echo $_smarty_tpl->tpl_vars['user']->value->email;?>
 "/></div>
-            <div><label for="telephonenumber">Telefoonnummer</label><input type="text" id="telephonenumber" name="telephonenumber" required="true" value="<?php echo $_smarty_tpl->tpl_vars['user']->value->telephonenumber;?>
+            <div><label for="telephonenumber">Telefoonnummer</label><input type="text" id="telephonenumber" name="telephonenumberEditUser" required="true" value="<?php echo $_smarty_tpl->tpl_vars['user']->value->telephonenumber;?>
 "></div>
 
             <?php
@@ -133,18 +141,18 @@ $__foreach_useritem_2_saved_local_item = $_smarty_tpl->tpl_vars['useritem'];
 ?>
                 <?php if ($_smarty_tpl->tpl_vars['useritem']->value->username === $_smarty_tpl->tpl_vars['username']->value) {?>
                     <div><h5>Adresgegevens</h5></div>
-                    <div><label for="streetname">Adres</label><input type="text" id="streetname" name="streetnameAddUser" required="true" placeholder="Straatnaam" value="<?php echo $_smarty_tpl->tpl_vars['useritem']->value->streetname;?>
+                    <div><label for="streetname">Adres</label><input type="text" id="streetname" name="streetnameEditUser" required="true" placeholder="Straatnaam" value="<?php echo $_smarty_tpl->tpl_vars['useritem']->value->streetname;?>
 "></div>
-                    <div><label></label><input type="text" name="housenumberAddUser" required="true" placeholder="Huisnummer" value="<?php echo $_smarty_tpl->tpl_vars['useritem']->value->housenumber;?>
+                    <div><label></label><input type="text" name="housenumberEditUser" required="true" placeholder="Huisnummer" value="<?php echo $_smarty_tpl->tpl_vars['useritem']->value->housenumber;?>
 "></div>
-                    <div><label></label><input type="text" name="housenumberSuffixAddUser" placeholder="Huisnummertoevoeging" value="<?php echo $_smarty_tpl->tpl_vars['useritem']->value->housenumber_suffix;?>
+                    <div><label></label><input type="text" name="housenumberSuffixEditUser" placeholder="Huisnummertoevoeging" value="<?php echo $_smarty_tpl->tpl_vars['useritem']->value->housenumber_suffix;?>
 "></div>
-                    <div><label for="postalCode">Postcode</label><input type="text" name="postalCodeAddUser" required="true" value="<?php echo $_smarty_tpl->tpl_vars['useritem']->value->postalCode;?>
+                    <div><label for="postalCode">Postcode</label><input type="text" name="postalCodeEditUser" required="true" value="<?php echo $_smarty_tpl->tpl_vars['useritem']->value->postalCode;?>
 "></div>
-                    <div><label for="city">Woonplaats</label><input type="text" name="cityAddUser" required="true" value="<?php echo $_smarty_tpl->tpl_vars['useritem']->value->city;?>
+                    <div><label for="city">Woonplaats</label><input type="text" name="cityEditUser" required="true" value="<?php echo $_smarty_tpl->tpl_vars['useritem']->value->city;?>
 "></div>
                     <?php }?>
-            <?php
+                <?php
 $_smarty_tpl->tpl_vars['useritem'] = $__foreach_useritem_2_saved_local_item;
 }
 if ($__foreach_useritem_2_saved_item) {

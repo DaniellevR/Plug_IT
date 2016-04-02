@@ -105,21 +105,21 @@ else if ($action === 'getProductsFromCategoryRemoveProduct' || $action === 'getP
     $idsAddresses = $userModel->getIdsAddresses($username);
 
     echo '<div><h5>Persoonsgegevens</h5></div>';
-    echo '<div><label for="firstname">Name</label><input type="text" id="firstname" name="firstname" required="true" placeholder="Voornaam" value="' . $foundUser->firstname . '"></div>';
-    echo '<div><label></label><input type="text" id="prefix" name="prefix" required="true" placeholder="Tussenvoegsel" value="' . $foundUser->prefix . '"></div>';
-    echo '<div><label></label><input type="text" id="lastname" name="lastname" required="true" placeholder="Achternaam" value="' . $foundUser->lastname . '"></div>';
-    echo '<div><label for="email">Email</label><input type="email" id="email"  required="true" value="' . $foundUser->email . '"/></div>';
-    echo '<div><label for="telephonenumber">Telefoonnummer</label><input type="text" id="telephonenumber" name="telephonenumber" required="true" value="' . $foundUser->telephonenumber . '"></div>';
+    echo '<div><label for="firstname">Name</label><input type="text" id="firstname" name="firstnameEditUser" required="true" placeholder="Voornaam" value="' . $foundUser->firstname . '"></div>';
+    echo '<div><label></label><input type="text" id="prefix" name="prefixEditUser" placeholder="Tussenvoegsel" value="' . $foundUser->prefix . '"></div>';
+    echo '<div><label></label><input type="text" id="lastname" name="lastnameEditUser" required="true" placeholder="Achternaam" value="' . $foundUser->lastname . '"></div>';
+    echo '<div><label for="email">Email</label><input type="email" name="emailEditUser" id="email"  required="true" value="' . $foundUser->email . '"/></div>';
+    echo '<div><label for="telephonenumber">Telefoonnummer</label><input type="text" id="telephonenumber" name="telephonenumberEditUser" required="true" value="' . $foundUser->telephonenumber . '"></div>';
 
     // Find the addresses
     foreach ($addresses as $address) {
         if (in_array($address->id, $idsAddresses)) {
             echo '<div><h5>Adresgegevens</h5></div>';
-            echo '<div><label for="streetname">Adres</label><input type="text" id="streetname" name="streetnameAddUser" required="true" placeholder="Straatnaam" value="' . $address->streetname . '"></div>';
-            echo '<div><label></label><input type="text" name="housenumberAddUser" required="true" placeholder="Huisnummer" value="' . $address->housenumber . '"></div>';
-            echo '<div><label></label><input type="text" name="housenumberSuffixAddUser" placeholder="Huisnummertoevoeging" value="' . $address->housenumberSuffix . '"></div>';
-            echo '<div><label for="postalCode">Postcode</label><input type="text" name="postalCodeAddUser" required="true" value="' . $address->postalCode . '"></div>';
-            echo '<div><label for="city">Woonplaats</label><input type="text" name="cityAddUser" required="true" value="' . $address->city . '"></div>';
+            echo '<div><label for="streetname">Adres</label><input type="text" id="streetname" name="streetnameEditUser" required="true" placeholder="Straatnaam" value="' . $address->streetname . '"></div>';
+            echo '<div><label></label><input type="text" name="housenumberEditUser" required="true" placeholder="Huisnummer" value="' . $address->housenumber . '"></div>';
+            echo '<div><label></label><input type="text" name="housenumberSuffixEditUser" placeholder="Huisnummertoevoeging" value="' . $address->housenumberSuffix . '"></div>';
+            echo '<div><label for="postalCode">Postcode</label><input type="text" name="postalCodeEditUser" required="true" value="' . $address->postalCode . '"></div>';
+            echo '<div><label for="city">Woonplaats</label><input type="text" name="cityEditUser" required="true" value="' . $address->city . '"></div>';
         }
     }
 

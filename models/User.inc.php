@@ -148,6 +148,18 @@ class User extends Database {
             return -1;
         }
     }
+    
+    public function disconnectUserFromAddresses($username) {
+        if ($this->establishConnection()) {
+                $stmt = $this->conn->prepare("DELETE FROM user_has_address WHERE user_username = ?");
+                $stmt->bind_param('s', $username);
+                $stmt->execute();
+                $this->closeConnection();
+                return true;
+            } else {
+                return false;
+            }
+    }
 
     public function getIdsAddresses($username) {
         if ($this->establishConnection()) {
@@ -167,6 +179,18 @@ class User extends Database {
             $this->closeConnection();
 
             return $ids;
+        } else {
+            return false;
+        }
+    }
+    
+    public function editUser($username, $password, $firstname, $prefix, $lastname, $email, $telephonenumber, $rolename) {
+        if ($this->establishConnection()) {
+            $stmt = $this->conn->prepare("UPDATE user SET password = ?, firstname = ?, prefix = ?, lastname = ?, email = ?, telephonenumber = ?, role_name = ? WHERE username = ?");
+            $stmt->bind_param('ssssssss', $password, $firstname, $prefix, $lastname, $email, $telephonenumber, $rolename, $username);
+            $stmt->execute();
+            $this->closeConnection();
+            return true;
         } else {
             return false;
         }

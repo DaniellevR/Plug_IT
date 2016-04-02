@@ -1,5 +1,12 @@
 {block name=accountInfoForm}
     <form method="POST" enctype="multipart/form-data" onsubmit="editUser(this, event)">
+
+        {if $errors !== ""}
+            <div class="errortext">
+                {$errors}
+            </div>
+        {/if}
+
         {$username = ""}
         {$user = ""}
 
@@ -30,22 +37,22 @@
 
         <div id="contentDivEditUser">
             <div><h5>Persoonsgegevens</h5></div>
-            <div><label for="firstname">Name</label><input type="text" id="firstname" name="firstname" required="true" placeholder="Voornaam" value="{$user->firstname}"></div>
-            <div><label></label><input type="text" id="prefix" name="prefix" required="true" placeholder="Tussenvoegsel" value="{$user->prefix}"></div>
-            <div><label></label><input type="text" id="lastname" name="lastname" required="true" placeholder="Achternaam" value="{$user->lastname}"></div>
-            <div><label for="email">Email</label><input type="email" id="email"  required="true" value="{$user->email}"/></div>
-            <div><label for="telephonenumber">Telefoonnummer</label><input type="text" id="telephonenumber" name="telephonenumber" required="true" value="{$user->telephonenumber}"></div>
+            <div><label for="firstname">Name</label><input type="text" id="firstname" name="firstnameEditUser" required="true" placeholder="Voornaam" value="{$user->firstname}"></div>
+            <div><label></label><input type="text" id="prefix" name="prefixEditUser" placeholder="Tussenvoegsel" value="{$user->prefix}"></div>
+            <div><label></label><input type="text" id="lastname" name="lastnameEditUser" required="true" placeholder="Achternaam" value="{$user->lastname}"></div>
+            <div><label for="email">Email</label><input type="email" name="emailEditUser" id="email"  required="true" value="{$user->email}"/></div>
+            <div><label for="telephonenumber">Telefoonnummer</label><input type="text" id="telephonenumber" name="telephonenumberEditUser" required="true" value="{$user->telephonenumber}"></div>
 
             {foreach from=$users item=useritem }
                 {if $useritem->username === $username}
                     <div><h5>Adresgegevens</h5></div>
-                    <div><label for="streetname">Adres</label><input type="text" id="streetname" name="streetnameAddUser" required="true" placeholder="Straatnaam" value="{$useritem->streetname}"></div>
-                    <div><label></label><input type="text" name="housenumberAddUser" required="true" placeholder="Huisnummer" value="{$useritem->housenumber}"></div>
-                    <div><label></label><input type="text" name="housenumberSuffixAddUser" placeholder="Huisnummertoevoeging" value="{$useritem->housenumber_suffix}"></div>
-                    <div><label for="postalCode">Postcode</label><input type="text" name="postalCodeAddUser" required="true" value="{$useritem->postalCode}"></div>
-                    <div><label for="city">Woonplaats</label><input type="text" name="cityAddUser" required="true" value="{$useritem->city}"></div>
+                    <div><label for="streetname">Adres</label><input type="text" id="streetname" name="streetnameEditUser" required="true" placeholder="Straatnaam" value="{$useritem->streetname}"></div>
+                    <div><label></label><input type="text" name="housenumberEditUser" required="true" placeholder="Huisnummer" value="{$useritem->housenumber}"></div>
+                    <div><label></label><input type="text" name="housenumberSuffixEditUser" placeholder="Huisnummertoevoeging" value="{$useritem->housenumber_suffix}"></div>
+                    <div><label for="postalCode">Postcode</label><input type="text" name="postalCodeEditUser" required="true" value="{$useritem->postalCode}"></div>
+                    <div><label for="city">Woonplaats</label><input type="text" name="cityEditUser" required="true" value="{$useritem->city}"></div>
                     {/if}
-            {/foreach}
+                {/foreach}
 
             <div><h5>Accountgegevens</h5></div>
 

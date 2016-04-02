@@ -200,7 +200,7 @@ class MainCtrl {
             $givenHashedPassword = crypt($password, $data[0]);
 
             if ($givenHashedPassword === $data[0]) {
-                $_SESSION["username"] = $_POST["username"];
+                $_SESSION["username"] = $username;
                 $_SESSION["usertype"] = $data[1];
                 echo $data[1];
             } else {

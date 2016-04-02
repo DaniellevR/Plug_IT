@@ -125,6 +125,7 @@ function addUser(sender, e) {
 
 function editUser(sender, e) {
     e.preventDefault();
+    
     jQuery.ajax({
         type: "POST",
         url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
@@ -133,11 +134,19 @@ function editUser(sender, e) {
             telephonenumber: document.getElementsByName('telephonenumberEditUser')[0].value, streetname: document.getElementsByName('streetnameEditUser')[0].value,
             housenumber: document.getElementsByName('housenumberEditUser')[0].value, housenumberSuffix: document.getElementsByName('housenumberSuffixEditUser')[0].value,
             postalCode: document.getElementsByName('postalCodeEditUser')[0].value, city: document.getElementsByName('cityEditUser')[0].value,
-            role: document.getElementsByName('rolesEditUser')[0].value, currentPassword: document.getElementsByName('current_passwordEditUser')[0].value,
-            password: document.getElementsByName('passwordEditUser')[0].value, repeatPassword: document.getElementsByName('repeat_passwordEditUser')[0].value,
-            username: document.getElementsByName('edit_users')[0].value},
-        success: function() {
-            window.location = "/Plug_IT/index.php?page=Admin";
+            role: document.getElementsByName('rolesEditUser')[0].value, currentPassword: document.getElementsByName('passwordEditUser')[0].value,
+            password: document.getElementsByName('newPasswordEditUser')[0].value, repeatPassword: document.getElementsByName('repeat_passwordEditUser')[0].value,
+            username: document.getElementsByName('usernameEditUser')[0].value},
+        success: function(response) {
+            alert(response);
+            
+            if (response === "error") {
+                window.location = "/Plug_IT/index.php?page=" + QueryString.page;
+            } else if (QueryString.page === "AdminUsers") {
+                window.location = "/Plug_IT/index.php?page=AdminUsers";
+            } else {
+                window.location = "/Plug_IT/index.php?page=Home";
+            }
         }
     });
 }

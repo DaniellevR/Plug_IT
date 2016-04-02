@@ -179,7 +179,14 @@ class AdminController extends MainCtrl {
     }
 
     public function editUser() {
-        if (isset($_POST["firstname"]) && isset($_POST["prefix"]) && isset($_POST["lastname"]) && isset($_POST["email"]) && isset($_POST["telephonenumber"]) && isset($_POST["streetname"]) && isset($_POST["housenumber"]) && isset($_POST["housenumberSuffix"]) && isset($_POST["postalCode"]) && isset($_POST["city"]) && isset($_POST["username"]) && isset($_POST["role"]) && isset($_POST["currentPassword"]) && isset($_POST["password"]) && isset($_POST["repeatPassword"])) {
+//        $file = fopen("C://edituser.txt", "w");
+//        fwrite($file, "EDIT");
+//        fclose($file);
+
+        $_SESSION["action"] = "editUser";
+        $errors = "";
+
+        if (isset($_POST["firstname"]) && isset($_POST["prefix"]) && isset($_POST["lastname"]) && isset($_POST["email"]) && isset($_POST["telephonenumber"]) && isset($_POST["streetname"]) && isset($_POST["housenumber"]) && isset($_POST["housenumberSuffix"]) && isset($_POST["postalCode"]) && isset($_POST["city"]) && isset($_POST["username"]) && isset($_POST["role"])) {
             $firstname = $_POST["firstname"];
             $prefix = $_POST["prefix"];
             $lastname = $_POST["lastname"];
@@ -192,20 +199,87 @@ class AdminController extends MainCtrl {
             $city = $_POST["city"];
             $username = $_POST["username"];
             $rolename = $_POST["role"];
-            $currentPassword = $_POST["currentPassword"];
-            $password = $_POST["password"];
-            $repeatPassword = $_POST["repeatPassword"];
 
+//            $file = fopen("C://edituser2.txt", "w");
+//            fwrite($file, $firstname);
+//            fwrite($file, $prefix);
+//            fwrite($file, $lastname);
+//            fwrite($file, $email);
+//            fwrite($file, $telephonenumber);
+//            fwrite($file, $streetname);
+//            fwrite($file, $housenumber);
+//            fwrite($file, $housenumberSuffix);
+//            fwrite($file, $postalCode);
+//            fwrite($file, $city);
+//            fwrite($file, $username);
+//            fwrite($file, $rolename);
+//            fclose($file);
+            // Find user
             $userModel = new User();
+            $users = $userModel->getUsers();
+            $foundUser = NULL;
+            foreach ($users as $user) {
+                if ($user->username === $username) {
+                    $foundUser = $user;
+                    break;
+                }
+            }
+            
+            $newPassword = $foundUser->password;
 
+            if (isset($_POST["currentPassword"]) && isset($_POST["password"]) && isset($_POST["repeatPassword"])) {
+                $currentPassword = $_POST["currentPassword"];
+                $password = $_POST["password"];
+                $repeatPassword = $_POST["repeatPassword"];
+
+                if (strcmp($password, $repeatPassword) === 0) {
+                    // Check current password
+                    $givenHashedPassword = crypt($currentPassword, $foundUser->password);
+
+                    if ($givenHashedPassword === $foundUser->password) {
+                        // If correct change password
+                        $newPassword = $this->hash($password);
+                    } else {
+                        $errors = "Het wijzigen van het wachtwoord is mislukt.\r\n";
+                    }
+                } else {
+                    $errors = "Het herhaalde wachtwoord komt niet overeen.\r\n";
+                }
+            }
+            
             // Check (and add) address
             $addressId = $this->checkAndAddAddress($streetname, $housenumber, $city, $housenumberSuffix, $postalCode);
 
-            // Edit user
-            $user_id = $userModel->addUser($username, $password, $firstname, $prefix, $lastname, $email, $telephonenumber, $rolename);
+            if ($addressId > 0) {
+                // Remove old connection
+                $ret = $userModel->disconnectUserFromAddresses($username);
 
-            // Add user and address connection
-            $userModel->connectUserWithAddress($username, $addressId);
+                if ($ret == 1) {
+                    // Add user and address connection
+                    $ret = $userModel->connectUserWithAddress($username, $addressId);
+                    if ($ret != 1) {
+                        $errors = $errors . "Er is een fout opgetreden. Uw adresgegevens zijn helaas verwijderd.\r\n";
+                    }
+                } else {
+                    $errors = $errors . "Kon uw adres niet wijzigen. Probeer het opnieuw.\r\n";
+                }
+            } else {
+                $errors = $errors . "Kon uw adres niet wijzigen. Probeer het opnieuw.\r\n";
+            }
+
+            // Edit user
+            $res = $userModel->editUser($username, $newPassword, $firstname, $prefix, $lastname, $email, $telephonenumber, $rolename);
+            if ($res != 1) {
+                // Edit user not succeeded
+                $errors = $errors . "Kon uw persoonsgegevens niet wijzigen. Probeer het opnieuw.";
+            }
+        } else {
+            $errors = "Er is een fout opgetreden. Probeer het opnieuw.";
+        }
+
+        if ($errors !== "") {
+            $_SESSION["errors"] = $errors;
+            echo "error";
         }
     }
 
