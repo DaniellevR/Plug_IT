@@ -21,15 +21,30 @@ if ($action === 'editCategory') {
     foreach ($categories as $cat) {
         if ($cat->id === $categoryId) {
             $category = $cat;
+            break;
+        }
+    }
+
+    // Find children
+    $children = "";
+    foreach ($categories as $cat) {
+        if ($cat->parent === $category->id) {
+            $children = "yes";
+            break;
         }
     }
 
     echo '<div><label for="categoryNewName">Categorienaam</label><input type="text" id="categoryNewName" name="newname" required="true" value="' . $category->name . '"/></div>';
     echo '<div><label for="categoryNewDescription">Omschrijving</label><input type="text" id="categoryNewDescription" name="category_description" required="true" value="' . $category->description . '"/></div>';
     echo '<div><label for="categoriesParentEdit">Ouder categorie</label>';
-    echo '<select type="text" id="categories_edit" id="categoriesParentEdit" name="parent" onchange="grabInfo(this, "editCategory", "contentDivEditCategory")">';
 
-// Get options parent
+    if (is_null($category->parent) && $children !== "") {
+        echo '<select type="text" id="categories_edit" id="categoriesParentEdit" name="parent" onchange="grabInfo(this, "editCategory", "contentDivEditCategory")" disabled>';
+    } else {
+        echo '<select type="text" id="categories_edit" id="categoriesParentEdit" name="parent" onchange="grabInfo(this, "editCategory", "contentDivEditCategory")">';
+    }
+
+    // Get options parent
     if (is_null($category->parent)) {
         // Category has no parent
         echo '<option value="" selected>-</option>';
@@ -53,14 +68,13 @@ if ($action === 'editCategory') {
     }
 
     echo '</select></div>';
-    echo '<div><label for="imageEditCategory">Foto categorie</label><input type="file" accept="image/*" name="image" id="imageEditCategory" class="input_text" required="true"/></div>';
+    echo '<div><label for="imageEditCategory">Foto categorie</label><input type="file" accept="image/*" name="image" id="imageEditCategory" class="input_text"/></div>';
 
     $path = "../assets/pix/categories/";
     foreach (glob($path . $categoryId . '.*') as $filename) {
         echo '<img src="' . substr($filename, 3) . '" class="image" />';
     }
-}
-else if ($action === 'getProductsFromCategoryRemoveProduct' || $action === 'getProductsFromCategoryEditProduct') {
+} else if ($action === 'getProductsFromCategoryRemoveProduct' || $action === 'getProductsFromCategoryEditProduct') {
     $categoryId = $_GET["id"];
     $productModel = new Product();
     $products = $productModel->getProductsInCategory($categoryId);
@@ -151,7 +165,6 @@ else if ($action === 'getProductsFromCategoryRemoveProduct' || $action === 'getP
     echo '<div><label for="passwordEditUser">Huidige wachtwoord</label><input type="password" id="passwordEditUser" name="passwordEditUser"></div>';
     echo '<div><label for="newPasswordEditUser">Nieuwe wachtwoord</label><input type="password" id="newPasswordEditUser" name="newPasswordEditUser"></div>';
     echo '<div><label for="repeat_passwordEditUser">Herhaal wachtwoord</label><input type="password" id="repeat_passwordEditUser" name="repeat_passwordEditUser"></div>';
-
 } else if ($action === 'getSupplierInfo') {
     $suppliername = $_GET["id"];
     $supplierModel = new Supplier();

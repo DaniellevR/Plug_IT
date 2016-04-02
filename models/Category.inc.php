@@ -175,6 +175,10 @@ class Category extends Database {
     }
 
     public function editCategory($id, $name, $description, $parent) {
+        if ($parent === "") {
+            $parent = NULL;
+        }
+        
         if ($this->establishConnection()) {
             $stmt = $this->conn->prepare("UPDATE category SET name = ?, description = ?, category_id = ? WHERE id = ?");
             $stmt->bind_param('ssii', $name, $description, $parent, $id);

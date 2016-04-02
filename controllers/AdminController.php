@@ -179,10 +179,6 @@ class AdminController extends MainCtrl {
     }
 
     public function editUser() {
-//        $file = fopen("C://edituser.txt", "w");
-//        fwrite($file, "EDIT");
-//        fclose($file);
-
         $_SESSION["action"] = "editUser";
         $errors = "";
 
@@ -200,20 +196,6 @@ class AdminController extends MainCtrl {
             $username = $_POST["username"];
             $rolename = $_POST["role"];
 
-//            $file = fopen("C://edituser2.txt", "w");
-//            fwrite($file, $firstname);
-//            fwrite($file, $prefix);
-//            fwrite($file, $lastname);
-//            fwrite($file, $email);
-//            fwrite($file, $telephonenumber);
-//            fwrite($file, $streetname);
-//            fwrite($file, $housenumber);
-//            fwrite($file, $housenumberSuffix);
-//            fwrite($file, $postalCode);
-//            fwrite($file, $city);
-//            fwrite($file, $username);
-//            fwrite($file, $rolename);
-//            fclose($file);
             // Find user
             $userModel = new User();
             $users = $userModel->getUsers();

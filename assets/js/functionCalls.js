@@ -138,8 +138,6 @@ function editUser(sender, e) {
             password: document.getElementsByName('newPasswordEditUser')[0].value, repeatPassword: document.getElementsByName('repeat_passwordEditUser')[0].value,
             username: document.getElementsByName('usernameEditUser')[0].value},
         success: function(response) {
-            alert(response);
-            
             if (response === "error") {
                 window.location = "/Plug_IT/index.php?page=" + QueryString.page;
             } else if (QueryString.page === "AdminUsers") {
