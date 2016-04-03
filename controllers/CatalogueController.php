@@ -59,7 +59,29 @@ class CatalogueController extends MainCtrl {
 
     public function getProductsFromCategoryId($catId) {
         $product = new Product();
-        $products = $product->getProductsFromCategoryId($catId);
+        $category = new Category();
+        $allProducts = $product->getProducts();
+        $allCategories = $category->getCategories();
+
+        $categoriesToSearch = array();
+
+        $categoriesToSearch[] = $catId;
+
+        foreach ($allCategories as $cat) {
+            if ($cat->parent == $catId) {
+                $categoriesToSearch[] = $cat->id;
+            }
+        }
+
+        $products = array();
+
+        foreach ($allProducts as $p) {
+            foreach ($categoriesToSearch as $cat) {
+                if ($p->categoryId == $cat) {
+                    $products[] = $p;
+                }
+            }
+        }
 
         return $products;
     }
