@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-04-03 02:12:12
+/* Smarty version 3.1.29, created on 2016-04-03 03:33:09
   from "C:\wamp\www\Plug_IT\smarty\templates\layout.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_57005fdce16ed2_22082880',
+  'unifunc' => 'content_570072d5c30862_58510594',
   'file_dependency' => 
   array (
     'bb0308ddaa30b162f7ec483cf35c26cc0e7708d3' => 
     array (
       0 => 'C:\\wamp\\www\\Plug_IT\\smarty\\templates\\layout.tpl',
-      1 => 1459642329,
+      1 => 1459647182,
       2 => 'file',
     ),
   ),
@@ -19,7 +19,7 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_57005fdce16ed2_22082880 ($_smarty_tpl) {
+function content_570072d5c30862_58510594 ($_smarty_tpl) {
 $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, false);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
@@ -27,7 +27,7 @@ $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, false);
     <head> 
         <title><?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'title', array (
-  0 => 'block_2219257005fdcb16bc5_84679001',
+  0 => 'block_18903570072d592f492_57049225',
   1 => false,
   3 => 0,
   2 => 0,
@@ -50,7 +50,7 @@ $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'title', array (
 >
     <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'head', array (
-  0 => 'block_1463357005fdcb1fe52_92739483',
+  0 => 'block_8900570072d5938613_78900474',
   1 => false,
   3 => 0,
   2 => 0,
@@ -371,9 +371,10 @@ $_smarty_tpl->tpl_vars['footeritem'] = $__foreach_footeritem_8_saved_item;
             <a href="/Plug_IT/index.php?page=Home"> <img src="/Plug_IT/assets/pix/logo.png" alt="Plug IT.nl" /></a>
 
             <div class="search">
-                <form action="#" method="post">
-                    <input id="searchBar" type="text" placeholder="Zoeken..." required/>
-                    <input id="searchBarButton" type="button" value="Zoeken">
+                <form action="/Plug_IT/index.php?page=Catalogue" method="get">
+                    <input id="searchBar" type="text" name="searchKeywords" placeholder="Zoeken..." required/>
+                    <input name="page" value="Catalogue" hidden/>
+                    <input id="searchBarButton" type="submit" value="Zoeken"/>
                 </form>
             </div>
 
@@ -437,7 +438,7 @@ $_smarty_tpl->tpl_vars['parent'] = $__foreach_parent_10_saved_item;
             </div>
         <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'body', array (
-  0 => 'block_119857005fdcd98189_11106377',
+  0 => 'block_13741570072d5bb2042_58297142',
   1 => false,
   3 => 0,
   2 => 0,
@@ -533,17 +534,17 @@ $_smarty_tpl->tpl_vars['footeritem'] = $__foreach_footeritem_12_saved_item;
                 </html>
 <?php }
 /* {block 'title'}  file:layout.tpl */
-function block_2219257005fdcb16bc5_84679001($_smarty_tpl, $_blockParentStack) {
+function block_18903570072d592f492_57049225($_smarty_tpl, $_blockParentStack) {
 ?>
 Plug IT<?php
 }
 /* {/block 'title'} */
 /* {block 'head'}  file:layout.tpl */
-function block_1463357005fdcb1fe52_92739483($_smarty_tpl, $_blockParentStack) {
+function block_8900570072d5938613_78900474($_smarty_tpl, $_blockParentStack) {
 }
 /* {/block 'head'} */
 /* {block 'body'}  file:layout.tpl */
-function block_119857005fdcd98189_11106377($_smarty_tpl, $_blockParentStack) {
+function block_13741570072d5bb2042_58297142($_smarty_tpl, $_blockParentStack) {
 }
 /* {/block 'body'} */
 }

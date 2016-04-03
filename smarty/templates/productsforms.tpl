@@ -97,11 +97,10 @@
                     <label for="city">Woonplaats</label>
                     <input type="text" id="city" name="city" required="true">
                 </div>
-
-                <div>
-                    <label></label>
-                    <input type="submit" value="Toevoegen" id="addProduct" class="button"/>
-                </div>
+            </div>
+            <div>
+                <label></label>
+                <input type="submit" value="Toevoegen" id="addProduct" class="button"/>
             </div>
         </form>
 
@@ -157,15 +156,15 @@
             </div>
             <div id="contentDivRemoveProduct">
 
-            <div><label for="productToRemove">Productnaam</label>
-                <select type="text" id="productToRemove" name="productToRemove">
-                    {foreach from=$products item=product }
-                        {if $product->categoryId === $cat->id}
-                            <option value="{$product->id}">{$product->name}</option>
-                        {/if}
-                    {/foreach}
-                </select></div>
-                </div>
+                <div><label for="productToRemove">Productnaam</label>
+                    <select type="text" id="productToRemove" name="productToRemove">
+                        {foreach from=$products item=product }
+                            {if $product->categoryId === $cat->id}
+                                <option value="{$product->id}">{$product->name}</option>
+                            {/if}
+                        {/foreach}
+                    </select></div>
+            </div>
 
             <div>
                 <label></label>

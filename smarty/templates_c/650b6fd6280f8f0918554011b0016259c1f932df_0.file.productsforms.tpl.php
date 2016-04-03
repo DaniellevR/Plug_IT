@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-04-03 03:08:32
+/* Smarty version 3.1.29, created on 2016-04-03 03:21:30
   from "C:\wamp\www\Plug_IT\smarty\templates\productsforms.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_57006d10dd8358_48560105',
+  'unifunc' => 'content_5700701a9beba3_24857974',
   'file_dependency' => 
   array (
     '650b6fd6280f8f0918554011b0016259c1f932df' => 
     array (
       0 => 'C:\\wamp\\www\\Plug_IT\\smarty\\templates\\productsforms.tpl',
-      1 => 1459645708,
+      1 => 1459646480,
       2 => 'file',
     ),
   ),
@@ -20,13 +20,13 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
     'file:admin.tpl' => 1,
   ),
 ),false)) {
-function content_57006d10dd8358_48560105 ($_smarty_tpl) {
+function content_5700701a9beba3_24857974 ($_smarty_tpl) {
 $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'productsforms', array (
-  0 => 'block_2136157006d10cd6515_34934010',
+  0 => 'block_117405700701a844d33_19091769',
   1 => false,
   3 => 0,
   2 => 0,
@@ -35,7 +35,7 @@ $_smarty_tpl->ext->_inheritance->endChild($_smarty_tpl);
 $_smarty_tpl->smarty->ext->_subtemplate->render($_smarty_tpl, "file:admin.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'productsforms'}  file:productsforms.tpl */
-function block_2136157006d10cd6515_34934010($_smarty_tpl, $_blockParentStack) {
+function block_117405700701a844d33_19091769($_smarty_tpl, $_blockParentStack) {
 ?>
 
     <div class="adminpart">
@@ -193,11 +193,10 @@ $_smarty_tpl->tpl_vars['supplier'] = $__foreach_supplier_2_saved_item;
                     <label for="city">Woonplaats</label>
                     <input type="text" id="city" name="city" required="true">
                 </div>
-
-                <div>
-                    <label></label>
-                    <input type="submit" value="Toevoegen" id="addProduct" class="button"/>
-                </div>
+            </div>
+            <div>
+                <label></label>
+                <input type="submit" value="Toevoegen" id="addProduct" class="button"/>
             </div>
         </form>
 
@@ -331,9 +330,9 @@ $_smarty_tpl->tpl_vars['parent'] = $__foreach_parent_5_saved_item;
             </div>
             <div id="contentDivRemoveProduct">
 
-            <div><label for="productToRemove">Productnaam</label>
-                <select type="text" id="productToRemove" name="productToRemove">
-                    <?php
+                <div><label for="productToRemove">Productnaam</label>
+                    <select type="text" id="productToRemove" name="productToRemove">
+                        <?php
 $_from = $_smarty_tpl->tpl_vars['products']->value;
 if (!is_array($_from) && !is_object($_from)) {
 settype($_from, 'array');
@@ -345,20 +344,20 @@ foreach ($_from as $_smarty_tpl->tpl_vars['product']->value) {
 $_smarty_tpl->tpl_vars['product']->_loop = true;
 $__foreach_product_7_saved_local_item = $_smarty_tpl->tpl_vars['product'];
 ?>
-                        <?php if ($_smarty_tpl->tpl_vars['product']->value->categoryId === $_smarty_tpl->tpl_vars['cat']->value->id) {?>
-                            <option value="<?php echo $_smarty_tpl->tpl_vars['product']->value->id;?>
+                            <?php if ($_smarty_tpl->tpl_vars['product']->value->categoryId === $_smarty_tpl->tpl_vars['cat']->value->id) {?>
+                                <option value="<?php echo $_smarty_tpl->tpl_vars['product']->value->id;?>
 "><?php echo $_smarty_tpl->tpl_vars['product']->value->name;?>
 </option>
-                        <?php }?>
-                    <?php
+                            <?php }?>
+                        <?php
 $_smarty_tpl->tpl_vars['product'] = $__foreach_product_7_saved_local_item;
 }
 if ($__foreach_product_7_saved_item) {
 $_smarty_tpl->tpl_vars['product'] = $__foreach_product_7_saved_item;
 }
 ?>
-                </select></div>
-                </div>
+                    </select></div>
+            </div>
 
             <div>
                 <label></label>
