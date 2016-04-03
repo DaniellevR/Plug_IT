@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-04-03 20:07:51
+/* Smarty version 3.1.29, created on 2016-04-03 22:08:45
   from "C:\xampp\htdocs\Plug_IT\smarty\templates\orderAndDelivery.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_57015bf72c09f6_85476699',
+  'unifunc' => 'content_5701784d093384_13243148',
   'file_dependency' => 
   array (
     '6c88205afee0c77554df127b0f26669b588075c9' => 
     array (
       0 => 'C:\\xampp\\htdocs\\Plug_IT\\smarty\\templates\\orderAndDelivery.tpl',
-      1 => 1459706677,
+      1 => 1459714044,
       2 => 'file',
     ),
   ),
@@ -20,13 +20,13 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
     'file:layout.tpl' => 1,
   ),
 ),false)) {
-function content_57015bf72c09f6_85476699 ($_smarty_tpl) {
+function content_5701784d093384_13243148 ($_smarty_tpl) {
 $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'body', array (
-  0 => 'block_1222357015bf72a2855_34457492',
+  0 => 'block_189355701784d0741a9_92824581',
   1 => false,
   3 => 0,
   2 => 0,
@@ -37,7 +37,7 @@ $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'body', array (
 $_smarty_tpl->smarty->ext->_subtemplate->render($_smarty_tpl, "file:layout.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'}  file:orderAndDelivery.tpl */
-function block_1222357015bf72a2855_34457492($_smarty_tpl, $_blockParentStack) {
+function block_189355701784d0741a9_92824581($_smarty_tpl, $_blockParentStack) {
 ?>
 
     <div class="content">
@@ -95,6 +95,8 @@ $_smarty_tpl->tpl_vars['cartProduct'] = $__foreach_cartProduct_0_saved_item;
         <?php } else { ?>
             <h3>U heeft nog geen producten in uw winkelwagentje.</h3>
         <?php }?>
+        <?php echo $_smarty_tpl->tpl_vars['testen']->value;?>
+
     </div>
 <?php
 }

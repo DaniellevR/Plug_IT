@@ -33,11 +33,14 @@ class OrderAndDeliveryController extends MainCtrl {
         if (isset($cartList)) {
             $smarty->assign('cartList', $cartList);
         }
+        if (isset($_SESSION['testen'])) {
+            $smarty->assign('testen', $_SESSION['testen']);
+        }
         $smarty->assign('navigation', $navi);
         $smarty->assign('categories', $sideNavigation);
         $smarty->assign('model', $model);
         $smarty->assign("controller", $this);
-        $smarty->assign('footer', ['Informatie', 'Bestelling & levering', 'Betalen', 'Retourneren', 'Voorwaarden', 'Over', 'Contact']);
+//        $smarty->assign('footer', ['Informatie', 'Bestelling & levering', 'Betalen', 'Retourneren', 'Voorwaarden', 'Over', 'Contact']);
         $smarty->display($name . '.tpl');
     }
 

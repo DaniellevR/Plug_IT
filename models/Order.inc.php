@@ -16,36 +16,28 @@ class Order extends Database {
     public function createOrder($price, $username) {
         if ($this->establishConnection()) {
 //get user address
-            $sql = "SELECT address_address_id FROM user_has_address WHERE user_username = $username";
+            $sql = "SELECT address_address_id FROM user_has_address WHERE user_username = '$username'";
 
-            $resultAddress = $this->conn->query($sql);
+            $result = $this->conn->query($sql);
 
-            while ($row = $resultAddress->fetch_assoc()) {
+            $addressId;
+
+            while ($row = $result->fetch_assoc()) {
                 $addressId = $row['address_address_id'];
             }
 
 //create order
-            $sql = "INSERT INTO _order (user_username, price, order_state_state, address_address_delivery, address_address_billing) VALUES ($username, $price, 'processing', $addressId, $addressId);";
+            $sql = "INSERT INTO _order (`address_address_delivery`, `address_address_billing`, `user_username`, `order_state_state`, `price`) VALUES ($addressId, $addressId, '$username', 'processing', $price)";
 
             $this->conn->query($sql);
 
-            $sql2 = "SELECT last_insert_id()";
+            $sql = "SELECT last_insert_id()";
 
-            $result = $this->conn->query($sql2);
+            $result = $this->conn->query($sql);
 
             while ($row = $result->fetch_assoc()) {
-                $id = $row['id'];
+                $id = $row['last_insert_id()'];
             }
-
-//            $sql = "SELECT id FROM _order order by id desc limit 1";
-//
-//            $result = $this->conn->query($sql);
-//            if ($result == null) {
-//                return;
-//            }
-//            while ($row = $result->fetch_assoc()) {
-//                $id = $row['id'];
-//            }
 
             $this->closeConnection();
 
