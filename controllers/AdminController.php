@@ -416,6 +416,12 @@ class AdminController extends MainCtrl {
 
             $orderModel = new Order();
             
+            // Check (and add) delivery address
+            $addressId = $this->checkAndAddAddress($streetname, $housenumber, $city, $housenumberSuffix, $postalCode);
+            
+            // Check (and add) billing address
+            $addressId = $this->checkAndAddAddress($streetname, $housenumber, $city, $housenumberSuffix, $postalCode);
+            
             // Create order
             $ret = $orderModel->createFullOrder($username, $deliveryAddress, $billingAddress, "Unpaid", $price);
             
