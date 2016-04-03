@@ -31,6 +31,5 @@
         {else}
             <h3>U heeft nog geen producten in uw winkelwagentje.</h3>
         {/if}
-        {$testen}
     </div>
 {/block}

@@ -54,39 +54,6 @@ class Product extends Database {
         }
     }
 
-    public function getProductsFromCategoryId($catId) {
-        if ($this->establishConnection()) {
-            $sql = "SELECT * FROM product WHERE category_id = " . $catId;
-
-            $result = $this->conn->query($sql);
-
-            if ($result == null) {
-                return;
-            }
-
-            $products = array();
-
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $product = new Product();
-                    $product->id = $row['id'];
-                    $product->name = $row['name'];
-                    $product->description = $row['description'];
-                    $product->price = $row['price'];
-                    $product->brand = $row['brand'];
-                    $product->supplier = $row['supplier_name'];
-                    $product->amount = $row['amount'];
-                    $product->category_id = $row['category_id'];
-                    $products[] = $product;
-                }
-            }
-
-            $this->closeConnection();
-
-            return $products;
-        }
-    }
-
     public function getProductsInCategory($categoryId) {
         if ($this->establishConnection()) {
             $stmt = $this->conn->prepare("SELECT * FROM product WHERE category_id = ?");
