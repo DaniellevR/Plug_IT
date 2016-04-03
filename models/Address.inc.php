@@ -25,6 +25,10 @@ class Address extends Database {
     public $housenumberSuffix;
     public $postalCode;
 
+    /**
+     * Get all addresses
+     * @return \Address|boolean
+     */
     public function getAddresses() {
         if ($this->establishConnection()) {
             $sql = "SELECT * FROM address";
@@ -53,6 +57,15 @@ class Address extends Database {
         }
     }
     
+    /**
+     * Check if address already exists
+     * @param type $streetname
+     * @param type $housenumber
+     * @param type $city
+     * @param type $housenumberSuffix
+     * @param type $postalCode
+     * @return type int (count)
+     */
     public function checkIfAddressExists($streetname, $housenumber, $city, $housenumberSuffix, $postalCode) {
         if ($this->establishConnection()) {
             $sql = "SELECT COUNT(*) as cnt FROM address WHERE streetname = '" . $this->conn->real_escape_string($name) . "' AND housenumber = " . 
@@ -78,6 +91,15 @@ class Address extends Database {
         }
     }
     
+    /**
+     * Add address
+     * @param type $streetname
+     * @param type $housenumber
+     * @param type $city
+     * @param type $housenumberSuffix
+     * @param type $postalCode
+     * @return type int (id)
+     */
     public function addAddress($streetname, $housenumber, $city, $housenumberSuffix, $postalCode) {
         if ($this->establishConnection()) {
             $stmt = $this->conn->prepare("INSERT INTO address (address_id, streetname, housenumber, city, housenumber_suffix, postal_code) VALUES (0, ?, ?, ?, ?, ?)");

@@ -20,6 +20,10 @@ require_once($root . "/Plug_IT/models/Database.inc.php");
 class Role extends Database {
     public $name;
 
+    /**
+     * Get all roles
+     * @return \Role|boolean
+     */
     public function getRoles() {
         if ($this->establishConnection()) {
             $sql = "SELECT * FROM role";

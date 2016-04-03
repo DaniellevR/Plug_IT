@@ -20,100 +20,176 @@ require_once($root . "/Plug_IT/models/Order.inc.php");
 require_once($root . "/Plug_IT/models/Product.inc.php");
 require_once($root . "/Plug_IT/models/CartProduct.inc.php");
 
+/**
+ * Main for the controllers
+ */
 class MainCtrl {
 
+    /**
+     * Call function to view home
+     */
     public function Home() {
         $this->View('home', 'Hello world');
     }
 
+    /**
+     * Call function to view about
+     */
     public function About() {
         $this->View('about', 'Im awesome');
     }
 
+    /**
+     * Call function to view contact
+     */
     public function Contact() {
         $this->View('contact', 'Call me maybe?');
     }
 
+    /**
+     * Call function to view admin categories
+     */
     public function AdminCategories() {
         $this->View('categoriesforms', '');
     }
 
+    /**
+     * Call function to view admin products
+     */
     public function AdminProducts() {
         $this->View('productsforms', '');
     }
 
+    /**
+     * Call function to view admin users
+     */
     public function AdminUsers() {
         $this->View('usersforms', '');
     }
 
+    /**
+     * Call function to view admin orders
+     */
     public function AdminOrders() {
         $this->View('ordersforms', '');
     }
 
+    /**
+     * Call function to view catalogue
+     */
     public function Catalogue() {
         $this->View('catalogue', '');
     }
 
+    /**
+     * Call function to view category page
+     */
     public function Category() {
         $this->View('category', '');
     }
 
+    /**
+     * Call function to view conditions
+     */
     public function Conditions() {
         $this->View('conditions', '');
     }
 
+    /**
+     * Call function to view Information
+     */
     public function Information() {
         $this->View('information', '');
     }
 
+    /**
+     * Call function to view order and delivery
+     */
     public function OrderAndDelivery() {
         $this->View('orderAndDelivery', '');
     }
 
+    /**
+     * Call function to view order and delivery info
+     */
     public function OrderAndDeliveryInfo() {
         $this->View('orderAndDeliveryInfo', '');
     }
 
+    /**
+     * Call function to view payment info
+     */
     public function PaymentInfo() {
         $this->View('paymentInfo', '');
     }
 
+    /**
+     * Call function to view product page
+     */
     public function Product() {
         $this->View('product', '');
     }
 
+    /**
+     * Call function to view retour info
+     */
     public function RetourInfo() {
         $this->View('retourInfo', '');
     }
 
+    /**
+     * Call function to view cart
+     */
     public function Cart() {
         $this->View('cart', '');
     }
 
+    /**
+     * Call function to view wishlist
+     */
     public function Wishlist() {
         $this->View('wishlist', '');
     }
 
+    /**
+     * Call function to view the account page of the logged in user
+     */
     public function MyAccount() {
         $this->View('myAccount', '');
     }
 
+    /**
+     * Call function to view customer service
+     */
     public function CustomerService() {
         $this->View('customerService', '');
     }
 
+    /**
+     * Call function to view login page
+     */
     public function Login() {
         $this->View('login', '');
     }
 
+    /**
+     * Call function to view register page
+     */
     public function Register() {
         $this->View('register', '');
     }
 
+    /**
+     * Call function to view tasks
+     */
     public function Tasks() {
         $this->View('tasks', '');
     }
 
+    /**
+     * Get navigation items for the header and footer
+     * @return type double array
+     */
     public function getNavigationItems() {
         $navigationItemModel = new NavigationItem();
         $navigationItems = $navigationItemModel->getNavigationItems();
@@ -137,6 +213,10 @@ class MainCtrl {
         return $nav;
     }
 
+    /**
+     * Get categories
+     * @return type array sorted by categories and subcategories
+     */
     public function getCategories() {
         $categoryModel = new Category();
         $categories = $categoryModel->getCategories();
@@ -161,48 +241,81 @@ class MainCtrl {
         return $sideNavigation;
     }
 
+    /**
+     * Get suppliers
+     * @return type array
+     */
     public function getSuppliers() {
         $supplierModel = new Supplier();
         $suppliers = $supplierModel->getSuppliers();
         return $suppliers;
     }
 
+    /**
+     * Get roles
+     * @return type array
+     */
     public function getRoles() {
         $roleModel = new Role();
         $roles = $roleModel->getRoles();
         return $roles;
     }
 
+    /**
+     * Get users
+     * @return type array
+     */
     public function getUsers() {
         $userModel = new User();
         $users = $userModel->getUsers();
         return $users;
     }
 
+    /**
+     * Get addresses
+     * @return type array
+     */
     public function getAddresses() {
         $addressModel = new Address();
         $addresses = $addressModel->getAddresses();
         return $addresses;
     }
 
+    /**
+     * Get products
+     * @return type array
+     */
     public function getProducts() {
         $productModel = new Product();
         $products = $productModel->getProducts();
         return $products;
     }
 
+    /**
+     * Get orders
+     * @return type array
+     */
     public function getOrders() {
         $orderModel = new Order();
         $orders = $orderModel->getOrders();
         return $orders;
     }
 
+    /**
+     * Get states order
+     * @return type array
+     */
     public function getStates() {
         $orderModel = new Order();
         $states = $orderModel->getStates();
         return $states;
     }
 
+    /**
+     * Get products by keywords
+     * @param type $keywords
+     * @return type
+     */
     public function getProductsByKeywords($keywords) {
         $product = new Product();
         $products = $product->getProducts();
@@ -222,6 +335,9 @@ class MainCtrl {
         return $outputProducts;
     }
 
+    /**
+     * Handle login request
+     */
     public function loginUser() {
         $_SESSION["action"] = "login";
 
@@ -231,10 +347,10 @@ class MainCtrl {
 
             $userModel = new User();
             $data = $userModel->loginCheck($username);
-
             $givenHashedPassword = crypt($password, $data[0]);
 
             if ($givenHashedPassword === $data[0]) {
+                // Logged in
                 $_SESSION["username"] = $username;
                 $_SESSION["usertype"] = $data[1];
                 echo $data[1];
@@ -248,12 +364,20 @@ class MainCtrl {
         }
     }
 
+    /**
+     * Handle logout request
+     */
     public function logoutUser() {
         unset($_SESSION['username']);
         unset($_SESSION['usertype']);
         session_write_close();
     }
 
+    /**
+     * Hash the password with random salt
+     * @param type $password
+     * @return type string
+     */
     public function hash($password) {
         $cost = 10;
         $salt = strtr(base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM)), '+', '.');
@@ -264,6 +388,7 @@ class MainCtrl {
 
 }
 
+// Start the session (duration 30 minutes)
 session_start();
 session_cache_expire(1800);
 ?>

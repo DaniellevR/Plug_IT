@@ -1,13 +1,14 @@
 <?php
+
 /*
-*
-* Webshop Plug IT
-*
-* Made by : Nigel Liebers and Danielle van Rooij
-*
-* Avans 's-Hertogenbosch 2016 (c)
-*
-*/
+ *
+ * Webshop Plug IT
+ *
+ * Made by : Nigel Liebers and Danielle van Rooij
+ *
+ * Avans 's-Hertogenbosch 2016 (c)
+ *
+ */
 
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once($root . "/Plug_IT/models/Database.inc.php");
@@ -18,6 +19,7 @@ require_once($root . "/Plug_IT/models/Database.inc.php");
  * @author Nigel
  */
 class Order extends Database {
+
     public $id;
     public $deliveryAddressId;
     public $billingAddressId;
@@ -25,6 +27,10 @@ class Order extends Database {
     public $state;
     public $price;
 
+    /**
+     * Get all orders
+     * @return \Order|boolean
+     */
     public function getOrders() {
         if ($this->establishConnection()) {
             $sql = "SELECT * FROM _order";
@@ -52,7 +58,11 @@ class Order extends Database {
             return false;
         }
     }
-    
+
+    /**
+     * Get available states an order can have
+     * @return boolean
+     */
     public function getStates() {
         if ($this->establishConnection()) {
             $sql = "SELECT * FROM order_state";
@@ -73,7 +83,16 @@ class Order extends Database {
             return false;
         }
     }
-    
+
+    /**
+     * Create an order
+     * @param type $username
+     * @param type $deliveryAddressId
+     * @param type $billingAddressId
+     * @param type $state
+     * @param type $price
+     * @return type int (id)
+     */
     public function createFullOrder($username, $deliveryAddressId, $billingAddressId, $state, $price) {
         if ($this->establishConnection()) {
             $stmt = $this->conn->prepare("INSERT INTO _order (id, address_address_delivery, address_address_billing, user_username, order_state_state, price) VALUES (0, ?, ?, ?, ?)");
@@ -89,7 +108,13 @@ class Order extends Database {
             return -1;
         }
     }
-    
+
+    /**
+     * Create an order
+     * @param type $price
+     * @param type $username
+     * @return type int (id)
+     */
     public function createOrder($price, $username) {
         if ($this->establishConnection()) {
 //get user address
@@ -122,6 +147,11 @@ class Order extends Database {
         }
     }
 
+    /**
+     * Add products to an order (from list)
+     * @param type $orderId
+     * @param type $list
+     */
     public function createOrderHasProduct($orderId, $list) {
         if ($this->establishConnection()) {
             foreach ($list as $cartProduct) {
@@ -135,9 +165,16 @@ class Order extends Database {
             $this->closeConnection();
         }
     }
-    
-        public function addProductToOrder($orderId, $productId, $amount) {
-            if ($this->establishConnection()) {
+
+    /**
+     * Add product to order
+     * @param type $orderId
+     * @param type $productId
+     * @param type $amount
+     * @return type int (id)
+     */
+    public function addProductToOrder($orderId, $productId, $amount) {
+        if ($this->establishConnection()) {
             $stmt = $this->conn->prepare("INSERT INTO order_has_product (order_id, product_id, amount) VALUES (?, ?, ?)");
             $stmt->bind_param('iii', $orderId, $productId, $amount);
 
@@ -151,7 +188,13 @@ class Order extends Database {
             return -1;
         }
     }
-    
+
+    /**
+     * Edit state of order
+     * @param type $orderId
+     * @param type $state
+     * @return boolean
+     */
     public function editState($orderId, $state) {
         if ($this->establishConnection()) {
             $stmt = $this->conn->prepare("UPDATE _order SET order_state_state = ? WHERE id = ?");
