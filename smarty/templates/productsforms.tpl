@@ -31,7 +31,7 @@
                 <input type="text" id="brand" name="brand" required="true">
             </div>
             <div>
-                <label for="brand">Aantal op voorraad</label>
+                <label for="amount">Aantal op voorraad</label>
                 <input type="number" min="1" step="1" value="1" name="amount" required="true">
             </div>
 
@@ -105,13 +105,17 @@
         </form>
 
         <form action="handlers/EditProductHandler.php" method="POST" enctype="multipart/form-data">
+            {$cat = ""}
             <div>
                 <h3>Product wijzigen</h3>
             </div>
             <div>
                 <label for="categoriesEditProduct">Categorienaam</label>
-                <select type="text" id="categories_remove" id="categoriesEditProduct" name="categoriesEditProduct" onchange="grabInfo(this, 'getProductsFromCategoryEditProduct', 'contentDivEditProduct1');">
+                <select type="text" id="categoriesEditProduct" name="categoriesEditProduct" onchange="grabInfo(this, 'getProductsFromCategoryEditProduct', 'contentDivEditProduct1');">
                     {foreach from=$categories[0] item=parent }
+                        {if $cat === ""}
+                            {$cat = $parent}
+                        {/if}
                         <option class="category" id="{$parent->id}">{$parent->name}</option>
                         {foreach from=$categories[1] item=child }
                             {if $child->parent === $parent->id}
@@ -121,8 +125,131 @@
                     {/foreach}
                 </select>
             </div>
-            <div id="contentDivEditProduct1"></div>
-            <div id="contentDivEditProduct2"></div>
+
+            <div id="contentDivEditProduct1">
+                {$product = ""}
+                <div><label for="productToEdit">Productnaam</label>
+                    <select type="text" id="productToEdit" name="productToEdit" onchange="grabInfo(this, 'getProductAndSupplierInfoEditProduct', 'contentDivEditProduct2')">
+                        {foreach from=$products item=productitem }
+                            {if $productitem->categoryId === $cat->id}
+                                {if $product === ""}
+                                    {$product = $productitem}
+                                {/if}
+                                <option value="{$productitem->id}">{$productitem->name}</option>
+                            {/if}
+                        {/foreach}
+                    </select></div>
+                    
+                <div id="contentDivEditProduct2">
+                    <div><h4>Productinformatie</h4></div>
+                    <div>
+                        <label for="productname">Productnaam</label>
+                        <input type="text" name="productnameEditProduct" id="productname" required="true" value="{$product->name}">
+                    </div>
+                    <div>
+                        <label for="productSummaryShort">Korte omschrijving</label>
+                        <textarea type="text" id="productSummaryShort" name="productSummaryShortEditProduct"  maxlength="200" required="true">{$product->shortDescription}</textarea>
+                    </div>
+                    <div>
+                        <label for="productSummaryLong">Lange omschrijving</label>
+                        <textarea type="text" id="productSummaryLong" name="productSummaryLongEditProduct" class="longdescription" required="true">{$product->description}</textarea>
+                    </div>
+                    <div>
+                        <label for="characteristics">Kenmerken</label>
+                        <input type="text" id="characteristics" name="characteristicsEditProduct" required="true" placeholder="Kenmerk, Kenmerk, Kenmerk" value="{$product->characteristics}">
+                    </div>
+                    <div>
+                        <label for="price">Prijs</label>
+                        <input type="number" id="price" name="priceEditProduct" min="0.01" step="0.01" value="{$product->price}"/>
+                    </div>
+                    <div>
+                        <label for="brand">Merk</label>
+                        <input type="text" id="brand" name="brandEditProduct" required="true" value="{$product->brand}">
+                    </div>
+                    <div>
+                        <label for="amountEditProduct">Aantal op voorraad</label>
+                        <input type="number" min="1" step="1" name="amountEditProduct" required="true" value="{$product->amount}">
+                    </div>
+
+                    <div>
+                        <label for="categoriesEditProduct">Categorienaam</label>
+                        <select type="text" id="categoriesAddProduct" id="categoriesAddProduct" name="categoriesAddProduct">
+                            {foreach from=$categories[0] item=parent }
+                                <option class="category" value="{$parent->id}">{$parent->name}</option>
+                                {foreach from=$categories[1] item=child }
+                                    {if $child->parent === $parent->id}
+                                        <option class="subcategory" value="{$child->id}">{$child->name}</option>
+                                    {/if}
+                                {/foreach}
+                            {/foreach}
+                        </select>
+                    </div>
+                    <div>
+                        <label for="image">Foto categorie</label>
+                        <input type="file" accept="image/*" name="image" id="image" class="input_text"/>
+                    </div>
+                    <div>
+                        <img type="image" src="/Plug_IT/assets/pix/products/{$product->id}.png" class="image" />
+                    </div>
+
+                    <div><h4>Leverancier</h4></div>
+                    {$supplier = ""}
+                    <div>
+                        <label for="suppliersEditProduct">Kies uw leverancier</label>
+                        <select type="text" id="suppliersAddProduct" name="suppliersAddProduct" onchange="grabInfo(this, 'getSupplierInfo', 'contentDivEditProduct3')">
+                            <option value="">Nieuwe leverancier</option>
+                            {foreach from=$suppliers item=supplieritem }
+                                {if $supplieritem->name === $product->supplier}
+                                    {$supplier = $supplieritem}
+                                    <option id="{$supplieritem->name}" value="{$supplieritem->name}" selected>{$supplieritem->name}</option>
+                                {else}
+                                    <option id="{$supplieritem->name}" value="{$supplieritem->name}">{$supplieritem->name}</option>
+                                {/if}
+
+                            {/foreach}
+                        </select>
+                    </div>
+
+                    <div id="contentDivEditProduct3">
+
+                        <div>
+                            <label for="suppliername">Naam</label>
+                            <input type="text" id="suppliername" name="suppliernameEditProduct" required="true" value="{$supplier->name}" readonly>
+                        </div>
+                        <div>
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="emailEditProduct" required="true" value="{$supplier->email}" readonly>
+                        </div>
+                        <div>
+                            <label for="telephonenumber">Telefoonnummer</label>
+                            <input type="tel" id="telephonenumber" name="telephonenumberEditProduct" required="true" value="{$supplier->telephonenumber}" readonly>
+                        </div>
+                        <div>
+                            <label for="streetname">Adres</label>
+                            <input type="text" name="streetnameEditProduct" required="true" placeholder="Straatnaam" value="{$supplier->streetname}" readonly>
+                        </div>
+                        <div>
+                            <label></label>
+                            <input type="text" name="housenumberEditProduct" required="true" placeholder="Huisnummer" value="{$supplier->housenumber}" readonly>
+                        </div>
+                        <div>
+                            <label></label>
+                            <input type="text" name="housenumberSuffixEditProduct" placeholder="Huisnummertoevoeging" value="{$supplier->housenumber_suffix}" readonly>
+                        </div>
+                        <div>
+                            <label for="postalCode">Postcode</label>
+                            <input type="text" id="postalCode" name="postalCodeEditProduct" required="true" value="{$supplier->postalCode}" readonly>
+                        </div>
+                        <div>
+                            <label for="city">Woonplaats</label>
+                            <input type="text" id="city" name="cityEditProduct" required="true" value="{$supplier->city}" readonly>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
             <div>
                 <label></label>
                 <input type="submit" value="Wijzigen" id="editCategory" class="button"/>

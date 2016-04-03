@@ -151,6 +151,9 @@ function editUser(sender, e) {
 
 function grabInfo(select, action, contentDiv)
 {
+    
+    $('.testfunction').text("ACTION : " + action + " ; DIV : " + contentDiv);
+    
     var id = select[select.selectedIndex].id;
 
     if (window.XMLHttpRequest)

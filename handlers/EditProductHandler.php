@@ -8,27 +8,33 @@ require_once($root . "/Plug_IT/models/Address.inc.php");
 
 $errors = "";
 
-if (isset($_POST['categoriesEdit']) && isset($_POST['newname']) && isset($_POST['category_description']) && isset($_POST['parent'])) {
+if (isset($_POST['productToEdit']) && isset($_POST['productnameEditProduct']) && isset($_POST['productSummaryShortEditProduct']) && isset($_POST['productSummaryLongEditProduct']) &&
+        isset($_POST['characteristicsEditProduct']) && isset($_POST['priceEditProduct']) && isset($_POST['brandEditProduct']) && isset($_POST['amountEditProduct']) &&
+        isset($_POST['categoriesEditProduct']) && isset($_POST['suppliersEditProduct']) && isset($_POST['suppliernameEditProduct']) && isset($_POST['emailEditProduct']) &&
+        isset($_POST['telephonenumberEditProduct']) && isset($_POST['streetnameEditProduct']) && isset($_POST['housenumberEditProduct']) && isset($_POST['housenumberSuffixEditProduct']) &&
+        isset($_POST['postalCodeEditProduct']) && isset($_POST['cityEditProduct'])) {
     // Productinfo
-    $productname = $_POST['productname'];
-    $shortDescription = $_POST['productSummaryShort'];
-    $longDescription = $_POST['productSummaryLong'];
-    $characteristics = $_POST['characteristics'];
-    $price = $_POST['price'];
-    $brand = $_POST['brand'];
-    $amount = $_POST['amount'];
-    $categoryId = $_POST['categoriesAddProduct'];
+    $productId = $_POST['productToEdit'];
+    $productname = $_POST['productnameEditProduct'];
+    $shortDescription = $_POST['productSummaryShortEditProduct'];
+    $longDescription = $_POST['productSummaryLongEditProduct'];
+    $characteristics = $_POST['characteristicsEditProduct'];
+    $price = $_POST['priceEditProduct'];
+    $brand = $_POST['brandEditProduct'];
+    $amount = $_POST['amountEditProduct'];
+    $categoryId = $_POST['categoriesEditProduct'];
 
     // Supplier
-    $existingSuppliername = $_POST['suppliersAddProduct'];
-    $suppliername = $_POST['suppliername'];
-    $email = $_POST['email'];
-    $telephonenumber = $_POST['telephonenumber'];
-    $streetname = $_POST['streetname'];
-    $housenumber = $_POST['housenumber'];
-    $housenumberSuffix = $_POST['housenumberSuffix'];
-    $postalCode = $_POST['postalCode'];
-    $city = $_POST['city'];
+    $existingSuppliername = $_POST['suppliersEditProduct'];
+    $suppliername = $_POST['suppliernameEditProduct'];
+    $email = $_POST['emailEditProduct'];
+    $telephonenumber = $_POST['telephonenumberEditProduct'];
+    $streetname = $_POST['streetnameEditProduct'];
+    $housenumber = $_POST['housenumberEditProduct'];
+    $housenumberSuffix = $_POST['housenumberSuffixEditProduct'];
+    $postalCode = $_POST['postalCodeEditProduct'];
+    $city = $_POST['cityEditProduct'];
+
 
     // db
     $productModel = new Product();
