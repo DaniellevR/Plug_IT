@@ -7,6 +7,7 @@ require_once($root . "/Plug_IT/models/Supplier.inc.php");
 require_once($root . "/Plug_IT/models/User.inc.php");
 require_once($root . "/Plug_IT/models/Role.inc.php");
 require_once($root . "/Plug_IT/models/Address.inc.php");
+require_once($root . "/Plug_IT/models/Order.inc.php");
 
 class MainCtrl {
 
@@ -57,7 +58,7 @@ class MainCtrl {
     public function OrderAndDelivery() {
         $this->View('orderAndDelivery', '');
     }
-    
+
     public function OrderAndDeliveryInfo() {
         $this->View('orderAndDeliveryInfo', '');
     }
@@ -166,17 +167,29 @@ class MainCtrl {
         $users = $userModel->getUsers();
         return $users;
     }
-    
+
     public function getAddresses() {
         $addressModel = new Address();
         $addresses = $addressModel->getAddresses();
         return $addresses;
     }
-    
+
     public function getProducts() {
         $productModel = new Product();
         $products = $productModel->getProducts();
         return $products;
+    }
+
+    public function getOrders() {
+        $orderModel = new Order();
+        $orders = $orderModel->getOrders();
+        return $orders;
+    }
+    
+    public function getStates() {
+        $orderModel = new Order();
+        $states = $orderModel->getStates();
+        return $states;
     }
 
     public function getProductsByKeywords($keywords) {
@@ -199,11 +212,11 @@ class MainCtrl {
 
     public function loginUser() {
         $_SESSION["action"] = "login";
-        
+
         if (isset($_POST["username"]) && isset($_POST["password"])) {
             $username = $_POST["username"];
             $password = $_POST["password"];
-            
+
             $userModel = new User();
             $data = $userModel->loginCheck($username);
 

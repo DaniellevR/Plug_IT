@@ -149,6 +149,32 @@ function editUser(sender, e) {
     });
 }
 
+function addOrder(sender, e) {
+    e.preventDefault();
+
+    jQuery.ajax({
+        type: "POST",
+        url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
+        data: {action: 'addOrder'},
+        success: function() {
+            window.location = "/Plug_IT/index.php?page=AdminOrders";
+        }
+    });
+}
+
+function editOrder(sender, e) {
+    e.preventDefault();
+
+    jQuery.ajax({
+        type: "POST",
+        url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
+        data: {action: 'editOrder', orderId: document.getElementsByName('orderlist')[0].value, state: document.getElementsByName('statesEditOrder')[0].value},
+        success: function() {
+            window.location = "/Plug_IT/index.php?page=AdminOrders";
+        }
+    });
+}
+
 function grabInfo(select, action, contentDiv)
 {
     

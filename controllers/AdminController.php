@@ -6,6 +6,7 @@ require_once($root . "/Plug_IT/models/Category.inc.php");
 require_once($root . "/Plug_IT/models/Product.inc.php");
 require_once($root . "/Plug_IT/models/Address.inc.php");
 require_once($root . "/Plug_IT/models/User.inc.php");
+require_once($root . "/Plug_IT/models/Order.inc.php");
 
 class AdminController extends MainCtrl {
 
@@ -47,6 +48,20 @@ class AdminController extends MainCtrl {
         $smarty->assign('users', $this->getUsers());
         $smarty->assign('roles', $this->getRoles());
         $smarty->assign('products', $this->getProducts());
+
+        // Orders admin data
+        $productsInCart = array();
+        $smarty->assign('productsCartAdmin', $productsInCart);
+        if (isset($_SESSION["aminOrderId"])) {
+            $smarty->assign('orderIdAdmin', $_SESSION["aminOrderId"]);
+        }
+        if (isset($_SESSION["usernameAddOrder"])) {
+            $smarty->assign('usernameCartAdmin', $_SESSION["usernameAddOrder"]);
+        }
+
+        $smarty->assign('orders', $this->getOrders());
+        $smarty->assign('states', $this->getStates());
+
         $smarty->assign('model', $model);
         $smarty->display($name . '.tpl');
     }
@@ -88,7 +103,7 @@ class AdminController extends MainCtrl {
             fwrite($file, $res);
             fclose($file);
 
-            
+
             if ($res == 1) {
                 $path = "../assets/pix/products/";
                 foreach (glob($path . $productId . '.*') as $filename) {
@@ -293,7 +308,25 @@ class AdminController extends MainCtrl {
     }
 
     public function EditOrder() {
-        
+        $errors = "";
+
+        if (isset($_POST["orderId"]) && isset($_POST["state"])) {
+            $orderId = $_POST["orderId"];
+            $state = $_POST["state"];
+
+            $orderModel = new Order();
+            $ret = $orderModel->editState($orderId, $state);
+
+            if ($ret != 1) {
+                $errors = "Kon de status van de order niet aanpassen. Probeer het opnieuw.";
+            }
+        } else {
+            $errors = "Er is een fout opgetreden. Probeer het opnieuw.";
+        }
+
+        if ($errors !== "") {
+            $_SESSION["errors"] = $errors;
+        }
     }
 
 }

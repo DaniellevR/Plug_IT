@@ -7,6 +7,7 @@ require_once($root . "/Plug_IT/models/User.inc.php");
 require_once($root . "/Plug_IT/models/Role.inc.php");
 require_once($root . "/Plug_IT/models/Address.inc.php");
 require_once($root . "/Plug_IT/models/Supplier.inc.php");
+require_once($root . "/Plug_IT/models/Order.inc.php");
 
 $action = $_GET['action'];
 
@@ -74,7 +75,7 @@ if ($action === 'editCategory') {
     foreach (glob($path . $categoryId . '.*') as $filename) {
         echo '<img src="' . substr($filename, 3) . '" class="image" />';
     }
-} else if ($action === 'getProductsFromCategoryRemoveProduct' || $action === 'getProductsFromCategoryEditProduct') {
+} else if ($action === 'getProductsFromCategoryRemoveProduct' || $action === 'getProductsFromCategoryEditProduct' || $action === 'getProductsFromCategoryAddOrder') {
     $categoryId = $_GET["id"];
     $productModel = new Product();
     $products = $productModel->getProductsInCategory($categoryId);
@@ -82,10 +83,12 @@ if ($action === 'editCategory') {
     if ($action === 'getProductsFromCategoryRemoveProduct') {
         echo '<div><label for="productToRemove">Productnaam</label>';
         echo '<select type="text" id="productToRemove" name="productToRemove">';
-    } else {
+    } else if ($action === 'getProductsFromCategoryEditProduct') {
         echo '<div><label for="productToEdit">Productnaam</label>';
 //        echo '<select type="text" id="productToEdit" name="productToEdit" onchange="grabInfo(this, "getProductAndSupplierInfoEditProduct", "contentDivEditProduct2");">';
         echo '<select type="text" id="productToEdit" name="productToEdit" onchange="grabInfo(this, "getProductAndSupplierInfoEditProduct", "contentDivEditProduct2")">';
+    } else {
+        echo '<div><label for="productslist">Productnaam</label><select type="text" id="productslist" name="productslist">';
     }
 
     foreach ($products as $product) {
@@ -99,6 +102,8 @@ if ($action === 'editCategory') {
         productInfo($products[0]->id);
         echo '<div><h4>Leverancier</h4></div>';
         supplierInfo($products[0]->supplier);
+    } else if ($action === 'getProductsFromCategoryAddOrder') {
+        echo '<div><label for="amount">Aantal</label><input type="number" min="1" step="1" value="1" name="amount" required="true"></div>';
     }
 } else if ($action === 'getProductAndSupplierInfoEditProduct') {
 // Productinfo
@@ -177,6 +182,20 @@ if ($action === 'editCategory') {
 } else if ($action === 'getSupplierInfo') {
     $suppliername = $_GET["id"];
     supplierInfo($suppliername);
+} else if ($action === 'getStatesEditOrder') {
+    $orderstate = $_GET["id"];
+    $orderModel = new Order();
+    $states = $orderModel->getStates();
+
+    echo '<label>Status</label><select type="text" name="statesEditOrder">';
+        foreach ($states as $state) {
+        if ($state === $orderstate) {
+            echo '<option value="'. $state . '" selected>' . $state . '</option>';
+        } else {
+            echo '<option value="'. $state . '">' . $state . '</option>';
+        }
+    }
+    echo '</select>';
 }
 
 function productInfo($productId) {

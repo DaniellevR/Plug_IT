@@ -25,5 +25,11 @@ if (isset($_POST['action']) && !empty($_POST['action'])) {
         case 'editUser' :
             $adminCtrl->editUser();
             break;
+        case 'addOrder' :
+            $adminCtrl->addOrder();
+            break;
+        case 'editOrder' :
+            $adminCtrl->EditOrder();
+            break;
     }
 }
