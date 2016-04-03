@@ -149,20 +149,65 @@ function editUser(sender, e) {
     });
 }
 
-function addOrder(sender, e) {
-    e.preventDefault();
+function checkform($action) {
+    if ($action === "addProductToOrder") {
+        addProductToOrder();
+    } else if ($action === "addOrder") {
+        addOrder();
+    } else if ($action === "reset") {
+        reset();
+    }
+//    test();
+}
+
+function reset() {
+    jQuery.ajax({
+        type: "POST",
+        url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
+        data: {action: 'reset'},
+        success: function() {
+            window.location = "/Plug_IT/index.php?page=AdminOrders";
+        }
+    });
+}
+
+function addProductToOrder() {
+//    e.preventDefault();
+
+    $('.testfunction').text("ADD PRODUCT TO ORDER");
 
     jQuery.ajax({
         type: "POST",
         url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
         data: {action: 'addOrder', username: document.getElementsByName('userAddOrder')[0].value, streetnameDelivery: document.getElementsByName('streetnameDelivery')[0].value,
-            housenumberDeliviry: document.getElementsByName('housenumberDelivery')[0].value, housenumberSuffixDelivery: document.getElementsByName('housenumberSuffixDelivery')[0].value,
+            housenumberDelivery: document.getElementsByName('housenumberDelivery')[0].value, housenumberSuffixDelivery: document.getElementsByName('housenumberSuffixDelivery')[0].value,
             postalCodeDelivery: document.getElementsByName('postalCodeDelivery')[0].value, cityDelivery: document.getElementsByName('cityDelivery')[0].value,
             streetnameBilling: document.getElementsByName('streetnameBilling')[0].value, housenumberBilling: document.getElementsByName('housenumberBilling')[0].value,
             housenumberSuffixBilling: document.getElementsByName('housenumberSuffixBilling')[0].value, postalCodeBilling: document.getElementsByName('postalCodeBilling')[0].value,
             cityBilling: document.getElementsByName('cityBilling')[0].value, productId: document.getElementsByName('productslist')[0].value,
-            amount: document.getElementsByName('amount')[0].value, button: document.getElementsByName('addOrder')[0].value},
-        success: function () {
+            amount: document.getElementsByName('amount')[0].value, button: 'addProduct'},
+        success: function() {
+            window.location = "/Plug_IT/index.php?page=AdminOrders";
+        }
+    });
+}
+
+function addOrder() {
+//    e.preventDefault();
+
+    $('.testfunction').text("ADD ORDER");
+
+    jQuery.ajax({
+        type: "POST",
+        url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
+        data: {action: 'addOrder', username: document.getElementsByName('userAddOrder')[0].value, streetnameDelivery: document.getElementsByName('streetnameDelivery')[0].value,
+            housenumberDelivery: document.getElementsByName('housenumberDelivery')[0].value, housenumberSuffixDelivery: document.getElementsByName('housenumberSuffixDelivery')[0].value,
+            postalCodeDelivery: document.getElementsByName('postalCodeDelivery')[0].value, cityDelivery: document.getElementsByName('cityDelivery')[0].value,
+            streetnameBilling: document.getElementsByName('streetnameBilling')[0].value, housenumberBilling: document.getElementsByName('housenumberBilling')[0].value,
+            housenumberSuffixBilling: document.getElementsByName('housenumberSuffixBilling')[0].value, postalCodeBilling: document.getElementsByName('postalCodeBilling')[0].value,
+            cityBilling: document.getElementsByName('cityBilling')[0].value, productId: document.getElementsByName('productslist')[0].value,
+            amount: document.getElementsByName('amount')[0].value, button: 'addOrder'},
+        success: function() {
             window.location = "/Plug_IT/index.php?page=AdminOrders";
         }
     });

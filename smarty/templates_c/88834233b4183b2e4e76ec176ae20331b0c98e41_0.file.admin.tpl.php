@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-04-03 02:28:39
+/* Smarty version 3.1.29, created on 2016-04-04 00:15:11
   from "C:\wamp\www\Plug_IT\smarty\templates\admin.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_570063b79379c2_43770885',
+  'unifunc' => 'content_570195efefd042_96417761',
   'file_dependency' => 
   array (
     '88834233b4183b2e4e76ec176ae20331b0c98e41' => 
     array (
       0 => 'C:\\wamp\\www\\Plug_IT\\smarty\\templates\\admin.tpl',
-      1 => 1459643235,
+      1 => 1459721140,
       2 => 'file',
     ),
   ),
@@ -21,13 +21,13 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
     'file:loginform.tpl' => 1,
   ),
 ),false)) {
-function content_570063b79379c2_43770885 ($_smarty_tpl) {
+function content_570195efefd042_96417761 ($_smarty_tpl) {
 $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'body', array (
-  0 => 'block_21379570063b78949f2_76107241',
+  0 => 'block_31144570195efe61ba6_38871552',
   1 => false,
   3 => 0,
   2 => 0,
@@ -36,34 +36,34 @@ $_smarty_tpl->ext->_inheritance->endChild($_smarty_tpl);
 $_smarty_tpl->smarty->ext->_subtemplate->render($_smarty_tpl, "file:layout.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'categoriesforms'}  file:admin.tpl */
-function block_10496570063b790af48_78626418($_smarty_tpl, $_blockParentStack) {
+function block_11457570195efecf579_93526503($_smarty_tpl, $_blockParentStack) {
 }
 /* {/block 'categoriesforms'} */
 /* {block 'productsforms'}  file:admin.tpl */
-function block_9529570063b79116e3_69797590($_smarty_tpl, $_blockParentStack) {
+function block_3174570195efed6488_49475653($_smarty_tpl, $_blockParentStack) {
 }
 /* {/block 'productsforms'} */
 /* {block 'usersforms'}  file:admin.tpl */
-function block_26494570063b7917817_72900628($_smarty_tpl, $_blockParentStack) {
+function block_2983570195efedc601_94475735($_smarty_tpl, $_blockParentStack) {
 }
 /* {/block 'usersforms'} */
 /* {block 'ordersforms'}  file:admin.tpl */
-function block_9439570063b791d8c5_82250078($_smarty_tpl, $_blockParentStack) {
+function block_2132570195efee2809_21016891($_smarty_tpl, $_blockParentStack) {
 }
 /* {/block 'ordersforms'} */
 /* {block 'parent_block'}  file:admin.tpl */
-function block_21804570063b7926a90_27840495($_smarty_tpl, $_blockParentStack) {
+function block_21501570195efeebb17_13377525($_smarty_tpl, $_blockParentStack) {
 $_smarty_tpl->smarty->ext->_subtemplate->render($_smarty_tpl, "file:loginform.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 }
 /* {/block 'parent_block'} */
 /* {block 'body'}  file:admin.tpl */
-function block_21379570063b78949f2_76107241($_smarty_tpl, $_blockParentStack) {
+function block_31144570195efe61ba6_38871552($_smarty_tpl, $_blockParentStack) {
 ?>
 
     <div class="content admin">
         <h1 class="test">Admin</h1>
         
-        <?php if ($_smarty_tpl->tpl_vars['errors']->value !== '' && $_smarty_tpl->tpl_vars['action']->value !== "addUser" && $_smarty_tpl->tpl_vars['action']->value !== "login") {?>
+        <?php if ($_smarty_tpl->tpl_vars['errors']->value !== '') {?>
             <div class="error">
                 <?php echo $_smarty_tpl->tpl_vars['errors']->value;?>
 
@@ -103,7 +103,7 @@ function block_21379570063b78949f2_76107241($_smarty_tpl, $_blockParentStack) {
 
         <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'categoriesforms', array (
-  0 => 'block_10496570063b790af48_78626418',
+  0 => 'block_11457570195efecf579_93526503',
   1 => false,
   3 => 0,
   2 => 0,
@@ -113,7 +113,7 @@ $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'categoriesforms'
 
     <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'productsforms', array (
-  0 => 'block_9529570063b79116e3_69797590',
+  0 => 'block_3174570195efed6488_49475653',
   1 => false,
   3 => 0,
   2 => 0,
@@ -123,7 +123,7 @@ $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'productsforms', 
 
 <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'usersforms', array (
-  0 => 'block_26494570063b7917817_72900628',
+  0 => 'block_2983570195efedc601_94475735',
   1 => false,
   3 => 0,
   2 => 0,
@@ -133,7 +133,7 @@ $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'usersforms', arr
 
 <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'ordersforms', array (
-  0 => 'block_9439570063b791d8c5_82250078',
+  0 => 'block_2132570195efee2809_21016891',
   1 => false,
   3 => 0,
   2 => 0,
@@ -143,7 +143,7 @@ $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'ordersforms', ar
 
 <?php } else {
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, "parent_block", array (
-  0 => 'block_21804570063b7926a90_27840495',
+  0 => 'block_21501570195efeebb17_13377525',
   1 => false,
   3 => 0,
   2 => 0,

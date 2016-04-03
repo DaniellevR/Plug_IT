@@ -20,6 +20,7 @@ class Product extends Database {
     public $supplier;
     public $amount;
     public $categoryId;
+    public $amountInCartAdmin = 0;
 
     public function getProducts() {
         if ($this->establishConnection()) {

@@ -1,5 +1,8 @@
 <?php
 
+$root = realpath($_SERVER["DOCUMENT_ROOT"]);
+require_once($root . "/Plug_IT/models/Database.inc.php");
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -12,7 +15,78 @@
  * @author Nigel
  */
 class Order extends Database {
+    public $id;
+    public $deliveryAddressId;
+    public $billingAddressId;
+    public $username;
+    public $state;
+    public $price;
 
+    public function getOrders() {
+        if ($this->establishConnection()) {
+            $sql = "SELECT * FROM _order";
+            $result = $this->conn->query($sql);
+
+            $orders = array();
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $order = new Order();
+                    $order->id = $row['id'];
+                    $order->deliveryAddressId = $row['address_address_delivery'];
+                    $order->billingAddressId = $row['address_address_billing'];
+                    $order->username = $row['user_username'];
+                    $order->state = $row['order_state_state'];
+                    $order->price = $row['price'];
+                    $orders[] = $order;
+                }
+            }
+
+            $this->closeConnection();
+
+            return $orders;
+        } else {
+            return false;
+        }
+    }
+    
+    public function getStates() {
+        if ($this->establishConnection()) {
+            $sql = "SELECT * FROM order_state";
+            $result = $this->conn->query($sql);
+
+            $states = array();
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $states[] = $row['state'];
+                }
+            }
+
+            $this->closeConnection();
+
+            return $states;
+        } else {
+            return false;
+        }
+    }
+    
+    public function createFullOrder($username, $deliveryAddressId, $billingAddressId, $state, $price) {
+        if ($this->establishConnection()) {
+            $stmt = $this->conn->prepare("INSERT INTO _order (id, address_address_delivery, address_address_billing, user_username, order_state_state, price) VALUES (0, ?, ?, ?, ?)");
+            $stmt->bind_param('iissi', $deliveryAddressId, $billingAddressId, $username, $state, $price);
+
+            $stmt->execute();
+            $generated_id = $stmt->insert_id;
+
+            $this->closeConnection();
+
+            return $generated_id;
+        } else {
+            return -1;
+        }
+    }
+    
     public function createOrder($price, $username) {
         if ($this->establishConnection()) {
 //get user address
@@ -56,6 +130,34 @@ class Order extends Database {
             }
 
             $this->closeConnection();
+        }
+    }
+    
+        public function addProductToOrder($orderId, $productId, $amount) {
+            if ($this->establishConnection()) {
+            $stmt = $this->conn->prepare("INSERT INTO order_has_product (order_id, product_id, amount) VALUES (?, ?, ?)");
+            $stmt->bind_param('iii', $orderId, $productId, $amount);
+
+            $stmt->execute();
+            $generated_id = $stmt->insert_id;
+
+            $this->closeConnection();
+
+            return $generated_id;
+        } else {
+            return -1;
+        }
+    }
+    
+    public function editState($orderId, $state) {
+        if ($this->establishConnection()) {
+            $stmt = $this->conn->prepare("UPDATE _order SET order_state_state = ? WHERE id = ?");
+            $stmt->bind_param('si', $state, $orderId);
+            $stmt->execute();
+            $this->closeConnection();
+            return true;
+        } else {
+            return false;
         }
     }
 

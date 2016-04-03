@@ -3,7 +3,7 @@
     <div class="content admin">
         <h1 class="test">Admin</h1>
         
-        {if $errors !== "" && $action !== "addUser" && $action !== "login"}
+        {if $errors !== ""}
             <div class="error">
                 {$errors}
             </div>

@@ -2,9 +2,13 @@
     <form method="POST" enctype="multipart/form-data" onsubmit="editUser(this, event)">
 
         {if $errors !== ""}
-            <div class="errortext">
-                {$errors}
-            </div>
+            {if isset($smarty.get.page)}
+                {if $smarty.get.page === "Register" || $smarty.get.page === "MyAccount"}
+                    <div class="errortext">
+                        {$errors}
+                    </div>
+                {/if}
+            {/if}
         {/if}
 
         {$username = ""}
