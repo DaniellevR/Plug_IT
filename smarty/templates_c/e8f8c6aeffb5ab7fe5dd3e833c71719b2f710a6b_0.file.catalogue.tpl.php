@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-04-03 20:06:03
+/* Smarty version 3.1.29, created on 2016-04-04 00:19:40
   from "C:\xampp\htdocs\Plug_IT\smarty\templates\catalogue.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_57015b8b622d85_17827606',
+  'unifunc' => 'content_570196fc34f564_12136393',
   'file_dependency' => 
   array (
     'e8f8c6aeffb5ab7fe5dd3e833c71719b2f710a6b' => 
     array (
       0 => 'C:\\xampp\\htdocs\\Plug_IT\\smarty\\templates\\catalogue.tpl',
-      1 => 1459706424,
+      1 => 1459721962,
       2 => 'file',
     ),
   ),
@@ -20,13 +20,13 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
     'file:layout.tpl' => 1,
   ),
 ),false)) {
-function content_57015b8b622d85_17827606 ($_smarty_tpl) {
+function content_570196fc34f564_12136393 ($_smarty_tpl) {
 $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'body', array (
-  0 => 'block_1564157015b8b5e8451_75972689',
+  0 => 'block_11814570196fc315979_16799506',
   1 => false,
   3 => 0,
   2 => 0,
@@ -37,7 +37,7 @@ $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'body', array (
 $_smarty_tpl->smarty->ext->_subtemplate->render($_smarty_tpl, "file:layout.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'}  file:catalogue.tpl */
-function block_1564157015b8b5e8451_75972689($_smarty_tpl, $_blockParentStack) {
+function block_11814570196fc315979_16799506($_smarty_tpl, $_blockParentStack) {
 ?>
 
     <div class="content">
@@ -96,6 +96,7 @@ $_smarty_tpl->tpl_vars['product'] = $__foreach_product_0_saved_item;
                 <h4>Geen producten gevonden</h4>
             <?php }?>
         <?php } elseif (isset($_smarty_tpl->tpl_vars['childCategories']->value)) {?>
+            <div class='catalogueHeader'><h3>Categoriën</h3></div>
             <?php
 $_from = $_smarty_tpl->tpl_vars['childCategories']->value;
 if (!is_array($_from) && !is_object($_from)) {
@@ -126,6 +127,7 @@ $_smarty_tpl->tpl_vars['cat'] = $__foreach_cat_1_saved_item;
 }
 ?>
         <?php } elseif (isset($_smarty_tpl->tpl_vars['allCategories']->value)) {?>
+            <div class='catalogueHeader'><h3>Categoriën</h3></div>
             <?php
 $_from = $_smarty_tpl->tpl_vars['allCategories']->value;
 if (!is_array($_from) && !is_object($_from)) {
@@ -160,6 +162,7 @@ $_smarty_tpl->tpl_vars['cat'] = $__foreach_cat_2_saved_item;
         <?php }?>
 
         <?php if (isset($_smarty_tpl->tpl_vars['products']->value)) {?>
+            <div class='catalogueHeader'><h3>Producten</h3></div>
             <?php
 $_from = $_smarty_tpl->tpl_vars['products']->value;
 if (!is_array($_from) && !is_object($_from)) {

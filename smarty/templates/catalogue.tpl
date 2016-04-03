@@ -33,6 +33,7 @@
                 <h4>Geen producten gevonden</h4>
             {/if}
         {else if isset($childCategories)}
+            <div class='catalogueHeader'><h3>Categoriën</h3></div>
             {foreach from=$childCategories item=cat}
                 <a href="/Plug_IT/index.php?page=Catalogue&cat={$cat->name}&id={$cat->id}">
                     <div class='categoryThumbnail'>
@@ -42,6 +43,7 @@
                 </a>
             {/foreach}
         {else if isset($allCategories)}
+            <div class='catalogueHeader'><h3>Categoriën</h3></div>
             {foreach from=$allCategories item=cat}
                 {if $cat->parent == null}
                     <a href="/Plug_IT/index.php?page=Catalogue&cat={$cat->name}&id={$cat->id}">
@@ -55,6 +57,7 @@
         {/if}
 
         {if isset($products)}
+            <div class='catalogueHeader'><h3>Producten</h3></div>
             {foreach from=$products item=product}
                 <div class='productThumbnail'>
                     <a href='/Plug_IT/index.php?page=Product&id={$product->id}'>
