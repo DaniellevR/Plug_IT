@@ -120,6 +120,22 @@ class Order extends Database {
         }
     }
     
+        public function addProductToOrder($orderId, $productId, $amount) {
+            if ($this->establishConnection()) {
+            $stmt = $this->conn->prepare("INSERT INTO order_has_product (order_id, product_id, amount) VALUES (?, ?, ?)");
+            $stmt->bind_param('iii', $orderId, $productId, $amount);
+
+            $stmt->execute();
+            $generated_id = $stmt->insert_id;
+
+            $this->closeConnection();
+
+            return $generated_id;
+        } else {
+            return -1;
+        }
+    }
+    
     public function editState($orderId, $state) {
         if ($this->establishConnection()) {
             $stmt = $this->conn->prepare("UPDATE _order SET order_state_state = ? WHERE id = ?");

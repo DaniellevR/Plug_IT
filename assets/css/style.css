@@ -53,6 +53,10 @@ a:visited {
     background-color: transparent;
 }
 
+.right {
+    float: right;
+}
+
 /* ==========================================================================
     CSS header.php
    ========================================================================== */
@@ -453,6 +457,10 @@ input[type=text], input[type=password], input[type=file], input[type=tel], input
     font-size: 0.9em;
     border-radius: 5px;
     /*background: rgba(0, 0, 0, 0.07);*/
+}
+
+input[class=small] {
+    width: 50px;
 }
 
 /*input[type=text]:focus, input[type=password]:focus{

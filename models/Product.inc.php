@@ -22,6 +22,8 @@ class Product extends Database {
     public $categoryId;
     public $amountInCart;
     public $amountInCartAdmin = 0;
+    
+    
 
     public function getProducts() {
         if ($this->establishConnection()) {

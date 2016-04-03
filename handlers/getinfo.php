@@ -188,14 +188,38 @@ if ($action === 'editCategory') {
     $states = $orderModel->getStates();
 
     echo '<label>Status</label><select type="text" name="statesEditOrder">';
-        foreach ($states as $state) {
+    foreach ($states as $state) {
         if ($state === $orderstate) {
-            echo '<option value="'. $state . '" selected>' . $state . '</option>';
+            echo '<option value="' . $state . '" selected>' . $state . '</option>';
         } else {
-            echo '<option value="'. $state . '">' . $state . '</option>';
+            echo '<option value="' . $state . '">' . $state . '</option>';
         }
     }
     echo '</select>';
+} else if ($action === 'getAddressesUsername') {
+    $username = $_GET["id"];
+    $userModel = new User();
+    $users = $userModel->getUsers();
+
+    $foundUser = "";
+    foreach ($users as $user) {
+        if ($user->username === $username) {
+            $foundUser = $user;
+        }
+    }
+    
+    echo '<div><h5>Bezorgadres</h5></div>';
+    echo '<div><label for="streetname">Adres</label><input type="text" id="streetname" name="streetnameDelivery" required="true" placeholder="Straatnaam" value="' . $foundUser->streetname . '"></div>';
+    echo '<div><label></label><input type="text" name="housenumberDelivery" required="true" placeholder="Huisnummer" value="' . $foundUser->housenumber . '"></div>';
+    echo '<div><label></label><input type="text" name="housenumberSuffixDelivery" placeholder="Huisnummertoevoeging" value="' . $foundUser->housenumber_suffix . '"></div>';
+    echo '<div><label for="postalCode">Postcode</label><input type="text" name="postalCodeDelivery" required="true" value="' . $foundUser->postalCode . '"></div>';
+    echo '<div><label for="city">Woonplaats</label><input type="text" name="cityDelivery" required="true" value="' . $foundUser->city . '"></div>';
+    echo '<div><h5>Factuuradres</h5></div>';
+    echo '<div><label for="streetname">Adres</label><input type="text" id="streetname" name="streetnameBilling" required="true" placeholder="Straatnaam" value="' . $foundUser->streetname . '"></div>';
+    echo '<div><label></label><input type="text" name="housenumberBilling" required="true" placeholder="Huisnummer" value="' . $foundUser->housenumber . '"></div>';
+    echo '<div><label></label><input type="text" name="housenumberSuffixBilling" placeholder="Huisnummertoevoeging" value="' . $foundUser->housenumber_suffix . '"></div>';
+    echo '<div><label for="postalCode">Postcode</label><input type="text" name="postalCodeBilling" required="true" value="' . $foundUser->postalCode . '"></div>';
+    echo '<div><label for="city">Woonplaats</label><input type="text" name="cityBilling" required="true" value="' . $foundUser->city . '"></div>';
 }
 
 function productInfo($productId) {
