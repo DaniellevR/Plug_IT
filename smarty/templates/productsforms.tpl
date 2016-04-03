@@ -32,7 +32,7 @@
             </div>
             <div>
                 <label for="brand">Aantal op voorraad</label>
-                <input type="number" min="1" step="1" name="amount" required="true">
+                <input type="number" min="1" step="1" value="1" name="amount" required="true">
             </div>
 
             <div>
@@ -87,9 +87,8 @@
                 </div>
                 <div>
                     <label></label>
-                    <input type="text" name="housenumberSuffix" placeholder="Toevoeging">
+                    <input type="text" name="housenumberSuffix" placeholder="Huisnummertoevoeging">
                 </div>
-            </div>
             <div>
                 <label for="postalCode">Postcode</label>
                 <input type="text" id="postalCode" name="postalCode" required="true">
@@ -103,6 +102,7 @@
                 <label></label>
                 <input type="submit" value="Toevoegen" id="addProduct" class="button"/>
             </div>
+                            </div>
         </form>
 
         <form action="handlers/EditProductHandler.php" method="POST" enctype="multipart/form-data">

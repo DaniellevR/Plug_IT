@@ -94,12 +94,13 @@ if (isset($_FILES['image'])) {
                     $errors = $errors . "Er is een fout opgetreden bij het opslaan. Probeer het opnieuw.\r\n";
                 }
             } else {
-                $errors = $errors . "Ingevoerde combinatie van productnaam en leverancier bestaan al.\r\nKon het product niet toevoegen.";
+                $errors = $errors . "Ingevoerde combinatie van productnaam en leverancier bestaat al.\r\nKon het product niet toevoegen.";
             }
         }
     }
 
     $_SESSION["errors"] = $errors;
+    $_SESSION["messages"] = $messages;
 } else {
     $_SESSION["errors"] = "Kon het product niet toevoegen.";
 }

@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-03-31 21:47:02
+/* Smarty version 3.1.29, created on 2016-04-03 02:46:02
   from "C:\wamp\www\Plug_IT\smarty\templates\productsforms.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_56fd7eb6dc4257_87568406',
+  'unifunc' => 'content_570067caa76e13_34206709',
   'file_dependency' => 
   array (
     '650b6fd6280f8f0918554011b0016259c1f932df' => 
     array (
       0 => 'C:\\wamp\\www\\Plug_IT\\smarty\\templates\\productsforms.tpl',
-      1 => 1459452632,
+      1 => 1459644358,
       2 => 'file',
     ),
   ),
@@ -20,13 +20,13 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
     'file:admin.tpl' => 1,
   ),
 ),false)) {
-function content_56fd7eb6dc4257_87568406 ($_smarty_tpl) {
+function content_570067caa76e13_34206709 ($_smarty_tpl) {
 $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'productsforms', array (
-  0 => 'block_3192156fd7eb6cf5057_18454911',
+  0 => 'block_23797570067ca9a6d84_44273831',
   1 => false,
   3 => 0,
   2 => 0,
@@ -35,7 +35,7 @@ $_smarty_tpl->ext->_inheritance->endChild($_smarty_tpl);
 $_smarty_tpl->smarty->ext->_subtemplate->render($_smarty_tpl, "file:admin.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'productsforms'}  file:productsforms.tpl */
-function block_3192156fd7eb6cf5057_18454911($_smarty_tpl, $_blockParentStack) {
+function block_23797570067ca9a6d84_44273831($_smarty_tpl, $_blockParentStack) {
 ?>
 
     <div class="adminpart">
@@ -70,7 +70,7 @@ function block_3192156fd7eb6cf5057_18454911($_smarty_tpl, $_blockParentStack) {
             </div>
             <div>
                 <label for="brand">Aantal op voorraad</label>
-                <input type="number" min="1" step="1" name="amount" required="true">
+                <input type="number" min="1" step="1" value="1" name="amount" required="true">
             </div>
 
             <div>
@@ -183,9 +183,8 @@ $_smarty_tpl->tpl_vars['supplier'] = $__foreach_supplier_2_saved_item;
                 </div>
                 <div>
                     <label></label>
-                    <input type="text" name="housenumberSuffix" placeholder="Toevoeging">
+                    <input type="text" name="housenumberSuffix" placeholder="Huisnummertoevoeging">
                 </div>
-            </div>
             <div>
                 <label for="postalCode">Postcode</label>
                 <input type="text" id="postalCode" name="postalCode" required="true">
@@ -199,6 +198,7 @@ $_smarty_tpl->tpl_vars['supplier'] = $__foreach_supplier_2_saved_item;
                 <label></label>
                 <input type="submit" value="Toevoegen" id="addProduct" class="button"/>
             </div>
+                            </div>
         </form>
 
         <form action="handlers/EditProductHandler.php" method="POST" enctype="multipart/form-data">

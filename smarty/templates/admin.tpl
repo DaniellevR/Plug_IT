@@ -8,6 +8,12 @@
                 {$errors}
             </div>
         {/if}
+        {if $messages !== ""}
+            <div class="message">
+                {$messages}
+            </div>
+        {/if}
+        
 
         {if isset($smarty.cookies.PHPSESSID) && isset($smarty.session.usertype) && $smarty.session.usertype === "Administrator"}
             <ul class="adminpnl">

@@ -32,6 +32,13 @@ class AdminController extends MainCtrl {
         }
         $smarty->assign('errors', $errors);
 
+        $messages = "";
+        if (isset($_SESSION["messages"])) {
+            $messages = $_SESSION["messages"];
+            unset($_SESSION["messages"]);
+        }
+        $smarty->assign('messages', $messages);
+
         $smarty->assign('page', $name);
 
         $smarty->assign('navigation', $navi);
@@ -206,7 +213,7 @@ class AdminController extends MainCtrl {
                     break;
                 }
             }
-            
+
             $newPassword = $foundUser->password;
 
             if (isset($_POST["currentPassword"]) && isset($_POST["password"]) && isset($_POST["repeatPassword"])) {
@@ -228,7 +235,7 @@ class AdminController extends MainCtrl {
                     $errors = "Het herhaalde wachtwoord komt niet overeen.\r\n";
                 }
             }
-            
+
             // Check (and add) address
             $addressId = $this->checkAndAddAddress($streetname, $housenumber, $city, $housenumberSuffix, $postalCode);
 

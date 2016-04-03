@@ -6,8 +6,11 @@ li {
     list-style-type: none;
 }
 
-body {
+* {
     font-family:Arial, Helvetica, sans-serif;
+}
+
+body {
     background-color:#5CA0FF;
     height: auto;
 }
@@ -25,6 +28,14 @@ div.sitecontainer {
     border: 2px solid red;
     padding: 10px;
     text-align: center;
+}
+
+.message {
+    background-color: #99ff99;
+    border: 2px solid green;
+    padding: 10px;
+    text-align: center;
+    margin-top: 10px;
 }
 
 .errortext {
@@ -435,7 +446,7 @@ label {
     /*vertical-align: middle;*/
 }
 
-input[type=text], input[type=password], input[type=file], input[type=tel], input[type=email], select[type=text], textarea[type=text] {
+input[type=text], input[type=password], input[type=file], input[type=tel], input[type=email], select[type=text], textarea[type=text], input[type=number] {
     width: 65%; 
     /*font-family: "Lucida Grande","Lucida Sans Unicode",Tahoma,Sans-Serif;*/
     padding: 5px;
