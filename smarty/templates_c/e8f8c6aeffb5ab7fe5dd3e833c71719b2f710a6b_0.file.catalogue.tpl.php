@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-04-03 19:30:08
+/* Smarty version 3.1.29, created on 2016-04-03 20:06:03
   from "C:\xampp\htdocs\Plug_IT\smarty\templates\catalogue.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_570153207d81e7_04987741',
+  'unifunc' => 'content_57015b8b622d85_17827606',
   'file_dependency' => 
   array (
     'e8f8c6aeffb5ab7fe5dd3e833c71719b2f710a6b' => 
     array (
       0 => 'C:\\xampp\\htdocs\\Plug_IT\\smarty\\templates\\catalogue.tpl',
-      1 => 1459600610,
+      1 => 1459706424,
       2 => 'file',
     ),
   ),
@@ -20,13 +20,13 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
     'file:layout.tpl' => 1,
   ),
 ),false)) {
-function content_570153207d81e7_04987741 ($_smarty_tpl) {
+function content_57015b8b622d85_17827606 ($_smarty_tpl) {
 $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'body', array (
-  0 => 'block_119755701532076b238_14101583',
+  0 => 'block_1564157015b8b5e8451_75972689',
   1 => false,
   3 => 0,
   2 => 0,
@@ -37,7 +37,7 @@ $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'body', array (
 $_smarty_tpl->smarty->ext->_subtemplate->render($_smarty_tpl, "file:layout.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'body'}  file:catalogue.tpl */
-function block_119755701532076b238_14101583($_smarty_tpl, $_blockParentStack) {
+function block_1564157015b8b5e8451_75972689($_smarty_tpl, $_blockParentStack) {
 ?>
 
     <div class="content">
@@ -69,7 +69,7 @@ $__foreach_product_0_saved_local_item = $_smarty_tpl->tpl_vars['product'];
 </h4>
                         </div>
                         <div class='shortDescription'>
-                            <p><?php echo $_smarty_tpl->tpl_vars['product']->value->description;?>
+                            <p><?php echo $_smarty_tpl->tpl_vars['product']->value->shortDescription;?>
 </p></div>
                         <div id='productBuy'>
                             <p>€<?php echo $_smarty_tpl->tpl_vars['product']->value->price;?>
@@ -184,7 +184,7 @@ $__foreach_product_3_saved_local_item = $_smarty_tpl->tpl_vars['product'];
 </h4>
                     </div>
                     <div class='shortDescription'>
-                        <p><?php echo $_smarty_tpl->tpl_vars['product']->value->description;?>
+                        <p><?php echo $_smarty_tpl->tpl_vars['product']->value->shortDescription;?>
 </p></div>
                     <div id='productBuy'><p>€<?php echo $_smarty_tpl->tpl_vars['product']->value->price;?>
 </p>

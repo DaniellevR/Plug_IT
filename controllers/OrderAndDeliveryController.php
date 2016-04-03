@@ -12,12 +12,20 @@ class OrderAndDeliveryController extends MainCtrl {
         $navi = $this->getNavigationItems();
         $sideNavigation = $this->getCategories();
 //        $smarty->assign('header', ['Inloggen', 'Verlanglijstje', 'Klantenservice']);
+        if (isset($_SESSION['username']) && isset($_SESSION['usertype'])) {
+            $username = $_SESSION['username'];
+            $usertype = $_SESSION['usertype'];
+        }
         if (isset($_SESSION['cartList'])) {
             $cartList = $_SESSION['cartList'];
         }
         if (isset($_GET['confirmed'])) {
             $confirmed = true;
             $this->orderConfirmed();
+        }
+        if (isset($username) && isset($usertype)) {
+            $smarty->assign('username', $username);
+            $smarty->assign('usertype', $usertype);
         }
         if (isset($confirmed)) {
             $smarty->assign('confirmed', $confirmed);
@@ -34,20 +42,19 @@ class OrderAndDeliveryController extends MainCtrl {
     }
 
     public function orderConfirmed() {
-        require_once 'models/Order.php';
         $order = new Order();
 
         $total = 0;
 
         foreach ($_SESSION['cartList'] as $product) {
-            $total = $total + ($product->amountInCart * $product->price);
+            $total = $total + ($product->amount * $product->product->price);
         }
 
-        $orderId = $order->createOrder($total);
+        $orderId = $order->createOrder($total, $_SESSION['username']);
 
         $order->createOrderHasProduct($orderId, $_SESSION['cartList']);
 
-        session_destroy();
+        unset($_SESSION['cartList']);
     }
 
 }

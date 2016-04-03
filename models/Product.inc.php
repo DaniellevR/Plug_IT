@@ -20,8 +20,6 @@ class Product extends Database {
     public $supplier;
     public $amount;
     public $categoryId;
-    public $amountInCart;
-    public $amountInCartAdmin = 0;
 
     public function getProducts() {
         if ($this->establishConnection()) {
@@ -142,7 +140,7 @@ class Product extends Database {
                     $product->brand = $row['brand'];
                     $product->supplier = $row['supplier_name'];
                     $product->amount = $row['amount'];
-                    $product->categoryId = $row['category_id'];
+                    $product->category_id = $row['category_id'];
                 }
             }
 
@@ -207,14 +205,16 @@ class Product extends Database {
     }
 
     public function removeProduct($id) {
-        if ($this->establishConnection()) {
-            $stmt = $this->conn->prepare("DELETE FROM product WHERE id = ?");
-            $stmt->bind_param('i', $id);
-            $stmt->execute();
-            $this->closeConnection();
-            return true;
-        } else {
-            return false;
+        if ($this->removeSubcategories($id) == 1) {
+            if ($this->establishConnection()) {
+                $stmt = $this->conn->prepare("DELETE FROM product WHERE id = ?");
+                $stmt->bind_param('i', $id);
+                $stmt->execute();
+                $this->closeConnection();
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 

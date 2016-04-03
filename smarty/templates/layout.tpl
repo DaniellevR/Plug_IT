@@ -68,23 +68,23 @@
                             {foreach from=$categories[0] item=parent }
                                 {if $product->categoryId === $parent->id}
                                     {$isFound = "yes"}
-                                     > <a href='/Plug_IT/index.php?page=Catalogue&cat={$parent->name}&id={$parent->id}'>{$parent->name}</a>
+                                    > <a href='/Plug_IT/index.php?page=Catalogue&cat={$parent->name}&id={$parent->id}'>{$parent->name}</a>
                                 {/if}
                             {/foreach}
-                            
+
                             {if $isFound === ""}
                                 {foreach from=$categories[1] item=child }
                                     {if $product->categoryId === $child->id}
-                                         {foreach from=$categories[0] item=parent }
+                                        {foreach from=$categories[0] item=parent }
                                             {if $parent->id === $child->parent}
-                                                 > <a href='/Plug_IT/index.php?page=Catalogue&cat={$parent->name}&id={$parent->id}'>{$parent->name}</a>
+                                                > <a href='/Plug_IT/index.php?page=Catalogue&cat={$parent->name}&id={$parent->id}'>{$parent->name}</a>
                                             {/if}
                                         {/foreach}
-                                         > <a href='/Plug_IT/index.php?page=Catalogue&cat={$child->name}&id={$child->id}'>{$child->name}</a>
+                                        > <a href='/Plug_IT/index.php?page=Catalogue&cat={$child->name}&id={$child->id}'>{$child->name}</a>
                                     {/if}
                                 {/foreach}
                             {/if}
-                             > <a href='/Plug_IT/index.php?page=Product&id={$product->id}'>{$product->name}</a>
+                            > <a href='/Plug_IT/index.php?page=Product&id={$product->id}'>{$product->name}</a>
                         {/if}
                     {else}
                         {foreach from=$navigation[0] item=headeritem }
@@ -133,11 +133,11 @@
                 <ul class="nav">
                     <a href="/Plug_IT/index.php?page=Catalogue">Catalogus</a>
                     {foreach from=$categories[0] item=parent }
-                        <a href="/Plug_IT/index.php?page=Category"><li>{$parent->name}</li></a>
+                        <a href="/Plug_IT/index.php?page=Catalogue&cat={$parent->name}&id={$parent->id}"><li>{$parent->name}</li></a>
                         <ul>
                             {foreach from=$categories[1] item=child }
                                 {if $child->parent == $parent->id}
-                                    <a href="/Plug_IT/index.php?page=Category"><li>{$child->name}</li></a>
+                                    <a href="/Plug_IT/index.php?page=Catalogue&cat={$child->name}&id={$child->id}"><li>{$child->name}</li></a>
                                         {/if}
                                     {/foreach}
                         </ul>

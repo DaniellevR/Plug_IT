@@ -15,7 +15,7 @@
                             <h4>{$product->name}</h4>
                         </div>
                         <div class='shortDescription'>
-                            <p>{$product->description}</p></div>
+                            <p>{$product->shortDescription}</p></div>
                         <div id='productBuy'>
                             <p>€{$product->price}</p>
                         </div>
@@ -65,7 +65,7 @@
                         <h4>{$product->name}</h4>
                     </div>
                     <div class='shortDescription'>
-                        <p>{$product->description}</p></div>
+                        <p>{$product->shortDescription}</p></div>
                     <div id='productBuy'><p>€{$product->price}</p>
                     </div>
                     <div class="input">

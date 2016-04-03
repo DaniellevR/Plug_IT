@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-var QueryString = function() {
+var QueryString = function () {
     // This function is anonymous, is executed immediately and 
     // the return value is assigned to QueryString!
     var query_string = {};
@@ -34,7 +34,7 @@ function login(sender, e) {
         type: "POST",
         url: 'http://localhost/Plug_IT/handlers/SessionHandler.php',
         data: {action: 'login', username: document.getElementsByName('username')[0].value, password: document.getElementsByName('password')[0].value},
-        success: function(response) {
+        success: function (response) {
             if (response === "User") {
                 window.location = "/Plug_IT/index.php?page=Home";
             } else {
@@ -65,7 +65,7 @@ function logout(sender, e) {
         type: "POST",
         url: 'http://localhost/Plug_IT/handlers/SessionHandler.php',
         data: {action: 'logout'},
-        success: function() {
+        success: function () {
             window.location = "/Plug_IT/index.php?page=Home";
         }
     });
@@ -78,7 +78,7 @@ function removeCategory(sender, e) {
         type: "POST",
         url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
         data: {action: 'removeCategory', categoryId: document.getElementsByName('categoriesRemove')[0].value},
-        success: function() {
+        success: function () {
             window.location = "/Plug_IT/index.php?page=Admin";
         }
     });
@@ -90,7 +90,7 @@ function removeProduct(sender, e) {
         type: "POST",
         url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
         data: {action: 'removeProduct', productId: document.getElementsByName('productToRemove')[0].value},
-        success: function() {
+        success: function () {
             window.location = "/Plug_IT/index.php?page=AdminProducts";
         }
     });
@@ -111,7 +111,7 @@ function addUser(sender, e) {
             username: document.getElementsByName('username')[0].value, role: document.getElementsByName('roles')[0].value,
             password: document.getElementsByName('password')[0].value, repeatPassword: document.getElementsByName('repeat_password')[0].value,
             page: document.getElementsByName('page')[0].value},
-        success: function(response) {
+        success: function (response) {
             if (response === "error") {
                 window.location = "/Plug_IT/index.php?page=" + QueryString.page;
             } else if (QueryString.page === "AdminUsers") {
@@ -125,7 +125,7 @@ function addUser(sender, e) {
 
 function editUser(sender, e) {
     e.preventDefault();
-    
+
     jQuery.ajax({
         type: "POST",
         url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
@@ -137,7 +137,7 @@ function editUser(sender, e) {
             role: document.getElementsByName('rolesEditUser')[0].value, currentPassword: document.getElementsByName('passwordEditUser')[0].value,
             password: document.getElementsByName('newPasswordEditUser')[0].value, repeatPassword: document.getElementsByName('repeat_passwordEditUser')[0].value,
             username: document.getElementsByName('usernameEditUser')[0].value},
-        success: function(response) {
+        success: function (response) {
             if (response === "error") {
                 window.location = "/Plug_IT/index.php?page=" + QueryString.page;
             } else if (QueryString.page === "AdminUsers") {
@@ -162,7 +162,7 @@ function addOrder(sender, e) {
             housenumberSuffixBilling: document.getElementsByName('housenumberSuffixBilling')[0].value, postalCodeBilling: document.getElementsByName('postalCodeBilling')[0].value,
             cityBilling: document.getElementsByName('cityBilling')[0].value, productId: document.getElementsByName('productslist')[0].value,
             amount: document.getElementsByName('amount')[0].value, button: document.getElementsByName('addOrder')[0].value},
-        success: function() {
+        success: function () {
             window.location = "/Plug_IT/index.php?page=AdminOrders";
         }
     });
@@ -175,7 +175,7 @@ function editOrder(sender, e) {
         type: "POST",
         url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
         data: {action: 'editOrder', orderId: document.getElementsByName('orderlist')[0].value, state: document.getElementsByName('statesEditOrder')[0].value},
-        success: function() {
+        success: function () {
             window.location = "/Plug_IT/index.php?page=AdminOrders";
         }
     });
@@ -188,7 +188,7 @@ function editAmountProductInOrder(sender, e) {
         type: "POST",
         url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
         data: {action: 'changeAmount', newAmount: document.getElementsByName('newAmount')[0].value, productId: document.getElementsByName('newAmount')[0].id},
-        success: function() {
+        success: function () {
             window.location = "/Plug_IT/index.php?page=AdminOrders";
         }
     });
@@ -196,21 +196,20 @@ function editAmountProductInOrder(sender, e) {
 
 function grabInfo(select, action, contentDiv)
 {
-    
+
     $('.testfunction').text("ACTION : " + action + " ; DIV : " + contentDiv);
-    
+
     var id = select[select.selectedIndex].id;
 
     if (window.XMLHttpRequest)
     {// code for IE7+, Firefox, Chrome, Opera, Safari
         xmlhttp = new XMLHttpRequest();
-    }
-    else
+    } else
     {// code for IE6, IE5
         xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
-    xmlhttp.onreadystatechange = function()
+    xmlhttp.onreadystatechange = function ()
     {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
         {

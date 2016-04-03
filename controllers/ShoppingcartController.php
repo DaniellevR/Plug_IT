@@ -2,7 +2,6 @@
 
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once($root . "/Plug_IT/controllers/MainCtrl.php");
-require_once($root . "/Plug_IT/models/Product.inc.php");
 
 class ShoppingcartController extends MainCtrl {
 
@@ -39,7 +38,7 @@ class ShoppingcartController extends MainCtrl {
 
     public function removeFromCart($id) {
         for ($i = 0; $i < count($_SESSION['cartList']); $i++) {
-            if ($_SESSION['cartList'][$i]->id == $id) {
+            if ($_SESSION['cartList'][$i]->product->id == $id) {
                 unset($_SESSION['cartList'][$i]);
                 return;
             }
@@ -48,12 +47,12 @@ class ShoppingcartController extends MainCtrl {
 
     public function editAmountInCart($id, $amount) {
         for ($i = 0; $i < count($_SESSION['cartList']); $i++) {
-            if ($_SESSION['cartList'][$i]->id == $id) {
+            if ($_SESSION['cartList'][$i]->product->id == $id) {
                 if ($amount < 1) {
                     unset($_SESSION['cartList'][$i]);
                     return;
                 } else {
-                    $_SESSION['cartList'][$i]->amountInCart = $amount;
+                    $_SESSION['cartList'][$i]->amount = $amount;
                 }
             }
         }
@@ -65,16 +64,19 @@ class ShoppingcartController extends MainCtrl {
         }
 
         foreach ($_SESSION['cartList'] as $i) {
-            if ($i->id == $id) {
-                $i->amountInCart = $i->amountInCart + $amount;
+            $idToCheck = $i->product->id;
+            if ($idToCheck == $id) {
+                $i->amount = $i->amount + $amount;
                 return;
             }
         }
 
+        $cartProduct = new CartProduct();
         $product = new Product();
         $p = $product->getProductFromId($id);
-        $p->amountInCart = $amount;
-        $_SESSION['cartList'][] = $p;
+        $cartProduct->amount = $amount;
+        $cartProduct->product = $p;
+        $_SESSION['cartList'][] = $cartProduct;
         return;
     }
 

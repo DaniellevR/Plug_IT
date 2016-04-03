@@ -8,6 +8,8 @@ require_once($root . "/Plug_IT/models/User.inc.php");
 require_once($root . "/Plug_IT/models/Role.inc.php");
 require_once($root . "/Plug_IT/models/Address.inc.php");
 require_once($root . "/Plug_IT/models/Order.inc.php");
+require_once($root . "/Plug_IT/models/Product.inc.php");
+require_once($root . "/Plug_IT/models/CartProduct.inc.php");
 
 class MainCtrl {
 
@@ -185,7 +187,7 @@ class MainCtrl {
         $orders = $orderModel->getOrders();
         return $orders;
     }
-    
+
     public function getStates() {
         $orderModel = new Order();
         $states = $orderModel->getStates();
@@ -198,11 +200,12 @@ class MainCtrl {
 
         $outputProducts = array();
 
-        foreach ($products as $prod) {
-            foreach ($prod as $text) {
+        foreach ($products as $product) {
+            foreach ($product as $text) {
                 if (isset($text)) {
-                    if (strpos(strtoupper($keywords), strtoupper($text)) !== false) {
-                        $outputProducts[] = $prod;
+                    if (strpos(strtoupper($text), strtoupper($keywords)) !== false) {
+                        $outputProducts[] = $product;
+                        break;
                     }
                 }
             }

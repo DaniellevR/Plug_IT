@@ -12,95 +12,40 @@
  * @author Nigel
  */
 class Order extends Database {
-    public $id;
-    public $deliveryAddressId;
-    public $billingAddressId;
-    public $username;
-    public $state;
-    public $price;
 
-    public function getOrders() {
+    public function createOrder($price, $username) {
         if ($this->establishConnection()) {
-            $sql = "SELECT * FROM _order";
-            $result = $this->conn->query($sql);
+//get user address
+            $sql = "SELECT address_address_id FROM user_has_address WHERE user_username = $username";
 
-            $orders = array();
+            $resultAddress = $this->conn->query($sql);
 
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $order = new Order();
-                    $order->id = $row['id'];
-                    $order->deliveryAddressId = $row['address_address_delivery'];
-                    $order->billingAddressId = $row['address_address_billing'];
-                    $order->username = $row['user_username'];
-                    $order->state = $row['order_state_state'];
-                    $order->price = $row['price'];
-                    $orders[] = $order;
-                }
+            while ($row = $resultAddress->fetch_assoc()) {
+                $addressId = $row['address_address_id'];
             }
 
-            $this->closeConnection();
-
-            return $orders;
-        } else {
-            return false;
-        }
-    }
-    
-    public function getStates() {
-        if ($this->establishConnection()) {
-            $sql = "SELECT * FROM order_state";
-            $result = $this->conn->query($sql);
-
-            $states = array();
-
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $states[] = $row['state'];
-                }
-            }
-
-            $this->closeConnection();
-
-            return $states;
-        } else {
-            return false;
-        }
-    }
-    
-    public function createFullOrder($username, $deliveryAddressId, $billingAddressId, $state, $price) {
-        if ($this->establishConnection()) {
-            $stmt = $this->conn->prepare("INSERT INTO _order (id, address_address_delivery, address_address_billing, user_username, order_state_state, price) VALUES (0, ?, ?, ?, ?)");
-            $stmt->bind_param('iissi', $deliveryAddressId, $billingAddressId, $username, $state, $price);
-
-            $stmt->execute();
-            $generated_id = $stmt->insert_id;
-
-            $this->closeConnection();
-
-            return $generated_id;
-        } else {
-            return -1;
-        }
-    }
-    
-    public function createOrder($price) {
-        if ($this->establishConnection()) {
-            $sql = "INSERT INTO _order (id, price) VALUES (0, " . $price . ");";
+//create order
+            $sql = "INSERT INTO _order (user_username, price, order_state_state, address_address_delivery, address_address_billing) VALUES ($username, $price, 'processing', $addressId, $addressId);";
 
             $this->conn->query($sql);
 
-            $sql = "SELECT id FROM _order order by id desc limit 1";
+            $sql2 = "SELECT last_insert_id()";
 
-            $result = $this->conn->query($sql);
-
-            if ($result == null) {
-                return;
-            }
+            $result = $this->conn->query($sql2);
 
             while ($row = $result->fetch_assoc()) {
                 $id = $row['id'];
             }
+
+//            $sql = "SELECT id FROM _order order by id desc limit 1";
+//
+//            $result = $this->conn->query($sql);
+//            if ($result == null) {
+//                return;
+//            }
+//            while ($row = $result->fetch_assoc()) {
+//                $id = $row['id'];
+//            }
 
             $this->closeConnection();
 
@@ -110,25 +55,15 @@ class Order extends Database {
 
     public function createOrderHasProduct($orderId, $list) {
         if ($this->establishConnection()) {
-            foreach ($list as $product) {
-                $sql = "INSERT INTO order_has_product (order_id, product_id, amount) VALUES ($orderId, $product->id, $product->amountInCart);";
+            foreach ($list as $cartProduct) {
+                $id = $cartProduct->product->id;
+                $amount = $cartProduct->amount;
+                $sql = "INSERT INTO order_has_product (order_id, product_id, amount) VALUES ($orderId, $id, $amount);";
 
                 $this->conn->query($sql);
             }
 
             $this->closeConnection();
-        }
-    }
-    
-    public function editState($orderId, $state) {
-        if ($this->establishConnection()) {
-            $stmt = $this->conn->prepare("UPDATE _order SET order_state_state = ? WHERE id = ?");
-            $stmt->bind_param('si', $state, $orderId);
-            $stmt->execute();
-            $this->closeConnection();
-            return true;
-        } else {
-            return false;
         }
     }
 
