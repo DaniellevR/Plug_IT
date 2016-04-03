@@ -50,13 +50,19 @@ class AdminController extends MainCtrl {
         $smarty->assign('products', $this->getProducts());
 
         // Orders admin data
-        $productsInCart = array();
-        $smarty->assign('productsCartAdmin', $productsInCart);
-        if (isset($_SESSION["aminOrderId"])) {
-            $smarty->assign('orderIdAdmin', $_SESSION["aminOrderId"]);
+        if (isset($_SESSION["productsCartAdmin"])) {
+            $smarty->assign('productsCartAdmin', $_SESSION["productsCartAdmin"]);
+        } else {
+            $smarty->assign('productsCartAdmin', array());
         }
         if (isset($_SESSION["usernameAddOrder"])) {
             $smarty->assign('usernameCartAdmin', $_SESSION["usernameAddOrder"]);
+        }
+        if (isset($_SESSION["deliveryAddressAdmin"])) {
+            $smarty->assign('deliveryAddressAdmin', $_SESSION["deliveryAddressAdmin"]);
+        }
+        if (isset($_SESSION["billingAddressAdmin"])) {
+            $smarty->assign('billingAddressAdmin', $_SESSION["billingAddressAdmin"]);
         }
 
         $smarty->assign('orders', $this->getOrders());
@@ -304,10 +310,139 @@ class AdminController extends MainCtrl {
     }
 
     public function addOrder() {
-        
+        $errors = "";
+
+        if (isset($_POST["username"]) && isset($_POST["streetnameDelivery"]) && isset($_POST["housenumberDelivery"]) && isset($_POST["housenumberSuffixDelivery"]) && isset($_POST["postalCodeDelivery"]) && isset($_POST["cityDelivery"]) && isset($_POST["streetnameBilling"]) && isset($_POST["housenumberBilling"]) && isset($_POST["housenumberSuffixBilling"]) && isset($_POST["postalCodeBilling"]) && isset($_POST["cityBilling"]) && isset($_POST["productId"]) && isset($_POST["amount"]) && isset($_POST["button"])) {
+            $username = $_POST["username"];
+            $streetnameDelivery = $_POST["streetnameDelivery"];
+            $housenumberDelivery = $_POST["housenumberDelivery"];
+            $housenumberSuffixDelivery = $_POST["housenumberSuffixDelivery"];
+            $postalCodeDelivery = $_POST["postalCodeDelivery"];
+            $cityDelivery = $_POST["cityDelivery"];
+            $streetnameBilling = $_POST["streetnameBilling"];
+            $housenumberBilling = $_POST["housenumberBilling"];
+            $housenumberSuffixBilling = $_POST["housenumberSuffixBilling"];
+            $postalCodeBilling = $_POST["postalCodeBilling"];
+            $cityBilling = $_POST["cityBilling"];
+            $productId = $_POST["productId"];
+            $amount = $_POST["amount"];
+            $button = $_POST["button"];
+
+            // Remember username
+            $_SESSION["usernameAddOrder"] = $username;
+
+            // Remember delivery address
+            $_SESSION["deliveryAddressAdmin"] = array($streetnameDelivery, $housenumberDelivery, $housenumberSuffixDelivery, $postalCodeDelivery, $cityDelivery);
+
+            // Remember billing address
+            $_SESSION["billingAddressAdmin"] = array($streetnameBilling, $housenumberBilling, $housenumberSuffixBilling, $postalCodeBilling, $cityBilling);
+
+            if ($button === "addProduct") {
+                $this->addProductToOrder($productId, $amount);
+            } else {
+                $this->saveOrder();
+            }
+        } else {
+            $errors = "Er is een fout opgetreden. Probeer het opnieuw.";
+        }
+
+        if ($errors !== "") {
+            $_SESSION["errors"] = $errors;
+        }
     }
 
-    public function EditOrder() {
+    public function addProductToOrder($productId, $amount) {
+        $productModel = new Product();
+        $foundProduct = $productModel->getProductFromId($productId);
+        $foundProduct->amountInCartAdmin = $amount;
+
+        if (isset($_SESSION["productsCartAdmin"])) {
+            $products = $_SESSION["productsCartAdmin"];
+            $newProducts = array();
+
+            $isInCart = "";
+            foreach ($products as $product) {
+                if ($product->id === $details[0]) {
+                    $isInCart = "yes";
+                    $newProduct = $product;
+                    $newProduct->amount = $newProduct->amount + $amount;
+                    $newProducts[] = $newProduct;
+                }
+            }
+
+            if ($isInCart === "") {
+                $newProducts[] = $foundProduct;
+            }
+
+            $_SESSION["productsCartAdmin"] = $newProducts;
+        } else {
+            $productModel = new Product();
+            $product = $productModel->getProductFromId($productId);
+            $product->amountInCartAdmin = $amount;
+            $_SESSION["productsCartAdmin"] = array($product);
+        }
+    }
+
+    public function changeAmount() {
+        if (isset($_POST["newAmount"]) && isset($_POST["productId"])) {
+            $amount = $_POST["newAmount"];
+            $productId = $_POST["productId"];
+
+            if (isset($_SESSION["productsCartAdmin"])) {
+                $products = $_SESSION["productsCartAdmin"];
+                $newProducts = array();
+
+                foreach ($products as $product) {
+                    if ($product->id === $productId) {
+                        $newProduct = $product;
+                        $newProduct->amount = $amount;
+                        $newProducts[] = $newProduct;
+                    } else {
+                        $newProducts[] = $product;
+                    }
+                }
+
+                $_SESSION["productsCartAdmin"] = $newProducts;
+            }
+        }
+    }
+
+    public function saveOrder() {
+        if (isset($_SESSION["usernameAddOrder"]) && isset($_SESSION["deliveryAddressAdmin"]) && isset($_SESSION["billingAddressAdmin"]) && isset($_SESSION["productsCartAdmin"])) {
+            $username = $_SESSION["usernameAddOrder"];
+            $deliveryAddress = $_SESSION["deliveryAddressAdmin"];
+            $billingAddress = $_SESSION["billingAddressAdmin"];
+            $products = $_SESSION["productsCartAdmin"];
+
+            $orderModel = new Order();
+            
+            // Create order
+            $ret = $orderModel->createFullOrder($username, $deliveryAddress, $billingAddress, "Unpaid", $price);
+            
+            // Add products to order
+            
+            
+
+            if ($ret === 1) {
+                // Forget username
+                unset($_SESSION["usernameAddOrder"]);
+
+                // Forget delivery address
+                unset($_SESSION["deliveryAddressAdmin"]);
+
+                // Forget billing address
+                unset($_SESSION["billingAddressAdmin"]);
+
+                unset($_SESSION["productsCartAdmin"]);
+            } else {
+                $_SESSION["errors"] = "Kon de order niet vastleggen in de database. Probeer het opnieuw.";
+            }
+        } else {
+            $_SESSION["errors"] = "Er is een fout opgetreden. Probeer het opnieuw.";
+        }
+    }
+
+    public function editOrder() {
         $errors = "";
 
         if (isset($_POST["orderId"]) && isset($_POST["state"])) {

@@ -68,6 +68,22 @@ class Order extends Database {
         }
     }
     
+    public function createFullOrder($username, $deliveryAddressId, $billingAddressId, $state, $price) {
+        if ($this->establishConnection()) {
+            $stmt = $this->conn->prepare("INSERT INTO _order (id, address_address_delivery, address_address_billing, user_username, order_state_state, price) VALUES (0, ?, ?, ?, ?)");
+            $stmt->bind_param('iissi', $deliveryAddressId, $billingAddressId, $username, $state, $price);
+
+            $stmt->execute();
+            $generated_id = $stmt->insert_id;
+
+            $this->closeConnection();
+
+            return $generated_id;
+        } else {
+            return -1;
+        }
+    }
+    
     public function createOrder($price) {
         if ($this->establishConnection()) {
             $sql = "INSERT INTO _order (id, price) VALUES (0, " . $price . ");";

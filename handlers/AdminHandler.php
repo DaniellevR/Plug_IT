@@ -29,7 +29,10 @@ if (isset($_POST['action']) && !empty($_POST['action'])) {
             $adminCtrl->addOrder();
             break;
         case 'editOrder' :
-            $adminCtrl->EditOrder();
+            $adminCtrl->editOrder();
+            break;
+        case 'changeAmount' :
+            $adminCtrl->changeAmount();
             break;
     }
 }

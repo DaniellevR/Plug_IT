@@ -155,7 +155,13 @@ function addOrder(sender, e) {
     jQuery.ajax({
         type: "POST",
         url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
-        data: {action: 'addOrder'},
+        data: {action: 'addOrder', username: document.getElementsByName('userAddOrder')[0].value, streetnameDelivery: document.getElementsByName('streetnameDelivery')[0].value,
+            housenumberDeliviry: document.getElementsByName('housenumberDelivery')[0].value, housenumberSuffixDelivery: document.getElementsByName('housenumberSuffixDelivery')[0].value,
+            postalCodeDelivery: document.getElementsByName('postalCodeDelivery')[0].value, cityDelivery: document.getElementsByName('cityDelivery')[0].value,
+            streetnameBilling: document.getElementsByName('streetnameBilling')[0].value, housenumberBilling: document.getElementsByName('housenumberBilling')[0].value,
+            housenumberSuffixBilling: document.getElementsByName('housenumberSuffixBilling')[0].value, postalCodeBilling: document.getElementsByName('postalCodeBilling')[0].value,
+            cityBilling: document.getElementsByName('cityBilling')[0].value, productId: document.getElementsByName('productslist')[0].value,
+            amount: document.getElementsByName('amount')[0].value, button: document.getElementsByName('addOrder')[0].value},
         success: function() {
             window.location = "/Plug_IT/index.php?page=AdminOrders";
         }
@@ -169,6 +175,19 @@ function editOrder(sender, e) {
         type: "POST",
         url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
         data: {action: 'editOrder', orderId: document.getElementsByName('orderlist')[0].value, state: document.getElementsByName('statesEditOrder')[0].value},
+        success: function() {
+            window.location = "/Plug_IT/index.php?page=AdminOrders";
+        }
+    });
+}
+
+function editAmountProductInOrder(sender, e) {
+    e.preventDefault();
+
+    jQuery.ajax({
+        type: "POST",
+        url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
+        data: {action: 'changeAmount', newAmount: document.getElementsByName('newAmount')[0].value, productId: document.getElementsByName('newAmount')[0].id},
         success: function() {
             window.location = "/Plug_IT/index.php?page=AdminOrders";
         }
