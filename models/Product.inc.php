@@ -23,7 +23,7 @@ class Product extends Database {
 
     public function getProducts() {
         if ($this->establishConnection()) {
-            $sql = "SELECT * FROM products";
+            $sql = "SELECT * FROM product";
             $result = $this->conn->query($sql);
 
             $products = array();
@@ -52,7 +52,7 @@ class Product extends Database {
             return false;
         }
     }
-    
+
     public function getProductsFromCategoryId($catId) {
         if ($this->establishConnection()) {
             $sql = "SELECT * FROM product WHERE category_id = " . $catId;
@@ -119,7 +119,7 @@ class Product extends Database {
             return false;
         }
     }
-    
+
     public function getProductFromId($id) {
         if ($this->establishConnection()) {
             $sql = "SELECT * FROM product WHERE id = " . $id;
@@ -205,19 +205,17 @@ class Product extends Database {
     }
 
     public function removeProduct($id) {
-        if ($this->removeSubcategories($id) == 1) {
-            if ($this->establishConnection()) {
-                $stmt = $this->conn->prepare("DELETE FROM product WHERE id = ?");
-                $stmt->bind_param('i', $id);
-                $stmt->execute();
-                $this->closeConnection();
-                return true;
-            } else {
-                return false;
-            }
+        if ($this->establishConnection()) {
+            $stmt = $this->conn->prepare("DELETE FROM product WHERE id = ?");
+            $stmt->bind_param('i', $id);
+            $stmt->execute();
+            $this->closeConnection();
+            return true;
+        } else {
+            return false;
         }
     }
-    
+
     public function editProduct($id, $name, $shortDescription, $description, $characteristics, $price, $brand, $supplier, $amount, $categoryId) {
         if ($this->establishConnection()) {
             $stmt = $this->conn->prepare("UPDATE product SET name = ?, short_description = ?, description = ?, characteristics = ?, price = ?, brand = ?, supplier_name = ?, amount = ?, category_id = ? WHERE id = ?");

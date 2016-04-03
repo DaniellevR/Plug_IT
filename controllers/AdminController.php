@@ -46,6 +46,7 @@ class AdminController extends MainCtrl {
         $smarty->assign('suppliers', $this->getSuppliers());
         $smarty->assign('users', $this->getUsers());
         $smarty->assign('roles', $this->getRoles());
+        $smarty->assign('products', $this->getProducts());
         $smarty->assign('model', $model);
         $smarty->display($name . '.tpl');
     }
@@ -69,13 +70,28 @@ class AdminController extends MainCtrl {
     }
 
     public function removeProduct() {
-        if (isset($_POST["productId"])) {
-            $productModel = new Product();
-            $res = $productModel->removeProduct($_POST['productId']);
+        $file = fopen("C://removeproductc.txt", "w");
+        fwrite($file, "REMOVE PRODUCT");
+        fclose($file);
 
+        if (isset($_POST["productId"])) {
+            $productId = $_POST["productId"];
+
+            $file = fopen("C://productId.txt", "w");
+            fwrite($file, $productId);
+            fclose($file);
+
+            $productModel = new Product();
+            $res = $productModel->removeProduct($productId);
+
+            $file = fopen("C://res.txt", "w");
+            fwrite($file, $res);
+            fclose($file);
+
+            
             if ($res == 1) {
                 $path = "../assets/pix/products/";
-                foreach (glob($path . $_POST['productId'] . '.*') as $filename) {
+                foreach (glob($path . $productId . '.*') as $filename) {
                     unlink(realpath($filename));
                 }
             } else {

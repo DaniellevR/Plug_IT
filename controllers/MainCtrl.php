@@ -172,10 +172,16 @@ class MainCtrl {
         $addresses = $addressModel->getAddresses();
         return $addresses;
     }
+    
+    public function getProducts() {
+        $productModel = new Product();
+        $products = $productModel->getProducts();
+        return $products;
+    }
 
     public function getProductsByKeywords($keywords) {
         $product = new Product();
-        $products = $product->getAllProducts();
+        $products = $product->getProducts();
 
         $outputProducts = array();
 

@@ -91,7 +91,7 @@ function removeProduct(sender, e) {
         url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
         data: {action: 'removeProduct', productId: document.getElementsByName('productToRemove')[0].value},
         success: function() {
-            window.location = "/Plug_IT/index.php?page=Admin";
+            window.location = "/Plug_IT/index.php?page=AdminProducts";
         }
     });
 }

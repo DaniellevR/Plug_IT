@@ -89,20 +89,20 @@
                     <label></label>
                     <input type="text" name="housenumberSuffix" placeholder="Huisnummertoevoeging">
                 </div>
-            <div>
-                <label for="postalCode">Postcode</label>
-                <input type="text" id="postalCode" name="postalCode" required="true">
-            </div>
-            <div>
-                <label for="city">Woonplaats</label>
-                <input type="text" id="city" name="city" required="true">
-            </div>
+                <div>
+                    <label for="postalCode">Postcode</label>
+                    <input type="text" id="postalCode" name="postalCode" required="true">
+                </div>
+                <div>
+                    <label for="city">Woonplaats</label>
+                    <input type="text" id="city" name="city" required="true">
+                </div>
 
-            <div>
-                <label></label>
-                <input type="submit" value="Toevoegen" id="addProduct" class="button"/>
+                <div>
+                    <label></label>
+                    <input type="submit" value="Toevoegen" id="addProduct" class="button"/>
+                </div>
             </div>
-                            </div>
         </form>
 
         <form action="handlers/EditProductHandler.php" method="POST" enctype="multipart/form-data">
@@ -134,7 +134,8 @@
 
 
 
-        <form method="POST" enctype="multipart/form-data" onsubmit="">
+        <form method="POST" enctype="multipart/form-data" onsubmit="removeProduct(this, event);">
+            {$cat = ""}
             <div>
                 <h3>Product verwijderen</h3>
             </div>
@@ -142,6 +143,9 @@
                 <label for="categoriesRemoveProduct">Categorienaam</label>
                 <select type="text" id="categories_remove" id="categoriesRemoveProduct" name="categoriesRemoveProduct" onchange="grabInfo(this, 'getProductsFromCategoryRemoveProduct', 'contentDivRemoveProduct')">
                     {foreach from=$categories[0] item=parent }
+                        {if $cat === ""}
+                            {$cat = $parent}
+                        {/if}
                         <option class="category" id="{$parent->id}">{$parent->name}</option>
                         {foreach from=$categories[1] item=child }
                             {if $child->parent === $parent->id}
@@ -151,7 +155,18 @@
                     {/foreach}
                 </select>
             </div>
-            <div id="contentDivRemoveProduct"></div>
+            <div id="contentDivRemoveProduct">
+
+            <div><label for="productToRemove">Productnaam</label>
+                <select type="text" id="productToRemove" name="productToRemove">
+                    {foreach from=$products item=product }
+                        {if $product->categoryId === $cat->id}
+                            <option value="{$product->id}">{$product->name}</option>
+                        {/if}
+                    {/foreach}
+                </select></div>
+                </div>
+
             <div>
                 <label></label>
                 <input type="submit" value="Verwijderen" id="removeCategory" class="button"/>
