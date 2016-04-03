@@ -34,5 +34,8 @@ if (isset($_POST['action']) && !empty($_POST['action'])) {
         case 'changeAmount' :
             $adminCtrl->changeAmount();
             break;
+        case 'reset' :
+            $adminCtrl->resetOrder();
+            break;
     }
 }

@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-04-03 02:03:56
+/* Smarty version 3.1.29, created on 2016-04-04 00:01:07
   from "C:\wamp\www\Plug_IT\smarty\templates\accountInfoForm.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_57005decc66189_52207229',
+  'unifunc' => 'content_570192a3c1b8b2_74012279',
   'file_dependency' => 
   array (
     '06c7345b2bf3412fe9afc9266efe68ecb6399e6c' => 
     array (
       0 => 'C:\\wamp\\www\\Plug_IT\\smarty\\templates\\accountInfoForm.tpl',
-      1 => 1459637491,
+      1 => 1459720856,
       2 => 'file',
     ),
   ),
@@ -19,10 +19,10 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_57005decc66189_52207229 ($_smarty_tpl) {
+function content_570192a3c1b8b2_74012279 ($_smarty_tpl) {
 $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, false);
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'accountInfoForm', array (
-  0 => 'block_1250257005decb5a455_85587143',
+  0 => 'block_420570192a3ab9660_57346522',
   1 => false,
   3 => 0,
   2 => 0,
@@ -31,16 +31,20 @@ $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'accountInfoForm'
 
 <?php }
 /* {block 'accountInfoForm'}  file:accountInfoForm.tpl */
-function block_1250257005decb5a455_85587143($_smarty_tpl, $_blockParentStack) {
+function block_420570192a3ab9660_57346522($_smarty_tpl, $_blockParentStack) {
 ?>
 
     <form method="POST" enctype="multipart/form-data" onsubmit="editUser(this, event)">
 
         <?php if ($_smarty_tpl->tpl_vars['errors']->value !== '') {?>
-            <div class="errortext">
-                <?php echo $_smarty_tpl->tpl_vars['errors']->value;?>
+            <?php if (isset($_GET['page'])) {?>
+                <?php if ($_GET['page'] === "Register" || $_GET['page'] === "MyAccount") {?>
+                    <div class="errortext">
+                        <?php echo $_smarty_tpl->tpl_vars['errors']->value;?>
 
-            </div>
+                    </div>
+                <?php }?>
+            <?php }?>
         <?php }?>
 
         <?php $_smarty_tpl->tpl_vars['username'] = new Smarty_Variable('', null);

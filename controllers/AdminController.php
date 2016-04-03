@@ -51,6 +51,18 @@ class AdminController extends MainCtrl {
 
         // Orders admin data
         if (isset($_SESSION["productsCartAdmin"])) {
+
+            $file = fopen("C://cart.txt", "w");
+
+            foreach ($_SESSION["productsCartAdmin"] as $productInfo) {
+                fwrite($file, $productInfo[0]);
+                fwrite($file, $productInfo[1]);
+                fwrite($file, $productInfo[2]);
+                fwrite($file, $productInfo[3]);
+            }
+
+            fclose($file);
+
             $smarty->assign('productsCartAdmin', $_SESSION["productsCartAdmin"]);
         } else {
             $smarty->assign('productsCartAdmin', array());
@@ -309,6 +321,28 @@ class AdminController extends MainCtrl {
         }
     }
 
+    public function resetOrder() {
+        // Forget username
+        if (isset($_SESSION["usernameAddOrder"])) {
+            unset($_SESSION["usernameAddOrder"]);
+        }
+
+        // Forget delivery address
+        if (isset($_SESSION["deliveryAddressAdmin"])) {
+            unset($_SESSION["deliveryAddressAdmin"]);
+        }
+
+        // Forget billing address
+        if (isset($_SESSION["billingAddressAdmin"])) {
+            unset($_SESSION["billingAddressAdmin"]);
+        }
+
+        // Forget products in order
+        if (isset($_SESSION["productsCartAdmin"])) {
+            unset($_SESSION["productsCartAdmin"]);
+        }
+    }
+
     public function addOrder() {
         $errors = "";
 
@@ -357,29 +391,28 @@ class AdminController extends MainCtrl {
         $foundProduct->amountInCartAdmin = $amount;
 
         if (isset($_SESSION["productsCartAdmin"])) {
-            $products = $_SESSION["productsCartAdmin"];
-            $newProducts = array();
+            $productInfos = $_SESSION["productsCartAdmin"];
+            unset($_SESSION["productsCartAdmin"]);
 
             $isInCart = "";
-            foreach ($products as $product) {
-                if ($product->id === $details[0]) {
+            foreach ($productInfos as $productInfo) {
+                if ($productInfo[0] === $productId) {
                     $isInCart = "yes";
-                    $newProduct = $product;
-                    $newProduct->amount = $newProduct->amount + $amount;
-                    $newProducts[] = $newProduct;
+                    $newAmount = $productInfo[2] + $amount;
+                    $newProductInfo = array($foundProduct->id, $foundProduct->name, $newAmount, $foundProduct->price);
+                    $_SESSION["productsCartAdmin"][] = $newProductInfo;
+                } else {
+                    $_SESSION["productsCartAdmin"][] = $productInfo;
                 }
             }
 
             if ($isInCart === "") {
-                $newProducts[] = $foundProduct;
+                $productInfo = array($foundProduct->id, $foundProduct->name, $foundProduct->amountInCartAdmin, $foundProduct->price);
+                $_SESSION["productsCartAdmin"][] = $productInfo;
             }
-
-            $_SESSION["productsCartAdmin"] = $newProducts;
         } else {
-            $productModel = new Product();
-            $product = $productModel->getProductFromId($productId);
-            $product->amountInCartAdmin = $amount;
-            $_SESSION["productsCartAdmin"] = array($product);
+            $productInfo = array($foundProduct->id, $foundProduct->name, $foundProduct->amountInCartAdmin, $foundProduct->price);
+            $_SESSION["productsCartAdmin"][] = $productInfo;
         }
     }
 
@@ -414,22 +447,29 @@ class AdminController extends MainCtrl {
             $billingAddress = $_SESSION["billingAddressAdmin"];
             $products = $_SESSION["productsCartAdmin"];
 
-            $orderModel = new Order();
-            
-            // Check (and add) delivery address
-            $addressId = $this->checkAndAddAddress($streetname, $housenumber, $city, $housenumberSuffix, $postalCode);
-            
-            // Check (and add) billing address
-            $addressId = $this->checkAndAddAddress($streetname, $housenumber, $city, $housenumberSuffix, $postalCode);
-            
-            // Create order
-            $ret = $orderModel->createFullOrder($username, $deliveryAddress, $billingAddress, "Unpaid", $price);
-            
-            // Add products to order
-            
-            
+            $price = 0.00;
+            foreach ($products as $product) {
+                $price = $price + $product->price;
+            }
 
-            if ($ret === 1) {
+
+            $orderModel = new Order();
+
+            // Check (and add) delivery address
+            $deliveryAddressId = $this->checkAndAddAddress($deliveryAddress[0], $deliveryAddress[1], $deliveryAddress[4], $deliveryAddress[2], $deliveryAddress[3]);
+
+            // Check (and add) billing address
+            $billingAddressId = $this->checkAndAddAddress($billingAddress[0], $billingAddress[1], $billingAddress[4], $billingAddress[2], $billingAddress[3]);
+
+            // Create order
+            $orderId = $orderModel->createFullOrder($username, $deliveryAddressId, $billingAddressId, "Unpaid", $price);
+
+            if ($orderId > 0) {
+                // Add products to order
+                foreach ($products as $product) {
+                    $orderModel->addProductToOrder($orderId, $product->id, $product->amountInCartAdmin);
+                }
+
                 // Forget username
                 unset($_SESSION["usernameAddOrder"]);
 
@@ -439,12 +479,13 @@ class AdminController extends MainCtrl {
                 // Forget billing address
                 unset($_SESSION["billingAddressAdmin"]);
 
+                // Forget products in order
                 unset($_SESSION["productsCartAdmin"]);
             } else {
                 $_SESSION["errors"] = "Kon de order niet vastleggen in de database. Probeer het opnieuw.";
             }
         } else {
-            $_SESSION["errors"] = "Er is een fout opgetreden. Probeer het opnieuw.";
+            $_SESSION["errors"] = "Er is een fout opgetreden. Check of uw producten heeft gekozen. Probeer het opnieuw.";
         }
     }
 

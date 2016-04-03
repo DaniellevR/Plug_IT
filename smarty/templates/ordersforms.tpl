@@ -1,7 +1,7 @@
 {extends file='admin.tpl'}
 {block name=ordersforms}
     <div class="adminpart">
-        <form method="POST" enctype="multipart/form-data" onsubmit="">
+        <form method="POST" enctype="multipart/form-data">
             {$user = ""}
             {$username = ""}
 
@@ -10,12 +10,12 @@
             {/if}
 
             <div>
-                <h3>Order toevoegen</h3>
+                <h3>Order toevoegen<input class="right" type="button" name="reset" value="Wis huidige order" onclick="checkform('reset');"></h3>
             </div>
 
             <div>
                 <label for="usersAddOrder">Gebruikersnaam</label>
-                <select type="text" id="usersAddOrder" name="userAddOrder" {if $username !== ""}disabled{/if}>
+                <select type="text" id="usersAddOrder" name="userAddOrder" {if $username !== ""}disabled{/if} onchange="grabInfo(this, 'getAddressesUsername', 'contentDivAddressesAddOrder')">
                     {foreach from=$users item=useritem }
                         {if $useritem->username === $username}
                             {$user = $useritem}
@@ -29,7 +29,7 @@
                     {/foreach}
                 </select>
             </div>
-            <div id="contentDivAddOrder">
+            <div id="contentDivAddressesAddOrder">
                 {if isset($deliveryAddressAdmin)}
                         <div><h5>Bezorgadres</h5></div>
                         <div><label for="streetname">Adres</label><input type="text" id="streetname" name="streetnameDelivery" required="true" placeholder="Straatnaam" value="{$deliveryAddressAdmin[0]}"></div>
@@ -104,7 +104,8 @@
                 </div>
                 <div>
                     <label></label>
-                    <button type="submit" name="addOrder" value="addProduct">Product toevoegen</button>
+                    {*<button type="submit" name="addProduct" value="addProduct" onclick="addProductToOrder(this, event)">Product toevoegen</button>*}
+                    <input type="button" name="addProduct" value="addProduct" onclick="checkform('addProductToOrder');">
                 </div>
             </div>
             <div>
@@ -115,8 +116,8 @@
                         U heeft nog geen producten toegevoegd aan de order.
                     {else}
                         <ul>
-                            {foreach from=$productsCartAdmin item=product }
-                                <li>{$product->name} - Aantal : <input type="number" min="0" step="1" id="{$product->id}" value="{$product->amountInCartAdmin}" name="newAmount" onchange="editAmountProductInOrder(this, event)" required="true"> - Prijs : {$product->price}</li>
+                            {foreach from=$productsCartAdmin item=productInfo }
+                                <li>{$productInfo[1]}<input class="small" type="number" min="0" step="1" id="{$productInfo[0]}" value="{$productInfo[2]}" name="newAmount" onchange="editAmountProductInOrder(this, event)" required="true"><b> Prijs </b> €{$productInfo[3]}</li>
                                 {/foreach}
                         </ul>
                     {/if}
@@ -124,7 +125,8 @@
             </div>
             <div>
                 <label></label>
-                <button type="submit" name="addOrder" value="addOrder" class="button">Toevoegen</button>
+                {*<button type="submit" name="addOrder" value="addOrder" class="button" onclick="addOrder(this, event)">Toevoegen</button>*}
+                <input type="button" name="addOrder" value="addOrder" class="button" onclick="checkform('addOrder')">
             </div>
         </form>
 

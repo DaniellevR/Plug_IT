@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-04-03 18:38:58
+/* Smarty version 3.1.29, created on 2016-04-03 22:32:01
   from "C:\wamp\www\Plug_IT\smarty\templates\ordersforms.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_5701472250f0a0_57650865',
+  'unifunc' => 'content_57017dc1e95d76_23903718',
   'file_dependency' => 
   array (
     '5bfd3c34cf5030188f42fb17f33cc5f4e11feba4' => 
     array (
       0 => 'C:\\wamp\\www\\Plug_IT\\smarty\\templates\\ordersforms.tpl',
-      1 => 1459701534,
+      1 => 1459715518,
       2 => 'file',
     ),
   ),
@@ -20,13 +20,13 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
     'file:admin.tpl' => 1,
   ),
 ),false)) {
-function content_5701472250f0a0_57650865 ($_smarty_tpl) {
+function content_57017dc1e95d76_23903718 ($_smarty_tpl) {
 $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'ordersforms', array (
-  0 => 'block_2136457014722330e72_50096536',
+  0 => 'block_2898257017dc1cbbab7_56906280',
   1 => false,
   3 => 0,
   2 => 0,
@@ -35,11 +35,11 @@ $_smarty_tpl->ext->_inheritance->endChild($_smarty_tpl);
 $_smarty_tpl->smarty->ext->_subtemplate->render($_smarty_tpl, "file:admin.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'ordersforms'}  file:ordersforms.tpl */
-function block_2136457014722330e72_50096536($_smarty_tpl, $_blockParentStack) {
+function block_2898257017dc1cbbab7_56906280($_smarty_tpl, $_blockParentStack) {
 ?>
 
     <div class="adminpart">
-        <form method="POST" enctype="multipart/form-data" onsubmit="">
+        <form method="POST" enctype="multipart/form-data">
             <?php $_smarty_tpl->tpl_vars['user'] = new Smarty_Variable('', null);
 $_smarty_tpl->ext->_updateScope->updateScope($_smarty_tpl, 'user', 0);?>
             <?php $_smarty_tpl->tpl_vars['username'] = new Smarty_Variable('', null);
@@ -51,12 +51,12 @@ $_smarty_tpl->ext->_updateScope->updateScope($_smarty_tpl, 'username', 0);?>
             <?php }?>
 
             <div>
-                <h3>Order toevoegen</h3>
+                <h3>Order toevoegen<input class="right" type="button" name="reset" value="Wis huidige order" onclick="checkform('reset');"></h3>
             </div>
 
             <div>
                 <label for="usersAddOrder">Gebruikersnaam</label>
-                <select type="text" id="usersAddOrder" name="userAddOrder" <?php if ($_smarty_tpl->tpl_vars['username']->value !== '') {?>disabled<?php }?>>
+                <select type="text" id="usersAddOrder" name="userAddOrder" <?php if ($_smarty_tpl->tpl_vars['username']->value !== '') {?>disabled<?php }?> onchange="grabInfo(this, 'getAddressesUsername', 'contentDivAddressesAddOrder')">
                     <?php
 $_from = $_smarty_tpl->tpl_vars['users']->value;
 if (!is_array($_from) && !is_object($_from)) {
@@ -95,7 +95,7 @@ $_smarty_tpl->tpl_vars['useritem'] = $__foreach_useritem_0_saved_item;
 ?>
                 </select>
             </div>
-            <div id="contentDivAddOrder">
+            <div id="contentDivAddressesAddOrder">
                 <?php if (isset($_smarty_tpl->tpl_vars['deliveryAddressAdmin']->value)) {?>
                         <div><h5>Bezorgadres</h5></div>
                         <div><label for="streetname">Adres</label><input type="text" id="streetname" name="streetnameDelivery" required="true" placeholder="Straatnaam" value="<?php echo $_smarty_tpl->tpl_vars['deliveryAddressAdmin']->value[0];?>
@@ -249,7 +249,8 @@ $_smarty_tpl->tpl_vars['product'] = $__foreach_product_3_saved_item;
                 </div>
                 <div>
                     <label></label>
-                    <button type="submit" name="addOrder" value="addProduct">Product toevoegen</button>
+                    
+                    <input type="button" name="addProduct" value="addProduct" onclick="checkform('addProductToOrder');">
                 </div>
             </div>
             <div>
@@ -266,23 +267,23 @@ $_from = $_smarty_tpl->tpl_vars['productsCartAdmin']->value;
 if (!is_array($_from) && !is_object($_from)) {
 settype($_from, 'array');
 }
-$__foreach_product_4_saved_item = isset($_smarty_tpl->tpl_vars['product']) ? $_smarty_tpl->tpl_vars['product'] : false;
-$_smarty_tpl->tpl_vars['product'] = new Smarty_Variable();
-$_smarty_tpl->tpl_vars['product']->_loop = false;
-foreach ($_from as $_smarty_tpl->tpl_vars['product']->value) {
-$_smarty_tpl->tpl_vars['product']->_loop = true;
-$__foreach_product_4_saved_local_item = $_smarty_tpl->tpl_vars['product'];
+$__foreach_productInfo_4_saved_item = isset($_smarty_tpl->tpl_vars['productInfo']) ? $_smarty_tpl->tpl_vars['productInfo'] : false;
+$_smarty_tpl->tpl_vars['productInfo'] = new Smarty_Variable();
+$_smarty_tpl->tpl_vars['productInfo']->_loop = false;
+foreach ($_from as $_smarty_tpl->tpl_vars['productInfo']->value) {
+$_smarty_tpl->tpl_vars['productInfo']->_loop = true;
+$__foreach_productInfo_4_saved_local_item = $_smarty_tpl->tpl_vars['productInfo'];
 ?>
-                                <li><?php echo $_smarty_tpl->tpl_vars['product']->value->name;?>
- - Aantal : <input type="number" min="0" step="1" id="<?php echo $_smarty_tpl->tpl_vars['product']->value->id;?>
-" value="<?php echo $_smarty_tpl->tpl_vars['product']->value->amountInCartAdmin;?>
-" name="newAmount" onchange="editAmountProductInOrder(this, event)" required="true"> - Prijs : <?php echo $_smarty_tpl->tpl_vars['product']->value->price;?>
+                                <li><?php echo $_smarty_tpl->tpl_vars['productInfo']->value[1];?>
+<input class="small" type="number" min="0" step="1" id="<?php echo $_smarty_tpl->tpl_vars['productInfo']->value[0];?>
+" value="<?php echo $_smarty_tpl->tpl_vars['productInfo']->value[2];?>
+" name="newAmount" onchange="editAmountProductInOrder(this, event)" required="true"><b> Prijs </b> €<?php echo $_smarty_tpl->tpl_vars['productInfo']->value[3];?>
 </li>
                                 <?php
-$_smarty_tpl->tpl_vars['product'] = $__foreach_product_4_saved_local_item;
+$_smarty_tpl->tpl_vars['productInfo'] = $__foreach_productInfo_4_saved_local_item;
 }
-if ($__foreach_product_4_saved_item) {
-$_smarty_tpl->tpl_vars['product'] = $__foreach_product_4_saved_item;
+if ($__foreach_productInfo_4_saved_item) {
+$_smarty_tpl->tpl_vars['productInfo'] = $__foreach_productInfo_4_saved_item;
 }
 ?>
                         </ul>
@@ -291,7 +292,8 @@ $_smarty_tpl->tpl_vars['product'] = $__foreach_product_4_saved_item;
             </div>
             <div>
                 <label></label>
-                <button type="submit" name="addOrder" value="addOrder" class="button">Toevoegen</button>
+                
+                <input type="button" name="addOrder" value="addOrder" class="button" onclick="checkform('addOrder')">
             </div>
         </form>
 
