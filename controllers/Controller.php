@@ -1,4 +1,13 @@
 <?php
+/*
+*
+* Webshop Plug IT
+*
+* Made by : Nigel Liebers and Danielle van Rooij
+*
+* Avans 's-Hertogenbosch 2016 (c)
+*
+*/
 
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once($root . "/Plug_IT/controllers/MainCtrl.php");

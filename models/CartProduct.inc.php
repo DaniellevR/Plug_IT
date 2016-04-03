@@ -1,10 +1,13 @@
 <?php
-
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+*
+* Webshop Plug IT
+*
+* Made by : Nigel Liebers and Danielle van Rooij
+*
+* Avans 's-Hertogenbosch 2016 (c)
+*
+*/
 
 /**
  * Description of ShoppingCart
