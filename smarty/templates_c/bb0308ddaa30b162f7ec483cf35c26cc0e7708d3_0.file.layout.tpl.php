@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-04-03 01:57:13
+/* Smarty version 3.1.29, created on 2016-04-03 02:12:12
   from "C:\wamp\www\Plug_IT\smarty\templates\layout.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_57005c59614f11_33349458',
+  'unifunc' => 'content_57005fdce16ed2_22082880',
   'file_dependency' => 
   array (
     'bb0308ddaa30b162f7ec483cf35c26cc0e7708d3' => 
     array (
       0 => 'C:\\wamp\\www\\Plug_IT\\smarty\\templates\\layout.tpl',
-      1 => 1459641430,
+      1 => 1459642329,
       2 => 'file',
     ),
   ),
@@ -19,7 +19,7 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_57005c59614f11_33349458 ($_smarty_tpl) {
+function content_57005fdce16ed2_22082880 ($_smarty_tpl) {
 $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, false);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
@@ -27,7 +27,7 @@ $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, false);
     <head> 
         <title><?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'title', array (
-  0 => 'block_2380257005c59332e57_07425498',
+  0 => 'block_2219257005fdcb16bc5_84679001',
   1 => false,
   3 => 0,
   2 => 0,
@@ -50,7 +50,7 @@ $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'title', array (
 >
     <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'head', array (
-  0 => 'block_2935557005c5933c188_36242879',
+  0 => 'block_1463357005fdcb1fe52_92739483',
   1 => false,
   3 => 0,
   2 => 0,
@@ -111,6 +111,9 @@ $_smarty_tpl->tpl_vars['nav'] = $__foreach_nav_0_saved_item;
                 <?php if (isset($_GET['page'])) {?>
                     <?php if ($_GET['page'] === "Home") {?>
                         <a href='/Plug_IT/index.php?page=Home'>Home</a>
+                    <?php } elseif ($_GET['page'] === "Admin" || $_GET['page'] === "AdminCategories" || $_GET['page'] === "AdminProducts" || $_GET['page'] === "AdminUsers" || $_GET['page'] === "AdminOrders") {?>
+                        <a href='/Plug_IT/index.php?page=Home'>Home</a> > <a href='/Plug_IT/index.php?page=<?php echo $_GET['page'];?>
+'>Admin</a>
                     <?php } elseif ($_GET['page'] === "Catalogue") {?>
                         <a href='/Plug_IT/index.php?page=Home'>Home</a> > <a href='/Plug_IT/index.php?page=Catalogue'>Catalogus</a>
                         <?php if (isset($_GET['id'])) {?>
@@ -434,7 +437,7 @@ $_smarty_tpl->tpl_vars['parent'] = $__foreach_parent_10_saved_item;
             </div>
         <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'body', array (
-  0 => 'block_743257005c59594051_60992529',
+  0 => 'block_119857005fdcd98189_11106377',
   1 => false,
   3 => 0,
   2 => 0,
@@ -530,17 +533,17 @@ $_smarty_tpl->tpl_vars['footeritem'] = $__foreach_footeritem_12_saved_item;
                 </html>
 <?php }
 /* {block 'title'}  file:layout.tpl */
-function block_2380257005c59332e57_07425498($_smarty_tpl, $_blockParentStack) {
+function block_2219257005fdcb16bc5_84679001($_smarty_tpl, $_blockParentStack) {
 ?>
 Plug IT<?php
 }
 /* {/block 'title'} */
 /* {block 'head'}  file:layout.tpl */
-function block_2935557005c5933c188_36242879($_smarty_tpl, $_blockParentStack) {
+function block_1463357005fdcb1fe52_92739483($_smarty_tpl, $_blockParentStack) {
 }
 /* {/block 'head'} */
 /* {block 'body'}  file:layout.tpl */
-function block_743257005c59594051_60992529($_smarty_tpl, $_blockParentStack) {
+function block_119857005fdcd98189_11106377($_smarty_tpl, $_blockParentStack) {
 }
 /* {/block 'body'} */
 }

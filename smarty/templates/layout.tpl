@@ -39,6 +39,8 @@
                 {if isset($smarty.get.page)}
                     {if $smarty.get.page === "Home"}
                         <a href='/Plug_IT/index.php?page=Home'>Home</a>
+                    {elseif $smarty.get.page === "Admin" || $smarty.get.page === "AdminCategories" || $smarty.get.page === "AdminProducts" || $smarty.get.page === "AdminUsers" || $smarty.get.page === "AdminOrders"}
+                        <a href='/Plug_IT/index.php?page=Home'>Home</a> > <a href='/Plug_IT/index.php?page={$smarty.get.page}'>Admin</a>
                     {elseif $smarty.get.page === "Catalogue"}
                         <a href='/Plug_IT/index.php?page=Home'>Home</a> > <a href='/Plug_IT/index.php?page=Catalogue'>Catalogus</a>
                         {if isset($smarty.get.id)}
