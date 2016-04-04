@@ -129,7 +129,7 @@
             <div id="contentDivEditProduct1">
                 {$product = ""}
                 <div><label for="productToEdit">Productnaam</label>
-                    <select type="text" id="productToEdit" name="productToEdit" onchange="grabInfo(this, 'getProductAndSupplierInfoEditProduct', 'contentDivEditProduct2')">
+                    <select type="text" id="productToEdit" name="productToEdit" onchange="grabInfo(this, 'getProductInfo', 'contentDivEditProduct2')">
                         {foreach from=$products item=productitem }
                             {if $productitem->categoryId === $cat->id}
                                 {if $product === ""}
@@ -139,12 +139,12 @@
                             {/if}
                         {/foreach}
                     </select></div>
-                    
                 <div id="contentDivEditProduct2">
+{*                                        {if $product === ""}*}
                     <div><h4>Productinformatie</h4></div>
                     <div>
                         <label for="productname">Productnaam</label>
-                        <input type="text" name="productnameEditProduct" id="productname" required="true" value="{$product->name}">
+                        <input type="text" name="productnameEditProduct" id="productname" required="true" value="{$product->name}" readonly>
                     </div>
                     <div>
                         <label for="productSummaryShort">Korte omschrijving</label>
@@ -173,7 +173,7 @@
 
                     <div>
                         <label for="categoriesEditProduct">Categorienaam</label>
-                        <select type="text" id="categoriesAddProduct" id="categoriesAddProduct" name="categoriesAddProduct">
+                        <select type="text" id="categoriesEditProduct" id="categoriesEditProduct" name="categoriesEditProduct">
                             {foreach from=$categories[0] item=parent }
                                 <option class="category" value="{$parent->id}">{$parent->name}</option>
                                 {foreach from=$categories[1] item=child }
@@ -191,8 +191,9 @@
                     <div>
                         <img type="image" src="/Plug_IT/assets/pix/products/{$product->id}.png" class="image" />
                     </div>
+{*                    {/if}*}
 
-                    <div><h4>Leverancier</h4></div>
+                    {*<div><h4>Leverancier</h4></div>
                     {$supplier = ""}
                     <div>
                         <label for="suppliersEditProduct">Kies uw leverancier</label>
@@ -245,7 +246,7 @@
                             <input type="text" id="city" name="cityEditProduct" required="true" value="{$supplier->city}" readonly>
                         </div>
 
-                    </div>
+                    </div>*}
 
                 </div>
             </div>

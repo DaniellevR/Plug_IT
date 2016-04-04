@@ -100,7 +100,7 @@ if ($action === 'editCategory') {
     } else if ($action === 'getProductsFromCategoryEditProduct') {
         echo '<div><label for="productToEdit">Productnaam</label>';
 //        echo '<select type="text" id="productToEdit" name="productToEdit" onchange="grabInfo(this, "getProductAndSupplierInfoEditProduct", "contentDivEditProduct2");">';
-        echo '<select type="text" id="productToEdit" name="productToEdit" onchange="grabInfo(this, "getProductAndSupplierInfoEditProduct", "contentDivEditProduct2")">';
+        echo '<select type="text" id="productToEdit" name="productToEdit" onchange="grabInfo(this, "getProductInfo", "contentDivEditProduct2")">';
     } else {
         echo '<div><label for="productslist">Productnaam</label><select type="text" id="productslist" name="productslist">';
     }
@@ -114,8 +114,8 @@ if ($action === 'editCategory') {
     if ($action === 'getProductsFromCategoryEditProduct') {
         echo '<div><h4>Productinformatie</h4></div>';
         productInfo($products[0]->id);
-        echo '<div><h4>Leverancier</h4></div>';
-        supplierInfo($products[0]->supplier);
+//        echo '<div><h4>Leverancier</h4></div>';
+//        supplierInfo($products[0]->supplier);
     } else if ($action === 'getProductsFromCategoryAddOrder') {
         echo '<div><label for="amount">Aantal</label><input type="number" min="1" step="1" value="1" name="amount" required="true"></div>';
     }
@@ -123,11 +123,11 @@ if ($action === 'editCategory') {
 // Productinfo
     $productId = $_GET["id"];
     echo '<div><h4>Productinformatie</h4></div>';
-    $suppliername = productInfo($productId);
+    productInfo($productId);
 
 // Supplier info
-    echo '<div><h4>Leverancier</h4></div>';
-    supplierInfo($suppliername);
+//    echo '<div><h4>Leverancier</h4></div>';
+//    supplierInfo($suppliername);
 } else if ($action === 'editUser') {
     $username = $_GET["id"];
     $userModel = new User();
@@ -213,6 +213,9 @@ if ($action === 'editCategory') {
 } else if ($action === 'getAddressesUsername') {
     $username = $_GET["id"];
     addressInfo($username);
+} else if ($action === 'getProductInfo') {
+    $productId = $_GET["id"];
+    productInfo($productId);
 }
 
 /**
@@ -224,43 +227,43 @@ function productInfo($productId) {
     $productModel = new Product();
     $product = $productModel->getProduct($productId);
 
-    echo '<div><label for="productname">Productnaam</label><input type="text" name="productnameEditProduct" id="productname" required="true" value="' . $product->name . '"></div>';
-    echo '<div><label for="productSummaryShort">Korte omschrijving</label><textarea type="text" id="productSummaryShort" name="productSummaryShortEditProduct"  maxlength="200" required="true">' . $product->shortDescription . '</textarea></div>';
-    echo '<div><label for="productSummaryLong">Lange omschrijving</label><textarea type="text" id="productSummaryLong" name="productSummaryLongEditProduct" class="longdescription" required="true">' . $product->description . '</textarea></div>';
-    echo '<div><label for="characteristics">Kenmerken</label><input type="text" id="characteristics" name="characteristicsEditProduct" required="true" placeholder="Kenmerk, Kenmerk, Kenmerk" value="' . $product->characteristics . '"></div>';
-    echo '<div><label for="price">Prijs</label><input type="number" id="price" name="priceEditProduct" min="0.01" step="0.01" value="' . $product->price . '"/></div>';
-    echo '<div><label for="brand">Merk</label><input type="text" id="brand" name="brandEditProduct" required="true" value="' . $product->brand . '"></div>';
-    echo '<div><label for="amountEditProduct">Aantal op voorraad</label><input type="number" min="1" step="1" name="amountEditProduct" required="true" value="' . $product->amount . '"></div>';
-    echo '<div><label for = "categoriesEditProduct">Categorienaam</label><select type = "text" id = "categoriesAddProduct" id = "categoriesAddProduct" name = "categoriesAddProduct">';
+    if (!is_null($product)) {
+        echo '<div><label for="productname">Productnaam</label><input type="text" name="productnameEditProduct" id="productname" required="true" value="' . $product->name . '" readonly></div>';
+        echo '<div><label for="productSummaryShort">Korte omschrijving</label><textarea type="text" id="productSummaryShort" name="productSummaryShortEditProduct"  maxlength="200" required="true">' . $product->shortDescription . '</textarea></div>';
+        echo '<div><label for="productSummaryLong">Lange omschrijving</label><textarea type="text" id="productSummaryLong" name="productSummaryLongEditProduct" class="longdescription" required="true">' . $product->description . '</textarea></div>';
+        echo '<div><label for="characteristics">Kenmerken</label><input type="text" id="characteristics" name="characteristicsEditProduct" required="true" placeholder="Kenmerk, Kenmerk, Kenmerk" value="' . $product->characteristics . '"></div>';
+        echo '<div><label for="price">Prijs</label><input type="number" id="price" name="priceEditProduct" min="0.01" step="0.01" value="' . $product->price . '"/></div>';
+        echo '<div><label for="brand">Merk</label><input type="text" id="brand" name="brandEditProduct" required="true" value="' . $product->brand . '"></div>';
+        echo '<div><label for="amountEditProduct">Aantal op voorraad</label><input type="number" min="1" step="1" name="amountEditProduct" required="true" value="' . $product->amount . '"></div>';
+        echo '<div><label for = "categoriesEditProduct">Categorienaam</label><select type = "text" id="categoriesEditProduct" name="categoriesEditProduct">';
 
-    $categoryModel = new Category();
-    $categories = $categoryModel->getCategories();
+        $categoryModel = new Category();
+        $categories = $categoryModel->getCategories();
 
-    foreach ($categories as $category) {
-        if (is_null($category->parent)) {
-            if ($product->categoryId === $category->id) {
-                echo '<option class = "category" value = "' . $category->id . '" selected>';
-            } else {
-                echo '<option class = "category" value = "' . $category->id . '">';
-            }
+        foreach ($categories as $category) {
+            if (is_null($category->parent)) {
+                if ($product->categoryId === $category->id) {
+                    echo '<option class = "category" value = "' . $category->id . '" selected>';
+                } else {
+                    echo '<option class = "category" value = "' . $category->id . '">';
+                }
 
-            foreach ($categories as $category2) {
-                if ($category2->parent === $category->id) {
-                    if ($product->categoryId === $category2->id) {
-                        echo '<option class = "subcategory" value = "' . $category2->id . '" selected>';
-                    } else {
-                        echo '<option class = "subcategory" value = "' . $category2->id . '">';
+                foreach ($categories as $category2) {
+                    if ($category2->parent === $category->id) {
+                        if ($product->categoryId === $category2->id) {
+                            echo '<option class = "subcategory" value = "' . $category2->id . '" selected>';
+                        } else {
+                            echo '<option class = "subcategory" value = "' . $category2->id . '">';
+                        }
                     }
                 }
             }
         }
+
+        echo '</select></div>';
+        echo '<div><label for = "image">Foto categorie</label><input type = "file" accept = "image/*" name = "image" id = "image" class = "input_text"/></div>';
+        echo '<div><img type = "image" src = "/Plug_IT/assets/pix/products/' . $product->id . '.png" class = "image" /></div>';
     }
-
-    echo '</select></div>';
-    echo '<div><label for = "image">Foto categorie</label><input type = "file" accept = "image/*" name = "image" id = "image" class = "input_text"/></div>';
-    echo '<div><img type = "image" src = "/Plug_IT/assets/pix/products/' . $product->id . '.png" class = "image" /></div>';
-
-    return $product->supplier;
 }
 
 /**
@@ -272,23 +275,23 @@ function supplierInfo($suppliername) {
     $supplier = $supplierModel->getSupplier($suppliername);
 
     if ($suppliername == "") {
-        echo '<div><label>Naam:</label><input type="text" name="suppliername" required="true" value="' . $supplier->name . '"></div>';
-        echo '<div><label>Email:</label><input type="email" name="email" required="true" value="' . $supplier->email . '">';
-        echo '<div><label>Telefoonnummer:</label><input type="tel" name="telephonenumber" required="true" value="' . $supplier->telephonenumber . '"></div>';
-        echo '<div><label>Adres:</label><input type="text" name="streetname" required="true" placeholder="Straatnaam" value="' . $supplier->streetname . '"></div>';
-        echo '<div><label></label><input class="small_field" type="text" name="housenumber" required="true" placeholder="Huisnummer" value="' . $supplier->housenumber . '"></div>';
-        echo '<div><label></label><input class="small_field" type="text" name="housenumberSuffix" placeholder="Huisnummertoevoeging" value="' . $supplier->housenumber_suffix . '"></div>';
-        echo '<div><label>Postcode:</label><input type="text" name="postalCode" required="true" value="' . $supplier->postalCode . '"></div>';
-        echo '<div><label>Woonplaats:</label><input type="text" name="city" required="true" value="' . $supplier->city . '"></div>';
+        echo '<div><label>Naam:</label><input type="text" name="suppliernameEditProduct" required="true" value="' . $supplier->name . '"></div>';
+        echo '<div><label>Email:</label><input type="email" name="emailEditProduct" required="true" value="' . $supplier->email . '">';
+        echo '<div><label>Telefoonnummer:</label><input type="tel" name="telephonenumberEditProduct" required="true" value="' . $supplier->telephonenumber . '"></div>';
+        echo '<div><label>Adres:</label><input type="text" name="streetnameEditProduct" required="true" placeholder="Straatnaam" value="' . $supplier->streetname . '"></div>';
+        echo '<div><label></label><input class="small_field" type="text" name="housenumberEditProduct" required="true" placeholder="Huisnummer" value="' . $supplier->housenumber . '"></div>';
+        echo '<div><label></label><input class="small_field" type="text" name="housenumberSuffixEditProduct" placeholder="Huisnummertoevoeging" value="' . $supplier->housenumber_suffix . '"></div>';
+        echo '<div><label>Postcode:</label><input type="text" name="postalCodeEditProduct" required="true" value="' . $supplier->postalCode . '"></div>';
+        echo '<div><label>Woonplaats:</label><input type="text" name="cityEditProduct" required="true" value="' . $supplier->city . '"></div>';
     } else {
-        echo '<div><label>Naam:</label><input type="text" name="suppliername" required="true" value="' . $supplier->name . '" readonly></div>';
-        echo '<div><label>Email:</label><input type="email" name="email" required="true" value="' . $supplier->email . '" readonly></div>';
-        echo '<div><label>Telefoonnummer:</label><input type="tel" name="telephonenumber" required="true" value="' . $supplier->telephonenumber . '" readonly></div>';
-        echo '<div><label>Adres:</label><input type="text" name="streetname" required="true" placeholder="Straatnaam" value="' . $supplier->streetname . '" readonly></div>';
-        echo '<div><label></label><input class="small_field" type="text" name="housenumber" required="true" placeholder="Huisnummer" value="' . $supplier->housenumber . '" readonly></div>';
-        echo '<div><label></label><input class="small_field" type="text" name="housenumberSuffix" placeholder="Huisnummertoevoeging" value="' . $supplier->housenumber_suffix . '" readonly></div>';
-        echo '<div><label>Postcode:</label><input type="text" name="postalCode" required="true" value="' . $supplier->postalCode . '" readonly></div>';
-        echo '<div><label>Woonplaats:</label><input type="text" name="city" required="true" value="' . $supplier->city . '" readonly></div>';
+        echo '<div><label>Naam:</label><input type="text" name="suppliernameEditProduct" required="true" value="' . $supplier->name . '" readonly></div>';
+        echo '<div><label>Email:</label><input type="email" name="emailEditProduct" required="true" value="' . $supplier->email . '" readonly></div>';
+        echo '<div><label>Telefoonnummer:</label><input type="tel" name="telephonenumberEditProduct" required="true" value="' . $supplier->telephonenumber . '" readonly></div>';
+        echo '<div><label>Adres:</label><input type="text" name="streetnameEditProduct" required="true" placeholder="Straatnaam" value="' . $supplier->streetname . '" readonly></div>';
+        echo '<div><label></label><input class="small_field" type="text" name="housenumberEditProduct" required="true" placeholder="Huisnummer" value="' . $supplier->housenumber . '" readonly></div>';
+        echo '<div><label></label><input class="small_field" type="text" name="housenumberSuffixEditProduct" placeholder="Huisnummertoevoeging" value="' . $supplier->housenumber_suffix . '" readonly></div>';
+        echo '<div><label>Postcode:</label><input type="text" name="postalCodeEditProduct" required="true" value="' . $supplier->postalCode . '" readonly></div>';
+        echo '<div><label>Woonplaats:</label><input type="text" name="cityEditProduct" required="true" value="' . $supplier->city . '" readonly></div>';
     }
 }
 

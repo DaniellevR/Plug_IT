@@ -1,13 +1,14 @@
 <?php
+
 /*
-*
-* Webshop Plug IT
-*
-* Made by : Nigel Liebers and Danielle van Rooij
-*
-* Avans 's-Hertogenbosch 2016 (c)
-*
-*/
+ *
+ * Webshop Plug IT
+ *
+ * Made by : Nigel Liebers and Danielle van Rooij
+ *
+ * Avans 's-Hertogenbosch 2016 (c)
+ *
+ */
 
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once($root . "/Plug_IT/models/Database.inc.php");
@@ -18,6 +19,7 @@ require_once($root . "/Plug_IT/models/Database.inc.php");
  * @author Daniëlle
  */
 class Product extends Database {
+
     public $id;
     public $name;
     public $shortDescription;
@@ -148,6 +150,34 @@ class Product extends Database {
     public function checkIfProductIsUnique($name, $supplier) {
         if ($this->establishConnection()) {
             $sql = "SELECT COUNT(*) as cnt FROM product WHERE name = '" . $this->conn->real_escape_string($name) . "' AND supplier_name = '" . $this->conn->real_escape_string($supplier) . "'";
+            $result = $this->conn->query($sql);
+
+            $count = -1;
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $count = $row['cnt'];
+                }
+            }
+
+            $this->closeConnection();
+
+            return $count;
+        } else {
+            return -1;
+        }
+    }
+
+    /**
+     * Check if the product is unique with id
+     * @param type $id
+     * @param type $name
+     * @param type $supplier
+     * @return type int (count)
+     */
+    public function checkIfProductIsUniqueWithId($id, $name, $supplier) {
+        if ($this->establishConnection()) {
+            $sql = "SELECT COUNT(*) as cnt FROM product WHERE name = '" . $this->conn->real_escape_string($name) . "' AND supplier_name = '" . $this->conn->real_escape_string($supplier) . "' AND id <> " . $this->conn->real_escape_string($id);
             $result = $this->conn->query($sql);
 
             $count = -1;
