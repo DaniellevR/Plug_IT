@@ -397,6 +397,52 @@ input[class=small] {
 /* ==========================================================================
     Catalogue
    ========================================================================== */
+.cartAmount[type="number"] 
+{
+    float: left;
+    width: 14em;
+}
+
+.CartButton[type="submit"] 
+{
+    float: left;
+    width: 16em;
+}
+
+#linkToProduct
+{
+    float: left;
+    margin-top: 2em;
+    width: 100%;
+}
+
+.leftThumbnailPart
+{
+    float:left;
+    height: 10em;
+    width: 10em;
+}
+.centerThumbnailPart
+{
+    float:left;
+    height: 10em;
+    min-width: 20em;
+    width: 60%;
+}
+.rightThumbnailPart
+{
+    float:left;
+    height: 10em;
+    min-width: 10em;
+    width: 20%;
+}
+
+.buy
+{
+    float: left;
+    width: 10em;
+    height: 4em;
+}
 
 .categoryThumbnail
 {
@@ -427,15 +473,22 @@ input[class=small] {
 .productThumbnail
 {
     width: 100%;
-    height: 10em;
+    height: 100%;
     /*border: 1px black solid;*/
     float: left;
     margin-bottom: 1em;
-    background-color: #eeeeee;
 
     text-decoration: none;
     color: black;
     text-align: center;
+}
+.productThumbnail:nth-child(even)
+{
+    background-color: #eeeeee;
+}
+.productThumbnail:nth-child(odd)
+{
+    background-color: #e6e6e6;
 }
 
 .productThumbnail:hover
@@ -453,10 +506,9 @@ input[class=small] {
 .shortDescription
 {
     width: 60%;
-    height: 2em;
+    height: 4em;
     float: left;
     overflow: hidden;
-    padding-left: 4em;
 }
 
 .productName
@@ -480,7 +532,26 @@ input[class=small] {
 /* ==========================================================================
     Productpage
    ========================================================================== */
+#leftProductInfo
+{
+    height: 20em;
+    width: 14em;
+    float: left;
+}
+#centerProductInfo
+{
+    margin-top: 2em;
+    float: left;
+    width: 40%;
+    min-width: 20em;
+}
 
+#rightProductInfo
+{
+    margin-top: 2em;
+    float: left;
+    margin-left: 1em;
+}
 .productInfo
 {
     height: 100%;
@@ -489,9 +560,10 @@ input[class=small] {
     border: 1px solid black;
 }
 
-.productTitle
+#productTitle
 {
-
+    float: left;
+    margin-left: 1em;
 }
 
 .productImage
@@ -511,7 +583,6 @@ input[class=small] {
 {
     float: left;
     margin: 1em;
-    width: 20%;
     border: 1px solid blue;
 }
 

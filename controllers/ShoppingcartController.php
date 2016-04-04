@@ -17,7 +17,7 @@ class ShoppingcartController extends MainCtrl {
     function View($name, $model) {
         global $smarty;
 
-        // Get navigation items
+// Get navigation items
         $navi = $this->getNavigationItems();
         $sideNavigation = $this->getCategories();
         if (isset($_POST['id']) && isset($_POST['amount'])) {
@@ -33,7 +33,6 @@ class ShoppingcartController extends MainCtrl {
             $this->editAmountInCart($_POST['id'], $_POST['amount']);
         }
 
-//        $smarty->assign('header', ['Inloggen', 'Verlanglijstje', 'Klantenservice']);
         $smarty->assign('navigation', $navi);
         $smarty->assign('categories', $sideNavigation);
         if (isset($cartList)) {
@@ -41,28 +40,23 @@ class ShoppingcartController extends MainCtrl {
         }
         $smarty->assign('model', $model);
         $smarty->assign("controller", $this);
-        $smarty->assign('footer', ['Informatie', 'Bestelling & levering', 'Betalen', 'Retourneren', 'Voorwaarden', 'Over', 'Contact']);
         $smarty->display($name . '.tpl');
     }
 
     public function removeFromCart($id) {
-        for ($i = 0; $i < count($_SESSION['cartList']); $i++) {
-            if ($_SESSION['cartList'][$i]->product->id == $id) {
-                unset($_SESSION['cartList'][$i]);
-                return;
+        $tempArray = array();
+        foreach ($_SESSION['cartList'] as $cartProduct) {
+            if ($cartProduct->product->id != $id) {
+                $tempArray[] = $cartProduct;
             }
         }
+        $_SESSION['cartList'] = $tempArray;
     }
 
     public function editAmountInCart($id, $amount) {
-        for ($i = 0; $i < count($_SESSION['cartList']); $i++) {
-            if ($_SESSION['cartList'][$i]->product->id == $id) {
-                if ($amount < 1) {
-                    unset($_SESSION['cartList'][$i]);
-                    return;
-                } else {
-                    $_SESSION['cartList'][$i]->amount = $amount;
-                }
+        foreach ($_SESSION['cartList'] as $cartProduct) {
+            if ($cartProduct->product->id == $id) {
+                $cartProduct->amount = $amount;
             }
         }
     }
