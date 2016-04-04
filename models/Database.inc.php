@@ -17,15 +17,15 @@
 class Database {
     public $conn;
 
+    /**
+     * Make connection with the database
+     * @return boolean
+     */
     public function establishConnection() {
         $servername = "sql7.freemysqlhosting.net";
         $username = "sql7113415";
         $password = "dNMJpgPLG4";
         $database = "sql7113415";
-//        $servername = "localhost";
-//        $username = "root";
-//        $password = "";
-//        $database = "sql7111397";
 
         // Create connection
         $this->conn = new mysqli($servername, $username, $password, $database);
@@ -37,6 +37,9 @@ class Database {
         return true;
     }
     
+    /**
+     * Close the connection with the database
+     */
     public function closeConnection() {
         mysqli_close($this->conn);
     }

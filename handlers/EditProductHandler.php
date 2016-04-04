@@ -15,8 +15,11 @@ require_once($root . "/Plug_IT/models/Product.inc.php");
 require_once($root . "/Plug_IT/models/Supplier.inc.php");
 require_once($root . "/Plug_IT/models/Address.inc.php");
 
+/**
+ * Edit the product
+ * @author Daniëlle
+ */
 $errors = "";
-
 if (isset($_POST['productToEdit']) && isset($_POST['productnameEditProduct']) && isset($_POST['productSummaryShortEditProduct']) && isset($_POST['productSummaryLongEditProduct']) &&
         isset($_POST['characteristicsEditProduct']) && isset($_POST['priceEditProduct']) && isset($_POST['brandEditProduct']) && isset($_POST['amountEditProduct']) &&
         isset($_POST['categoriesEditProduct']) && isset($_POST['suppliersEditProduct']) && isset($_POST['suppliernameEditProduct']) && isset($_POST['emailEditProduct']) &&
@@ -61,10 +64,6 @@ if (isset($_POST['productToEdit']) && isset($_POST['productnameEditProduct']) &&
                 if ($addressId > 0) {
                     // Add supplier
                     $supplierModel->addSupplier($suppliername, $addressId, $email, $telephonenumber);
-
-//                        if ($ret <= 0) {
-//                            $errors = $errors . "Fout opgetreden bij het opslaan van de leverancier.\r\nHet product kon niet toegevoegd worden.";
-//                        }
                 } else {
                     $errors = $errors . "Fout opgetreden bij het opslaan van de leverancier.\r\nHet product kon niet toegevoegd worden.";
                 }
@@ -74,20 +73,23 @@ if (isset($_POST['productToEdit']) && isset($_POST['productnameEditProduct']) &&
         }
     }
 
+    // Check if product is unique
     $count = $productModel->checkIfProductIsUnique($productname, $suppliername);
 
     if ($count == 0) {
+        // Edit the product
         $res = $productModel->editProduct($id, $productname, $shortDescription, $longDescription, $characteristics, $price, $brand, $suppliername, $amount, $categoryId);
 
         if ($res == 1) {
             if (isset($_FILES['image'])) {
+                // New image is given
                 $file_name = $_FILES['image']['name'];
                 $file_size = $_FILES['image']['size'];
                 $file_tmp = $_FILES['image']['tmp_name'];
                 $file_type = $_FILES['image']['type'];
 
                 if ($file_name != "" && $file_size != "" && $file_tmp != "" && $file_type != "") {
-
+                    // Check for errors
                     $file_ext = explode(".", $file_name);
                     $file_ext = end($file_ext);
 
@@ -102,16 +104,18 @@ if (isset($_POST['productToEdit']) && isset($_POST['productnameEditProduct']) &&
                     }
 
                     if ($errors === "") {
-
+                        // Create directory if it doesn't exist yet
                         if (!is_dir("../assets/pix/products/")) {
                             mkdir("../assets/pix/products/");
                         }
 
+                        // Remove old picture
                         $path = "../assets/pix/products/";
                         foreach (glob($path . $id . '*') as $filename) {
                             unlink(realpath($filename));
                         }
 
+                        // Add new picture
                         move_uploaded_file($file_tmp, "../assets/pix/products/" . $id . ".png");
                     }
                 }

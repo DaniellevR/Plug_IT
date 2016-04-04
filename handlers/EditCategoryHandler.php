@@ -13,30 +13,35 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once($root . "/Plug_IT/controllers/AdminController.php");
 require_once($root . "/Plug_IT/models/Category.inc.php");
 
+/**
+ * Edit the category
+ * @author Daniëlle
+ */
 $errors = "";
-
 if (isset($_POST['categoriesEdit']) && isset($_POST['newname']) && isset($_POST['category_description']) && isset($_POST['parent'])) {
     $id = $_POST['categoriesEdit'];
     $name = $_POST['newname'];
     $description = $_POST['category_description'];
     $parent = $_POST['parent'];
 
-    // db
+    // Check if category will still be unique
     $categoryModel = new Category();
     $count = $categoryModel->checkIfCategoryIsUniqueWithId($id, $name, $parent);
 
     if ($count == 0) {
+        // Edit the category
         $res = $categoryModel->editCategory($id, $name, $description, $parent);
 
         if ($res == 1) {
             if (isset($_FILES['image'])) {
+                // New image given
                 $file_name = $_FILES['image']['name'];
                 $file_size = $_FILES['image']['size'];
                 $file_tmp = $_FILES['image']['tmp_name'];
                 $file_type = $_FILES['image']['type'];
 
                 if ($file_name != "" && $file_size != "" && $file_tmp != "" && $file_type != "") {
-
+                    // Check for errors
                     $file_ext = explode(".", $file_name);
                     $file_ext = end($file_ext);
 
@@ -51,16 +56,18 @@ if (isset($_POST['categoriesEdit']) && isset($_POST['newname']) && isset($_POST[
                     }
 
                     if ($errors === "") {
-
+                        // Create directory if it doesn't exist
                         if (!is_dir("../assets/pix/categories/")) {
                             mkdir("../assets/pix/categories/");
                         }
 
+                        // Remove old picture
                         $path = "../assets/pix/categories/";
                         foreach (glob($path . $id . '*') as $filename) {
                             unlink(realpath($filename));
                         }
 
+                        // Add new picture
                         move_uploaded_file($file_tmp, "../assets/pix/categories/" . $id . ".png");
                     }
                 }

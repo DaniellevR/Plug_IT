@@ -19,13 +19,16 @@ require_once($root . "/Plug_IT/models/Database.inc.php");
  * @author Daniëlle
  */
 class NavigationItem extends Database {
-
     public $id;
     public $name;
     public $page;
     public $location;
     public $parent;
 
+    /**
+     * Get navigation items
+     * @return boolean|\NavigationItem
+     */
     public function getNavigationItems() {
         if ($this->establishConnection()) {
             $sql = "SELECT * FROM navigationitem";
@@ -34,7 +37,6 @@ class NavigationItem extends Database {
             $navigationItems = array();
 
             if ($result->num_rows > 0) {
-//            if ($result != null) {
                 while ($row = $result->fetch_assoc()) {
                     $navigationItem = new NavigationItem();
                     $navigationItem->id = $row['id'];

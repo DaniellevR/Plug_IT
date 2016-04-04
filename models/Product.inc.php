@@ -18,7 +18,6 @@ require_once($root . "/Plug_IT/models/Database.inc.php");
  * @author Daniëlle
  */
 class Product extends Database {
-
     public $id;
     public $name;
     public $shortDescription;
@@ -31,6 +30,10 @@ class Product extends Database {
     public $categoryId;
     public $amountInCartAdmin = 0;
 
+    /**
+     * Get all products
+     * @return \Product|boolean
+     */
     public function getProducts() {
         if ($this->establishConnection()) {
             $sql = "SELECT * FROM product";
@@ -63,6 +66,11 @@ class Product extends Database {
         }
     }
 
+    /**
+     * Get product in given category
+     * @param type $categoryId
+     * @return \Product|boolean
+     */
     public function getProductsInCategory($categoryId) {
         if ($this->establishConnection()) {
             $stmt = $this->conn->prepare("SELECT * FROM product WHERE category_id = ?");
@@ -74,7 +82,6 @@ class Product extends Database {
             $stmt->bind_result($this->id, $this->name, $this->shortDescription, $this->description, $this->characteristics, $this->price, $this->brand, $this->supplier, $this->amount, $this->categoryId);
 
             while ($stmt->fetch()) { // For each row
-//                $products[] = $this;
                 $product = new Product();
                 $product->id = $this->id;
                 $product->name = $this->name;
@@ -97,6 +104,11 @@ class Product extends Database {
         }
     }
 
+    /**
+     * Get product from id
+     * @param type $id
+     * @return \Product
+     */
     public function getProductFromId($id) {
         if ($this->establishConnection()) {
             $sql = "SELECT * FROM product WHERE id = " . $id;
@@ -117,7 +129,7 @@ class Product extends Database {
                     $product->brand = $row['brand'];
                     $product->supplier = $row['supplier_name'];
                     $product->amount = $row['amount'];
-                    $product->category_id = $row['category_id'];
+                    $product->categoryId = $row['category_id'];
                 }
             }
 
@@ -127,6 +139,12 @@ class Product extends Database {
         }
     }
 
+    /**
+     * Check if the product is unique
+     * @param type $name
+     * @param type $supplier
+     * @return type int (count)
+     */
     public function checkIfProductIsUnique($name, $supplier) {
         if ($this->establishConnection()) {
             $sql = "SELECT COUNT(*) as cnt FROM product WHERE name = '" . $this->conn->real_escape_string($name) . "' AND supplier_name = '" . $this->conn->real_escape_string($supplier) . "'";
@@ -148,6 +166,11 @@ class Product extends Database {
         }
     }
 
+    /**
+     * Get product with id
+     * @param type $productId
+     * @return \Product|boolean
+     */
     public function getProduct($productId) {
         if ($this->establishConnection()) {
             $stmt = $this->conn->prepare("SELECT * FROM product WHERE id = ?");
@@ -165,6 +188,19 @@ class Product extends Database {
         }
     }
 
+    /**
+     * Add product
+     * @param type $name
+     * @param type $shortDescription
+     * @param type $description
+     * @param type $characteristics
+     * @param type $price
+     * @param type $brand
+     * @param type $supplier
+     * @param type $amount
+     * @param type $categoryId
+     * @return type int (id)
+     */
     public function addProduct($name, $shortDescription, $description, $characteristics, $price, $brand, $supplier, $amount, $categoryId) {
         if ($this->establishConnection()) {
             $stmt = $this->conn->prepare("INSERT INTO product (id, name, short_description, description, characteristics, price, brand, supplier_name, amount, category_id) VALUES (0, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -181,6 +217,11 @@ class Product extends Database {
         }
     }
 
+    /**
+     * Remove product with id
+     * @param type $id
+     * @return boolean
+     */
     public function removeProduct($id) {
         if ($this->removeSubcategories($id) == 1) {
             if ($this->establishConnection()) {
@@ -195,6 +236,20 @@ class Product extends Database {
         }
     }
 
+    /**
+     * Edit product
+     * @param type $id
+     * @param type $name
+     * @param type $shortDescription
+     * @param type $description
+     * @param type $characteristics
+     * @param type $price
+     * @param type $brand
+     * @param type $supplier
+     * @param type $amount
+     * @param type $categoryId
+     * @return boolean
+     */
     public function editProduct($id, $name, $shortDescription, $description, $characteristics, $price, $brand, $supplier, $amount, $categoryId) {
         if ($this->establishConnection()) {
             $stmt = $this->conn->prepare("UPDATE product SET name = ?, short_description = ?, description = ?, characteristics = ?, price = ?, brand = ?, supplier_name = ?, amount = ?, category_id = ? WHERE id = ?");

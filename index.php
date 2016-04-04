@@ -19,14 +19,14 @@ require_once($root . "/Plug_IT/controllers/ShoppingcartController.php");
 require_once($root . "/Plug_IT/controllers/OrderAndDeliveryController.php");
 include('lib/smarty/libs/Smarty.class.php');
 
+// Smarty
 $smarty = new Smarty;
 $smarty->setTemplateDir('smarty/templates');
 $smarty->setCompileDir('smarty/templates_c');
 $smarty->setCacheDir('smarty/cache');
 $smarty->setConfigDir('smarty/configs');
 
-//$controller = new Controller();
-
+// Check page and start the correct controller
 if (isset($_GET['page'])) {
     $page = $_GET['page'];
     if ($page === 'Admin') {
