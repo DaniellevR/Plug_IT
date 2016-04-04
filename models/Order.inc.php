@@ -95,15 +95,16 @@ class Order extends Database {
      */
     public function createFullOrder($username, $deliveryAddressId, $billingAddressId, $state, $price) {
         if ($this->establishConnection()) {
-            $stmt = $this->conn->prepare("INSERT INTO _order (id, address_address_delivery, address_address_billing, user_username, order_state_state, price) VALUES (0, ?, ?, ?, ?)");
-            $stmt->bind_param('iissi', $deliveryAddressId, $billingAddressId, $username, $state, $price);
+            $sql = "INSERT INTO _order (id, address_address_delivery, address_address_billing, user_username, order_state_state, price) VALUES (0, " . $this->conn->real_escape_string($deliveryAddressId) .
+                    ", " . $this->conn->real_escape_string($billingAddressId) . ", '" . $this->conn->real_escape_string($username) . "', '" . $this->conn->real_escape_string($state) . "', " .
+                    $this->conn->real_escape_string($price) . ")";
+            $result = $this->conn->query($sql);
 
-            $stmt->execute();
-            $generated_id = $stmt->insert_id;
+            $id = mysqli_insert_id($this->conn);
 
             $this->closeConnection();
 
-            return $generated_id;
+            return $id;
         } else {
             return -1;
         }

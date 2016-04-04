@@ -64,36 +64,38 @@
                     {/if}
                 {/foreach}
 
-                <div>
-                    <label for="categoryNewName">Categorienaam</label>
-                    <input type="text" id="categoryNewName" name="newname" required="true" value="{$cat->name}"/>
-                </div>
-                <div>
-                    <label for="categoryNewDescription">Omschrijving</label>
-                    <input type="text" id="categoryNewDescription" name="category_description" required="true" value="{$cat->description}"/>
-                </div>
-                <div>
-                    <label for="categoriesParentEdit">Ouder categorie</label>
-                    <select type="text" id="categories_edit" id="categoriesParentEdit" name="parent" onchange="grabInfo(this, 'editCategory', 'contentDivEditCategory')" {if $cat->parent === NULL && $children !== ""}disabled{/if}>
-                        <option value="">-</option>
-                        {foreach from=$categories[0] item=parent }
-                            <option class="category" value="{$parent->id}" id="{$parent->id}" {if $cat->parent === $parent->id}selected{/if}>{$parent->name}</option>
-                            {foreach from=$categories[1] item=child }
-                                {if $child->parent === $parent->id}
-                                    <option class="subcategory" value="{$child->id}" id="{$child->id}" {if $cat->parent === $child->id}selected{/if}>{$child->name}</option>
-                                {/if}
+                {if $cat !== ""}
+                    <div>
+                        <label for="categoryNewName">Categorienaam</label>
+                        <input type="text" id="categoryNewName" name="newname" required="true" value="{$cat->name}"/>
+                    </div>
+                    <div>
+                        <label for="categoryNewDescription">Omschrijving</label>
+                        <input type="text" id="categoryNewDescription" name="category_description" required="true" value="{$cat->description}"/>
+                    </div>
+                    <div>
+                        <label for="categoriesParentEdit">Ouder categorie</label>
+                        <select type="text" id="categories_edit" id="categoriesParentEdit" name="parent" onchange="grabInfo(this, 'editCategory', 'contentDivEditCategory')" {if $cat->parent === NULL && $children !== ""}disabled{/if}>
+                            <option value="">-</option>
+                            {foreach from=$categories[0] item=parent }
+                                <option class="category" value="{$parent->id}" id="{$parent->id}" {if $cat->parent === $parent->id}selected{/if}>{$parent->name}</option>
+                                {foreach from=$categories[1] item=child }
+                                    {if $child->parent === $parent->id}
+                                        <option class="subcategory" value="{$child->id}" id="{$child->id}" {if $cat->parent === $child->id}selected{/if}>{$child->name}</option>
+                                    {/if}
+                                {/foreach}
                             {/foreach}
-                        {/foreach}
-                    </select>
-                </div>
+                        </select>
+                    </div>
 
-                <div>
-                    <label for="imageEditCategory">Foto categorie</label>
-                    <input type="file" accept="image/*" name="image" id="imageEditCategory" class="input_text"/>
-                </div>
-                <div>
-                    <img type="image" src="/Plug_IT/assets/pix/categories/{$cat->id}.png" class="image" />
-                </div>
+                    <div>
+                        <label for="imageEditCategory">Foto categorie</label>
+                        <input type="file" accept="image/*" name="image" id="imageEditCategory" class="input_text"/>
+                    </div>
+                    <div>
+                        <img type="image" src="/Plug_IT/assets/pix/categories/{$cat->id}.png" class="image" />
+                    </div>
+                {/if}
             </div>
             <div>
                 <label></label>

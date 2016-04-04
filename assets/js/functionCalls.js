@@ -285,7 +285,9 @@ function editAmountProductInOrder(sender, e) {
     jQuery.ajax({
         type: "POST",
         url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
-        data: {action: 'changeAmount', newAmount: document.getElementsByName('newAmount')[0].value, productId: document.getElementsByName('newAmount')[0].id},
+//        data: {action: 'changeAmount', newAmount: document.getElementsByName('newAmount')[0].value, productId: document.getElementsByName('newAmount')[0].id},
+//        data: {action: 'changeAmount', newAmount: sender.value, productId: sender.id},
+    data: {action: 'changeAmount', newAmount: e.target.value, productId: e.target.id},
         success: function () {
             window.location = "/Plug_IT/index.php?page=AdminOrders";
         }

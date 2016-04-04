@@ -453,21 +453,28 @@ class AdminController extends MainCtrl {
             $amount = $_POST["newAmount"];
             $productId = $_POST["productId"];
 
-            if (isset($_SESSION["productsCartAdmin"])) {
-                $products = $_SESSION["productsCartAdmin"];
-                $newProducts = array();
+            $productModel = new Product();
+            $foundProduct = $productModel->getProductFromId($productId);
 
-                foreach ($products as $product) {
-                    if ($product->id === $productId) {
-                        $newProduct = $product;
-                        $newProduct->amount = $amount;
-                        $newProducts[] = $newProduct;
+            if (isset($_SESSION["productsCartAdmin"])) {
+                // Remember products
+                $productInfos = $_SESSION["productsCartAdmin"];
+                unset($_SESSION["productsCartAdmin"]);
+
+                // Edit amount for correct product
+                foreach ($productInfos as $productInfo) {
+                    if ($productInfo[0] === $productId) {
+                        // Product in the cart, edit the amount
+                        $isInCart = "yes";
+                        if ($amount != 0) {
+                            $newProductInfo = array($foundProduct->id, $foundProduct->name, $amount, $foundProduct->price);
+                            $_SESSION["productsCartAdmin"][] = $newProductInfo;
+                        }
                     } else {
-                        $newProducts[] = $product;
+                        // Product not in the cart, add the product
+                        $_SESSION["productsCartAdmin"][] = $productInfo;
                     }
                 }
-
-                $_SESSION["productsCartAdmin"] = $newProducts;
             }
         }
     }
@@ -482,11 +489,11 @@ class AdminController extends MainCtrl {
             $billingAddress = $_SESSION["billingAddressAdmin"];
             $products = $_SESSION["productsCartAdmin"];
             $orderModel = new Order();
-            
+
             // Calculate the price
             $price = 0.00;
-            foreach ($products as $product) {
-                $productsPrice = $product->amountInCartAdmin * $product->price;
+            foreach ($products as $productInfo) {
+                $productsPrice = $productInfo[2] * $productInfo[3];
                 $price = $price + $productsPrice;
             }
 
@@ -501,8 +508,8 @@ class AdminController extends MainCtrl {
 
             if ($orderId > 0) {
                 // Add products to order
-                foreach ($products as $product) {
-                    $orderModel->addProductToOrder($orderId, $product->id, $product->amountInCartAdmin);
+                foreach ($products as $productInfo) {
+                    $orderModel->addProductToOrder($orderId, $productInfo[0], $productInfo[2]);
                 }
 
                 // Forget username
