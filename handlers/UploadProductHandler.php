@@ -1,19 +1,36 @@
 <?php
 
+/*
+ *
+ * Webshop Plug IT
+ *
+ * Made by : Nigel Liebers and Danielle van Rooij
+ *
+ * Avans 's-Hertogenbosch 2016 (c)
+ *
+ */
+
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once($root . "/Plug_IT/controllers/AdminController.php");
 require_once($root . "/Plug_IT/models/Product.inc.php");
 require_once($root . "/Plug_IT/models/Supplier.inc.php");
 require_once($root . "/Plug_IT/models/Address.inc.php");
 
+/**
+ * Upload product
+ * @author Daniëlle
+ */
+$errors = "";
+$messages = "";
+
 if (isset($_FILES['image'])) {
-    $errors = "";
-    $messages = "";
+    // Image given
     $file_name = $_FILES['image']['name'];
     $file_size = $_FILES['image']['size'];
     $file_tmp = $_FILES['image']['tmp_name'];
     $file_type = $_FILES['image']['type'];
 
+    // Check for errors
     $file_ext = explode(".", $file_name);
     $file_ext = end($file_ext);
 
@@ -61,14 +78,10 @@ if (isset($_FILES['image'])) {
                 if ($addressModel->checkIfAddressExists($streetname, $housenumber, $city, $housenumberSuffix, $postalCode) == 0) {
                     // Add address
                     $addressId = $addressModel->addAddress($streetname, $housenumber, $city, $housenumberSuffix, $postalCode);
-                    
+
                     if ($addressId > 0) {
                         // Add supplier
                         $supplierModel->addSupplier($suppliername, $addressId, $email, $telephonenumber);
-                        
-//                        if ($ret <= 0) {
-//                            $errors = $errors . "Fout opgetreden bij het opslaan van de leverancier.\r\nHet product kon niet toegevoegd worden.";
-//                        }
                     } else {
                         $errors = $errors . "Fout opgetreden bij het opslaan van de leverancier.\r\nHet product kon niet toegevoegd worden.";
                     }
@@ -78,19 +91,25 @@ if (isset($_FILES['image'])) {
             }
         }
 
+        // Check if there are any errors
         if ($errors == "") {
+            // Check if product is unique
             $count = $productModel->checkIfProductIsUnique($productname, $suppliername);
 
             if ($count == 0) {
+                // Add product
                 $generated_id = $productModel->addProduct($productname, $shortDescription, $longDescription, $characteristics, $price, $brand, $suppliername, $amount, $categoryId);
 
+                // Create directory if it doesn't exist yet
                 if (!is_dir("../assets/pix/products/")) {
                     mkdir("../assets/pix/products/");
                 }
 
                 if ($generated_id > 0) {
+                    // Add image
                     move_uploaded_file($file_tmp, "../assets/pix/products/" . $generated_id . ".png");
                 } else {
+                    // Upload failed
                     $errors = $errors . "Er is een fout opgetreden bij het opslaan. Probeer het opnieuw.\r\n";
                 }
             } else {

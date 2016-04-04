@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-04-03 22:32:01
+/* Smarty version 3.1.29, created on 2016-04-04 03:29:55
   from "C:\wamp\www\Plug_IT\smarty\templates\ordersforms.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_57017dc1e95d76_23903718',
+  'unifunc' => 'content_5701c393884b50_50411439',
   'file_dependency' => 
   array (
     '5bfd3c34cf5030188f42fb17f33cc5f4e11feba4' => 
     array (
       0 => 'C:\\wamp\\www\\Plug_IT\\smarty\\templates\\ordersforms.tpl',
-      1 => 1459715518,
+      1 => 1459733389,
       2 => 'file',
     ),
   ),
@@ -20,13 +20,13 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
     'file:admin.tpl' => 1,
   ),
 ),false)) {
-function content_57017dc1e95d76_23903718 ($_smarty_tpl) {
+function content_5701c393884b50_50411439 ($_smarty_tpl) {
 $_smarty_tpl->ext->_inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
 $_smarty_tpl->ext->_inheritance->processBlock($_smarty_tpl, 0, 'ordersforms', array (
-  0 => 'block_2898257017dc1cbbab7_56906280',
+  0 => 'block_24105701c393691216_73953490',
   1 => false,
   3 => 0,
   2 => 0,
@@ -35,7 +35,7 @@ $_smarty_tpl->ext->_inheritance->endChild($_smarty_tpl);
 $_smarty_tpl->smarty->ext->_subtemplate->render($_smarty_tpl, "file:admin.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block 'ordersforms'}  file:ordersforms.tpl */
-function block_2898257017dc1cbbab7_56906280($_smarty_tpl, $_blockParentStack) {
+function block_24105701c393691216_73953490($_smarty_tpl, $_blockParentStack) {
 ?>
 
     <div class="adminpart">
@@ -97,19 +97,19 @@ $_smarty_tpl->tpl_vars['useritem'] = $__foreach_useritem_0_saved_item;
             </div>
             <div id="contentDivAddressesAddOrder">
                 <?php if (isset($_smarty_tpl->tpl_vars['deliveryAddressAdmin']->value)) {?>
-                        <div><h5>Bezorgadres</h5></div>
-                        <div><label for="streetname">Adres</label><input type="text" id="streetname" name="streetnameDelivery" required="true" placeholder="Straatnaam" value="<?php echo $_smarty_tpl->tpl_vars['deliveryAddressAdmin']->value[0];?>
+                    <div><h5>Bezorgadres</h5></div>
+                    <div><label for="streetname">Adres</label><input type="text" id="streetname" name="streetnameDelivery" required="true" placeholder="Straatnaam" value="<?php echo $_smarty_tpl->tpl_vars['deliveryAddressAdmin']->value[0];?>
 "></div>
-                        <div><label></label><input type="text" name="housenumberDelivery" required="true" placeholder="Huisnummer" value="<?php echo $_smarty_tpl->tpl_vars['deliveryAddressAdmin']->value[1];?>
+                    <div><label></label><input type="text" name="housenumberDelivery" required="true" placeholder="Huisnummer" value="<?php echo $_smarty_tpl->tpl_vars['deliveryAddressAdmin']->value[1];?>
 "></div>
-                        <div><label></label><input type="text" name="housenumberSuffixDelivery" placeholder="Huisnummertoevoeging" value="<?php echo $_smarty_tpl->tpl_vars['deliveryAddressAdmin']->value[2];?>
+                    <div><label></label><input type="text" name="housenumberSuffixDelivery" placeholder="Huisnummertoevoeging" value="<?php echo $_smarty_tpl->tpl_vars['deliveryAddressAdmin']->value[2];?>
 "></div>
-                        <div><label for="postalCode">Postcode</label><input type="text" name="postalCodeDelivery" required="true" value="<?php echo $_smarty_tpl->tpl_vars['deliveryAddressAdmin']->value[3];?>
+                    <div><label for="postalCode">Postcode</label><input type="text" name="postalCodeDelivery" required="true" value="<?php echo $_smarty_tpl->tpl_vars['deliveryAddressAdmin']->value[3];?>
 "></div>
-                        <div><label for="city">Woonplaats</label><input type="text" name="cityDelivery" required="true" value="<?php echo $_smarty_tpl->tpl_vars['deliveryAddressAdmin']->value[4];?>
+                    <div><label for="city">Woonplaats</label><input type="text" name="cityDelivery" required="true" value="<?php echo $_smarty_tpl->tpl_vars['deliveryAddressAdmin']->value[4];?>
 "></div>
-                <?php } else { ?>
-                    <?php if ($_smarty_tpl->tpl_vars['user']->value !== '') {?>
+                    <?php } else { ?>
+                        <?php if ($_smarty_tpl->tpl_vars['user']->value !== '') {?>
                         <div><h5>Bezorgadres</h5></div>
                         <div><label for="streetname">Adres</label><input type="text" id="streetname" name="streetnameDelivery" required="true" placeholder="Straatnaam" value="<?php echo $_smarty_tpl->tpl_vars['user']->value->streetname;?>
 "></div>
@@ -122,22 +122,22 @@ $_smarty_tpl->tpl_vars['useritem'] = $__foreach_useritem_0_saved_item;
                         <div><label for="city">Woonplaats</label><input type="text" name="cityDelivery" required="true" value="<?php echo $_smarty_tpl->tpl_vars['user']->value->city;?>
 "></div>
                         <?php }?>
-                <?php }?>
+                    <?php }?>
 
                 <?php if (isset($_smarty_tpl->tpl_vars['billingAddressAdmin']->value)) {?>
-                        <div><h5>Factuuradres</h5></div>
-                        <div><label for="streetname">Adres</label><input type="text" id="streetname" name="streetnameBilling" required="true" placeholder="Straatnaam" value="<?php echo $_smarty_tpl->tpl_vars['billingAddressAdmin']->value[0];?>
+                    <div><h5>Factuuradres</h5></div>
+                    <div><label for="streetname">Adres</label><input type="text" id="streetname" name="streetnameBilling" required="true" placeholder="Straatnaam" value="<?php echo $_smarty_tpl->tpl_vars['billingAddressAdmin']->value[0];?>
 "></div>
-                        <div><label></label><input type="text" name="housenumberBilling" required="true" placeholder="Huisnummer" value="<?php echo $_smarty_tpl->tpl_vars['billingAddressAdmin']->value[1];?>
+                    <div><label></label><input type="text" name="housenumberBilling" required="true" placeholder="Huisnummer" value="<?php echo $_smarty_tpl->tpl_vars['billingAddressAdmin']->value[1];?>
 "></div>
-                        <div><label></label><input type="text" name="housenumberSuffixBilling" placeholder="Huisnummertoevoeging" value="<?php echo $_smarty_tpl->tpl_vars['billingAddressAdmin']->value[2];?>
+                    <div><label></label><input type="text" name="housenumberSuffixBilling" placeholder="Huisnummertoevoeging" value="<?php echo $_smarty_tpl->tpl_vars['billingAddressAdmin']->value[2];?>
 "></div>
-                        <div><label for="postalCode">Postcode</label><input type="text" name="postalCodeBilling" required="true" value="<?php echo $_smarty_tpl->tpl_vars['billingAddressAdmin']->value[3];?>
+                    <div><label for="postalCode">Postcode</label><input type="text" name="postalCodeBilling" required="true" value="<?php echo $_smarty_tpl->tpl_vars['billingAddressAdmin']->value[3];?>
 "></div>
-                        <div><label for="city">Woonplaats</label><input type="text" name="cityBilling" required="true" value="<?php echo $_smarty_tpl->tpl_vars['billingAddressAdmin']->value[4];?>
+                    <div><label for="city">Woonplaats</label><input type="text" name="cityBilling" required="true" value="<?php echo $_smarty_tpl->tpl_vars['billingAddressAdmin']->value[4];?>
 "></div>
-                <?php } else { ?>
-                    <?php if ($_smarty_tpl->tpl_vars['user']->value !== '') {?>
+                    <?php } else { ?>
+                        <?php if ($_smarty_tpl->tpl_vars['user']->value !== '') {?>
                         <div><h5>Factuuradres</h5></div>
                         <div><label for="streetname">Adres</label><input type="text" id="streetname" name="streetnameBilling" required="true" placeholder="Straatnaam" value="<?php echo $_smarty_tpl->tpl_vars['user']->value->streetname;?>
 "></div>
@@ -150,7 +150,7 @@ $_smarty_tpl->tpl_vars['useritem'] = $__foreach_useritem_0_saved_item;
                         <div><label for="city">Woonplaats</label><input type="text" name="cityBilling" required="true" value="<?php echo $_smarty_tpl->tpl_vars['user']->value->city;?>
 "></div>
                         <?php }?>
-                <?php }?>
+                    <?php }?>
             </div>
 
             <div>
@@ -261,7 +261,9 @@ $_smarty_tpl->ext->_updateScope->updateScope($_smarty_tpl, 'count', 0);?>
                     <?php if ($_smarty_tpl->tpl_vars['count']->value === 0) {?>
                         U heeft nog geen producten toegevoegd aan de order.
                     <?php } else { ?>
-                        <ul>
+                        <ul class="productsOrder">
+                            <?php $_smarty_tpl->tpl_vars['totalPrice'] = new Smarty_Variable(0, null);
+$_smarty_tpl->ext->_updateScope->updateScope($_smarty_tpl, 'totalPrice', 0);?>
                             <?php
 $_from = $_smarty_tpl->tpl_vars['productsCartAdmin']->value;
 if (!is_array($_from) && !is_object($_from)) {
@@ -274,10 +276,14 @@ foreach ($_from as $_smarty_tpl->tpl_vars['productInfo']->value) {
 $_smarty_tpl->tpl_vars['productInfo']->_loop = true;
 $__foreach_productInfo_4_saved_local_item = $_smarty_tpl->tpl_vars['productInfo'];
 ?>
+                                <?php $_smarty_tpl->tpl_vars['priceTotalProducts'] = new Smarty_Variable($_smarty_tpl->tpl_vars['productInfo']->value[2]*$_smarty_tpl->tpl_vars['productInfo']->value[3], null);
+$_smarty_tpl->ext->_updateScope->updateScope($_smarty_tpl, 'priceTotalProducts', 0);?>
+                                <?php $_smarty_tpl->tpl_vars['totalPrice'] = new Smarty_Variable($_smarty_tpl->tpl_vars['totalPrice']->value+$_smarty_tpl->tpl_vars['priceTotalProducts']->value, null);
+$_smarty_tpl->ext->_updateScope->updateScope($_smarty_tpl, 'totalPrice', 0);?>
                                 <li><?php echo $_smarty_tpl->tpl_vars['productInfo']->value[1];?>
 <input class="small" type="number" min="0" step="1" id="<?php echo $_smarty_tpl->tpl_vars['productInfo']->value[0];?>
 " value="<?php echo $_smarty_tpl->tpl_vars['productInfo']->value[2];?>
-" name="newAmount" onchange="editAmountProductInOrder(this, event)" required="true"><b> Prijs </b> €<?php echo $_smarty_tpl->tpl_vars['productInfo']->value[3];?>
+" name="newAmount" onchange="editAmountProductInOrder(this, event)" required="true"> Prijs €<?php echo $_smarty_tpl->tpl_vars['priceTotalProducts']->value;?>
 </li>
                                 <?php
 $_smarty_tpl->tpl_vars['productInfo'] = $__foreach_productInfo_4_saved_local_item;
@@ -286,6 +292,8 @@ if ($__foreach_productInfo_4_saved_item) {
 $_smarty_tpl->tpl_vars['productInfo'] = $__foreach_productInfo_4_saved_item;
 }
 ?>
+                            <li><b>Totaalprijs € <?php echo $_smarty_tpl->tpl_vars['totalPrice']->value;?>
+</b></li>
                         </ul>
                     <?php }?>
                 </div>

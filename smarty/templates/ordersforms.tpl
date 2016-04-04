@@ -31,14 +31,14 @@
             </div>
             <div id="contentDivAddressesAddOrder">
                 {if isset($deliveryAddressAdmin)}
-                        <div><h5>Bezorgadres</h5></div>
-                        <div><label for="streetname">Adres</label><input type="text" id="streetname" name="streetnameDelivery" required="true" placeholder="Straatnaam" value="{$deliveryAddressAdmin[0]}"></div>
-                        <div><label></label><input type="text" name="housenumberDelivery" required="true" placeholder="Huisnummer" value="{$deliveryAddressAdmin[1]}"></div>
-                        <div><label></label><input type="text" name="housenumberSuffixDelivery" placeholder="Huisnummertoevoeging" value="{$deliveryAddressAdmin[2]}"></div>
-                        <div><label for="postalCode">Postcode</label><input type="text" name="postalCodeDelivery" required="true" value="{$deliveryAddressAdmin[3]}"></div>
-                        <div><label for="city">Woonplaats</label><input type="text" name="cityDelivery" required="true" value="{$deliveryAddressAdmin[4]}"></div>
-                {else}
-                    {if $user !== ""}
+                    <div><h5>Bezorgadres</h5></div>
+                    <div><label for="streetname">Adres</label><input type="text" id="streetname" name="streetnameDelivery" required="true" placeholder="Straatnaam" value="{$deliveryAddressAdmin[0]}"></div>
+                    <div><label></label><input type="text" name="housenumberDelivery" required="true" placeholder="Huisnummer" value="{$deliveryAddressAdmin[1]}"></div>
+                    <div><label></label><input type="text" name="housenumberSuffixDelivery" placeholder="Huisnummertoevoeging" value="{$deliveryAddressAdmin[2]}"></div>
+                    <div><label for="postalCode">Postcode</label><input type="text" name="postalCodeDelivery" required="true" value="{$deliveryAddressAdmin[3]}"></div>
+                    <div><label for="city">Woonplaats</label><input type="text" name="cityDelivery" required="true" value="{$deliveryAddressAdmin[4]}"></div>
+                    {else}
+                        {if $user !== ""}
                         <div><h5>Bezorgadres</h5></div>
                         <div><label for="streetname">Adres</label><input type="text" id="streetname" name="streetnameDelivery" required="true" placeholder="Straatnaam" value="{$user->streetname}"></div>
                         <div><label></label><input type="text" name="housenumberDelivery" required="true" placeholder="Huisnummer" value="{$user->housenumber}"></div>
@@ -46,17 +46,17 @@
                         <div><label for="postalCode">Postcode</label><input type="text" name="postalCodeDelivery" required="true" value="{$user->postalCode}"></div>
                         <div><label for="city">Woonplaats</label><input type="text" name="cityDelivery" required="true" value="{$user->city}"></div>
                         {/if}
-                {/if}
+                    {/if}
 
                 {if isset($billingAddressAdmin)}
-                        <div><h5>Factuuradres</h5></div>
-                        <div><label for="streetname">Adres</label><input type="text" id="streetname" name="streetnameBilling" required="true" placeholder="Straatnaam" value="{$billingAddressAdmin[0]}"></div>
-                        <div><label></label><input type="text" name="housenumberBilling" required="true" placeholder="Huisnummer" value="{$billingAddressAdmin[1]}"></div>
-                        <div><label></label><input type="text" name="housenumberSuffixBilling" placeholder="Huisnummertoevoeging" value="{$billingAddressAdmin[2]}"></div>
-                        <div><label for="postalCode">Postcode</label><input type="text" name="postalCodeBilling" required="true" value="{$billingAddressAdmin[3]}"></div>
-                        <div><label for="city">Woonplaats</label><input type="text" name="cityBilling" required="true" value="{$billingAddressAdmin[4]}"></div>
-                {else}
-                    {if $user !== ""}
+                    <div><h5>Factuuradres</h5></div>
+                    <div><label for="streetname">Adres</label><input type="text" id="streetname" name="streetnameBilling" required="true" placeholder="Straatnaam" value="{$billingAddressAdmin[0]}"></div>
+                    <div><label></label><input type="text" name="housenumberBilling" required="true" placeholder="Huisnummer" value="{$billingAddressAdmin[1]}"></div>
+                    <div><label></label><input type="text" name="housenumberSuffixBilling" placeholder="Huisnummertoevoeging" value="{$billingAddressAdmin[2]}"></div>
+                    <div><label for="postalCode">Postcode</label><input type="text" name="postalCodeBilling" required="true" value="{$billingAddressAdmin[3]}"></div>
+                    <div><label for="city">Woonplaats</label><input type="text" name="cityBilling" required="true" value="{$billingAddressAdmin[4]}"></div>
+                    {else}
+                        {if $user !== ""}
                         <div><h5>Factuuradres</h5></div>
                         <div><label for="streetname">Adres</label><input type="text" id="streetname" name="streetnameBilling" required="true" placeholder="Straatnaam" value="{$user->streetname}"></div>
                         <div><label></label><input type="text" name="housenumberBilling" required="true" placeholder="Huisnummer" value="{$user->housenumber}"></div>
@@ -64,7 +64,7 @@
                         <div><label for="postalCode">Postcode</label><input type="text" name="postalCodeBilling" required="true" value="{$user->postalCode}"></div>
                         <div><label for="city">Woonplaats</label><input type="text" name="cityBilling" required="true" value="{$user->city}"></div>
                         {/if}
-                {/if}
+                    {/if}
             </div>
 
             <div>
@@ -115,10 +115,14 @@
                     {if $count === 0}
                         U heeft nog geen producten toegevoegd aan de order.
                     {else}
-                        <ul>
+                        <ul class="productsOrder">
+                            {$totalPrice = 0}
                             {foreach from=$productsCartAdmin item=productInfo }
-                                <li>{$productInfo[1]}<input class="small" type="number" min="0" step="1" id="{$productInfo[0]}" value="{$productInfo[2]}" name="newAmount" onchange="editAmountProductInOrder(this, event)" required="true"><b> Prijs </b> €{$productInfo[3]}</li>
+                                {$priceTotalProducts = $productInfo[2] * $productInfo[3]}
+                                {$totalPrice = $totalPrice + $priceTotalProducts}
+                                <li>{$productInfo[1]}<input class="small" type="number" min="0" step="1" id="{$productInfo[0]}" value="{$productInfo[2]}" name="newAmount" onchange="editAmountProductInOrder(this, event)" required="true"> Prijs €{$priceTotalProducts}</li>
                                 {/foreach}
+                            <li><b>Totaalprijs € {$totalPrice}</b></li>
                         </ul>
                     {/if}
                 </div>

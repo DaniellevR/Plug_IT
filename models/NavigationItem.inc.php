@@ -1,14 +1,17 @@
 <?php
+/*
+*
+* Webshop Plug IT
+*
+* Made by : Nigel Liebers and Danielle van Rooij
+*
+* Avans 's-Hertogenbosch 2016 (c)
+*
+*/
 
 //require_once('models/database.php');
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once($root . "/Plug_IT/models/Database.inc.php");
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  * Description of NavigationItem
@@ -16,13 +19,16 @@ require_once($root . "/Plug_IT/models/Database.inc.php");
  * @author Daniëlle
  */
 class NavigationItem extends Database {
-
     public $id;
     public $name;
     public $page;
     public $location;
     public $parent;
 
+    /**
+     * Get navigation items
+     * @return boolean|\NavigationItem
+     */
     public function getNavigationItems() {
         if ($this->establishConnection()) {
             $sql = "SELECT * FROM navigationitem";
@@ -31,7 +37,6 @@ class NavigationItem extends Database {
             $navigationItems = array();
 
             if ($result->num_rows > 0) {
-//            if ($result != null) {
                 while ($row = $result->fetch_assoc()) {
                     $navigationItem = new NavigationItem();
                     $navigationItem->id = $row['id'];

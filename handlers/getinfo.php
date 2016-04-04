@@ -1,5 +1,15 @@
 <?php
 
+/*
+ *
+ * Webshop Plug IT
+ *
+ * Made by : Nigel Liebers and Danielle van Rooij
+ *
+ * Avans 's-Hertogenbosch 2016 (c)
+ *
+ */
+
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once($root . "/Plug_IT/models/Category.inc.php");
 require_once($root . "/Plug_IT/models/Product.inc.php");
@@ -9,13 +19,17 @@ require_once($root . "/Plug_IT/models/Address.inc.php");
 require_once($root . "/Plug_IT/models/Supplier.inc.php");
 require_once($root . "/Plug_IT/models/Order.inc.php");
 
+/**
+ * Get info for the request in the views
+ * @author Daniëlle
+ */
 $action = $_GET['action'];
 
 if ($action === 'editCategory') {
     $categoryId = $_GET["id"];
     $categoryModel = new Category();
 
-// Find category
+    // Find category
     $categories = $categoryModel->getCategories();
     $category;
 
@@ -26,7 +40,7 @@ if ($action === 'editCategory') {
         }
     }
 
-// Find children
+    // Find children
     $children = "";
     foreach ($categories as $cat) {
         if ($cat->parent === $category->id) {
@@ -45,9 +59,9 @@ if ($action === 'editCategory') {
         echo '<select type="text" id="categories_edit" id="categoriesParentEdit" name="parent" onchange="grabInfo(this, "editCategory", "contentDivEditCategory")">';
     }
 
-// Get options parent
+    // Get options parent
     if (is_null($category->parent)) {
-// Category has no parent
+        // Category has no parent
         echo '<option value="" selected>-</option>';
         foreach ($categories as $cat) {
             if (is_null($cat->parent)) {
@@ -55,7 +69,7 @@ if ($action === 'editCategory') {
             }
         }
     } else {
-// Category has a parent
+        // Category has a parent
         echo '<option value="">-</option>';
         foreach ($categories as $cat) {
             if (is_null($cat->parent)) {
@@ -198,30 +212,14 @@ if ($action === 'editCategory') {
     echo '</select>';
 } else if ($action === 'getAddressesUsername') {
     $username = $_GET["id"];
-    $userModel = new User();
-    $users = $userModel->getUsers();
-
-    $foundUser = "";
-    foreach ($users as $user) {
-        if ($user->username === $username) {
-            $foundUser = $user;
-        }
-    }
-    
-    echo '<div><h5>Bezorgadres</h5></div>';
-    echo '<div><label for="streetname">Adres</label><input type="text" id="streetname" name="streetnameDelivery" required="true" placeholder="Straatnaam" value="' . $foundUser->streetname . '"></div>';
-    echo '<div><label></label><input type="text" name="housenumberDelivery" required="true" placeholder="Huisnummer" value="' . $foundUser->housenumber . '"></div>';
-    echo '<div><label></label><input type="text" name="housenumberSuffixDelivery" placeholder="Huisnummertoevoeging" value="' . $foundUser->housenumber_suffix . '"></div>';
-    echo '<div><label for="postalCode">Postcode</label><input type="text" name="postalCodeDelivery" required="true" value="' . $foundUser->postalCode . '"></div>';
-    echo '<div><label for="city">Woonplaats</label><input type="text" name="cityDelivery" required="true" value="' . $foundUser->city . '"></div>';
-    echo '<div><h5>Factuuradres</h5></div>';
-    echo '<div><label for="streetname">Adres</label><input type="text" id="streetname" name="streetnameBilling" required="true" placeholder="Straatnaam" value="' . $foundUser->streetname . '"></div>';
-    echo '<div><label></label><input type="text" name="housenumberBilling" required="true" placeholder="Huisnummer" value="' . $foundUser->housenumber . '"></div>';
-    echo '<div><label></label><input type="text" name="housenumberSuffixBilling" placeholder="Huisnummertoevoeging" value="' . $foundUser->housenumber_suffix . '"></div>';
-    echo '<div><label for="postalCode">Postcode</label><input type="text" name="postalCodeBilling" required="true" value="' . $foundUser->postalCode . '"></div>';
-    echo '<div><label for="city">Woonplaats</label><input type="text" name="cityBilling" required="true" value="' . $foundUser->city . '"></div>';
+    addressInfo($username);
 }
 
+/**
+ * Get product info belonging to the given product id
+ * @param type $productId
+ * @return type
+ */
 function productInfo($productId) {
     $productModel = new Product();
     $product = $productModel->getProduct($productId);
@@ -265,6 +263,10 @@ function productInfo($productId) {
     return $product->supplier;
 }
 
+/**
+ * Get supplier info of given suppliername
+ * @param type $suppliername
+ */
 function supplierInfo($suppliername) {
     $supplierModel = new Supplier();
     $supplier = $supplierModel->getSupplier($suppliername);
@@ -288,6 +290,35 @@ function supplierInfo($suppliername) {
         echo '<div><label>Postcode:</label><input type="text" name="postalCode" required="true" value="' . $supplier->postalCode . '" readonly></div>';
         echo '<div><label>Woonplaats:</label><input type="text" name="city" required="true" value="' . $supplier->city . '" readonly></div>';
     }
+}
+
+/**
+ * Get addresses info belonging to given username
+ * @param type $username
+ */
+function addressInfo($username) {
+    $userModel = new User();
+    $users = $userModel->getUsers();
+
+    $foundUser = "";
+    foreach ($users as $user) {
+        if ($user->username === $username) {
+            $foundUser = $user;
+        }
+    }
+
+    echo '<div><h5>Bezorgadres</h5></div>';
+    echo '<div><label for="streetname">Adres</label><input type="text" id="streetname" name="streetnameDelivery" required="true" placeholder="Straatnaam" value="' . $foundUser->streetname . '"></div>';
+    echo '<div><label></label><input type="text" name="housenumberDelivery" required="true" placeholder="Huisnummer" value="' . $foundUser->housenumber . '"></div>';
+    echo '<div><label></label><input type="text" name="housenumberSuffixDelivery" placeholder="Huisnummertoevoeging" value="' . $foundUser->housenumber_suffix . '"></div>';
+    echo '<div><label for="postalCode">Postcode</label><input type="text" name="postalCodeDelivery" required="true" value="' . $foundUser->postalCode . '"></div>';
+    echo '<div><label for="city">Woonplaats</label><input type="text" name="cityDelivery" required="true" value="' . $foundUser->city . '"></div>';
+    echo '<div><h5>Factuuradres</h5></div>';
+    echo '<div><label for="streetname">Adres</label><input type="text" id="streetname" name="streetnameBilling" required="true" placeholder="Straatnaam" value="' . $foundUser->streetname . '"></div>';
+    echo '<div><label></label><input type="text" name="housenumberBilling" required="true" placeholder="Huisnummer" value="' . $foundUser->housenumber . '"></div>';
+    echo '<div><label></label><input type="text" name="housenumberSuffixBilling" placeholder="Huisnummertoevoeging" value="' . $foundUser->housenumber_suffix . '"></div>';
+    echo '<div><label for="postalCode">Postcode</label><input type="text" name="postalCodeBilling" required="true" value="' . $foundUser->postalCode . '"></div>';
+    echo '<div><label for="city">Woonplaats</label><input type="text" name="cityBilling" required="true" value="' . $foundUser->city . '"></div>';
 }
 
 ?>

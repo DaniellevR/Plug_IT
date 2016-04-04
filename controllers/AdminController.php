@@ -1,5 +1,15 @@
 <?php
 
+/*
+ *
+ * Webshop Plug IT
+ *
+ * Made by : Nigel Liebers and Danielle van Rooij
+ *
+ * Avans 's-Hertogenbosch 2016 (c)
+ *
+ */
+
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once($root . "/Plug_IT/controllers/MainCtrl.php");
 require_once($root . "/Plug_IT/models/Category.inc.php");
@@ -8,17 +18,17 @@ require_once($root . "/Plug_IT/models/Address.inc.php");
 require_once($root . "/Plug_IT/models/User.inc.php");
 require_once($root . "/Plug_IT/models/Order.inc.php");
 
+/**
+ * AdminController for functionalities in the admin pages
+ * @author Daniëlle
+ */
 class AdminController extends MainCtrl {
-
-//    $objSmarty->assign("common", $objectname);
 
     function View($name, $model) {
         global $smarty;
 
-        // Get navigation items
-        $navi = $this->getNavigationItems();
-        $sideNavigation = $this->getCategories();
-
+        // Set variables for usage in views
+        // Action
         $action = "";
         if (isset($_SESSION["action"])) {
             $action = $_SESSION["action"];
@@ -26,6 +36,7 @@ class AdminController extends MainCtrl {
         }
         $smarty->assign('action', $action);
 
+        // Errors
         $errors = "";
         if (isset($_SESSION["errors"])) {
             $errors = $_SESSION["errors"];
@@ -33,6 +44,7 @@ class AdminController extends MainCtrl {
         }
         $smarty->assign('errors', $errors);
 
+        // Messages
         $messages = "";
         if (isset($_SESSION["messages"])) {
             $messages = $_SESSION["messages"];
@@ -40,29 +52,19 @@ class AdminController extends MainCtrl {
         }
         $smarty->assign('messages', $messages);
 
+        // Further data
         $smarty->assign('page', $name);
-
-        $smarty->assign('navigation', $navi);
-        $smarty->assign('categories', $sideNavigation);
+        $smarty->assign('navigation', $this->getNavigationItems());
+        $smarty->assign('categories', $this->getCategories());
         $smarty->assign('suppliers', $this->getSuppliers());
         $smarty->assign('users', $this->getUsers());
         $smarty->assign('roles', $this->getRoles());
         $smarty->assign('products', $this->getProducts());
+        $smarty->assign('orders', $this->getOrders());
+        $smarty->assign('states', $this->getStates());
 
         // Orders admin data
         if (isset($_SESSION["productsCartAdmin"])) {
-
-            $file = fopen("C://cart.txt", "w");
-
-            foreach ($_SESSION["productsCartAdmin"] as $productInfo) {
-                fwrite($file, $productInfo[0]);
-                fwrite($file, $productInfo[1]);
-                fwrite($file, $productInfo[2]);
-                fwrite($file, $productInfo[3]);
-            }
-
-            fclose($file);
-
             $smarty->assign('productsCartAdmin', $_SESSION["productsCartAdmin"]);
         } else {
             $smarty->assign('productsCartAdmin', array());
@@ -77,19 +79,21 @@ class AdminController extends MainCtrl {
             $smarty->assign('billingAddressAdmin', $_SESSION["billingAddressAdmin"]);
         }
 
-        $smarty->assign('orders', $this->getOrders());
-        $smarty->assign('states', $this->getStates());
-
-        $smarty->assign('model', $model);
+        // Display
         $smarty->display($name . '.tpl');
     }
 
+    /**
+     * Remove category
+     */
     public function removeCategory() {
         if (isset($_POST["categoryId"])) {
+            // Remove category
             $categoryModel = new Category();
             $res = $categoryModel->removeCategory($_POST['categoryId']);
 
             if ($res == 1) {
+                // Remove picture
                 $path = "../assets/pix/categories/";
                 foreach (glob($path . $_POST['categoryId'] . '.*') as $filename) {
                     unlink(realpath($filename));
@@ -102,27 +106,18 @@ class AdminController extends MainCtrl {
         }
     }
 
+    /**
+     * Remove product
+     */
     public function removeProduct() {
-        $file = fopen("C://removeproductc.txt", "w");
-        fwrite($file, "REMOVE PRODUCT");
-        fclose($file);
-
         if (isset($_POST["productId"])) {
+            // Remove product
             $productId = $_POST["productId"];
-
-            $file = fopen("C://productId.txt", "w");
-            fwrite($file, $productId);
-            fclose($file);
-
             $productModel = new Product();
             $res = $productModel->removeProduct($productId);
 
-            $file = fopen("C://res.txt", "w");
-            fwrite($file, $res);
-            fclose($file);
-
-
             if ($res == 1) {
+                // Remove picture
                 $path = "../assets/pix/products/";
                 foreach (glob($path . $productId . '.*') as $filename) {
                     unlink(realpath($filename));
@@ -135,6 +130,9 @@ class AdminController extends MainCtrl {
         }
     }
 
+    /**
+     * Add user
+     */
     public function addUser() {
         $_SESSION["action"] = "addUser";
 
@@ -213,14 +211,22 @@ class AdminController extends MainCtrl {
         }
     }
 
+    /**
+     * Check if address exists, if not add it to the database
+     * @param type $streetname
+     * @param type $housenumber
+     * @param type $city
+     * @param type $housenumberSuffix
+     * @param type $postalCode
+     * @return type address id
+     */
     public function checkAndAddAddress($streetname, $housenumber, $city, $housenumberSuffix, $postalCode) {
         // Check existance address
         $addressModel = new Address();
         $addresses = $addressModel->getAddresses();
         $addressId = -1;
         foreach ($addresses as $address) {
-            //&& $address->housenumber == $housenumber && $addres->city == $city && $address->housenumberSuffix == $housenumberSuffix && $address->postalCode == $postalCode) {
-            if ($address->streetname == $streetname && $address->housenumber == $housenumber && $addres->city == $city && $address->housenumberSuffix == $housenumberSuffix && $address->postalCode == $postalCode) {
+            if ($address->streetname == $streetname && $address->housenumber == $housenumber && $address->city == $city && $address->housenumberSuffix == $housenumberSuffix && $address->postalCode == $postalCode) {
                 $addressId = $address->id;
                 break;
             }
@@ -234,6 +240,9 @@ class AdminController extends MainCtrl {
         return $addressId;
     }
 
+    /**
+     * Edit user
+     */
     public function editUser() {
         $_SESSION["action"] = "editUser";
         $errors = "";
@@ -270,6 +279,7 @@ class AdminController extends MainCtrl {
                 $password = $_POST["password"];
                 $repeatPassword = $_POST["repeatPassword"];
 
+                // Compare given passwords
                 if (strcmp($password, $repeatPassword) === 0) {
                     // Check current password
                     $givenHashedPassword = crypt($currentPassword, $foundUser->password);
@@ -321,6 +331,9 @@ class AdminController extends MainCtrl {
         }
     }
 
+    /**
+     * Reset the order from the admin page
+     */
     public function resetOrder() {
         // Forget username
         if (isset($_SESSION["usernameAddOrder"])) {
@@ -343,6 +356,9 @@ class AdminController extends MainCtrl {
         }
     }
 
+    /**
+     * Request from the add order form in the admin page
+     */
     public function addOrder() {
         $errors = "";
 
@@ -371,6 +387,7 @@ class AdminController extends MainCtrl {
             // Remember billing address
             $_SESSION["billingAddressAdmin"] = array($streetnameBilling, $housenumberBilling, $housenumberSuffixBilling, $postalCodeBilling, $cityBilling);
 
+            // Take the correct action
             if ($button === "addProduct") {
                 $this->addProductToOrder($productId, $amount);
             } else {
@@ -385,75 +402,100 @@ class AdminController extends MainCtrl {
         }
     }
 
+    /**
+     * Add the product to the cart (admin page)
+     * @param type $productId
+     * @param type $amount
+     */
     public function addProductToOrder($productId, $amount) {
+        // Find the product
         $productModel = new Product();
         $foundProduct = $productModel->getProductFromId($productId);
         $foundProduct->amountInCartAdmin = $amount;
 
         if (isset($_SESSION["productsCartAdmin"])) {
+            // Remember products
             $productInfos = $_SESSION["productsCartAdmin"];
             unset($_SESSION["productsCartAdmin"]);
 
+            // Check if the product is already in the cart
             $isInCart = "";
             foreach ($productInfos as $productInfo) {
                 if ($productInfo[0] === $productId) {
+                    // Product in the cart, edit the amount
                     $isInCart = "yes";
                     $newAmount = $productInfo[2] + $amount;
                     $newProductInfo = array($foundProduct->id, $foundProduct->name, $newAmount, $foundProduct->price);
                     $_SESSION["productsCartAdmin"][] = $newProductInfo;
                 } else {
+                    // Product not in the cart, add the product
                     $_SESSION["productsCartAdmin"][] = $productInfo;
                 }
             }
 
+            // Add the product to the cart if it isn't already in it
             if ($isInCart === "") {
                 $productInfo = array($foundProduct->id, $foundProduct->name, $foundProduct->amountInCartAdmin, $foundProduct->price);
                 $_SESSION["productsCartAdmin"][] = $productInfo;
             }
         } else {
+            // Create new cart with product
             $productInfo = array($foundProduct->id, $foundProduct->name, $foundProduct->amountInCartAdmin, $foundProduct->price);
             $_SESSION["productsCartAdmin"][] = $productInfo;
         }
     }
 
+    /**
+     * Change the amount of a product in the cart
+     */
     public function changeAmount() {
         if (isset($_POST["newAmount"]) && isset($_POST["productId"])) {
             $amount = $_POST["newAmount"];
             $productId = $_POST["productId"];
 
-            if (isset($_SESSION["productsCartAdmin"])) {
-                $products = $_SESSION["productsCartAdmin"];
-                $newProducts = array();
+            $productModel = new Product();
+            $foundProduct = $productModel->getProductFromId($productId);
 
-                foreach ($products as $product) {
-                    if ($product->id === $productId) {
-                        $newProduct = $product;
-                        $newProduct->amount = $amount;
-                        $newProducts[] = $newProduct;
+            if (isset($_SESSION["productsCartAdmin"])) {
+                // Remember products
+                $productInfos = $_SESSION["productsCartAdmin"];
+                unset($_SESSION["productsCartAdmin"]);
+
+                // Edit amount for correct product
+                foreach ($productInfos as $productInfo) {
+                    if ($productInfo[0] === $productId) {
+                        // Product in the cart, edit the amount
+                        $isInCart = "yes";
+                        if ($amount != 0) {
+                            $newProductInfo = array($foundProduct->id, $foundProduct->name, $amount, $foundProduct->price);
+                            $_SESSION["productsCartAdmin"][] = $newProductInfo;
+                        }
                     } else {
-                        $newProducts[] = $product;
+                        // Product not in the cart, add the product
+                        $_SESSION["productsCartAdmin"][] = $productInfo;
                     }
                 }
-
-                $_SESSION["productsCartAdmin"] = $newProducts;
             }
         }
     }
 
+    /**
+     * Save the order in the database
+     */
     public function saveOrder() {
         if (isset($_SESSION["usernameAddOrder"]) && isset($_SESSION["deliveryAddressAdmin"]) && isset($_SESSION["billingAddressAdmin"]) && isset($_SESSION["productsCartAdmin"])) {
             $username = $_SESSION["usernameAddOrder"];
             $deliveryAddress = $_SESSION["deliveryAddressAdmin"];
             $billingAddress = $_SESSION["billingAddressAdmin"];
             $products = $_SESSION["productsCartAdmin"];
-
-            $price = 0.00;
-            foreach ($products as $product) {
-                $price = $price + $product->price;
-            }
-
-
             $orderModel = new Order();
+
+            // Calculate the price
+            $price = 0.00;
+            foreach ($products as $productInfo) {
+                $productsPrice = $productInfo[2] * $productInfo[3];
+                $price = $price + $productsPrice;
+            }
 
             // Check (and add) delivery address
             $deliveryAddressId = $this->checkAndAddAddress($deliveryAddress[0], $deliveryAddress[1], $deliveryAddress[4], $deliveryAddress[2], $deliveryAddress[3]);
@@ -466,8 +508,8 @@ class AdminController extends MainCtrl {
 
             if ($orderId > 0) {
                 // Add products to order
-                foreach ($products as $product) {
-                    $orderModel->addProductToOrder($orderId, $product->id, $product->amountInCartAdmin);
+                foreach ($products as $productInfo) {
+                    $orderModel->addProductToOrder($orderId, $productInfo[0], $productInfo[2]);
                 }
 
                 // Forget username
@@ -489,6 +531,9 @@ class AdminController extends MainCtrl {
         }
     }
 
+    /**
+     * Edit the state of the order
+     */
     public function editOrder() {
         $errors = "";
 

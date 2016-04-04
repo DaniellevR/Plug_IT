@@ -1,0 +1,9 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}Webshop Plug_IT
+${licensePrefix}Made by : Nigel Liebers and DaniÃ«lle van Rooij
+${licensePrefix}Avans 's-Hertogenbosch 2016
+<#if licenseLast??>
+${licenseLast}
+</#if>

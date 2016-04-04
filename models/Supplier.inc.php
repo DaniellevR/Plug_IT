@@ -1,4 +1,13 @@
 <?php
+/*
+*
+* Webshop Plug IT
+*
+* Made by : Nigel Liebers and Danielle van Rooij
+*
+* Avans 's-Hertogenbosch 2016 (c)
+*
+*/
 
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once($root . "/Plug_IT/models/Database.inc.php");
@@ -10,7 +19,6 @@ require_once($root . "/Plug_IT/models/Address.inc.php");
  * @author Daniëlle
  */
 class Supplier extends Database {
-
     public $name;
     public $email;
     public $telephonenumber;
@@ -21,6 +29,10 @@ class Supplier extends Database {
     public $city;
     public $postalCode;
 
+    /**
+     * Get all suppliers
+     * @return boolean|\Supplier
+     */
     public function getSuppliers() {
         if ($this->establishConnection()) {
             $sql = "SELECT supplier.name, supplier.email, supplier.telephonenumber, address.address_id, address.streetname, address.housenumber, "
@@ -53,6 +65,11 @@ class Supplier extends Database {
         }
     }
     
+    /**
+     * Get supplier with name
+     * @param type $name
+     * @return boolean|\Supplier
+     */
     public function getSupplier($name) {
         if ($this->establishConnection()) {
             $sql = "SELECT supplier.name, supplier.email, supplier.telephonenumber, address.address_id, address.streetname, address.housenumber, "
@@ -84,6 +101,11 @@ class Supplier extends Database {
         }
     }
 
+    /**
+     * Check if a supplier with the name exists
+     * @param type $name
+     * @return type int (count)
+     */
     public function checkIfSupplierExists($name) {
         if ($this->establishConnection()) {
             $sql = "SELECT COUNT(*) as cnt FROM supplier WHERE name = '" . $this->conn->real_escape_string($name) . "'";
@@ -106,6 +128,14 @@ class Supplier extends Database {
         }
     }
 
+    /**
+     * Add supplier
+     * @param type $name
+     * @param type $addressId
+     * @param type $email
+     * @param type $telephonenumber
+     * @return type int (id)
+     */
     public function addSupplier($name, $addressId, $email, $telephonenumber) {
         if ($this->establishConnection()) {
             $stmt = $this->conn->prepare("INSERT INTO supplier (name, address_address_id, email, telephonenumber) VALUES (?, ?, ?, ?)");

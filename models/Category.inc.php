@@ -1,13 +1,17 @@
 <?php
 
+/*
+ *
+ * Webshop Plug IT
+ *
+ * Made by : Nigel Liebers and Danielle van Rooij
+ *
+ * Avans 's-Hertogenbosch 2016 (c)
+ *
+ */
+
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once($root . "/Plug_IT/models/Database.inc.php");
-//require_once('models/database.php');
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  * Description of Category
@@ -21,6 +25,10 @@ class Category extends Database {
     public $description;
     public $parent;
 
+    /**
+     * Get all the categories
+     * @return boolean|\Category
+     */
     public function getCategories() {
         if ($this->establishConnection()) {
             $sql = "SELECT * FROM category";
@@ -46,7 +54,12 @@ class Category extends Database {
             return false;
         }
     }
-    
+
+    /**
+     * Get child categories from category with id
+     * @param type $catId
+     * @return \Category
+     */
     public function getChildCategoriesFromId($catId) {
         if ($this->establishConnection()) {
             $sql = "SELECT * FROM category WHERE category_id = " . $catId;
@@ -76,6 +89,12 @@ class Category extends Database {
         }
     }
 
+    /**
+     * Check if the category is unique
+     * @param type $name
+     * @param type $parent
+     * @return type int (count)
+     */
     public function checkIfCategoryIsUnique($name, $parent) {
         if ($this->establishConnection()) {
             if ($parent === "") {
@@ -101,8 +120,15 @@ class Category extends Database {
             return -1;
         }
     }
-    
-        public function checkIfCategoryIsUniqueWithId($id, $name, $parent) {
+
+    /**
+     * Check if category is unique (don't check the category himself)
+     * @param type $id
+     * @param type $name
+     * @param type $parent
+     * @return type int count
+     */
+    public function checkIfCategoryIsUniqueWithId($id, $name, $parent) {
         if ($this->establishConnection()) {
             if ($parent === "") {
                 $sql = "SELECT COUNT(*) as cnt FROM category WHERE name = '" . $this->conn->real_escape_string($name) . "' AND category_id IS NULL AND id <> " . $this->conn->real_escape_string($id);
@@ -128,6 +154,13 @@ class Category extends Database {
         }
     }
 
+    /**
+     * Add category
+     * @param type $name
+     * @param type $description
+     * @param null $parent
+     * @return type int (id)
+     */
     public function addCategory($name, $description, $parent) {
         if ($this->establishConnection()) {
             if ($parent === "") {
@@ -148,6 +181,11 @@ class Category extends Database {
         }
     }
 
+    /**
+     * Remove category (and subcategories if they exist)
+     * @param type $id
+     * @return boolean
+     */
     public function removeCategory($id) {
         if ($this->removeSubcategories($id) == 1) {
             if ($this->establishConnection()) {
@@ -162,6 +200,11 @@ class Category extends Database {
         }
     }
 
+    /**
+     * Remove subcategories
+     * @param type $parent_id
+     * @return boolean
+     */
     private function removeSubcategories($parent_id) {
         if ($this->establishConnection()) {
             $stmt = $this->conn->prepare("DELETE FROM category WHERE category_id = ?");
@@ -174,11 +217,19 @@ class Category extends Database {
         }
     }
 
+    /**
+     * Edit category
+     * @param type $id
+     * @param type $name
+     * @param type $description
+     * @param null $parent
+     * @return boolean
+     */
     public function editCategory($id, $name, $description, $parent) {
         if ($parent === "") {
             $parent = NULL;
         }
-        
+
         if ($this->establishConnection()) {
             $stmt = $this->conn->prepare("UPDATE category SET name = ?, description = ?, category_id = ? WHERE id = ?");
             $stmt->bind_param('ssii', $name, $description, $parent, $id);

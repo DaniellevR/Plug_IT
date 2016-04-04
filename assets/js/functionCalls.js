@@ -1,9 +1,16 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/*
+*
+* Webshop Plug IT
+*
+* Made by : Nigel Liebers and Danielle van Rooij
+*
+* Avans 's-Hertogenbosch 2016 (c)
+*
+*/
 
+/**
+ * Get value of parameter in URL
+ */
 var QueryString = function () {
     // This function is anonymous, is executed immediately and 
     // the return value is assigned to QueryString!
@@ -27,6 +34,12 @@ var QueryString = function () {
     return query_string;
 }();
 
+/**
+ * Send request for login
+ * @param {type} sender
+ * @param {type} e
+ * @returns {undefined}
+ */
 function login(sender, e) {
     e.preventDefault();
 
@@ -35,7 +48,9 @@ function login(sender, e) {
         url: 'http://localhost/Plug_IT/handlers/SessionHandler.php',
         data: {action: 'login', username: document.getElementsByName('username')[0].value, password: document.getElementsByName('password')[0].value},
         success: function (response) {
-            if (response === "User") {
+            if (response === "error") {
+                window.location = "/Plug_IT/index.php?page=" + QueryString.page;
+            } else if (response === "User") {
                 window.location = "/Plug_IT/index.php?page=Home";
             } else {
                 if (QueryString.page === "Admin") {
@@ -44,21 +59,16 @@ function login(sender, e) {
                     window.location = "/Plug_IT/index.php?page=" + QueryString.page;
                 }
             }
-
-
-//            if (response === "error") {
-//                window.location = "/Plug_IT/index.php?page=" + QueryString.page;
-//            } else if (response === "Administrator") {
-//                window.location = "/Plug_IT/index.php?page=" + QueryString.page;
-//            } else if (response === "User") {
-//                window.location = "/Plug_IT/index.php?page=Home";
-//            } else {
-//                window.location = "/Plug_IT/index.php?page=" + QueryString.page;
-//            }
         }
     });
 }
 
+/**
+ * Send request for logout
+ * @param {type} sender
+ * @param {type} e
+ * @returns {undefined}
+ */
 function logout(sender, e) {
     e.preventDefault();
     jQuery.ajax({
@@ -71,6 +81,12 @@ function logout(sender, e) {
     });
 }
 
+/**
+ * Send request for removing a category
+ * @param {type} sender
+ * @param {type} e
+ * @returns {undefined}
+ */
 function removeCategory(sender, e) {
     e.preventDefault();
 
@@ -84,6 +100,12 @@ function removeCategory(sender, e) {
     });
 }
 
+/**
+ * Send a request for removing a product
+ * @param {type} sender
+ * @param {type} e
+ * @returns {undefined}
+ */
 function removeProduct(sender, e) {
     e.preventDefault();
     jQuery.ajax({
@@ -96,8 +118,13 @@ function removeProduct(sender, e) {
     });
 }
 
+/**
+ * Send a request to add a user
+ * @param {type} sender
+ * @param {type} e
+ * @returns {undefined}
+ */
 function addUser(sender, e) {
-//    firstname, prefix, lastname, email, telephonenumber, streetname, housenumber, housenumberSuffix, postalCode, city, username, roles, password, repeat_password
     e.preventDefault();
 
     jQuery.ajax({
@@ -123,6 +150,12 @@ function addUser(sender, e) {
     });
 }
 
+/**
+ * Send a request to edit a user
+ * @param {type} sender
+ * @param {type} e
+ * @returns {undefined}
+ */
 function editUser(sender, e) {
     e.preventDefault();
 
@@ -149,6 +182,11 @@ function editUser(sender, e) {
     });
 }
 
+/**
+ * Check action of button and call function
+ * @param {type} $action
+ * @returns {undefined}
+ */
 function checkform($action) {
     if ($action === "addProductToOrder") {
         addProductToOrder();
@@ -157,9 +195,12 @@ function checkform($action) {
     } else if ($action === "reset") {
         reset();
     }
-//    test();
 }
 
+/**
+ * Request for the order in the admin page to be forgotten
+ * @returns {undefined}
+ */
 function reset() {
     jQuery.ajax({
         type: "POST",
@@ -171,11 +212,11 @@ function reset() {
     });
 }
 
+/**
+ * Send request to add product to order
+ * @returns {undefined}
+ */
 function addProductToOrder() {
-//    e.preventDefault();
-
-    $('.testfunction').text("ADD PRODUCT TO ORDER");
-
     jQuery.ajax({
         type: "POST",
         url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
@@ -192,11 +233,11 @@ function addProductToOrder() {
     });
 }
 
+/**
+ * Send request to save the order in the database
+ * @returns {undefined}
+ */
 function addOrder() {
-//    e.preventDefault();
-
-    $('.testfunction').text("ADD ORDER");
-
     jQuery.ajax({
         type: "POST",
         url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
@@ -213,6 +254,12 @@ function addOrder() {
     });
 }
 
+/**
+ * Send request to add edit the state of an order
+ * @param {type} sender
+ * @param {type} e
+ * @returns {undefined}
+ */
 function editOrder(sender, e) {
     e.preventDefault();
 
@@ -226,24 +273,36 @@ function editOrder(sender, e) {
     });
 }
 
+/**
+ * Edit the amount of a product in the cart (admin page)
+ * @param {type} sender
+ * @param {type} e
+ * @returns {undefined}
+ */
 function editAmountProductInOrder(sender, e) {
     e.preventDefault();
 
     jQuery.ajax({
         type: "POST",
         url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
-        data: {action: 'changeAmount', newAmount: document.getElementsByName('newAmount')[0].value, productId: document.getElementsByName('newAmount')[0].id},
+//        data: {action: 'changeAmount', newAmount: document.getElementsByName('newAmount')[0].value, productId: document.getElementsByName('newAmount')[0].id},
+//        data: {action: 'changeAmount', newAmount: sender.value, productId: sender.id},
+    data: {action: 'changeAmount', newAmount: e.target.value, productId: e.target.id},
         success: function () {
             window.location = "/Plug_IT/index.php?page=AdminOrders";
         }
     });
 }
 
+/**
+ * Request for some data to display in the views
+ * @param {type} select
+ * @param {type} action
+ * @param {type} contentDiv
+ * @returns {undefined}
+ */
 function grabInfo(select, action, contentDiv)
 {
-
-    $('.testfunction').text("ACTION : " + action + " ; DIV : " + contentDiv);
-
     var id = select[select.selectedIndex].id;
 
     if (window.XMLHttpRequest)
@@ -258,7 +317,6 @@ function grabInfo(select, action, contentDiv)
     {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
         {
-//            $('.test').text(xmlhttp.responseText);
             document.getElementById(contentDiv).innerHTML = xmlhttp.responseText;
         }
     }

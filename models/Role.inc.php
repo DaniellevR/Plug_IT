@@ -1,4 +1,13 @@
 <?php
+/*
+*
+* Webshop Plug IT
+*
+* Made by : Nigel Liebers and Danielle van Rooij
+*
+* Avans 's-Hertogenbosch 2016 (c)
+*
+*/
 
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once($root . "/Plug_IT/models/Database.inc.php");
@@ -11,6 +20,10 @@ require_once($root . "/Plug_IT/models/Database.inc.php");
 class Role extends Database {
     public $name;
 
+    /**
+     * Get all roles
+     * @return \Role|boolean
+     */
     public function getRoles() {
         if ($this->establishConnection()) {
             $sql = "SELECT * FROM role";
