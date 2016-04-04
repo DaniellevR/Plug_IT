@@ -18,24 +18,24 @@
         {if isset($smarty.cookies.PHPSESSID) && isset($smarty.session.usertype) && $smarty.session.usertype === "Administrator"}
             <ul class="adminpnl">
                 {if $smarty.get.page === 'AdminCategories' || $smarty.get.page === 'Admin'}
-                    <li class="selected"><a href="/Plug_IT/index.php?page=AdminCategories">Categorieën</a></li>
+                    <li class="selected"><a href="/TEMP/gaststudent99/Plug_IT/index.php?page=AdminCategories">Categorieën</a></li>
                     {else}
-                    <li><a href="/Plug_IT/index.php?page=AdminCategories">Categorieën</a></li>
+                    <li><a href="/TEMP/gaststudent99/Plug_IT/index.php?page=AdminCategories">Categorieën</a></li>
                     {/if}
                     {if $smarty.get.page === 'AdminProducts'}
-                    <li class="selected"><a href="/Plug_IT/index.php?page=AdminProducts">Producten</a></li>
+                    <li class="selected"><a href="/TEMP/gaststudent99/Plug_IT/index.php?page=AdminProducts">Producten</a></li>
                     {else}
-                    <li><a href="/Plug_IT/index.php?page=AdminProducts">Producten</a></li>
+                    <li><a href="/TEMP/gaststudent99/Plug_IT/index.php?page=AdminProducts">Producten</a></li>
                     {/if}
                     {if $smarty.get.page === 'AdminUsers'}
-                    <li class="selected"><a href="/Plug_IT/index.php?page=AdminUsers">Gebruikers</a></li>
+                    <li class="selected"><a href="/TEMP/gaststudent99/Plug_IT/index.php?page=AdminUsers">Gebruikers</a></li>
                     {else}
-                    <li><a href="/Plug_IT/index.php?page=AdminUsers">Gebruikers</a></li>
+                    <li><a href="/TEMP/gaststudent99/Plug_IT/index.php?page=AdminUsers">Gebruikers</a></li>
                     {/if}
                     {if $smarty.get.page === 'AdminOrders'}
-                    <li class="selected"><a href="/Plug_IT/index.php?page=AdminOrders">Orders</a></li>
+                    <li class="selected"><a href="/TEMP/gaststudent99/Plug_IT/index.php?page=AdminOrders">Orders</a></li>
                     {else}
-                    <li><a href="/Plug_IT/index.php?page=AdminOrders">Orders</a></li>
+                    <li><a href="/TEMP/gaststudent99/Plug_IT/index.php?page=AdminOrders">Orders</a></li>
                     {/if}
             </ul>
 

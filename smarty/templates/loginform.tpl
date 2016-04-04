@@ -20,5 +20,5 @@
             <button type="submit" value="Submit" class="button">Inloggen</button>
         </div>
     </form>
-    <a href="/Plug_IT/index.php?page=Register">Heeft u nog geen account? Dan kunt u hier registreren.</a>
+    <a href="/TEMP/gaststudent99/Plug_IT/index.php?page=Register">Heeft u nog geen account? Dan kunt u hier registreren.</a>
 {/block}

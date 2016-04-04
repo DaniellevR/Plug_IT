@@ -43,8 +43,6 @@ var QueryString = function () {
 function login(sender, e) {
     e.preventDefault();
     
-    $('.testfunction').text("LOGIN");
-
     jQuery.ajax({
         type: "POST",
         url: '/TEMP/gaststudent99/Plug_IT/handlers/SessionHandler.php',

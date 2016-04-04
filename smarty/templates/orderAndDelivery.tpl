@@ -23,7 +23,7 @@
                 {$total = $total + ($product->price * $cartProduct->amount)}
             {/foreach}
             <h3>Totaalprijs: €{$total}</h3>
-            <form class='noadditionalDesign' action="/Plug_IT/index.php?page=OrderAndDelivery" method="get">
+            <form class='noadditionalDesign' action="/TEMP/gaststudent99/Plug_IT/index.php?page=OrderAndDelivery" method="get">
                 <input name="page" value="OrderAndDelivery" hidden/>
                 <input name="confirmed" value="true" hidden/>
                 <input id="confirmButton" type="submit" value="Akkoord"/>

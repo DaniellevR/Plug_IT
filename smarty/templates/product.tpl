@@ -25,7 +25,7 @@
                     </p>
                 </div>
                 <div class="buy">
-                    <form class="noadditionalDesign" action="/Plug_IT/index.php?page=Cart" method="post">
+                    <form class="noadditionalDesign" action="/TEMP/gaststudent99/Plug_IT/index.php?page=Cart" method="post">
                         <input class='cartAmount' name="amount" type="number" min="1" step="1" value="1" />
                         <input name="page" value="Cart" hidden/>
                         <input name="id" value="{$product->id}" hidden/>

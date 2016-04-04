@@ -68,7 +68,7 @@
                             {/foreach}
                         {/if}
                     {elseif $smarty.get.page === "Product"}
-                        <a href='/TEMP/gaststudent99/Plug_IT/index.php?page=Home'>Home</a> > <a href='/Plug_IT/index.php?page=Catalogue'>Catalogus</a>
+                        <a href='/TEMP/gaststudent99/Plug_IT/index.php?page=Home'>Home</a> > <a href='/TEMP/gaststudent99/Plug_IT/Plug_IT/index.php?page=Catalogue'>Catalogus</a>
                         {if isset($smarty.get.id)}
                             {$isFound = ""}
                             {foreach from=$categories[0] item=parent }
@@ -115,7 +115,7 @@
                     {/if}
                 {/if}
 
-                                <h1 class="testfunction">Testfunctie</h1>
+{*                                <h1 class="testfunction">Testfunctie</h1>*}
             </div>
 
             <a href="/TEMP/gaststudent99/Plug_IT/index.php?page=Home"> <img src="/TEMP/gaststudent99/Plug_IT/assets/pix/logo.png" alt="Plug IT.nl" /></a>

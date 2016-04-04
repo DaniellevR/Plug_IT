@@ -23,19 +23,19 @@
                         </div>
                         <div class='rightThumbnailPart'>
                             <div class="buy">
-                                <form class="noadditionalDesign" action="/Plug_IT/index.php?page=Cart" method="post">
+                                <form class="noadditionalDesign" action="/TEMP/gaststudent99/Plug_IT/index.php?page=Cart" method="post">
                                     <input class='cartAmount' name="amount" type="number" min="1" step="1" value="{$cartProduct->amount}" />
                                     <input name="page" value="Cart" hidden/>
                                     <input name="id" value="{$product->id}" hidden/>
                                     <input class="CartButton" type="submit" value="Wijziging bevestigen"/>
                                 </form>
-                                <form class='noadditionalDesign' action="/Plug_IT/index.php?page=Cart" method="post">
+                                <form class='noadditionalDesign' action="/TEMP/gaststudent99/Plug_IT/index.php?page=Cart" method="post">
                                     <input name="removeId" value="{$product->id}" hidden/>
                                     <input class="CartButton" type="submit" value="Verwijderen"/>
                                 </form>
                             </div>
 
-                            <a id='linkToProduct' href='/Plug_IT/index.php?page=Product&id={$product->id}'>
+                            <a id='linkToProduct' href='/TEMP/gaststudent99/Plug_IT/index.php?page=Product&id={$product->id}'>
                                 <p>Naar productpagina</p>
                             </a>
                         </div>
@@ -43,7 +43,7 @@
                     {$total = $total + ($product->price * $cartProduct->amount)}
                 {/foreach}
                 <h3>Totaalprijs: €{$total}</h3>
-                <form class='noadditionalDesign' action="/Plug_IT/index.php?page=OrderAndDelivery" method="get">
+                <form class='noadditionalDesign' action="/TEMP/gaststudent99/Plug_IT/index.php?page=OrderAndDelivery" method="get">
                     <input name="page" value="OrderAndDelivery" hidden/>
                     <input id="payButton" type="submit" value="Afrekenen"/>
                 </form>
