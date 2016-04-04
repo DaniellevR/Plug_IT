@@ -10,8 +10,8 @@
 */
 
 //require_once('models/database.php');
-$root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once($root . "/Plug_IT/models/Database.inc.php");
+$root = "W:\Websites\TEMP\gaststudent99\Plug_IT";
+require_once($root . "/models/Database.inc.php");
 
 /**
  * Description of NavigationItem

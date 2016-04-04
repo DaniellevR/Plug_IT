@@ -42,21 +42,23 @@ var QueryString = function () {
  */
 function login(sender, e) {
     e.preventDefault();
+    
+    $('.testfunction').text("LOGIN");
 
     jQuery.ajax({
         type: "POST",
-        url: 'http://localhost/Plug_IT/handlers/SessionHandler.php',
+        url: '/TEMP/gaststudent99/Plug_IT/handlers/SessionHandler.php',
         data: {action: 'login', username: document.getElementsByName('username')[0].value, password: document.getElementsByName('password')[0].value},
         success: function (response) {
             if (response === "error") {
-                window.location = "/Plug_IT/index.php?page=" + QueryString.page;
+                window.location = "/TEMP/gaststudent99/Plug_IT/index.php?page=" + QueryString.page;
             } else if (response === "User") {
-                window.location = "/Plug_IT/index.php?page=Home";
+                window.location = "/TEMP/gaststudent99/Plug_IT/index.php?page=Home";
             } else {
                 if (QueryString.page === "Admin") {
-                    window.location = "/Plug_IT/index.php?page=AdminCategories";
+                    window.location = "/TEMP/gaststudent99/Plug_IT/index.php?page=AdminCategories";
                 } else {
-                    window.location = "/Plug_IT/index.php?page=" + QueryString.page;
+                    window.location = "/TEMP/gaststudent99/Plug_IT/index.php?page=" + QueryString.page;
                 }
             }
         }
@@ -73,10 +75,10 @@ function logout(sender, e) {
     e.preventDefault();
     jQuery.ajax({
         type: "POST",
-        url: 'http://localhost/Plug_IT/handlers/SessionHandler.php',
+        url: '/TEMP/gaststudent99/Plug_IT/handlers/SessionHandler.php',
         data: {action: 'logout'},
         success: function () {
-            window.location = "/Plug_IT/index.php?page=Home";
+            window.location = "/TEMP/gaststudent99/Plug_IT/index.php?page=Home";
         }
     });
 }
@@ -92,10 +94,10 @@ function removeCategory(sender, e) {
 
     jQuery.ajax({
         type: "POST",
-        url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
+        url: '/TEMP/gaststudent99/Plug_IT/handlers/AdminHandler.php',
         data: {action: 'removeCategory', categoryId: document.getElementsByName('categoriesRemove')[0].value},
         success: function () {
-            window.location = "/Plug_IT/index.php?page=Admin";
+            window.location = "/TEMP/gaststudent99/Plug_IT/index.php?page=Admin";
         }
     });
 }
@@ -110,10 +112,10 @@ function removeProduct(sender, e) {
     e.preventDefault();
     jQuery.ajax({
         type: "POST",
-        url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
+        url: '/TEMP/gaststudent99/Plug_IT/handlers/AdminHandler.php',
         data: {action: 'removeProduct', productId: document.getElementsByName('productToRemove')[0].value},
         success: function () {
-            window.location = "/Plug_IT/index.php?page=AdminProducts";
+            window.location = "/TEMP/gaststudent99/Plug_IT/index.php?page=AdminProducts";
         }
     });
 }
@@ -129,7 +131,7 @@ function addUser(sender, e) {
 
     jQuery.ajax({
         type: "POST",
-        url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
+        url: '/TEMP/gaststudent99/Plug_IT/handlers/AdminHandler.php',
         data: {action: 'addUser', firstname: document.getElementsByName('firstname')[0].value, prefix: document.getElementsByName('prefix')[0].value,
             lastname: document.getElementsByName('lastname')[0].value, email: document.getElementsByName('email')[0].value,
             telephonenumber: document.getElementsByName('telephonenumber')[0].value, streetname: document.getElementsByName('streetnameAddUser')[0].value,
@@ -140,11 +142,11 @@ function addUser(sender, e) {
             page: document.getElementsByName('page')[0].value},
         success: function (response) {
             if (response === "error") {
-                window.location = "/Plug_IT/index.php?page=" + QueryString.page;
+                window.location = "/TEMP/gaststudent99/Plug_IT/index.php?page=" + QueryString.page;
             } else if (QueryString.page === "AdminUsers") {
-                window.location = "/Plug_IT/index.php?page=AdminUsers";
+                window.location = "/TEMP/gaststudent99/Plug_IT/index.php?page=AdminUsers";
             } else {
-                window.location = "/Plug_IT/index.php?page=Home";
+                window.location = "/TEMP/gaststudent99/Plug_IT/index.php?page=Home";
             }
         }
     });
@@ -161,7 +163,7 @@ function editUser(sender, e) {
 
     jQuery.ajax({
         type: "POST",
-        url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
+        url: '/TEMP/gaststudent99/Plug_IT/handlers/AdminHandler.php',
         data: {action: 'editUser', firstname: document.getElementsByName('firstnameEditUser')[0].value, prefix: document.getElementsByName('prefixEditUser')[0].value,
             lastname: document.getElementsByName('lastnameEditUser')[0].value, email: document.getElementsByName('emailEditUser')[0].value,
             telephonenumber: document.getElementsByName('telephonenumberEditUser')[0].value, streetname: document.getElementsByName('streetnameEditUser')[0].value,
@@ -172,11 +174,11 @@ function editUser(sender, e) {
             username: document.getElementsByName('usernameEditUser')[0].value},
         success: function (response) {
             if (response === "error") {
-                window.location = "/Plug_IT/index.php?page=" + QueryString.page;
+                window.location = "/TEMP/gaststudent99/Plug_IT/index.php?page=" + QueryString.page;
             } else if (QueryString.page === "AdminUsers") {
-                window.location = "/Plug_IT/index.php?page=AdminUsers";
+                window.location = "/TEMP/gaststudent99/Plug_IT/index.php?page=AdminUsers";
             } else {
-                window.location = "/Plug_IT/index.php?page=Home";
+                window.location = "/TEMP/gaststudent99/Plug_IT/index.php?page=Home";
             }
         }
     });
@@ -204,10 +206,10 @@ function checkform($action) {
 function reset() {
     jQuery.ajax({
         type: "POST",
-        url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
+        url: '/TEMP/gaststudent99/Plug_IT/handlers/AdminHandler.php',
         data: {action: 'reset'},
         success: function() {
-            window.location = "/Plug_IT/index.php?page=AdminOrders";
+            window.location = "/TEMP/gaststudent99/Plug_IT/index.php?page=AdminOrders";
         }
     });
 }
@@ -219,7 +221,7 @@ function reset() {
 function addProductToOrder() {
     jQuery.ajax({
         type: "POST",
-        url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
+        url: '/TEMP/gaststudent99/Plug_IT/handlers/AdminHandler.php',
         data: {action: 'addOrder', username: document.getElementsByName('userAddOrder')[0].value, streetnameDelivery: document.getElementsByName('streetnameDelivery')[0].value,
             housenumberDelivery: document.getElementsByName('housenumberDelivery')[0].value, housenumberSuffixDelivery: document.getElementsByName('housenumberSuffixDelivery')[0].value,
             postalCodeDelivery: document.getElementsByName('postalCodeDelivery')[0].value, cityDelivery: document.getElementsByName('cityDelivery')[0].value,
@@ -228,7 +230,7 @@ function addProductToOrder() {
             cityBilling: document.getElementsByName('cityBilling')[0].value, productId: document.getElementsByName('productslist')[0].value,
             amount: document.getElementsByName('amount')[0].value, button: 'addProduct'},
         success: function() {
-            window.location = "/Plug_IT/index.php?page=AdminOrders";
+            window.location = "/TEMP/gaststudent99/Plug_IT/index.php?page=AdminOrders";
         }
     });
 }
@@ -240,7 +242,7 @@ function addProductToOrder() {
 function addOrder() {
     jQuery.ajax({
         type: "POST",
-        url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
+        url: '/TEMP/gaststudent99/Plug_IT/handlers/AdminHandler.php',
         data: {action: 'addOrder', username: document.getElementsByName('userAddOrder')[0].value, streetnameDelivery: document.getElementsByName('streetnameDelivery')[0].value,
             housenumberDelivery: document.getElementsByName('housenumberDelivery')[0].value, housenumberSuffixDelivery: document.getElementsByName('housenumberSuffixDelivery')[0].value,
             postalCodeDelivery: document.getElementsByName('postalCodeDelivery')[0].value, cityDelivery: document.getElementsByName('cityDelivery')[0].value,
@@ -249,7 +251,7 @@ function addOrder() {
             cityBilling: document.getElementsByName('cityBilling')[0].value, productId: document.getElementsByName('productslist')[0].value,
             amount: document.getElementsByName('amount')[0].value, button: 'addOrder'},
         success: function() {
-            window.location = "/Plug_IT/index.php?page=AdminOrders";
+            window.location = "/TEMP/gaststudent99/Plug_IT/index.php?page=AdminOrders";
         }
     });
 }
@@ -265,10 +267,10 @@ function editOrder(sender, e) {
 
     jQuery.ajax({
         type: "POST",
-        url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
+        url: '/TEMP/gaststudent99/Plug_IT/handlers/AdminHandler.php',
         data: {action: 'editOrder', orderId: document.getElementsByName('orderlist')[0].value, state: document.getElementsByName('statesEditOrder')[0].value},
         success: function () {
-            window.location = "/Plug_IT/index.php?page=AdminOrders";
+            window.location = "/TEMP/gaststudent99/Plug_IT/index.php?page=AdminOrders";
         }
     });
 }
@@ -284,12 +286,12 @@ function editAmountProductInOrder(sender, e) {
 
     jQuery.ajax({
         type: "POST",
-        url: 'http://localhost/Plug_IT/handlers/AdminHandler.php',
+        url: '/TEMP/gaststudent99/Plug_IT/handlers/AdminHandler.php',
 //        data: {action: 'changeAmount', newAmount: document.getElementsByName('newAmount')[0].value, productId: document.getElementsByName('newAmount')[0].id},
 //        data: {action: 'changeAmount', newAmount: sender.value, productId: sender.id},
     data: {action: 'changeAmount', newAmount: e.target.value, productId: e.target.id},
         success: function () {
-            window.location = "/Plug_IT/index.php?page=AdminOrders";
+            window.location = "/TEMP/gaststudent99/Plug_IT/index.php?page=AdminOrders";
         }
     });
 }

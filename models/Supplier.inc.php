@@ -9,9 +9,9 @@
 *
 */
 
-$root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once($root . "/Plug_IT/models/Database.inc.php");
-require_once($root . "/Plug_IT/models/Address.inc.php");
+$root = "W:\Websites\TEMP\gaststudent99\Plug_IT";
+require_once($root . "/models/Database.inc.php");
+require_once($root . "/models/Address.inc.php");
 
 /**
  * Description of Supplier

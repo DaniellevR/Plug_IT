@@ -9,9 +9,9 @@
 *
 */
 
-$root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once($root . "/Plug_IT/controllers/AdminController.php");
-require_once($root . "/Plug_IT/models/Category.inc.php");
+$root = "W:\Websites\TEMP\gaststudent99\Plug_IT";
+require_once($root . "/controllers/AdminController.php");
+require_once($root . "/models/Category.inc.php");
 
 /**
  * Edit the category
@@ -84,5 +84,5 @@ if (isset($_POST['categoriesEdit']) && isset($_POST['newname']) && isset($_POST[
 
 $_SESSION["errors"] = $errors;
 
-header("Location: /Plug_IT/index.php?page=Admin");
+header("Location: /TEMP/gaststudent99/Plug_IT/index.php?page=Admin");
 ?>

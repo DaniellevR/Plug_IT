@@ -10,11 +10,11 @@
  *
  */
 
-$root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once($root . "/Plug_IT/controllers/AdminController.php");
-require_once($root . "/Plug_IT/models/Product.inc.php");
-require_once($root . "/Plug_IT/models/Supplier.inc.php");
-require_once($root . "/Plug_IT/models/Address.inc.php");
+$root = "W:\Websites\TEMP\gaststudent99\Plug_IT";
+require_once($root . "/controllers/AdminController.php");
+require_once($root . "/models/Product.inc.php");
+require_once($root . "/models/Supplier.inc.php");
+require_once($root . "/models/Address.inc.php");
 
 /**
  * Edit the product
@@ -95,5 +95,5 @@ if (isset($_POST['productToEdit']) && isset($_POST['productnameEditProduct']) &&
 
 $_SESSION["errors"] = $errors;
 
-header("Location: /Plug_IT/index.php?page=AdminProducts");
+header("Location: /TEMP/gaststudent99/Plug_IT/index.php?page=AdminProducts");
 ?>

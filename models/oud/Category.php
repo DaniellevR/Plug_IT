@@ -1,7 +1,7 @@
 <?php
 
-$root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once($root . "/Plug_IT/models/Database.php");
+$root = "W:\Websites\TEMP\gaststudent99\Plug_IT";
+require_once($root . "/models/Database.php");
 //require_once('models/database.php');
 /*
  * To change this license header, choose License Headers in Project Properties.

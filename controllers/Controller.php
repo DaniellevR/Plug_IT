@@ -9,8 +9,8 @@
 *
 */
 
-$root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once($root . "/Plug_IT/controllers/MainCtrl.php");
+$root = "W:\Websites\TEMP\gaststudent99\Plug_IT";
+require_once($root . "/controllers/MainCtrl.php");
 
 /**
  * Controller for text pages and login/register pages

@@ -9,8 +9,8 @@
 *
 */
 
-$root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once($root . "/Plug_IT/controllers/AdminController.php");
+$root = "W:\Websites\TEMP\gaststudent99\Plug_IT";
+require_once($root . "/controllers/AdminController.php");
 
 /**
  * Check action request and call correct function

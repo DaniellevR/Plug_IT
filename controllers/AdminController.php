@@ -10,13 +10,13 @@
  *
  */
 
-$root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once($root . "/Plug_IT/controllers/MainCtrl.php");
-require_once($root . "/Plug_IT/models/Category.inc.php");
-require_once($root . "/Plug_IT/models/Product.inc.php");
-require_once($root . "/Plug_IT/models/Address.inc.php");
-require_once($root . "/Plug_IT/models/User.inc.php");
-require_once($root . "/Plug_IT/models/Order.inc.php");
+$root = "W:\Websites\TEMP\gaststudent99\Plug_IT";
+require_once($root . "/controllers/MainCtrl.php");
+require_once($root . "/models/Category.inc.php");
+require_once($root . "/models/Product.inc.php");
+require_once($root . "/models/Address.inc.php");
+require_once($root . "/models/User.inc.php");
+require_once($root . "/models/Order.inc.php");
 
 /**
  * AdminController for functionalities in the admin pages

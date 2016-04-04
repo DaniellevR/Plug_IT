@@ -9,14 +9,14 @@
 *
 */
 
-$root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once($root . "/Plug_IT/models/NavigationItem.inc.php");
-require_once($root . "/Plug_IT/controllers/Controller.php");
-require_once($root . "/Plug_IT/controllers/AdminController.php");
-require_once($root . "/Plug_IT/controllers/CatalogueController.php");
-require_once($root . "/Plug_IT/controllers/ProductController.php");
-require_once($root . "/Plug_IT/controllers/ShoppingcartController.php");
-require_once($root . "/Plug_IT/controllers/OrderAndDeliveryController.php");
+$root = "W:\Websites\TEMP\gaststudent99\Plug_IT";
+require_once($root . "/models/NavigationItem.inc.php");
+require_once($root . "/controllers/Controller.php");
+require_once($root . "/controllers/AdminController.php");
+require_once($root . "/controllers/CatalogueController.php");
+require_once($root . "/controllers/ProductController.php");
+require_once($root . "/controllers/ShoppingcartController.php");
+require_once($root . "/controllers/OrderAndDeliveryController.php");
 include('lib/smarty/libs/Smarty.class.php');
 
 // Smarty
